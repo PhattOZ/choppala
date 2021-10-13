@@ -1,0 +1,131 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap");
+
+.container {
+  font-family: "Poppins", sans-serif;
+  width: 30%;
+  max-width: 463px;
+  height: 493px;
+  border-radius: 12px;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin: 35px 0 5px;
+}
+
+.childBox {
+  width: 84%;
+  margin: 10px 0;
+}
+
+.inputPart label {
+  display: block;
+  font-weight: 300;
+  font-size: 0.875rem;
+  margin-bottom: 2px;
+}
+
+.checkboxPart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.checkboxPart label {
+  font-size: 0.875rem;
+  font-weight: 400;
+  margin-left: 10px;
+}
+
+.checkboxPart input {
+  width: 18px;
+  height: 18px;
+}
+
+.inputBox {
+  width: 100%;
+  height: 42px;
+  border-radius: 6px;
+  padding-left: 10px;
+  border: 1px solid #a8aabc;
+  outline: none;
+}
+
+.signupButton {
+  height: 42px;
+  font-size: 1rem;
+  font-weight: 600;
+  background-color: #4585ff;
+  color: white;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.orSignupWithBox {
+  width: 84%;
+}
+
+.orSignupWithText {
+  color: #a8aabc;
+  font-size: 0.75rem;
+  font-weight: 300;
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid #a8aabc;
+  line-height: 0.1em;
+  margin: 8px 0;
+}
+
+.orSignupWithText span {
+  background: white;
+  padding: 0 12px;
+}
+
+.oauthButtons {
+  width: 84%;
+  display: flex;
+  gap: 15px;
+}
+
+.oauthButtons button {
+  width: 50%;
+  height: 42px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.signinText {
+  font-size: 0.875rem;
+  font-weight: 400;
+}
+
+.linkText {
+  color: #4585ff;
+  font-weight: 500;
+}
+
+.facebookButton {
+  background-color: #3b5998;
+}
+
+.googleButton {
+  background-color: #d36236;
+}
+
+.socialIcon {
+  margin-top: 2px;
+  margin-right: 10px;
+}
