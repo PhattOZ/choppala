@@ -1,0 +1,103 @@
+.headerContainer {
+  display: flex;
+  flex-wrap: wrap;
+  height: 7em;
+  background-color: white;
+  padding: 0.75em 0 1.25em 0;
+  position: sticky;
+  top: 0;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.item1 {
+  margin: 0 4em 0.25em 0;
+  :first-child {
+    margin-right: 0.5em;
+  }
+}
+
+.searchBar {
+  width: 40em;
+  height: 2.25em;
+  margin: 0 3em 0.5em -2em;
+  position: relative;
+
+  input[type="text"] {
+    position: absolute;
+    height: 100%;
+    width: 88%;
+    padding-left: 1.5em;
+    border: none;
+    border-radius: 20px 0 0 20px;
+    background-color: #e9efff;
+    box-shadow: 5px 5px 10px #f0f0f0;
+    outline: none;
+  }
+
+  button {
+    cursor: pointer;
+    position: absolute;
+    height: 100%;
+    width: 12%;
+    right: 0;
+    display: inline-block;
+    border: none;
+    border-radius: 0 20px 20px 0;
+    background-color: #4585ff;
+    box-shadow: 5px 5px 10px #f0f0f0;
+    align-content: center;
+
+    img {
+      margin-top: 0.25em;
+    }
+  }
+}
+
+.containerSide {
+  display: flex;
+  flex-direction: column;
+  width: 180px;
+  align-items: flex-end;
+  // margin-bottom: 0.5em;
+  padding-bottom: 0.75em;
+  margin-left: -2em;
+
+  .userMenu {
+    display: flex;
+    margin-bottom: 0.35em;
+    a {
+      width: 100%;
+      height: auto;
+      margin-right: 2em;
+    }
+  }
+
+  .menu {
+    display: flex;
+    padding: 0.25em 0;
+    padding-top: -0.5em;
+    margin-bottom: 1em;
+    .fabell {
+      width: max-content;
+      color: #5c94ff;
+    }
+
+    .faQuestionCircle {
+      width: max-content;
+      color: #5c94ff;
+    }
+
+    .faGlobe {
+      width: max-content;
+      margin-right: 2em;
+      color: #5c94ff;
+    }
+
+    a {
+      height: auto;
+      margin-right: 1.5em;
+      font-size: 0.8em;
+    }
+  }
+}
