@@ -2,6 +2,7 @@
   border-radius: 1rem;
   overflow: hidden;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  width: 8.5rem;
 }
 
 .card_image {
@@ -11,6 +12,15 @@
 
 .card_content {
   background: white;
+  height: 5.5rem;
   padding: 0.5rem;
-  height: 5rem;
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.2rem;
+}
+
+.stars_fav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
