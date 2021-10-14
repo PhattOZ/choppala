@@ -1,6 +1,7 @@
 import Image from "next/image"
 import Card from "src/components/Card"
 import styles from "src/styles/index.module.scss"
+import Layout from "src/components/Layout"
 
 function CategoryLink({ category }) {
   return (
@@ -22,35 +23,37 @@ export default function Index() {
   ]
 
   return (
-    <div className={styles.container}>
-      <div>
-        <div className={styles.section}>banner</div>
-        <div className={styles.section}>
-          <div className={styles.section_title}>categories</div>
-          <div className={styles.categoriesContainer}>
-            {categories.map((category) => (
-              <CategoryLink key={category} category={category} />
-            ))}
+    <Layout>
+      <div className={styles.container}>
+        <div>
+          <div className={styles.section}>banner</div>
+          <div className={styles.section}>
+            <div className={styles.section_title}>categories</div>
+            <div className={styles.categoriesContainer}>
+              {categories.map((category) => (
+                <CategoryLink key={category} category={category} />
+              ))}
+            </div>
           </div>
-        </div>
-        <div className={styles.section}>
-          <div className={styles.section_title}>justforyou</div>
-          <div className={styles.cardContainer}>
-            <Card title="haha" price={123} />
-            <Card title="haha" price={123} />
-            <Card title="haha" price={123} />
-            <Card title="haha" price={123} />
-            <Card title="haha" price={123} />
-            <Card title="haha" price={123} />
-            <Card title="haha" price={123} />
-            <Card title="haha" price={123} />
-            <Card title="haha" price={123} />
-            <Card title="haha" price={123} />
-            <Card title="haha" price={123} />
-            <Card title="haha" price={123} />
+          <div className={styles.section}>
+            <div className={styles.section_title}>justforyou</div>
+            <div className={styles.cardContainer}>
+              <Card title="haha" price={123} />
+              <Card title="haha" price={123} />
+              <Card title="haha" price={123} />
+              <Card title="haha" price={123} />
+              <Card title="haha" price={123} />
+              <Card title="haha" price={123} />
+              <Card title="haha" price={123} />
+              <Card title="haha" price={123} />
+              <Card title="haha" price={123} />
+              <Card title="haha" price={123} />
+              <Card title="haha" price={123} />
+              <Card title="haha" price={123} />
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </Layout>
   )
 }
