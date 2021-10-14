@@ -1,10 +1,11 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faUserCircle } from "@fortawesome/free-solid-svg-icons"
-import { faShoppingCart } from "@fortawesome/free-solid-svg-icons"
-import { faHeart } from "@fortawesome/free-solid-svg-icons"
-import { faBell } from "@fortawesome/free-regular-svg-icons"
-import { faQuestionCircle } from "@fortawesome/free-regular-svg-icons"
-import { faGlobe } from "@fortawesome/free-solid-svg-icons"
+import {
+  faUserCircle,
+  faGlobe,
+  faShoppingCart,
+  faHeart,
+} from "@fortawesome/free-solid-svg-icons"
+import { faBell, faQuestionCircle } from "@fortawesome/free-regular-svg-icons"
 import Link from "next/link"
 import styles from "./header.module.scss"
 

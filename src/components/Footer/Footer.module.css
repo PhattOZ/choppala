@@ -1,11 +1,8 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
-
 .container {
   display: flex;
   flex-direction: column;
   background-color: #ffffff;
   padding: 2rem 8rem;
-  font-family: "Poppins", sans-serif;
 }
 
 .footernav {
@@ -28,6 +25,7 @@
   color: #444655;
   margin-top: 0;
   margin-bottom: 12px;
+  font-weight: 500;
 }
 .item {
   color: #a8aabc;
