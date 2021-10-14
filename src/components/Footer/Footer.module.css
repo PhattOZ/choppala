@@ -1,0 +1,76 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+.container {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  padding: 2rem 8rem;
+  font-family: "Poppins", sans-serif;
+}
+
+.footernav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.footercol {
+  padding: 0 12px 24px 0;
+}
+
+.footercolright {
+  padding: 0 0 24px 0;
+  flex: 1 1 auto;
+  margin-left: 128px;
+}
+.title {
+  font-size: 14px;
+  color: #444655;
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+.item {
+  color: #a8aabc;
+  font-size: 14px;
+  padding: auto;
+  text-decoration: none;
+  text-align: left;
+}
+.item:hover {
+  color: #4585ff;
+}
+.appcontainer {
+  display: flex;
+  flex-direction: row;
+  flex: 1 1 auto;
+}
+.app {
+  color: black;
+  font-size: 12px;
+  padding-left: 4px;
+}
+.appflex {
+  margin-left: 4px;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+}
+.ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+  column-gap: 1rem;
+}
+
+.icon {
+  fill: #8b8ea1;
+}
+
+.copyright {
+  font-size: 14px;
+  color: #444655;
+}
