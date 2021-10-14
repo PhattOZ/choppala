@@ -1,5 +1,6 @@
 import Image from "next/image"
 import Card from "src/components/Card"
+import Layout from "src/components/Layout"
 import Footer from "src/components/Footer"
 import styles from "src/styles/pages/index.module.scss"
 
@@ -23,7 +24,7 @@ export default function Index() {
   ]
 
   return (
-    <>
+    <Layout>
       <div className={styles.container}>
         <div>
           <div className={styles.section}>banner</div>
@@ -54,7 +55,6 @@ export default function Index() {
           </div>
         </div>
       </div>
-      <Footer />
-    </>
+    </Layout>
   )
 }
