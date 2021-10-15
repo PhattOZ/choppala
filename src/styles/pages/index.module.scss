@@ -1,9 +1,7 @@
 .container {
   display: flex;
   justify-content: center;
-  padding-left: 5rem;
-  padding-right: 5rem;
-  background: #f5f5fa;
+  padding: 2rem 5rem 0 5rem;
 }
 
 .section {
@@ -11,7 +9,7 @@
 }
 
 .section_title {
-  font-weight: 600;
+  font-weight: 500;
   padding-bottom: 1rem;
 }
 
