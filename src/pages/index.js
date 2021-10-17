@@ -24,37 +24,35 @@ export default function Index() {
   ]
 
   return (
-    <Layout>
-      <div className={styles.container}>
-        <div>
-          <div className={styles.section}>banner</div>
-          <div className={styles.section}>
-            <div className={styles.section_title}>categories</div>
-            <div className={styles.categoriesContainer}>
-              {categories.map((category) => (
-                <CategoryLink key={category} category={category} />
-              ))}
-            </div>
+    <div className={styles.container}>
+      <div>
+        <div className={styles.section}>banner</div>
+        <div className={styles.section}>
+          <div className={styles.section_title}>categories</div>
+          <div className={styles.categoriesContainer}>
+            {categories.map((category) => (
+              <CategoryLink key={category} category={category} />
+            ))}
           </div>
-          <div className={styles.section}>
-            <div className={styles.section_title}>justforyou</div>
-            <div className={styles.cardContainer}>
-              <Card title="haha" price={123} />
-              <Card title="haha" price={123} />
-              <Card title="haha" price={123} />
-              <Card title="haha" price={123} />
-              <Card title="haha" price={123} />
-              <Card title="haha" price={123} />
-              <Card title="haha" price={123} />
-              <Card title="haha" price={123} />
-              <Card title="haha" price={123} />
-              <Card title="haha" price={123} />
-              <Card title="haha" price={123} />
-              <Card title="haha" price={123} />
-            </div>
+        </div>
+        <div className={styles.section}>
+          <div className={styles.section_title}>justforyou</div>
+          <div className={styles.cardContainer}>
+            <Card title="haha" price={123} />
+            <Card title="haha" price={123} />
+            <Card title="haha" price={123} />
+            <Card title="haha" price={123} />
+            <Card title="haha" price={123} />
+            <Card title="haha" price={123} />
+            <Card title="haha" price={123} />
+            <Card title="haha" price={123} />
+            <Card title="haha" price={123} />
+            <Card title="haha" price={123} />
+            <Card title="haha" price={123} />
+            <Card title="haha" price={123} />
           </div>
         </div>
       </div>
-    </Layout>
+    </div>
   )
 }
