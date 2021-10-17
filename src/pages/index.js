@@ -1,7 +1,5 @@
 import Image from "next/image"
 import Card from "src/components/Card"
-import Layout from "src/components/Layout"
-import Footer from "src/components/Footer"
 import styles from "src/styles/pages/index.module.scss"
 
 function CategoryLink({ category }) {
