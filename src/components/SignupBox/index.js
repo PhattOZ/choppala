@@ -1,5 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
+import { signIn } from "next-auth/react"
 // Styles
 import styles from "./SignupBox.module.css"
 
@@ -43,13 +44,21 @@ export default function SignupBox() {
         </p>
       </div>
       <div className={`${styles.childBox} ${styles.oauthButtons}`}>
-        <button className={styles.facebookButton}>
+        <button
+          className={styles.facebookButton}
+          onClick={() => signIn("facebook")}
+        >
           <div className={styles.socialIcon}>
             <Image src="/facebook-white-logo.png" width="11" height="14" />
           </div>
           Facebook
         </button>
-        <button className={styles.googleButton}>
+        <button
+          className={styles.googleButton}
+          onClick={() => {
+            signIn("google")
+          }}
+        >
           <div className={styles.socialIcon}>
             <Image src="/google-white-logo.png" width="15" height="15" />
           </div>
