@@ -26,5 +26,17 @@ export default async function auth(req, res) {
     adapter: MongoDBAdapter({
       db: (await clientPromise).db("choppaladb"), // "choppaladb" คือชื่อ database, NextAuth จะสร้าง 3 Collection : accounts, sessions, users
     }),
+    callbacks: {
+      async signIn({ user, account, profile, email, credentials }) {
+        console.log(`in signIn callback`)
+        user.username = user.name
+        user.name = ""
+        user.activeSeller = false
+        user.wishlist = []
+        // console.log(user)
+        // console.log(account)
+        return true
+      },
+    },
   })
 }
