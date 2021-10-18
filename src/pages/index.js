@@ -1,12 +1,10 @@
 import Image from "next/image"
 import Card from "src/components/Card"
-import Layout from "src/components/Layout"
-import Footer from "src/components/Footer"
 import styles from "src/styles/pages/index.module.scss"
 
 function CategoryLink({ category }) {
   return (
-    <div>
+    <div className={styles.category}>
       <div className={styles.category_image}>
         <Image src="/molang.jpg" layout="fill" objectFit="cover" />
       </div>
@@ -29,7 +27,10 @@ export default function Index() {
         <div className={styles.section}>banner</div>
         <div className={styles.section}>
           <div className={styles.section_title}>categories</div>
-          <div className={styles.categoriesContainer}>
+          <div
+            className={styles.categoriesContainer}
+            style={{ "--category-length": categories.length }}
+          >
             {categories.map((category) => (
               <CategoryLink key={category} category={category} />
             ))}
