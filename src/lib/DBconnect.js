@@ -24,9 +24,6 @@ export default async function dbConnect() {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       bufferCommands: false,
-      bufferMaxEntries: 0,
-      useFindAndModify: false,
-      useCreateIndex: true,
     }
 
     cache.promise = await mongoose.connect(MONGODB_URI, opt)
