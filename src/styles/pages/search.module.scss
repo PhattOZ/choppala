@@ -38,6 +38,14 @@
   font-weight: 600;
 }
 
+.category_list {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.275rem;
+  border-bottom: 2px solid #d9d9d9;
+}
+
 .card_container {
   flex-grow: 1;
   display: grid;

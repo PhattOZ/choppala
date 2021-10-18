@@ -7,6 +7,7 @@ import {
   faCog,
   faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons"
+import Image from "next/image"
 import styles from "src/styles/pages/user.module.scss"
 
 export default function User() {
@@ -14,10 +15,12 @@ export default function User() {
     <div className={styles.container}>
       <div className={styles.sidebar}>
         <div className={styles.sidebar_header}>
-          <div>user img</div>
+          <div className={styles.sidebar_user_img}>
+            <Image src="/molang.jpg" layout="fill" objectFit="cover" />
+          </div>
           <div>
-            <div>username</div>
-            <div>email</div>
+            <div>molang</div>
+            <div>piupiu@pincos.co</div>
           </div>
         </div>
         <ul>
@@ -66,7 +69,9 @@ export default function User() {
         </ul>
       </div>
       <div className={styles.main}>
-        <div>general info</div>
+        <div>
+          <div>General Information</div>
+        </div>
       </div>
     </div>
   )

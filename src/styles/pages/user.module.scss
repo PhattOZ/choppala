@@ -1,11 +1,11 @@
 .container {
   display: flex;
   column-gap: 2rem;
-  padding: 1rem 6rem 0 6rem;
+  padding: 1rem 6rem;
 }
 
 .sidebar {
-  width: 20%;
+  width: 25%;
   padding: 1rem;
   border-radius: 0.5rem;
   overflow: hidden;
@@ -14,18 +14,25 @@
 
 .sidebar_header {
   display: flex;
+  column-gap: 1rem;
+}
+
+.sidebar_user_img {
+  width: 3rem;
+  height: 3rem;
+  position: relative;
 }
 
 .sidebar_list {
   border-top: 2px solid #d9d9d9;
-  margin-top: 0.5rem;
+  margin-top: 1rem;
 }
 
 .sidebar_list_item {
   display: flex;
   align-items: center;
   column-gap: 1rem;
-  padding-top: 0.5rem;
+  padding-top: 1rem;
 }
 
 .sidebar_list_item span {

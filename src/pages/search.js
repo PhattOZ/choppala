@@ -25,6 +25,9 @@ export default function Search() {
             <li>food</li>
             <li>hoho</li>
           </ul>
+          <div>
+            <div>Price range</div>
+          </div>
         </div>
         <div className={styles.card_container}>
           <Card title="progressive web apppppp" price={555} />
