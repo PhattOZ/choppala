@@ -1,11 +1,15 @@
 import styles from "src/styles/pages/search.module.scss"
 import Card from "src/components/Card"
+import { useRouter } from "next/router"
 
 export default function Search() {
+  const router = useRouter()
+  const { keyword } = router.query
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <div>Search result for blabla</div>
+        <div>Search result for {keyword}</div>
         <div className={styles.header_sort}>
           <div>sort by:</div>
           <div>some dropdown</div>

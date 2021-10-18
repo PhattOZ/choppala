@@ -36,18 +36,20 @@
     outline: none;
   }
 
-  button {
+  div {
+    color: #ffffff;
     cursor: pointer;
     position: absolute;
     height: 100%;
     width: 12%;
     right: 0;
-    display: inline-block;
     border: none;
     border-radius: 0 20px 20px 0;
     background-color: #4585ff;
     box-shadow: 5px 5px 10px #f0f0f0;
-    align-content: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     img {
       margin-top: 0.25em;
