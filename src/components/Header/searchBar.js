@@ -20,13 +20,13 @@ export default function searchBar(props) {
         placeholder="search in Choppala"
       />
 
-      <div>
-        <Link href={{ pathname: "/search", query: { keyword: keyword } }}>
-          <a>
+      <Link href={{ pathname: "/search", query: { keyword: keyword } }}>
+        <a>
+          <div>
             <FontAwesomeIcon icon={faSearch} />
-          </a>
-        </Link>
-      </div>
+          </div>
+        </a>
+      </Link>
     </form>
   )
 }
