@@ -1,5 +1,6 @@
 import styles from "src/styles/pages/search.module.scss"
 import Card from "src/components/Card"
+import categories from "src/lib/categoryList"
 import { useRouter } from "next/router"
 
 export default function Search() {
@@ -23,11 +24,9 @@ export default function Search() {
           </div>
           <div className={styles.categories}>Categories</div>
           <ul className={styles.category_list}>
-            <li>clothes</li>
-            <li>game</li>
-            <li>card</li>
-            <li>food</li>
-            <li>hoho</li>
+            {categories.map((category) => (
+              <li key={category}>{category}</li>
+            ))}
           </ul>
           <div>
             <div>Price range</div>
