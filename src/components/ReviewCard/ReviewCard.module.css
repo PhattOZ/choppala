@@ -1,0 +1,52 @@
+.container {
+  width: 75%;
+  max-width: 1136px;
+  height: 50%;
+  border-radius: 12px;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.titlectn {
+  border-radius: 12px 12px 0 0;
+  background-color: #dbe6fd;
+  font-size: 18px;
+  padding: 0.8rem;
+  color: #444655;
+}
+.reviewlist {
+    padding: 1rem;
+}
+.review {
+  display: flex;
+  flex-direction: row;
+  column-gap: 0.5rem;
+  padding: 0.4rem;
+}
+.avatar {
+  position: relative;
+  background-color: #8b8ea1;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.h2 {
+  font-size: 14px;
+  color: #444655;
+}
+.liststar {
+  display: flex;
+  column-gap: 0.1rem;
+}
+.stars {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
