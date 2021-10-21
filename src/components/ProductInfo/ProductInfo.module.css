@@ -1,0 +1,23 @@
+.container {
+  width: 75%;
+  max-width: 1136px;
+  height: 50%;
+  border-radius: 12px;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+}
+.titlectn {
+  border-radius: 12px 12px 0 0;
+  background-color: #dbe6fd;
+  font-size: 18px;
+  padding: 0.8rem;
+  color: #444655;
+}
+.infotxt {
+  padding: 0 1rem  0 1rem;
+  font-size: 14px;
+  color: #8b8ea1;
+}
