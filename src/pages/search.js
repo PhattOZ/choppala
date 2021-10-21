@@ -1,11 +1,16 @@
 import styles from "src/styles/pages/search.module.scss"
 import Card from "src/components/Card"
+import categories from "src/lib/categoryList"
+import { useRouter } from "next/router"
 
 export default function Search() {
+  const router = useRouter()
+  const { keyword } = router.query
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <div>Search result for blabla</div>
+        <div>Search result for {keyword}</div>
         <div className={styles.header_sort}>
           <div>sort by:</div>
           <div>some dropdown</div>
@@ -19,11 +24,9 @@ export default function Search() {
           </div>
           <div className={styles.categories}>Categories</div>
           <ul className={styles.category_list}>
-            <li>clothes</li>
-            <li>game</li>
-            <li>card</li>
-            <li>food</li>
-            <li>hoho</li>
+            {categories.map((category) => (
+              <li key={category}>{category}</li>
+            ))}
           </ul>
           <div>
             <div>Price range</div>

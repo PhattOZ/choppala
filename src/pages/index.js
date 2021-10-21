@@ -1,5 +1,6 @@
 import Image from "next/image"
 import Card from "src/components/Card"
+import categories from "src/lib/categoryList"
 import styles from "src/styles/pages/index.module.scss"
 
 function CategoryLink({ category }) {
@@ -14,13 +15,6 @@ function CategoryLink({ category }) {
 }
 
 export default function Index() {
-  const categories = [
-    "Clothes",
-    "Mobiles & Gadgets",
-    "Food & Beverages",
-    "Home Appliances",
-  ]
-
   return (
     <div className={styles.container}>
       <div>
