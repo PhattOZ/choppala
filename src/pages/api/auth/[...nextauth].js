@@ -1,9 +1,11 @@
 import NextAuth from "next-auth"
-import { MongoDBAdapter } from "@next-auth/mongodb-adapter"
-import clientPromise from "src/lib/mongodb"
+// dbConnect
+import dbConnect from "src/lib/DBconnect"
 // Providers
 import GoogleProvider from "next-auth/providers/google"
 import FacebookProvider from "next-auth/providers/facebook"
+// Model
+import User from "src/models/User"
 
 export default async function auth(req, res) {
   return await NextAuth(req, res, {
@@ -23,18 +25,18 @@ export default async function auth(req, res) {
     session: {
       jwt: true, // ใช้ jwt แทน database session (ใน db จะไม่มี collection session)
     },
-    adapter: MongoDBAdapter({
-      db: (await clientPromise).db("choppaladb"), // "choppaladb" คือชื่อ database, NextAuth จะสร้าง 3 Collection : accounts, sessions, users
-    }),
     callbacks: {
       async signIn({ user, account, profile, email, credentials }) {
-        console.log(`in signIn callback`)
-        user.username = user.name
-        user.name = ""
-        user.activeSeller = false
+        await dbConnect()
+        user.customName = ""
+        user.provider = account.provider
+        user.isSeller = false
+        user.address = ""
+        user.phoneNumber = ""
+        user.cart = []
         user.wishlist = []
-        // console.log(user)
-        // console.log(account)
+        user.sellerItem = []
+        await User.create(user)
         return true
       },
     },

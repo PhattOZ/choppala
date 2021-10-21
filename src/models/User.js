@@ -1,14 +1,20 @@
 import mongoose from "mongoose"
 
 const UserSchema = new mongoose.Schema({
-  name: String,
+  name: String, // username
   email: String,
   image: String,
+  customName: String,
   provider: String,
   isSeller: Boolean,
   address: String,
   phoneNumber: String,
-  dob: String, // วัน-เดือน-ปีเกิด
+  cart: [
+    {
+      itemName: String,
+      itemPrice: Number,
+    },
+  ],
   wishlist: [
     {
       itemName: String,
@@ -24,4 +30,4 @@ const UserSchema = new mongoose.Schema({
   sellerItem: [{ itemName: String }], // รายการสินค้าที่ลงขายแล้ว (กรณี activeSeller: true)
 })
 
-module.exports = mongoose.model("User", UserSchema)
+module.exports = mongoose.models.User || mongoose.model("User", UserSchema)
