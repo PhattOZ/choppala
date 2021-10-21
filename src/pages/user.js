@@ -9,18 +9,33 @@ import {
 } from "@fortawesome/free-solid-svg-icons"
 import Image from "next/image"
 import styles from "src/styles/pages/user.module.scss"
+import { signOut, useSession } from "next-auth/react"
+import { useRouter } from "next/router"
 
 export default function User() {
+  const router = useRouter()
+  const { data: session, status } = useSession({
+    required: true,
+    onUnauthenticated() {
+      router.push("/signin") // ถ้า user ยังไม่ได้ Login ให้ redirect ไปหน้า /signin
+    },
+  })
+
+  // Loading session
+  if (status === "loading") {
+    return <h1>Loading...</h1>
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.sidebar}>
         <div className={styles.sidebar_header}>
           <div className={styles.sidebar_user_img}>
-            <Image src="/molang.jpg" layout="fill" objectFit="cover" />
+            <Image src={session.user.image} layout="fill" objectFit="cover" />
           </div>
           <div>
-            <div>molang</div>
-            <div>piupiu@pincos.co</div>
+            <div>{session.user.name}</div>
+            <div>{session.user.email}</div>
           </div>
         </div>
         <ul>
@@ -59,7 +74,10 @@ export default function User() {
               </span>
               <div>Settings</div>
             </li>
-            <li className={styles.sidebar_list_item}>
+            <li
+              className={styles.sidebar_list_item}
+              onClick={() => signOut({ callbackUrl: "/" })}
+            >
               <span>
                 <FontAwesomeIcon icon={faSignOutAlt} size={"lg"} />
               </span>

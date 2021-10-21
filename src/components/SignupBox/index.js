@@ -46,7 +46,7 @@ export default function SignupBox() {
       <div className={`${styles.childBox} ${styles.oauthButtons}`}>
         <button
           className={styles.facebookButton}
-          onClick={() => signIn("facebook")}
+          onClick={() => signIn("facebook", { callbackUrl: "/user" })}
         >
           <div className={styles.socialIcon}>
             <Image src="/facebook-white-logo.png" width="11" height="14" />
@@ -56,7 +56,7 @@ export default function SignupBox() {
         <button
           className={styles.googleButton}
           onClick={() => {
-            signIn("google")
+            signIn("google", { callbackUrl: "/user" })
           }}
         >
           <div className={styles.socialIcon}>

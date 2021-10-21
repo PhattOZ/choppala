@@ -2,6 +2,7 @@ import mongoose from "mongoose"
 
 const ItemSchema = new mongoose.Schema({
   name: String, // ชื่อสินค้า
+  image: String, // รูปภาพสินค้า (url ที่ได้จาก S3 bucket)
   price: Number, // ราคาสินค้า
   detail: String, // รายละเอียดสินค้า
   sellerName: String, // ชื่อคนขายสินค้า
