@@ -18,7 +18,16 @@
 
 .peopleIcon {
   position: relative;
-  width: 24rem;
-  height: 24rem;
+  width: 23rem;
+  height: 23rem;
   margin-top: 8rem;
+}
+
+@media (max-width: 1024px) {
+  .peopleIcon {
+    display: none;
+  }
+}
+
+@media (max-width: 580px) {
 }
