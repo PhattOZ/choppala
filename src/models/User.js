@@ -1,14 +1,14 @@
 import mongoose from "mongoose"
 
 const UserSchema = new mongoose.Schema({
-  name: { type: String }, // username
+  name: String, // username
   email: String,
   image: String,
-  customName: String,
+  password: String,
+  displayName: { type: String, default: "" },
   provider: String,
-  isSeller: Boolean,
-  address: String,
-  phoneNumber: String,
+  isSeller: { type: Boolean, default: false },
+  shippingAddresses: [{ name: String, address: String }],
   cart: [
     {
       itemName: String,

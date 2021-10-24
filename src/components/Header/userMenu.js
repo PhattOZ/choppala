@@ -14,10 +14,6 @@ import { useSession } from "next-auth/react"
 export default function userMenu() {
   const { data: session, status } = useSession()
 
-  // if (status === "loading") {
-  //   return <></>
-  // }
-
   return (
     <div className={styles.containerSide}>
       <div className={styles.menu}>
@@ -52,7 +48,11 @@ export default function userMenu() {
         <Link href="/user">
           <a>
             {status === "authenticated" ? (
-              <Image src={session.user.image} width="150" height="150" />
+              <Image
+                src={session.user.image ? session.user.image : "/molang.jpg"}
+                width="150"
+                height="150"
+              />
             ) : (
               <FontAwesomeIcon icon={faUserCircle} size={"lg"} />
             )}

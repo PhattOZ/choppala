@@ -3,8 +3,16 @@ import Image from "next/image"
 import { signIn } from "next-auth/react"
 // Styles
 import styles from "./SignupBox.module.css"
+import { useState } from "react"
 
 export default function SignupBox() {
+  const [email, setEmail] = useState("")
+
+  const handleChange = (event) => {
+    const value = event.target.value
+    setEmail(value)
+  }
+
   return (
     <div className={styles.container}>
       <h3 className={styles.title}>Create your Choppala Account</h3>
@@ -14,6 +22,7 @@ export default function SignupBox() {
           className={styles.inputBox}
           type="text"
           placeholder="Please enter your email"
+          onChange={handleChange}
         />
       </div>
       <div className={`${styles.childBox} ${styles.inputPart}`}>
@@ -35,7 +44,12 @@ export default function SignupBox() {
           </Link>
         </label>
       </div>
-      <button className={`${styles.childBox} ${styles.signupButton}`}>
+      <button
+        className={`${styles.childBox} ${styles.signupButton}`}
+        onClick={() => {
+          signIn("email", { email: email })
+        }}
+      >
         SIGN UP
       </button>
       <div className={styles.orSignupWithBox}>

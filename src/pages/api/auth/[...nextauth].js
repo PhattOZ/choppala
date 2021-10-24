@@ -1,11 +1,15 @@
 import NextAuth from "next-auth"
 // dbConnect
-import dbConnect from "src/lib/DBconnect"
+import dbConnect from "src/lib/dbConnect"
+import clientPromise from "src/lib/mongodb"
 // Providers
 import GoogleProvider from "next-auth/providers/google"
 import FacebookProvider from "next-auth/providers/facebook"
-// Model
+import EmailProvider from "next-auth/providers/email"
+// Models
 import User from "src/models/User"
+// Adapters
+import { MongoDBAdapter } from "@next-auth/mongodb-adapter"
 
 export default async function auth(req, res) {
   return await NextAuth(req, res, {
@@ -18,22 +22,28 @@ export default async function auth(req, res) {
         clientId: process.env.FACEBOOK_CLIENT_ID,
         clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
       }),
+      EmailProvider({
+        server: process.env.EMAIL_SERVER,
+        from: process.env.EMAIL_FROM,
+      }),
     ],
+
     pages: {
       signIn: "/signin", // ถ้า url เป็น /api/auth/signin ให้ไปที่ localhost:3000/signin
     },
+
     session: {
-      jwt: true, // ใช้ jwt แทน database session (ใน db จะไม่มี collection session)
+      jwt: true,
     },
+
+    adapter: MongoDBAdapter({
+      db: (await clientPromise).db("choppaladb"),
+    }),
+
     callbacks: {
       async signIn({ user, account, profile, email, credentials }) {
         await dbConnect()
-        user.customName = ""
         user.provider = account.provider
-        user.isSeller = false
-        user.address = ""
-        user.phoneNumber = ""
-        user.cart = []
         user.wishlist = []
         user.sellerItem = []
         await User.create(user)
