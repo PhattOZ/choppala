@@ -1,8 +1,10 @@
 import Link from "next/link"
-import Image from "next/image"
 import { signIn } from "next-auth/react"
 // Styles
 import styles from "./SignupBox.module.css"
+// Icon
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faFacebookF, faGoogle } from "@fortawesome/free-brands-svg-icons"
 
 export default function SignupBox() {
   return (
@@ -49,7 +51,7 @@ export default function SignupBox() {
           onClick={() => signIn("facebook", { callbackUrl: "/user" })}
         >
           <div className={styles.socialIcon}>
-            <Image src="/facebook-white-logo.png" width="11" height="14" />
+            <FontAwesomeIcon icon={faFacebookF} />
           </div>
           Facebook
         </button>
@@ -60,7 +62,7 @@ export default function SignupBox() {
           }}
         >
           <div className={styles.socialIcon}>
-            <Image src="/google-white-logo.png" width="15" height="15" />
+            <FontAwesomeIcon icon={faGoogle} />
           </div>
           Google
         </button>
