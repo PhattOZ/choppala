@@ -1,6 +1,6 @@
 import Image from "next/image"
 // Styles
-import styles from "../styles/pages/Signup.module.css"
+import styles from "src/styles/pages/Signup.module.scss"
 // Components
 import SignupBox from "../components/SignupBox"
 
