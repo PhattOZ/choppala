@@ -1,6 +1,6 @@
 .container {
-  width: 30%;
-  max-width: 463px;
+  width: 80%;
+  max-width: 480px;
   height: 493px;
   border-radius: 12px;
   background-color: #ffffff;
@@ -125,4 +125,24 @@
 .socialIcon {
   margin-top: 2px;
   margin-right: 10px;
+}
+
+@media (max-width: 580px) {
+  .container {
+    width: 100%;
+  }
+}
+
+@media (max-width: 380px) {
+  .container {
+    height: 530px;
+    justify-content: center;
+  }
+  .title {
+    font-size: 1.3rem;
+  }
+  .childBox {
+    width: 90%;
+    margin: 8px 0;
+  }
 }
