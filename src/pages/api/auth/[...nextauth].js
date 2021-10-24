@@ -1,7 +1,10 @@
 import NextAuth from "next-auth"
 // dbConnect
 import dbConnect from "src/lib/dbConnect"
+<<<<<<< Updated upstream
 import clientPromise from "src/lib/mongodb"
+=======
+>>>>>>> Stashed changes
 // Providers
 import GoogleProvider from "next-auth/providers/google"
 import FacebookProvider from "next-auth/providers/facebook"
