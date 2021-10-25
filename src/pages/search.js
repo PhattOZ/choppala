@@ -33,12 +33,36 @@ export default function Search() {
           </div>
         </div>
         <div className={styles.card_container}>
-          <Card title="progressive web apppppp" price={555} />
-          <Card title="progressive web apppppp" price={555} />
-          <Card title="progressive web apppppp" price={555} />
-          <Card title="progressive web apppppp" price={555} />
-          <Card title="progressive web apppppp" price={555} />
-          <Card title="progressive web apppppp" price={555} />
+          <Card
+            title="progressive web apppppp"
+            price={555}
+            image="/molang2.jpg"
+          />
+          <Card
+            title="progressive web apppppp"
+            price={555}
+            image="/molang2.jpg"
+          />
+          <Card
+            title="progressive web apppppp"
+            price={555}
+            image="/molang2.jpg"
+          />
+          <Card
+            title="progressive web apppppp"
+            price={555}
+            image="/molang2.jpg"
+          />
+          <Card
+            title="progressive web apppppp"
+            price={555}
+            image="/molang2.jpg"
+          />
+          <Card
+            title="progressive web apppppp"
+            price={555}
+            image="/molang2.jpg"
+          />
         </div>
       </div>
     </div>

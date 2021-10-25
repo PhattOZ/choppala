@@ -11,11 +11,10 @@ const ItemSchema = new mongoose.Schema({
   reviews: [
     {
       username: String,
+      userImage: String,
       rating: Number,
     },
   ],
 })
 
-const Item = mongoose.model("Item", ItemSchema)
-
-module.exports = Item
+module.exports = mongoose.models.Item || mongoose.model("Item", ItemSchema)
