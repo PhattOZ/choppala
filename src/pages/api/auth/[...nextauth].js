@@ -1,6 +1,6 @@
 import NextAuth from "next-auth"
 // dbConnect
-import dbConnect from "src/lib/DBconnect"
+import dbConnect from "src/lib/dbConnect"
 // Providers
 import GoogleProvider from "next-auth/providers/google"
 import FacebookProvider from "next-auth/providers/facebook"
