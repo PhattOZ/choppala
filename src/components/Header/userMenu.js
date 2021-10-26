@@ -49,7 +49,7 @@ export default function userMenu() {
             <FontAwesomeIcon icon={faShoppingCart} size={"lg"} />
           </a>
         </Link>
-        <Link href="/user">
+        <Link href="/me">
           <a>
             {status === "authenticated" ? (
               <Image src={session.user.image} width="150" height="150" />
