@@ -8,20 +8,14 @@ import {
   faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons"
 import Image from "next/image"
-import styles from "src/styles/pages/user.module.scss"
-import { signOut, useSession } from "next-auth/react"
+import styles from "./UserProfileLayout.module.scss"
+import { useSession, signOut } from "next-auth/react"
 import { useRouter } from "next/router"
 
-export default function User() {
+export default function Layout({ user, currentRoute, children }) {
   const router = useRouter()
-  const { data: session, status } = useSession({
-    required: true,
-    onUnauthenticated() {
-      router.push("/signin") // ถ้า user ยังไม่ได้ Login ให้ redirect ไปหน้า /signin
-    },
-  })
+  const { data: session, status } = useSession()
 
-  // Loading session
   if (status === "loading") {
     return <h1>Loading...</h1>
   }
@@ -29,13 +23,14 @@ export default function User() {
   return (
     <div className={styles.container}>
       <div className={styles.sidebar}>
+        <div>{currentRoute}</div>
         <div className={styles.sidebar_header}>
           <div className={styles.sidebar_user_img}>
             <Image src={session.user.image} layout="fill" objectFit="cover" />
           </div>
           <div>
-            <div>{session.user.name}</div>
-            <div>{session.user.email}</div>
+            <div className={styles.bold}>{session.user.name}</div>
+            <div className={styles.email}>{session.user.email}</div>
           </div>
         </div>
         <ul>
@@ -86,11 +81,7 @@ export default function User() {
           </ul>
         </ul>
       </div>
-      <div className={styles.main}>
-        <div>
-          <div>General Information</div>
-        </div>
-      </div>
+      {children}
     </div>
   )
 }
