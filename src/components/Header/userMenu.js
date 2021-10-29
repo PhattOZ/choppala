@@ -9,11 +9,20 @@ import { faBell, faQuestionCircle } from "@fortawesome/free-regular-svg-icons"
 import Link from "next/link"
 import styles from "./header.module.scss"
 import Image from "next/image"
-import { useSession } from "next-auth/react"
+import { useSession, signOut } from "next-auth/react"
+import { useState, useContext } from "react"
+import CartContext from "src/lib/cart-context"
 
 export default function userMenu() {
   const { data: session, status } = useSession()
+  const [isHamburgerActive, setIsHamburgerActive] = useState(false)
+  const ctx = useContext(CartContext)
 
+  const toggleHamburger = () => {
+    setIsHamburgerActive(!isHamburgerActive)
+  }
+
+  console.log(ctx.value)
   // if (status === "loading") {
   //   return <></>
   // }
@@ -44,20 +53,55 @@ export default function userMenu() {
             <FontAwesomeIcon icon={faHeart} size={"lg"} />
           </a>
         </Link>
-        <Link href="/user">
+        <Link href="/cart">
           <a>
             <FontAwesomeIcon icon={faShoppingCart} size={"lg"} />
           </a>
         </Link>
-        <Link href="/user">
+        <Link href={status === "authenticated" ? "/user" : "/signup"}>
           <a>
             {status === "authenticated" ? (
-              <Image src={session.user.image} width="150" height="150" />
+              <div className={styles.user_image}>
+                <Image
+                  src={session.user.image}
+                  layout="fill"
+                  objectFit="contain"
+                />
+              </div>
             ) : (
               <FontAwesomeIcon icon={faUserCircle} size={"lg"} />
             )}
           </a>
         </Link>
+      </div>
+
+      <div className={styles.concise_menu}>
+        <div className={styles.concise_cart}>
+          <Link href="/cart">
+            <a>
+              <FontAwesomeIcon icon={faShoppingCart} size={"lg"} />
+            </a>
+          </Link>
+        </div>
+        <div
+          className={`${styles.hamburger} ${
+            isHamburgerActive ? styles.toggle : ""
+          }`}
+          onClick={toggleHamburger}
+        >
+          <div className={styles.line1}></div>
+          <div className={styles.line2}></div>
+          <div className={styles.line3}></div>
+          <ul className={styles.dropdown_menu}>
+            <li>
+              <Link href="/user">
+                <a>user</a>
+              </Link>
+            </li>
+            <li>favorite</li>
+            <li onClick={() => signOut()}>logout</li>
+          </ul>
+        </div>
       </div>
     </div>
   )
