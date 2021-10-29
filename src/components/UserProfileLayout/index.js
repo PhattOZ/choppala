@@ -75,7 +75,7 @@ export default function Layout({ children }) {
             </SidebarItem>
 
             <li
-              className={styles.sidebar_list_item}
+              className={`${styles.sidebar_list_item} ${styles.signout}`}
               onClick={() => signOut({ callbackUrl: "/" })}
             >
               <span>
