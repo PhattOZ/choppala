@@ -12,6 +12,8 @@ $headerHeight: 7.3rem;
   justify-content: center;
   z-index: 9999;
   height: $headerHeight;
+  transition-timing-function: ease-in;
+  transition: 0.5s;
 
   .logo {
     margin: 1em 3em 0.25em 0.5em;
@@ -227,4 +229,8 @@ $headerHeight: 7.3rem;
       }
     }
   }
+}
+
+.hide_header {
+  opacity: 0;
 }

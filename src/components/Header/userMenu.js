@@ -22,7 +22,6 @@ export default function userMenu() {
     setIsHamburgerActive(!isHamburgerActive)
   }
 
-  console.log(ctx.value)
   // if (status === "loading") {
   //   return <></>
   // }
