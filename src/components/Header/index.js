@@ -6,25 +6,32 @@ import UserMenu from "./userMenu"
 import { useState, useEffect } from "react"
 
 export default function Header() {
-  const [show, setShow] = useState(true)
+  let oldScrollY = 0
 
-  const headerHandler = () => {
-    if (window.scrollY > 100) {
-      setShow(false)
+  const [showHeader, setShowHeader] = useState(true)
+
+  const controlDirection = () => {
+    if (window.scrollY > oldScrollY) {
+      setShowHeader(false)
     } else {
-      setShow(true)
+      setShowHeader(true)
     }
+    oldScrollY = window.scrollY
   }
 
   useEffect(() => {
-    window.addEventListener("scroll", headerHandler)
+    window.addEventListener("scroll", controlDirection)
     return () => {
-      window.removeEventListener("scroll", headerHandler)
+      window.removeEventListener("scroll", controlDirection)
     }
   }, [])
 
   return (
-    <div className={`${styles.headerContainer} ${!show && styles.hide_header}`}>
+    <div
+      className={`${styles.headerContainer} ${
+        !showHeader && styles.hide_header
+      }`}
+    >
       <div className={styles.logo}>
         <Link href="/">
           <a>

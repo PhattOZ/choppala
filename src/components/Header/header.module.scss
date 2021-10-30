@@ -12,8 +12,7 @@ $headerHeight: 7.3rem;
   justify-content: center;
   z-index: 9999;
   height: $headerHeight;
-  transition-timing-function: ease-in;
-  transition: 0.5s;
+  transition: all 0.8s ease;
 
   .logo {
     margin: 1em 3em 0.25em 0.5em;
@@ -232,5 +231,7 @@ $headerHeight: 7.3rem;
 }
 
 .hide_header {
-  opacity: 0;
+  //visibility: hidden; //can't use visibility together with transition
+  //display: none; //will cause some bug when the height of screen is too short
+  top: -20rem;
 }
