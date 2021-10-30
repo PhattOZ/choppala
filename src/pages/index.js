@@ -1,7 +1,10 @@
 import Image from "next/image"
+import Link from "next/link"
 import Card from "src/components/Card"
 import categories from "src/lib/categoryList"
 import styles from "src/styles/pages/index.module.scss"
+import dbConnect from "src/lib/dbConnect"
+import Item from "src/models/Item"
 
 function CategoryLink({ category }) {
   return (
@@ -14,7 +17,7 @@ function CategoryLink({ category }) {
   )
 }
 
-export default function Index() {
+export default function Index({ productList }) {
   return (
     <div className={styles.container}>
       <div>
@@ -33,21 +36,30 @@ export default function Index() {
         <div className={styles.section}>
           <div className={styles.section_title}>justforyou</div>
           <div className={styles.cardContainer}>
-            <Card title="haha" price={123} />
-            <Card title="haha" price={123} />
-            <Card title="haha" price={123} />
-            <Card title="haha" price={123} />
-            <Card title="haha" price={123} />
-            <Card title="haha" price={123} />
-            <Card title="haha" price={123} />
-            <Card title="haha" price={123} />
-            <Card title="haha" price={123} />
-            <Card title="haha" price={123} />
-            <Card title="haha" price={123} />
-            <Card title="haha" price={123} />
+            {productList.map((product) => (
+              <Link key={product._id} href={`/product/${product._id}`}>
+                <a>
+                  <Card
+                    title={product.name}
+                    price={product.price}
+                    image={product.image}
+                  />
+                </a>
+              </Link>
+            ))}
           </div>
         </div>
       </div>
     </div>
   )
+}
+
+export async function getServerSideProps(context) {
+  await dbConnect()
+  const productList = await Item.find().sort({ _id: -1 }).limit(18)
+  return {
+    props: {
+      productList: JSON.parse(JSON.stringify(productList)),
+    },
+  }
 }

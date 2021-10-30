@@ -12,7 +12,12 @@ import Link from "next/link"
 import Image from "next/image"
 import styles from "./ProductBox.module.css"
 
-export default function ProductBox({ productname, price }) {
+export default function ProductBox({
+  productname,
+  price,
+  sellerName,
+  reviewCount,
+}) {
   const [count, setCount] = useState(1)
 
   const [heart, setHeart] = useState(farfaHeart)
@@ -100,7 +105,7 @@ export default function ProductBox({ productname, price }) {
               <div className={styles.p1}>
                 Sold by{" "}
                 <a href="/" className={styles.soldname}>
-                  xxxxxxxxxxx
+                  {sellerName}
                 </a>
               </div>
             </div>
@@ -112,7 +117,7 @@ export default function ProductBox({ productname, price }) {
                 <FontAwesomeIcon icon={faStar} size={"xs"} color="#ffd700" />
                 <FontAwesomeIcon icon={faStar} size={"xs"} color="#A8AABC" />
               </div>
-              <div className={styles.p2}>124 reviews</div>
+              <div className={styles.p2}>{reviewCount} reviews</div>
             </div>
           </div>
           <div className={styles.pricecontainer}>
