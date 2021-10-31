@@ -3,12 +3,10 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons"
 import { useRouter } from "next/router"
 import { useState } from "react"
 import Link from "next/link"
-import { useRouter } from "next/router"
 
 export default function searchBar(props) {
   const router = useRouter()
   const [keyword, setKeyword] = useState("")
-  const router = useRouter()
 
   const handleChange = (e) => {
     const value = e.target.value
@@ -18,8 +16,8 @@ export default function searchBar(props) {
   const handleSubmit = (event) => {
     event.preventDefault()
     router.push({
-      pathname: "/search",
-      query: { keyword: keyword },
+      pathname: "/filter",
+      query: { ...router.query, keyword },
     })
   }
 
@@ -30,18 +28,20 @@ export default function searchBar(props) {
         onChange={handleChange}
         placeholder="search in Choppala"
       />
-      <Link
-        href={{
-          pathname: "/filter",
-          query: { ...router.query, keyword },
-        }}
-      >
-        <a>
-          <div>
-            <FontAwesomeIcon icon={faSearch} />
-          </div>
-        </a>
-      </Link>
+      <div>
+        <Link
+          href={{
+            pathname: "/filter",
+            query: { ...router.query, keyword },
+          }}
+        >
+          <a>
+            <div>
+              <FontAwesomeIcon icon={faSearch} size={"lg"} />
+            </div>
+          </a>
+        </Link>
+      </div>
     </form>
   )
 }
