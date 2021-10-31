@@ -1,0 +1,47 @@
+.main {
+    flex-grow: 1;
+    background-color: #ffffff;
+    padding: 1rem;
+    border-radius: 0.5rem;
+  }
+  
+  .main section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .text {
+    font-size: 14px;
+    color: #444655;
+  }
+  
+  .peopleIcon {
+    position: relative;
+    width: 18rem;
+    height: 18rem;
+    margin: auto;
+  }
+  
+  .button {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+    column-gap: 0.4rem;
+    background-color: #4585ff;
+    font-size: 16px;
+    font-weight: 500;
+    color: #ffff;
+    border-radius: 6px;
+    width: 12rem;
+    padding: 0.8rem;
+    cursor: pointer;
+  }
+  
+  .button:hover{
+    background-color: #8B8EA1;
+  }
+  
