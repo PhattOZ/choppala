@@ -1,3 +1,6 @@
+$grey70: #8b8ea1;
+$grey100: #444655;
+
 .main {
   display: flex;
   flex-direction: column;
@@ -20,7 +23,7 @@
   align-items: center;
   background-color: #ffffff;
   padding: 1rem;
-  padding-bottom: 3rem;  
+  padding-bottom: 3rem;
   border-radius: 0.5rem;
 }
 
@@ -47,8 +50,8 @@
 }
 
 .edit_section label {
-  font-size: 0.75rem;
-  color: #969696;
+  font-size: 0.9rem;
+  color: $grey100;
 }
 
 .edit_section input {
@@ -60,8 +63,10 @@
   margin-bottom: 1rem;
 }
 
-.edit_section input[type="date"] {
-  padding: 0.1rem;
+.edit_section input[type="text"] {
+  padding: 0.3rem 0.6rem;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.95rem;
 }
 
 .edit_section input:focus {
@@ -82,11 +87,17 @@
 }
 
 .saveButton {
-  display: inline-block;
-  padding: 0.25rem 2rem;
+  display: flex;
+  justify-content: center;
+  width: 10rem;
+  padding: 0.4rem 2rem;
   background-color: #4585ff;
   color: white;
   border-radius: 0.25rem;
+  cursor: pointer;
+  &:hover {
+    background-color: $grey70;
+  }
 }
 
 .peopleIcon {
