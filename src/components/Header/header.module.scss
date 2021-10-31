@@ -1,107 +1,237 @@
+@import "../../styles/breakPoints.scss";
+
+$headerHeight: 7.3rem;
+
 .headerContainer {
   display: flex;
-  flex-wrap: wrap;
   background-color: white;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding: 1rem;
   position: sticky;
   top: 0;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
   z-index: 9999;
-}
+  height: $headerHeight;
+  transition: all 0.8s ease;
 
-.item1 {
-  margin: 0 4em 0.25em 0;
-  :first-child {
-    margin-right: 0.5em;
-  }
-}
-
-.searchBar {
-  width: 50%;
-  height: 2.25em;
-  margin: 0 3em 0.5em -2em;
-  position: relative;
-
-  input[type="text"] {
-    position: absolute;
-    height: 100%;
-    width: 88%;
-    padding-left: 1.5em;
-    border: none;
-    border-radius: 20px 0 0 20px;
-    background-color: #e9efff;
-    box-shadow: 5px 5px 10px #f0f0f0;
-    outline: none;
-  }
-
-  div {
-    color: #ffffff;
-    cursor: pointer;
-    position: absolute;
-    height: 100%;
-    width: 12%;
-    right: 0;
-    border: none;
-    border-radius: 0 20px 20px 0;
-    background-color: #4585ff;
-    box-shadow: 5px 5px 10px #f0f0f0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    img {
-      margin-top: 0.25em;
-    }
-  }
-}
-
-.containerSide {
-  display: flex;
-  flex-direction: column;
-  width: 180px;
-  align-items: flex-end;
-  // margin-bottom: 0.5em;
-  padding-bottom: 0.75em;
-  margin-left: -2em;
-
-  .userMenu {
-    color: #3f3f3f;
-    display: flex;
-    margin-bottom: 0.35em;
-    a {
-      width: 100%;
-      height: auto;
-      margin-right: 2em;
-    }
-  }
-
-  .menu {
-    display: flex;
-    padding: 0.25em 0;
-    padding-top: -0.5em;
-    margin-bottom: 1em;
-    .fabell {
-      width: max-content;
-      color: #5c94ff;
-    }
-
-    .faQuestionCircle {
-      width: max-content;
-      color: #5c94ff;
-    }
-
-    .faGlobe {
-      width: max-content;
-      margin-right: 2em;
-      color: #5c94ff;
-    }
+  .logo {
+    margin: 1em 3em 0.25em 0.5em;
+    padding: auto;
+    width: 15em;
+    height: 4em;
 
     a {
-      height: auto;
-      margin-right: 1.5em;
-      font-size: 0.8em;
+      display: flex;
+      align-items: center;
+      column-gap: 0.5em;
+      .logo_text {
+        position: relative;
+        width: 10em;
+        height: 3em;
+        margin-top: 1em;
+      }
+      .logo_image {
+        position: relative;
+        width: 4em;
+        height: 4em;
+      }
     }
   }
+
+  @include breakpoint(phone) {
+    padding: 0.5em;
+    .logo {
+      margin: 1em 1.5em 0.25em 0em;
+      width: 5em;
+    }
+    .logo_text {
+      display: none;
+    }
+  }
+
+  .searchBar {
+    display: flex;
+    width: 50%;
+    height: 2.25em;
+    margin: 0 3em 0.5em -2em;
+    padding-top: 1em;
+    position: relative;
+
+    input[type="text"] {
+      position: absolute;
+      height: 100%;
+      width: 88%;
+      padding-left: 1.5em;
+      border: none;
+      border-radius: 20px 0 0 20px;
+      background-color: #e9efff;
+      box-shadow: 5px 5px 10px #f0f0f0;
+      outline: none;
+    }
+
+    :nth-child(2) {
+      width: 12%;
+      cursor: pointer;
+      position: absolute;
+      height: 100%;
+      right: 0;
+      display: inline-block;
+      border: none;
+      border-radius: 0 20px 20px 0;
+      background-color: #4585ff;
+      box-shadow: 5px 5px 10px #f0f0f0;
+      align-content: center;
+      div {
+        display: flex;
+        color: white;
+        padding: 6px 3px 0 0;
+        width: max-content;
+        margin: auto;
+      }
+    }
+  }
+
+  .containerSide {
+    display: flex;
+    flex-direction: column;
+    width: 180px;
+    align-items: flex-end;
+    margin-left: -2em;
+    row-gap: 0.5rem;
+    margin-bottom: 0.8rem;
+
+    .menu {
+      display: flex;
+      padding: 0.25em 0;
+      padding-top: -0.5em;
+      margin-bottom: 0.3rem;
+      .fabell {
+        width: max-content;
+        color: #5c94ff;
+      }
+
+      .faQuestionCircle {
+        width: max-content;
+        color: #5c94ff;
+      }
+
+      .faGlobe {
+        width: max-content;
+        margin-right: 2em;
+        color: #5c94ff;
+      }
+
+      a {
+        height: auto;
+        margin-right: 1.5em;
+        font-size: 0.8em;
+      }
+    }
+    .userMenu {
+      display: flex;
+
+      margin-bottom: 0.35em;
+      a {
+        width: 100%;
+        height: auto;
+        margin-right: 2em;
+      }
+      .user_image {
+        position: relative;
+        bottom: 0.2em;
+        width: 1.8em;
+        height: 1.8em;
+        margin-left: -0.3em;
+        margin-bottom: -0.3em;
+        :first-child {
+          border-radius: 50%;
+        }
+      }
+    }
+    .concise_menu {
+      display: none;
+      .hamburger {
+        .line1,
+        .line2,
+        .line3 {
+          width: 30px;
+          height: 3px;
+          background: black;
+          margin: 5px;
+          transition: all 0.3s ease;
+        }
+
+        .dropdown_menu {
+          display: none;
+          position: absolute;
+          background-color: blue;
+          margin-top: 0.5rem;
+          right: 0;
+        }
+      }
+    }
+  }
+
+  @include breakpoint(tablet) {
+    .containerSide {
+      width: 5em;
+      padding: 0 0 0 1rem;
+      margin-bottom: 0.7rem;
+      row-gap: 0.2rem;
+      .menu {
+        margin-right: -1.5rem;
+        margin-bottom: 0.5rem;
+      }
+      .userMenu {
+        display: none;
+      }
+      .concise_menu {
+        display: flex;
+        column-gap: 1em;
+        padding-top: 0.2rem;
+        // margin-top: -1.5em;
+        .concise_cart {
+          display: block;
+          position: relative;
+          bottom: 0.15rem;
+        }
+        .hamburger {
+          display: block;
+          cursor: pointer;
+          position: relative;
+          top: 0.65em;
+          transform: translate(-5%, -50%);
+          transition: all 0.7s ease;
+        }
+        .toggle .line1 {
+          transform: rotate(-45deg) translate(-5px, 6px);
+        }
+        .toggle .line2 {
+          transition: 0.7s ease;
+          width: 0;
+        }
+        .toggle .line3 {
+          transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        .toggle .dropdown_menu {
+          display: block;
+          background-color: white;
+          li {
+            padding: 0.2rem 1rem;
+            border: 1px solid red;
+            &:hover {
+              background-color: gray;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.hide_header {
+  //visibility: hidden; //can't use visibility together with transition
+  //display: none; //will cause some bug when the height of screen is too short
+  top: -20rem;
 }

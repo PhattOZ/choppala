@@ -1,8 +1,12 @@
+$footerHeight: 14rem;
+
 .container {
+  position: static;
   display: flex;
   flex-direction: column;
   background-color: #ffffff;
   padding: 2rem 8rem;
+  height: $footerHeight;
 }
 
 .footernav {

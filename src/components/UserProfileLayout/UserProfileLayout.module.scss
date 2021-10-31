@@ -43,13 +43,20 @@
   padding-top: 1rem;
 }
 
+.blue {
+  color: #4585ff;
+}
 
-.sidebar_list_item:hover{
-  color: #4585FF;
+.sidebar_list_item:hover {
+  color: #4585ff;
 }
 
 .sidebar_list_item span {
   width: 15%;
   display: flex;
   justify-content: center;
+}
+
+.signout {
+  cursor: pointer;
 }

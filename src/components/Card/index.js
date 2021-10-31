@@ -3,11 +3,11 @@ import { faStar, faHeart } from "@fortawesome/free-solid-svg-icons"
 import styles from "./Card.module.scss"
 import Image from "next/image"
 
-export default function Card({ title, price }) {
+export default function Card({ title, price, image }) {
   return (
     <div className={styles.card}>
       <div className={styles.card_image}>
-        <Image src="/molang2.jpg" layout="fill" objectFit="cover" />
+        <Image src={image} layout="fill" objectFit="cover" />
       </div>
       <div className={styles.card_content}>
         <div>{title}</div>

@@ -8,15 +8,15 @@ export default function ActivateSeller({ name, email }) {
   const router = useRouter()
   const data = { name, email }
   async function setSeller() {
-    console.log(name,email)
     const res = await fetch("/api/setSeller", {
-      method: 'POST',
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
     })
-    if(res.ok){
+
+    if (res.ok) {
       router.reload()
     }
   }

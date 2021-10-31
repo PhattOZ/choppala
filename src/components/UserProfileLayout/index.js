@@ -15,11 +15,16 @@ import styles from "./UserProfileLayout.module.scss"
 import { useSession, signOut } from "next-auth/react"
 import { useRouter } from "next/router"
 
-function SidebarItem({ children, content, link }) {
+function SidebarItem({ children, content, path }) {
+  const router = useRouter()
+  const style =
+    router.asPath == path
+      ? `${styles.sidebar_list_item} ${styles.blue}`
+      : styles.sidebar_list_item
   return (
-    <Link href={link ? link : "/"}>
+    <Link href={path ? path : "/"}>
       <a>
-        <li className={styles.sidebar_list_item}>
+        <li className={style}>
           <span>{children}</span>
           <div>{content}</div>
         </li>
@@ -29,7 +34,6 @@ function SidebarItem({ children, content, link }) {
 }
 
 export default function Layout({ children }) {
-  const router = useRouter()
   const { data: session, status } = useSession()
 
   if (status === "loading") {
@@ -50,15 +54,15 @@ export default function Layout({ children }) {
         </div>
         <ul>
           <ul className={styles.sidebar_list}>
-            <SidebarItem content="Profile" link="/me">
+            <SidebarItem content="Profile" path="/me">
               <FontAwesomeIcon icon={faUser} size={"lg"} />
             </SidebarItem>
 
-            <SidebarItem content="Purchase history" link="/me/purchasehistory">
+            <SidebarItem content="Purchase history" path="/me/purchasehistory">
               <FontAwesomeIcon icon={faHistory} size={"lg"} />
             </SidebarItem>
 
-            <SidebarItem content="Wishlist" link="/me/wishlist">
+            <SidebarItem content="Wishlist" path="/me/wishlist">
               <FontAwesomeIcon icon={faHeart} size={"lg"} />
             </SidebarItem>
           </ul>
@@ -77,7 +81,7 @@ export default function Layout({ children }) {
             </SidebarItem>
 
             <li
-              className={styles.sidebar_list_item}
+              className={`${styles.sidebar_list_item} ${styles.signout}`}
               onClick={() => signOut({ callbackUrl: "/" })}
             >
               <span>
