@@ -1,6 +1,7 @@
 import { SessionProvider } from "next-auth/react"
 import "../styles/globals.css"
 import Layout from "src/components/Layout"
+import { CartContextProvider } from "src/lib/cart-context"
 
 export default function App({
   Component,
@@ -8,9 +9,11 @@ export default function App({
 }) {
   return (
     <SessionProvider session={session}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <CartContextProvider>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </CartContextProvider>
     </SessionProvider>
   )
 }

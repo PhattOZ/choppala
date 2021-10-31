@@ -1,19 +1,59 @@
 import styles from "./header.module.scss"
 import Link from "next/link"
-import Logo from "./logo"
-import Logotext from "./logoText"
+import Image from "next/image"
 import SearchBar from "./searchBar"
 import UserMenu from "./userMenu"
+import { useState, useEffect } from "react"
 
 export default function Header() {
+  let oldScrollY = 0
+
+  const [showHeader, setShowHeader] = useState(true)
+
+  const controlDirection = () => {
+    if (window.scrollY > oldScrollY) {
+      setShowHeader(false)
+    } else {
+      setShowHeader(true)
+    }
+    oldScrollY = window.scrollY
+  }
+
+  useEffect(() => {
+    window.addEventListener("scroll", controlDirection)
+    return () => {
+      window.removeEventListener("scroll", controlDirection)
+    }
+  }, [])
+
   return (
-    <div className={styles.headerContainer}>
-      <Link href="/">
-        <a className={styles.item1}>
-          <Logo />
-          <Logotext />
-        </a>
-      </Link>
+    <div
+      className={`${styles.headerContainer} ${
+        !showHeader && styles.hide_header
+      }`}
+    >
+      <div className={styles.logo}>
+        <Link href="/">
+          <a>
+            <div className={styles.logo_image}>
+              <Image
+                src="/logo.png"
+                layout="fill"
+                objectFit="contain"
+                priority
+              />
+            </div>
+            <div className={styles.logo_text}>
+              <Image
+                src="/logoText.png"
+                layout="fill"
+                objectFit="contain"
+                priority
+              />
+            </div>
+          </a>
+        </Link>
+      </div>
       <SearchBar className={styles.searchBar} />
       <UserMenu />
     </div>

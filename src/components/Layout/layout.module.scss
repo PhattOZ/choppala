@@ -1,0 +1,19 @@
+@use "../Header/header.module.scss" as header;
+@use "../Footer/Footer.module.scss" as footer;
+
+.layout {
+  height: inherit;
+}
+
+.main {
+  position: static;
+  min-height: -moz-calc(
+    100% - header.$headerHeight - footer.$footerHeight
+  ); /* Firefox */
+  min-height: -webkit-calc(
+    100% - header.$headerHeight - footer.$footerHeight
+  ); /* Chrome, Safari */
+  min-height: calc(
+    100% - header.$headerHeight - footer.$footerHeight
+  ); /* IE9+ and future browsers */
+}

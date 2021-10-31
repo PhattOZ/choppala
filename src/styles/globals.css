@@ -3,6 +3,11 @@ body {
   padding: 0;
   margin: 0;
   font-family: "Poppins", sans-serif;
+  height: 100%;
+}
+
+div#__next {
+  height: 100%;
 }
 
 a {
