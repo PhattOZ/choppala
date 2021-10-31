@@ -29,7 +29,14 @@ export default function Index({ productList }) {
             style={{ "--category-length": categories.length }}
           >
             {categories.map((category) => (
-              <CategoryLink key={category} category={category} />
+              <Link
+                key={category}
+                href={{ pathname: "/filter", query: { category } }}
+              >
+                <a>
+                  <CategoryLink category={category} />
+                </a>
+              </Link>
             ))}
           </div>
         </div>

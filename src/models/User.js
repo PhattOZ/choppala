@@ -1,14 +1,38 @@
 import mongoose from "mongoose"
 
 const UserSchema = new mongoose.Schema({
-  name: String, // username
-  email: String,
-  image: String,
-  customName: String,
-  provider: String,
-  isSeller: Boolean,
-  address: String,
-  phoneNumber: String,
+  name: {
+    type: String,
+    required: true,
+  }, // username
+  email: {
+    type: String,
+    required: true,
+  },
+  image: {
+    type: String,
+    required: true,
+  },
+  customName: {
+    type: String,
+    default: "",
+  }, // Firstname-Lastname ที่ผู้ใช้ตั้งเอง
+  provider: {
+    type: String,
+    required: true,
+  },
+  isSeller: {
+    type: Boolean,
+    default: false,
+  },
+  address: {
+    type: String,
+    default: "",
+  },
+  phoneNumber: {
+    type: String,
+    default: "",
+  },
   cart: [
     {
       itemName: String,
@@ -22,6 +46,7 @@ const UserSchema = new mongoose.Schema({
       itemReviews: [
         {
           username: String,
+          userImage: String,
           rating: Number,
         },
       ],
