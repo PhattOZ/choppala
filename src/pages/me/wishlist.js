@@ -1,5 +1,9 @@
-import Sidebar from "src/components/UserProfileLayout"
+import Layout from "src/components/UserProfileLayout"
 
 export default function Wishlist() {
-  return <div></div>
+  return (
+    <Layout>
+      <div>some right-side content</div>
+    </Layout>
+  )
 }
