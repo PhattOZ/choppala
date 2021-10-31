@@ -1,7 +1,7 @@
 import Image from "next/image"
 import styles from "./ActivateSeller.module.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faUserPlus } from "@fortawesome/free-solid-svg-icons"
+import { faUserCheck } from "@fortawesome/free-solid-svg-icons"
 import { useRouter } from "next/router"
 
 export default function ActivateSeller({ name, email }) {
@@ -30,7 +30,7 @@ export default function ActivateSeller({ name, email }) {
           </div>
           <div className={styles.text}>Start selling on Choppala</div>
           <div className={styles.button} onClick={setSeller}>
-            <FontAwesomeIcon icon={faUserPlus} size={"lg"} />
+            <FontAwesomeIcon icon={faUserCheck} size={"lg"} />
             Activate seller
           </div>
         </section>

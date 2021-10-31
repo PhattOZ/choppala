@@ -1,13 +1,12 @@
 import Layout from "src/components/UserProfileLayout"
-import Image from "next/image"
-import { useRouter } from "next/router"
 import styles from "src/styles/pages/user/ManageStore.module.scss"
 import ActivateSeller from "src/components/ActivateSeller"
 import Store from "src/components/Store"
+import { useRouter } from "next/router"
 import { useSession } from "next-auth/react"
+import { getSession } from "next-auth/react"
 import dbConnect from "src/lib/dbConnect"
 import User from "src/models/User"
-import { getSession } from "next-auth/react"
 
 export default function ManageStore({ data }) {
   const router = useRouter()

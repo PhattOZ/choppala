@@ -1,0 +1,87 @@
+$blue: #4585ff;
+$lightblue: #dbe6fd;
+$lightblue30: #e9efff;
+$grey: #969696;
+$grey70: #8b8ea1;
+$grey100: #444655;
+$grey45: #a8aabc;
+$red: #ff1f00;
+$red20: #ffd2cc;
+
+.orderBox {
+  display: flex;
+  padding: 1rem;
+  border: 1px solid $grey;
+  border-radius: 0.4rem;
+}
+
+.orderBox:hover {
+  background-color: $lightblue30;
+  // border: 2px solid $blue;
+  cursor: pointer;
+}
+
+.flexInfo {
+  display: flex;
+  flex-direction: row;
+}
+
+.img {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.4rem;
+  width: 4rem;
+  height: 4rem;
+}
+
+.info {
+  position: relative;
+  display: flex;
+  column-gap: 2rem;
+}
+
+.nameblock {
+  display: flex;
+  width: 20rem;
+}
+
+.infoblock {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 6rem;
+}
+
+.priceblock {
+  display: flex;
+  padding-left: 2rem;
+  align-items: center;
+  column-gap: 0.4rem;
+}
+
+.textInfo {
+  display: flex;
+  font-size: 1rem;
+}
+
+.textInfo:nth-child(1) {
+  margin-left: 1rem;
+}
+
+.deleteBtn {
+  display: flex;
+  justify-content: center;
+  column-gap: 0.4rem;
+  width: 6rem;
+  padding: 0.5rem 2rem;
+  background-color: $red20;
+  color: $red;
+  border-radius: 0.25rem;
+  font-size: 0.9rem;
+}
+
+.deleteBtn:hover {
+  background-color: $red;
+  color: white;
+  cursor: pointer;
+}

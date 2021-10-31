@@ -1,7 +1,8 @@
 import Image from "next/image"
+import Link from "next/link"
 import styles from "./FirstProduct.module.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faPlus, faUserPlus } from "@fortawesome/free-solid-svg-icons"
+import { faPlusCircle } from "@fortawesome/free-solid-svg-icons"
 
 export default function FirstProduct() {
 
@@ -10,13 +11,15 @@ export default function FirstProduct() {
       <div className={styles.main}>
         <section>
           <div className={styles.peopleIcon}>
-            <Image src="/activate-seller.svg" layout="fill" objectFit="cover" />
+            <Image src="/addproduct.svg" layout="fill" objectFit="cover" />
           </div>
           <div className={styles.text}>Start selling on Choppala</div>
+          <Link href="/me/addproduct">
           <div className={styles.button}>
-            <FontAwesomeIcon icon={faPlus} size={"lg"} />
+            <FontAwesomeIcon icon={faPlusCircle} size={"lg"} />
             Add product
           </div>
+          </Link>
         </section>
       </div>
     </>

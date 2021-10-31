@@ -1,0 +1,222 @@
+$blue: #4585ff;
+$lightblue: #dbe6fd;
+$grey: #969696;
+$grey45: #a8aabc;
+$grey70: #8b8ea1;
+$grey100: #444655;
+$red: #ff1f00;
+$red20: #ffd2cc;
+
+.main {
+  flex-grow: 1;
+}
+
+.main section {
+  background-color: #ffffff;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  column-gap: 0.5rem;
+}
+
+.icon {
+  cursor: pointer;
+  color: $grey100;
+  &:hover {
+    color: $grey70;
+  }
+}
+
+.title {
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+.body {
+  display: flex;
+  flex-direction: row;
+  column-gap: 0.6rem;
+}
+
+.body_section {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 0.5rem;
+}
+
+.edit_section {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+  padding-right: 0;
+
+  label {
+    font-size: 0.9rem;
+    color: $grey100;
+  }
+
+  input {
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    border: 1px solid $grey;
+  }
+
+  input:focus {
+    outline-color: $blue;
+  }
+
+  input[type="text"] {
+    padding: 0.3rem 0.6rem;
+    font-family: "Poppins", sans-serif;
+    font-size: 0.95rem;
+  }
+
+  input[type="number"] {
+    padding: 0.3rem 0.6rem;
+    font-family: "Poppins", sans-serif;
+    font-size: 0.95rem;
+    width: 6rem;
+  }
+
+  select {
+    border-radius: 0.25rem;
+    border: 1px solid $grey;
+    padding: 0.3rem 0.6rem;
+    font-family: "Poppins", sans-serif;
+    font-size: 0.95rem;
+  }
+
+  select:focus {
+    outline-color: $blue;
+  }
+
+  option {
+    font-size: 0.9rem;
+  }
+
+  textarea {
+    overflow: hidden;
+    display: block;
+    border-radius: 0.25rem;
+    border: 1px solid $grey;
+    padding: 0.3rem 0.6rem;
+    font-family: "Poppins", sans-serif;
+    font-size: 0.95rem;
+    &:focus {
+      outline-color: $blue;
+    }
+  }
+}
+
+.edit_section_image {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 1.5rem;
+  padding-right: 0;
+
+  label {
+    font-size: 0.9rem;
+    color: $grey100;
+  }
+
+  input[type="file"] {
+    display: none;
+  }
+
+  input[type="file"] + label {
+    display: flex;
+    width: 14rem;
+    height: 14rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px dashed $grey45;
+    border-radius: 0.25rem;
+    cursor: pointer;
+  }
+}
+
+.block {
+  display: flex;
+  flex-direction: row;
+  column-gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.img {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    font-size: 0.75rem;
+    color: $grey100;
+  }
+
+  input[type="file"] {
+    display: none;
+  }
+
+  input[type="file"] + label {
+    display: flex;
+    width: 9rem;
+    height: 9rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px dashed $grey45;
+    border-radius: 0.25rem;
+    cursor: pointer;
+  }
+}
+
+.button_wrapper {
+  display: flex;
+  justify-content: flex-end;
+  column-gap: 1rem;
+}
+
+.addBtn {
+  display: flex;
+  justify-content: center;
+  width: 12rem;
+  padding: 0.5rem 2rem;
+  background-color: $blue;
+  color: white;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  &:hover {
+    background-color: $grey70;
+  }
+}
+
+.cancelBtn {
+  display: flex;
+  justify-content: center;
+  width: 12rem;
+  padding: 0.5rem 2rem;
+  background-color: $lightblue;
+  color: $blue;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.deleteBtn {
+  display: flex;
+  justify-content: center;
+  width: 12rem;
+  padding: 0.5rem 2rem;
+  background-color: $red20;
+  opacity: 80%;
+  color: $red;
+  cursor: pointer;
+}
