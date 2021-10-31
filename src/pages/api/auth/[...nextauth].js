@@ -28,16 +28,18 @@ export default async function auth(req, res) {
     callbacks: {
       async signIn({ user, account, profile, email, credentials }) {
         await dbConnect()
-        user.customName = ""
-        user.provider = account.provider
-        user.isSeller = false
-        user.address = ""
-        user.phoneNumber = ""
-        user.cart = []
-        user.wishlist = []
-        user.sellerItem = []
-        await User.create(user)
-        return true
+        const checkUser = await User.findOne({
+          name: user.name,
+          email: user.email,
+          image: user.image,
+        })
+        if (checkUser) {
+          return true // user คนนี้มีใน db แล้ว (เคย signin แล้ว)
+        } else {
+          user.provider = account.provider
+          await User.create(user)
+          return true
+        }
       },
     },
   })

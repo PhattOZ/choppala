@@ -10,7 +10,7 @@ export default function ReviewCard({ reviews }) {
       <div className={styles.titlectn}>Review & Rating</div>
       <div className={styles.reviewlist}>
         {reviews.map((review) => (
-          <div key={review.id}>
+          <div key={review._id}>
             <div className={styles.review}>
               <div className={styles.avatar}>
                 <FontAwesomeIcon icon={faUser} size={"lg"} color="#ffff" />
