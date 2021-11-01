@@ -8,7 +8,12 @@ export default function Signup() {
   return (
     <div className={styles.container}>
       <div className={styles.peopleIcon}>
-        <Image src="/signup-people-icon.svg" layout="fill" objectFit="cover" />
+        <Image
+          src="/signup-people-icon.svg"
+          layout="fill"
+          objectFit="cover"
+          alt="bg-img"
+        />
       </div>
       <SignupBox />
     </div>

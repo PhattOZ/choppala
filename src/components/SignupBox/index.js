@@ -28,14 +28,6 @@ export default function SignupBox() {
       </div>
       <div className={`${styles.childBox} ${styles.checkboxPart}`}>
         <input type="checkbox" required />
-        <label>
-          I've read and agree to{" "}
-          <Link href="/termsandconditions">
-            <a target="_blank" className={styles.linkText}>
-              Terms & Conditions
-            </a>
-          </Link>
-        </label>
       </div>
       <button className={`${styles.childBox} ${styles.signupButton}`}>
         SIGN UP

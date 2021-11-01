@@ -104,9 +104,9 @@ export default function ProductBox({
             <div className={styles.fsold}>
               <div className={styles.p1}>
                 Sold by{" "}
-                <a href="/" className={styles.soldname}>
-                  {sellerName}
-                </a>
+                <Link href="/">
+                  <a className={styles.soldname}>{sellerName}</a>
+                </Link>
               </div>
             </div>
             <div className={styles.freview}>

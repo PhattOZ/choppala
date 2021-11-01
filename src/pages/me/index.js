@@ -31,6 +31,7 @@ export default function Profile() {
                     src={session.user.image}
                     layout="fill"
                     objectFit="cover"
+                    alt="profile pic"
                   />
                 </div>
               </div>

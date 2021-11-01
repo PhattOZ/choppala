@@ -10,7 +10,12 @@ function CategoryLink({ category }) {
   return (
     <div className={styles.category}>
       <div className={styles.category_image}>
-        <Image src="/molang.jpg" layout="fill" objectFit="cover" />
+        <Image
+          src="/molang.jpg"
+          layout="fill"
+          objectFit="cover"
+          alt="category"
+        />
       </div>
       <div>{category}</div>
     </div>

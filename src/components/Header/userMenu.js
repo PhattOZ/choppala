@@ -13,7 +13,7 @@ import { useSession, signOut } from "next-auth/react"
 import { useState, useContext } from "react"
 import CartContext from "src/lib/cart-context"
 
-export default function userMenu() {
+export default function UserMenu() {
   const { data: session, status } = useSession()
   const [isHamburgerActive, setIsHamburgerActive] = useState(false)
   const ctx = useContext(CartContext)
