@@ -47,7 +47,7 @@ export default function userMenu() {
       </div>
 
       <div className={styles.userMenu}>
-        <Link href="/user">
+        <Link href="/me/wishlist">
           <a>
             <FontAwesomeIcon icon={faHeart} size={"lg"} />
           </a>
@@ -57,7 +57,7 @@ export default function userMenu() {
             <FontAwesomeIcon icon={faShoppingCart} size={"lg"} />
           </a>
         </Link>
-        <Link href={status === "authenticated" ? "/user" : "/signup"}>
+        <Link href="/me">
           <a>
             {status === "authenticated" ? (
               <div className={styles.user_image}>
