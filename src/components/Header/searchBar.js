@@ -4,7 +4,7 @@ import { useRouter } from "next/router"
 import { useState } from "react"
 import Link from "next/link"
 
-export default function searchBar(props) {
+export default function SearchBar(props) {
   const router = useRouter()
   const [keyword, setKeyword] = useState("")
 

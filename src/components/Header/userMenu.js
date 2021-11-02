@@ -13,7 +13,7 @@ import { useSession, signOut } from "next-auth/react"
 import { useState, useContext } from "react"
 import CartContext from "src/lib/cart-context"
 
-export default function userMenu() {
+export default function UserMenu() {
   const { data: session, status } = useSession()
   const [isHamburgerActive, setIsHamburgerActive] = useState(false)
   const ctx = useContext(CartContext)
@@ -47,7 +47,7 @@ export default function userMenu() {
       </div>
 
       <div className={styles.userMenu}>
-        <Link href="/me">
+        <Link href="/me/wishlist">
           <a>
             <FontAwesomeIcon icon={faHeart} size={"lg"} />
           </a>
@@ -57,7 +57,7 @@ export default function userMenu() {
             <FontAwesomeIcon icon={faShoppingCart} size={"lg"} />
           </a>
         </Link>
-        <Link href={status === "authenticated" ? "/me" : "/signup"}>
+        <Link href="/me">
           <a>
             {status === "authenticated" ? (
               <div className={styles.user_image}>

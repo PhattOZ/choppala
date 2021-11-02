@@ -10,9 +10,11 @@ export default function AddProductBox() {
         <section>
           <div className={styles.header}>
             <Link href="/me/sellingorders">
-              <div className={styles.icon}>
-                <FontAwesomeIcon icon={faChevronCircleLeft} size={"lg"} />
-              </div>
+              <a>
+                <div className={styles.icon}>
+                  <FontAwesomeIcon icon={faChevronCircleLeft} size={"lg"} />
+                </div>
+              </a>
             </Link>
             <div className={styles.title}>Add Product</div>
           </div>
@@ -24,7 +26,7 @@ export default function AddProductBox() {
               <div className={styles.edit}>
                 <form>
                   <div className={styles.edit_section}>
-                    <label htmlFor="">Product name</label>
+                    <label>Product name</label>
                     <input type="text" size="50" />
                   </div>
                 </form>
@@ -78,11 +80,46 @@ export default function AddProductBox() {
 
             {/* Culumn2 */}
             <div className={styles.body_table}>
-                {/* Row1 */}
-                <div className={styles.edit}>
-                  <div className={styles.edit_section_image}>
-                    <label htmlFor="">Product image</label>
-                    {/* Big Image */}
+              {/* Row1 */}
+              <div className={styles.edit}>
+                <div className={styles.edit_section_image}>
+                  <label htmlFor="">Product image</label>
+                  {/* Big Image */}
+                  <div className={styles.block}>
+                    <form>
+                      <input
+                        type="file"
+                        id="file-input"
+                        name="myImage"
+                        accept="image/x-png,image/gif,image/jpeg"
+                      />
+                      <label htmlFor="file-input">
+                        <FontAwesomeIcon
+                          icon={faImage}
+                          size="2x"
+                          color="#8B8EA1"
+                        />
+                        Add image
+                      </label>
+                    </form>
+                    <form>
+                      <input
+                        type="file"
+                        id="file-input"
+                        name="myImage"
+                        accept="image/x-png,image/gif,image/jpeg"
+                      />
+                      <label htmlFor="file-input">
+                        <FontAwesomeIcon
+                          icon={faImage}
+                          size="2x"
+                          color="#8B8EA1"
+                        />
+                        Add image
+                      </label>
+                    </form>
+                  </div>
+                  <div className={styles.img}>
                     <div className={styles.block}>
                       <form>
                         <input
@@ -91,7 +128,7 @@ export default function AddProductBox() {
                           name="myImage"
                           accept="image/x-png,image/gif,image/jpeg"
                         />
-                        <label for="file-input">
+                        <label htmlFor="file-input">
                           <FontAwesomeIcon
                             icon={faImage}
                             size="2x"
@@ -107,7 +144,23 @@ export default function AddProductBox() {
                           name="myImage"
                           accept="image/x-png,image/gif,image/jpeg"
                         />
-                        <label for="file-input">
+                        <label htmlFor="file-input">
+                          <FontAwesomeIcon
+                            icon={faImage}
+                            size="2x"
+                            color="#8B8EA1"
+                          />
+                          Add image
+                        </label>
+                      </form>
+                      <form>
+                        <input
+                          type="file"
+                          id="file-input"
+                          name="myImage"
+                          accept="image/x-png,image/gif,image/jpeg"
+                        />
+                        <label htmlFor="file-input">
                           <FontAwesomeIcon
                             icon={faImage}
                             size="2x"
@@ -117,67 +170,16 @@ export default function AddProductBox() {
                         </label>
                       </form>
                     </div>
-                    <div className={styles.img}>
-                      <div className={styles.block}>
-                        <form>
-                          <input
-                            type="file"
-                            id="file-input"
-                            name="myImage"
-                            accept="image/x-png,image/gif,image/jpeg"
-                          />
-                          <label for="file-input">
-                            <FontAwesomeIcon
-                              icon={faImage}
-                              size="2x"
-                              color="#8B8EA1"
-                            />
-                            Add image
-                          </label>
-                        </form>
-                        <form>
-                          <input
-                            type="file"
-                            id="file-input"
-                            name="myImage"
-                            accept="image/x-png,image/gif,image/jpeg"
-                          />
-                          <label for="file-input">
-                            <FontAwesomeIcon
-                              icon={faImage}
-                              size="2x"
-                              color="#8B8EA1"
-                            />
-                            Add image
-                          </label>
-                        </form>
-                        <form>
-                          <input
-                            type="file"
-                            id="file-input"
-                            name="myImage"
-                            accept="image/x-png,image/gif,image/jpeg"
-                          />
-                          <label for="file-input">
-                            <FontAwesomeIcon
-                              icon={faImage}
-                              size="2x"
-                              color="#8B8EA1"
-                            />
-                            Add image
-                          </label>
-                        </form>
-                      </div>
-                    </div>
                   </div>
                 </div>
+              </div>
             </div>
           </div>
           {/* Button */}
           <div className={styles.button_wrapper}>
             <div className={styles.cancelBtn}>Cancel</div>
             <Link href="/me/youritem">
-            <div className={styles.addBtn}>Add product</div>
+              <div className={styles.addBtn}>Add product</div>
             </Link>
             {/* <div className={styles.deleteBtn}>Delete</div> */}
           </div>
