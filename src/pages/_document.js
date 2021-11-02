@@ -5,6 +5,7 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
+          <link rel="manifest" href="/manifest.json" />
           <link
             href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
             rel="stylesheet"
