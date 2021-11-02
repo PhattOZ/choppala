@@ -8,11 +8,18 @@ import Card from "src/components/Card"
 // Query data function
 import querySearch from "src/lib/querySearch"
 
-export default function Filter({ category, itemList }) {
+export default function Filter({ keyword, category, itemList }) {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <div>Search result for </div>
+        {keyword ? (
+          <div className={styles.blue}>
+            Search result for{" "}
+            <span className={styles.keyword}>"{keyword}"</span>
+          </div>
+        ) : (
+          <div></div>
+        )}
         <div className={styles.header_sort}>
           <div>sort by:</div>
           <div>some dropdown</div>
@@ -42,9 +49,12 @@ export default function Filter({ category, itemList }) {
 export async function getServerSideProps(context) {
   const keyword = context.query.keyword ? context.query.keyword : ""
   const category = context.query.category ? context.query.category : ""
-  const data = await querySearch(keyword, category)
+  const minprice = context.query.minprice ? context.query.minprice : ""
+  const maxprice = context.query.maxprice ? context.query.maxprice : ""
+  const data = await querySearch(keyword, category, minprice, maxprice)
   return {
     props: {
+      keyword,
       category,
       itemList: data,
     },

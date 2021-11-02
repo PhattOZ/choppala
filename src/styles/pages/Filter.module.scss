@@ -26,6 +26,10 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.keyword {
+  font-weight: 600;
+}
+
 @media (min-width: 1024px) {
   .card_container {
     grid-template-columns: repeat(4, minmax(0, 1fr));

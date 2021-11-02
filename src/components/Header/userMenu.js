@@ -47,7 +47,7 @@ export default function userMenu() {
       </div>
 
       <div className={styles.userMenu}>
-        <Link href="/user">
+        <Link href="/me">
           <a>
             <FontAwesomeIcon icon={faHeart} size={"lg"} />
           </a>
@@ -57,7 +57,7 @@ export default function userMenu() {
             <FontAwesomeIcon icon={faShoppingCart} size={"lg"} />
           </a>
         </Link>
-        <Link href={status === "authenticated" ? "/user" : "/signup"}>
+        <Link href={status === "authenticated" ? "/me" : "/signup"}>
           <a>
             {status === "authenticated" ? (
               <div className={styles.user_image}>
@@ -93,7 +93,7 @@ export default function userMenu() {
           <div className={styles.line3}></div>
           <ul className={styles.dropdown_menu}>
             <li>
-              <Link href="/user">
+              <Link href="/me">
                 <a>user</a>
               </Link>
             </li>
