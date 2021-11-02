@@ -12,7 +12,7 @@ import {
 import Image from "next/image"
 import Link from "next/link"
 import styles from "./UserProfileLayout.module.scss"
-import { useSession, signOut } from "next-auth/react"
+import { signOut } from "next-auth/react"
 import { useRouter } from "next/router"
 
 function SidebarItem({ children, content, path }) {
@@ -33,23 +33,17 @@ function SidebarItem({ children, content, path }) {
   )
 }
 
-export default function Layout({ children }) {
-  const { data: session, status } = useSession()
-
-  if (status === "loading") {
-    return <h1>Loading...</h1>
-  }
-
+export default function Layout({ children, user }) {
   return (
     <div className={styles.container}>
       <div className={styles.sidebar}>
         <div className={styles.sidebar_header}>
           <div className={styles.sidebar_user_img}>
-            <Image src={session.user.image} layout="fill" objectFit="cover"/>
+            <Image src={user.image} layout="fill" objectFit="cover" />
           </div>
           <div>
-            <div className={styles.bold}>{session.user.name}</div>
-            <div className={styles.email}>{session.user.email}</div>
+            <div className={styles.bold}>{user.name}</div>
+            <div className={styles.email}>{user.email}</div>
           </div>
         </div>
         <ul>
@@ -67,11 +61,11 @@ export default function Layout({ children }) {
             </SidebarItem>
           </ul>
           <ul className={styles.sidebar_list}>
-            <SidebarItem content="Manage store" link="/me/managestore">
+            <SidebarItem content="Manage store" path="/me/managestore">
               <FontAwesomeIcon icon={faStore} size={"lg"} />
             </SidebarItem>
 
-            <SidebarItem content="Selling orders" link="/me/sellingorders">
+            <SidebarItem content="Selling orders" path="/me/sellingorders">
               <FontAwesomeIcon icon={faTags} size={"lg"} />
             </SidebarItem>
           </ul>

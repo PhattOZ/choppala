@@ -4,14 +4,15 @@ import ReviewCard from "src/components/ReviewCard"
 import styles from "src/styles/pages/ProductDetail.module.css"
 import Item from "src/models/Item"
 import dbConnect from "src/lib/dbConnect"
+import Link from "next/link"
 
 export default function ProductDetail({ product }) {
   return (
     <div className={styles.container}>
       <div className={styles.toplink}>
-        <a href="/" className={styles.ahome}>
-          Home
-        </a>
+        <Link href="/">
+          <a className={styles.ahome}>Home</a>
+        </Link>
         /Search/{product.name}
       </div>
       <ProductBox

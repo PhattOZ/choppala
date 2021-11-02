@@ -9,7 +9,7 @@ import { getSession } from "next-auth/react"
 export default function ManageStore({ user }) {
   return (
     <div className={styles.container}>
-      <Layout>
+      <Layout user={user}>
         {user.isSeller ? (
           <Store />
         ) : (
@@ -23,27 +23,28 @@ export default function ManageStore({ user }) {
 export async function getServerSideProps(context) {
   const { req } = context
   const session = await getSession({ req })
-  if (!session) {
+
+  if (session) {
+    await dbConnect()
+    const leanResponse = await User.findOne(
+      {
+        name: session.user.name,
+        email: session.user.email,
+      },
+      { _id: 0 }
+    ).lean()
+
+    return {
+      props: {
+        user: leanResponse,
+      },
+    }
+  } else {
     return {
       redirect: {
         destination: "/signup",
         permanent: false,
       },
     }
-  }
-
-  await dbConnect()
-  const leanResponse = await User.findOne(
-    {
-      name: session.user.name,
-      email: session.user.email,
-    },
-    { _id: 0 }
-  ).lean()
-
-  return {
-    props: {
-      user: leanResponse,
-    },
   }
 }

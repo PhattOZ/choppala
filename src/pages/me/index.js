@@ -20,7 +20,7 @@ export default function Profile() {
 
   return (
     <div className={styles.container}>
-      <Layout>
+      <Layout user={session.user}>
         <div className={styles.main}>
           <section>
             <div className={styles.header}>General Information</div>
@@ -31,6 +31,7 @@ export default function Profile() {
                     src={session.user.image}
                     layout="fill"
                     objectFit="cover"
+                    alt="profile pic"
                   />
                 </div>
               </div>
