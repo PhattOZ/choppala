@@ -1,0 +1,75 @@
+// Thank you Online Tutorials !!!
+// https://www.youtube.com/watch?v=41tNotMxu1A&t=0s
+
+.body {
+  min-height: 100vh;
+  width: 100%;
+  background: #eaeef0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.loader {
+  position: relative;
+  width: 10rem;
+  height: 10rem;
+  background: #eaeef0;
+  border: 0.25rem solid #eaeef0;
+  border-radius: 50%;
+  box-shadow: -0.5rem -0.5rem 1rem rgba(255, 255, 255, 1),
+    0.5rem 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  box-shadow: inset 0.6rem 0.6rem 1.2rem rgba(0, 0, 0, 0.5),
+    inset -0.4rem -0.4rem 1rem rgba(255, 255, 255, 1);
+}
+
+.loader::after {
+  content: "";
+  position: absolute;
+  inset: 1rem;
+  background: #eaeef0;
+  border: 0.2rem solid #eaeef0;
+  border-radius: 50%;
+  box-shadow: -0.5rem -0.5rem 1.5rem rgba(255, 255, 255, 1),
+    0.5rem 0.5rem 1.5rem rgba(0, 0, 0, 0.25),
+    inset 0.2rem 0.2rem 0.8rem rgba(0, 0, 0, 0.15),
+    inset -1px -1px 1rem rgba(255, 255, 255, 1);
+}
+
+.spinner {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: linear-gradient(#3f5efb, #fc466b);
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.logo {
+  position: relative;
+  width: 50%;
+  height: 50%;
+  border-radius: 50%;
+  overflow: hidden;
+  z-index: 10;
+}
