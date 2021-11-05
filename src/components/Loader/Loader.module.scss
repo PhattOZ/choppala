@@ -4,7 +4,7 @@
 .body {
   min-height: 100vh;
   width: 100%;
-  background: #eaeef0;
+  background: rgba($color: #eaeef0, $alpha: 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
