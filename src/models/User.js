@@ -35,8 +35,15 @@ const UserSchema = new mongoose.Schema({
   },
   cart: [
     {
-      itemName: String,
-      itemPrice: Number,
+      name: String,
+      image: String,
+      price: Number,
+      detail: String,
+      sellerName: String,
+      category: String,
+      soldCount: String,
+      quantity: Number,
+      isConfirm: Boolean,
     },
   ],
   wishlist: [

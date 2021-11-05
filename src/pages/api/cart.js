@@ -14,19 +14,24 @@ export default async function handler(req, res) {
     switch (method) {
       case "GET":
         try {
-          const data = await User.find(
+          const data = await User.findOne(
             { name: user.name, email: user.email },
-            "cart"
+            "cart -_id"
           )
-          res.status(200).json({ cart: data[0].cart })
+          res.status(200).json(data.cart)
         } catch (error) {
           res.status(400).send({ error: "error, GET method for cart api" })
         }
         break
       case "POST":
         try {
+          const filter = { name: user.name, email: user.email }
+          const update = { cart: req.body }
+          await User.findOneAndUpdate(filter, update)
+
+          res.status(200).json({ success: true })
         } catch (error) {
-          res.status(400)
+          res.status(400).send({ error: "error, GET method for cart api" })
         }
         break
       default:
