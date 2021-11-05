@@ -4,6 +4,7 @@ import dbConnect from "src/lib/dbConnect"
 // Providers
 import GoogleProvider from "next-auth/providers/google"
 import FacebookProvider from "next-auth/providers/facebook"
+import LineProvider from "next-auth/providers/line"
 // Model
 import User from "src/models/User"
 
@@ -18,12 +19,14 @@ export default async function auth(req, res) {
         clientId: process.env.FACEBOOK_CLIENT_ID,
         clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
       }),
+      LineProvider({
+        scope: "profile openid email",
+        clientId: process.env.LINE_CLIENT_ID,
+        clientSecret: process.env.LINE_CLIENT_SECRET,
+      }),
     ],
     pages: {
-      signIn: "/signin", // ถ้า url เป็น /api/auth/signin ให้ไปที่ localhost:3000/signin
-    },
-    session: {
-      jwt: true, // ใช้ jwt แทน database session (ใน db จะไม่มี collection session)
+      signIn: "/signup", // ถ้า url เป็น /api/auth/signin ให้ไปที่ localhost:3000/signup
     },
     callbacks: {
       async signIn({ user, account, profile, email, credentials }) {

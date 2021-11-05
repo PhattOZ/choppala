@@ -4,37 +4,19 @@ import { signIn } from "next-auth/react"
 import styles from "./SignupBox.module.css"
 // Icon
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faFacebookF, faGoogle } from "@fortawesome/free-brands-svg-icons"
+import {
+  faFacebookF,
+  faGoogle,
+  faLine,
+} from "@fortawesome/free-brands-svg-icons"
 
 export default function SignupBox() {
   return (
     <div className={styles.container}>
-      <h3 className={styles.title}>Create your Choppala Account</h3>
-      <div className={`${styles.childBox} ${styles.inputPart}`}>
-        <label>Email</label>
-        <input
-          className={styles.inputBox}
-          type="text"
-          placeholder="Please enter your email"
-        />
-      </div>
-      <div className={`${styles.childBox} ${styles.inputPart}`}>
-        <label>Password</label>
-        <input
-          className={styles.inputBox}
-          type="password"
-          placeholder="Please enter your password"
-        />
-      </div>
-      <div className={`${styles.childBox} ${styles.checkboxPart}`}>
-        <input type="checkbox" required />
-      </div>
-      <button className={`${styles.childBox} ${styles.signupButton}`}>
-        SIGN UP
-      </button>
-      <div className={styles.orSignupWithBox}>
-        <p className={styles.orSignupWithText}>
-          <span>OR Sign up with</span>
+      <h3 className={styles.title}>Welcome to Choppala!</h3>
+      <div className={styles.orContinueBox}>
+        <p className={styles.orContinueText}>
+          <span>Continue with</span>
         </p>
       </div>
       <div className={`${styles.childBox} ${styles.oauthButtons}`}>
@@ -44,8 +26,8 @@ export default function SignupBox() {
         >
           <div className={styles.socialIcon}>
             <FontAwesomeIcon icon={faFacebookF} />
+            <span className={styles.provider}>Facebook</span>
           </div>
-          Facebook
         </button>
         <button
           className={styles.googleButton}
@@ -55,16 +37,21 @@ export default function SignupBox() {
         >
           <div className={styles.socialIcon}>
             <FontAwesomeIcon icon={faGoogle} />
+            <span className={styles.provider}>Google</span>
           </div>
-          Google
+        </button>
+        <button
+          className={styles.lineButton}
+          onClick={() => {
+            signIn("line", { callbackUrl: "/user" })
+          }}
+        >
+          <div className={styles.socialIcon}>
+            <FontAwesomeIcon icon={faLine} size="lg" />
+            <span className={styles.provider}>LINE</span>
+          </div>
         </button>
       </div>
-      <p className={styles.signinText}>
-        Already have an account?{" "}
-        <Link href="/signin">
-          <a className={styles.linkText}>Log in</a>
-        </Link>
-      </p>
     </div>
   )
 }

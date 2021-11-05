@@ -1,14 +1,68 @@
 // Libraries
+import { useState } from "react"
+import { useRouter } from "next/router"
 import Link from "next/link"
+// Sort title list
+import sortTitles from "src/lib/sortTitles"
 // Styles
 import styles from "src/styles/pages/Filter.module.scss"
+// Icons
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faCaretDown } from "@fortawesome/free-solid-svg-icons"
 // Components
 import CategoryBox from "src/components/CategoryBox"
 import Card from "src/components/Card"
 // Query data function
 import querySearch from "src/lib/querySearch"
 
-export default function Filter({ keyword, category, itemList }) {
+function Dropdown({ sort }) {
+  const [open, setOpen] = useState(false)
+
+  const handleOpen = () => {
+    setOpen(!open)
+  }
+
+  return (
+    <div>
+      <div className={styles.dropdownBox} onClick={() => handleOpen()}>
+        {sort}
+        <FontAwesomeIcon icon={faCaretDown} size="lg" color="#7C7C7C" />
+      </div>
+      {open ? (
+        <MenuLists lists={sortTitles} handleOpen={handleOpen} sort={sort} />
+      ) : null}
+    </div>
+  )
+}
+
+function MenuLists({ lists, handleOpen, sort }) {
+  const router = useRouter()
+  return (
+    <div className={styles.listsContainer}>
+      {lists.map((i) => {
+        const sortStyle = i === sort ? styles.fontBlue : null
+        return (
+          <Link
+            key={i}
+            href={{
+              pathname: "/filter",
+              query: { ...router.query, sort: i },
+            }}
+          >
+            <a
+              className={`${styles.dropdownItem} ${sortStyle}`}
+              onClick={() => handleOpen()}
+            >
+              {i}
+            </a>
+          </Link>
+        )
+      })}
+    </div>
+  )
+}
+
+export default function Filter({ keyword, category, itemList, sortby }) {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -21,8 +75,8 @@ export default function Filter({ keyword, category, itemList }) {
           <div></div>
         )}
         <div className={styles.header_sort}>
-          <div>sort by:</div>
-          <div>some dropdown</div>
+          <div className={styles.sortBy}>Sort by :</div>
+          <Dropdown sort={sortby} />
         </div>
       </div>
       <div className={styles.main}>
@@ -51,12 +105,14 @@ export async function getServerSideProps(context) {
   const category = context.query.category ? context.query.category : ""
   const minprice = context.query.minprice ? context.query.minprice : ""
   const maxprice = context.query.maxprice ? context.query.maxprice : ""
-  const data = await querySearch(keyword, category, minprice, maxprice)
+  const sortby = context.query.sort ? context.query.sort : "Latest"
+  const data = await querySearch(keyword, category, minprice, maxprice, sortby)
   return {
     props: {
       keyword,
       category,
       itemList: data,
+      sortby,
     },
   }
 }
