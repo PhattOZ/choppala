@@ -19,7 +19,6 @@ export default function ProductDetail({ product }) {
     }
     ctx.addToCart(newProduct)
   }
-  console.log(ctx.value)
 
   return (
     <div className={styles.container}>

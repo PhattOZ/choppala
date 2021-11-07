@@ -19,6 +19,7 @@ export default function SearchBar(props) {
       pathname: "/filter",
       query: { ...router.query, keyword },
     })
+    setKeyword("")
   }
 
   return (
@@ -27,6 +28,7 @@ export default function SearchBar(props) {
         type="text"
         onChange={handleChange}
         placeholder="search in Choppala"
+        value={keyword}
       />
       <div>
         <Link

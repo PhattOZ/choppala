@@ -33,19 +33,19 @@ const cartReducer = (state, action) => {
       const sum = calculatePrice(action.val)
       return { cart: action.val, totalPrice: sum }
     case "ADD_CART":
-      const tragetIndex = state.cart.findIndex(
+      const addedTragetIndex = state.cart.findIndex(
         (item) => item._id === action.val._id
       )
       let newCart
       let newTotal
-      if (tragetIndex === -1) {
+      if (addedTragetIndex === -1) {
         //not found
         newCart = [...state.cart, action.val]
         newTotal = state.totalPrice + action.val.price * action.val.quantity
       } else {
         //found
         let { quantity, ...updatedItem } = action.val
-        const newQuantity = quantity + state.cart[tragetIndex].quantity
+        const newQuantity = quantity + state.cart[addedTragetIndex].quantity
         updatedItem = {
           ...updatedItem,
           quantity: newQuantity,
@@ -56,6 +56,68 @@ const cartReducer = (state, action) => {
         ]
         newTotal = calculatePrice(newCart)
       }
+      updatedCartDB(newCart)
+      return {
+        cart: newCart,
+        totalPrice: newTotal,
+      }
+    case "UPDATE_CART":
+      const updatedTragetIndex = state.cart.findIndex(
+        (item) => item._id === action.val.id
+      )
+
+      let { isConfirm, quantity, ...updatedItem } =
+        state.cart[updatedTragetIndex]
+
+      //-1 decrease, 0 switch select, 1 increase
+      switch (action.val.check) {
+        case -1:
+          if (quantity == 1) {
+            // delete item if quantity already 1 and decrease to 0
+            newCart = [
+              ...state.cart.filter((item) => item._id != action.val.id),
+            ]
+            newTotal = calculatePrice(newCart)
+            updatedCartDB(newCart)
+            return {
+              cart: newCart,
+              totalPrice: newTotal,
+            }
+          } else {
+            updatedItem = {
+              ...updatedItem,
+              quantity: quantity - 1,
+              isConfirm: isConfirm,
+            }
+          }
+          break
+        case 0:
+          updatedItem = {
+            ...updatedItem,
+            quantity: quantity,
+            isConfirm: !isConfirm,
+          }
+          break
+        case 1:
+          updatedItem = {
+            ...updatedItem,
+            quantity: quantity + 1,
+            isConfirm: isConfirm,
+          }
+          break
+      }
+      newCart = [...state.cart]
+      newCart[updatedTragetIndex] = updatedItem
+
+      newTotal = calculatePrice(newCart)
+      updatedCartDB(newCart)
+      return {
+        cart: newCart,
+        totalPrice: newTotal,
+      }
+    case "DELETE_ITEM":
+      newCart = [...state.cart.filter((item) => item._id != action.val)]
+      newTotal = calculatePrice(newCart)
       updatedCartDB(newCart)
       return {
         cart: newCart,
@@ -72,24 +134,33 @@ const cartReducer = (state, action) => {
 export const CartContextProvider = (props) => {
   const [cart, dispatchCart] = useReducer(cartReducer, initialState)
 
-  const getCart = () => {
+  const addToCart = (item) => {
+    dispatchCart({ type: "ADD_CART", val: item }) //update state first than update in db
+  }
+
+  const updateCart = (id, val) => {
+    const data = { id: id, check: val }
+
+    dispatchCart({ type: "UPDATE_CART", val: data })
+  }
+
+  const deleteItem = (id) => {
+    dispatchCart({ type: "DELETE_ITEM", val: id })
+  }
+
+  useEffect(() => {
     fetch("/api/cart")
       .then((response) => response.json())
       .then((data) => dispatchCart({ type: "GET_CART", val: data }))
       .catch((err) => console.log(err))
-  }
-
-  const addToCart = (item) => {
-    console.log("addToCart")
-    dispatchCart({ type: "ADD_CART", val: item }) //update state first than update in db
-  }
-
-  useEffect(() => {
-    getCart()
-    console.log("get cart first time")
   }, [])
 
-  const value = { value: cart, addToCart: addToCart }
+  const value = {
+    value: cart,
+    addToCart: addToCart,
+    deleteItem: deleteItem,
+    updateCart: updateCart,
+  }
   return (
     <CartContext.Provider value={value}>{props.children}</CartContext.Provider>
   )

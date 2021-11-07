@@ -40,7 +40,7 @@ export default function Header() {
                 src="/logo.png"
                 layout="fill"
                 objectFit="contain"
-                priority
+                rel="preload"
               />
             </div>
             <div className={styles.logo_text}>
@@ -48,7 +48,7 @@ export default function Header() {
                 src="/logoText.png"
                 layout="fill"
                 objectFit="contain"
-                priority
+                rel="preload"
               />
             </div>
           </a>

@@ -21,7 +21,8 @@ export default function UserMenu() {
   const toggleHamburger = () => {
     setIsHamburgerActive(!isHamburgerActive)
   }
-
+  let sum = 0
+  ctx.value.cart.map((item) => (sum += item.quantity))
   // if (status === "loading") {
   //   return <></>
   // }
@@ -53,8 +54,9 @@ export default function UserMenu() {
           </a>
         </Link>
         <Link href="/cart">
-          <a>
+          <a className={styles.countCart}>
             <FontAwesomeIcon icon={faShoppingCart} size={"lg"} />
+            {sum === 0 ? <></> : <span className={styles.totalQty}>{sum}</span>}
           </a>
         </Link>
         <Link href="/me">
@@ -77,8 +79,13 @@ export default function UserMenu() {
       <div className={styles.concise_menu}>
         <div className={styles.concise_cart}>
           <Link href="/cart">
-            <a>
+            <a className={styles.countCart}>
               <FontAwesomeIcon icon={faShoppingCart} size={"lg"} />
+              {sum === 0 ? (
+                <></>
+              ) : (
+                <span className={styles.totalQty}>{sum}</span>
+              )}
             </a>
           </Link>
         </div>
