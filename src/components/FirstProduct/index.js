@@ -5,20 +5,24 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons"
 
 export default function FirstProduct() {
-
   return (
     <>
       <div className={styles.main}>
         <section>
           <div className={styles.peopleIcon}>
-            <Image src="/addproduct.svg" layout="fill" objectFit="cover" />
+            <Image
+              src="/addproduct.svg"
+              layout="fill"
+              objectFit="cover"
+              alt="Add product icon"
+            />
           </div>
           <div className={styles.text}>Start selling on Choppala</div>
-          <Link href="/me/addproduct">
-          <div className={styles.button}>
-            <FontAwesomeIcon icon={faPlusCircle} size={"lg"} />
-            Add product
-          </div>
+          <Link href="/me/addproduct" passHref>
+            <div className={styles.button}>
+              <FontAwesomeIcon icon={faPlusCircle} size={"lg"} />
+              Add product
+            </div>
           </Link>
         </section>
       </div>

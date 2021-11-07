@@ -41,6 +41,7 @@ export default function Header() {
                 layout="fill"
                 objectFit="contain"
                 priority
+                alt="Choppala logo"
               />
             </div>
             <div className={styles.logo_text}>
@@ -49,6 +50,7 @@ export default function Header() {
                 layout="fill"
                 objectFit="contain"
                 priority
+                alt="Logo text"
               />
             </div>
           </a>

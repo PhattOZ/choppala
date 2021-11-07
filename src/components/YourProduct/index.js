@@ -27,11 +27,11 @@ export default function YourProduct() {
             <SellingBox />
           </div>
           <div className={styles.button_wrapper}>
-            <Link href="/me/addproduct">
-            <div className={styles.addBtn}>
-              <FontAwesomeIcon icon={faPlusCircle} size="lg" />
-              Add product
-            </div>
+            <Link href="/me/addproduct" passHref>
+              <div className={styles.addBtn}>
+                <FontAwesomeIcon icon={faPlusCircle} size="lg" />
+                Add product
+              </div>
             </Link>
           </div>
         </section>

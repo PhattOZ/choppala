@@ -9,7 +9,7 @@ export default function AddProductBox() {
       <div className={styles.main}>
         <section>
           <div className={styles.header}>
-            <Link href="/me/sellingorders">
+            <Link href="/me/sellingorders" passHref>
               <a>
                 <div className={styles.icon}>
                   <FontAwesomeIcon icon={faChevronCircleLeft} size={"lg"} />

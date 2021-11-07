@@ -7,7 +7,12 @@ export default function Card({ title, price, image }) {
   return (
     <div className={styles.card}>
       <div className={styles.card_image}>
-        <Image src={image} layout="fill" objectFit="cover" />
+        <Image
+          src={image}
+          layout="fill"
+          objectFit="cover"
+          alt="product image"
+        />
       </div>
       <div className={styles.card_content}>
         <div>{title}</div>

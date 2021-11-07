@@ -39,7 +39,12 @@ export default function Layout({ children, user }) {
       <div className={styles.sidebar}>
         <div className={styles.sidebar_header}>
           <div className={styles.sidebar_user_img}>
-            <Image src={user.image} layout="fill" objectFit="cover" />
+            <Image
+              src={user.image}
+              layout="fill"
+              objectFit="cover"
+              alt="User profile"
+            />
           </div>
           <div>
             <div className={styles.bold}>{user.name}</div>
