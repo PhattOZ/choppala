@@ -1,0 +1,24 @@
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.child {
+  width: 2rem;
+  height: 2rem;
+  font-weight: 500;
+  margin: 0 3px;
+  cursor: pointer;
+  color: #7c7c7c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bluebg {
+  background-color: #4585ff;
+  margin: 0 5px;
+  color: white;
+  border-radius: 50%;
+  font-weight: 600;
+}

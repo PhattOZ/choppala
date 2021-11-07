@@ -5,15 +5,12 @@ import { useState } from "react"
 import Link from "next/link"
 
 export default function CategoryBox() {
-  console.log(`render categorybox component`)
   const router = useRouter()
   const { category } = router.query
-  const min = router.query.minprice ? router.query.minprice : null
-  const max = router.query.maxprice ? router.query.maxprice : null
+  const min = router.query.minprice ? router.query.minprice : ""
+  const max = router.query.maxprice ? router.query.maxprice : ""
   const [minPrice, setMinPrice] = useState(min)
   const [maxPrice, setMaxPrice] = useState(max)
-  console.log(min)
-  console.log(max)
 
   const handleMinChange = (e) => {
     const value = e.target.value
@@ -49,7 +46,7 @@ export default function CategoryBox() {
               key={i}
               href={{
                 pathname: "/filter",
-                query: { ...router.query, category: i },
+                query: { ...router.query, category: i, page: 1 },
               }}
             >
               <a>
