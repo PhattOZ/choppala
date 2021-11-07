@@ -24,15 +24,19 @@ export default async function querySearch(
   }
 
   // ================================= Sort condition =================================
-  let sort = null
-  if (sortby === "Latest") {
-    sort = { _id: -1 }
-  } else if (sortby === "Price low to high") {
-    sort = { price: 1 }
-  } else if (sortby === "Price high to low") {
-    sort = { price: -1 }
+  let itemList = null
+  try {
+    if (sortby === "Latest") {
+      itemList = await Item.find(query).sort({ _id: -1 })
+    } else if (sortby === "Price low to high") {
+      itemList = await Item.find(query).sort({ price: 1 })
+    } else if (sortby === "Price high to low") {
+      itemList = await Item.find(query).sort({ price: -1 })
+    } else {
+      itemList = await Item.find(query)
+    }
+    return JSON.parse(JSON.stringify(itemList))
+  } catch (err) {
+    throw new Error("Error, cannot query data for filter page")
   }
-
-  const itemList = await Item.find(query).sort(sort)
-  return JSON.parse(JSON.stringify(itemList))
 }
