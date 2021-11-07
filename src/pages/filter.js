@@ -77,8 +77,7 @@ export default function Filter({
       <div className={styles.header}>
         {keyword ? (
           <div className={styles.blue}>
-            Search result for{" "}
-            <span className={styles.keyword}>&quot;{keyword}&quot;</span>
+            Search result for:<span className={styles.keyword}>{keyword}</span>
           </div>
         ) : (
           <div></div>

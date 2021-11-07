@@ -178,7 +178,7 @@ export default function AddProductBox() {
           {/* Button */}
           <div className={styles.button_wrapper}>
             <div className={styles.cancelBtn}>Cancel</div>
-            <Link href="/me/youritem">
+            <Link href="/me/youritem" passHref>
               <div className={styles.addBtn}>Add product</div>
             </Link>
             {/* <div className={styles.deleteBtn}>Delete</div> */}
