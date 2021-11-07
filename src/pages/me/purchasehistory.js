@@ -1,5 +1,5 @@
-import Layout from "src/components/UserProfileLayout"
+import Loader from "src/components/Loader"
 
 export default function PurchaseHistory() {
-  return <div>some content</div>
+  return <Loader />
 }
