@@ -6,10 +6,15 @@
   display: flex;
   justify-content: space-between;
   padding-bottom: 2rem;
+  align-items: center;
 }
 
 .header_sort {
   display: flex;
+  align-items: center;
+  .sortBy {
+    margin-right: 0.75rem;
+  }
 }
 
 .main {
@@ -34,4 +39,44 @@
   .card_container {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
+}
+
+// ******************* Dropdown component section *******************
+.dropdownBox {
+  cursor: pointer;
+  border: 1px solid black;
+  border-radius: 5px;
+  color: #7c7c7c;
+  background-color: white;
+  width: 12rem;
+  height: 2.2rem;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 11px;
+  align-items: center;
+}
+
+.listsContainer {
+  position: absolute;
+  top: 184px;
+  z-index: 999;
+  border-radius: 8px;
+  background-color: white;
+  color: #7c7c7c;
+}
+
+.dropdownItem {
+  width: 12rem;
+  height: 2.2rem;
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
+}
+
+.dropdownItem:hover {
+  background-color: #dbe6fd;
+}
+
+.fontBlue {
+  color: #4585ff;
 }

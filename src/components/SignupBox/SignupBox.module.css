@@ -11,7 +11,7 @@
 
 .title {
   font-size: 1.5rem;
-  font-weight: 500;
+  font-weight: 600;
   margin: 35px 0 5px;
 }
 
@@ -20,55 +20,11 @@
   margin: 10px 0;
 }
 
-.inputPart label {
-  display: block;
-  font-weight: 300;
-  font-size: 0.875rem;
-  margin-bottom: 2px;
-}
-
-.checkboxPart {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.checkboxPart label {
-  font-size: 0.875rem;
-  font-weight: 400;
-  margin-left: 10px;
-}
-
-.checkboxPart input {
-  width: 18px;
-  height: 18px;
-}
-
-.inputBox {
-  width: 100%;
-  height: 42px;
-  border-radius: 6px;
-  padding-left: 10px;
-  border: 1px solid #a8aabc;
-  outline: none;
-}
-
-.signupButton {
-  height: 42px;
-  font-size: 1rem;
-  font-weight: 600;
-  background-color: #4585ff;
-  color: white;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-}
-
-.orSignupWithBox {
+.orContinueBox {
   width: 84%;
 }
 
-.orSignupWithText {
+.orContinueText {
   color: #a8aabc;
   font-size: 0.75rem;
   font-weight: 300;
@@ -79,7 +35,7 @@
   margin: 8px 0;
 }
 
-.orSignupWithText span {
+.orContinueText span {
   background: white;
   padding: 0 12px;
 }
@@ -87,11 +43,12 @@
 .oauthButtons {
   width: 84%;
   display: flex;
+  flex-wrap: wrap;
   gap: 15px;
 }
 
 .oauthButtons button {
-  width: 50%;
+  width: 100%;
   height: 42px;
   font-size: 1rem;
   font-weight: 600;
@@ -104,16 +61,6 @@
   justify-content: center;
 }
 
-.signinText {
-  font-size: 0.875rem;
-  font-weight: 400;
-}
-
-.linkText {
-  color: #4585ff;
-  font-weight: 500;
-}
-
 .facebookButton {
   background-color: #3b5998;
 }
@@ -122,9 +69,12 @@
   background-color: #d36236;
 }
 
-.socialIcon {
-  margin-top: 2px;
-  margin-right: 10px;
+.lineButton {
+  background-color: #70d732;
+}
+
+.provider {
+  margin-left: 0.8rem;
 }
 
 @media (max-width: 580px) {
