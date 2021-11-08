@@ -2,6 +2,7 @@ import styles from "src/styles/pages/user/Profile.module.scss"
 import { useSession } from "next-auth/react"
 import Image from "next/image"
 import Layout from "src/components/UserProfileLayout"
+import Loader from "src/components/Loader"
 import { useRouter } from "next/router"
 
 export default function Profile() {
@@ -15,7 +16,7 @@ export default function Profile() {
 
   // Loading session
   if (status === "loading") {
-    return <h1>Loading...</h1>
+    return <Loader />
   }
 
   return (
