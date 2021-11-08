@@ -5,8 +5,21 @@ import styles from "src/styles/pages/ProductDetail.module.css"
 import Item from "src/models/Item"
 import dbConnect from "src/lib/dbConnect"
 import Link from "next/link"
+import CartContext from "src/lib/cart-context"
+import { useContext } from "react"
 
 export default function ProductDetail({ product }) {
+  const ctx = useContext(CartContext)
+  const cartHandler = (val) => {
+    let { reviews, ...newProduct } = product
+    newProduct = {
+      ...newProduct,
+      isConfirm: true,
+      quantity: val,
+    }
+    ctx.addToCart(newProduct)
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.toplink}>
@@ -16,6 +29,7 @@ export default function ProductDetail({ product }) {
         /Search/{product.name}
       </div>
       <ProductBox
+        onCartChange={cartHandler}
         productname={product.name}
         price={product.price}
         sellerName={product.sellerName}

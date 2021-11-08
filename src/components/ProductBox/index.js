@@ -13,6 +13,7 @@ import Image from "next/image"
 import styles from "./ProductBox.module.css"
 
 export default function ProductBox({
+  onCartChange,
   productname,
   price,
   sellerName,
@@ -35,6 +36,11 @@ export default function ProductBox({
     if (count > 1) {
       setCount(count - 1)
     }
+  }
+
+  const passCartToUppercompo = () => {
+    onCartChange(count)
+    setCount(1)
   }
 
   return (
@@ -139,7 +145,7 @@ export default function ProductBox({
             </button>
           </div>
           <div className={styles.btncontainer}>
-            <div className={styles.btncart}>
+            <div className={styles.btncart} onClick={passCartToUppercompo}>
               <div className={styles.icon}>
                 <FontAwesomeIcon icon={faCartPlus} size={"lg"} color="#ffff" />
               </div>

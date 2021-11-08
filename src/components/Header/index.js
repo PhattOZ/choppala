@@ -10,16 +10,15 @@ export default function Header() {
 
   const [showHeader, setShowHeader] = useState(true)
 
-  const controlDirection = () => {
-    if (window.scrollY > oldScrollY) {
-      setShowHeader(false)
-    } else {
-      setShowHeader(true)
-    }
-    oldScrollY = window.scrollY
-  }
-
   useEffect(() => {
+    const controlDirection = () => {
+      if (window.scrollY > oldScrollY) {
+        setShowHeader(false)
+      } else {
+        setShowHeader(true)
+      }
+      oldScrollY = window.scrollY
+    }
     window.addEventListener("scroll", controlDirection)
     return () => {
       window.removeEventListener("scroll", controlDirection)
@@ -42,6 +41,7 @@ export default function Header() {
                 objectFit="contain"
                 priority
                 alt="Choppala logo"
+                rel="preload"
               />
             </div>
             <div className={styles.logo_text}>
@@ -51,6 +51,7 @@ export default function Header() {
                 objectFit="contain"
                 priority
                 alt="Logo text"
+                rel="preload"
               />
             </div>
           </a>
