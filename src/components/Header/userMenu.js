@@ -103,7 +103,7 @@ export default function UserMenu() {
           <div className={styles.line3}></div>
           <ul className={styles.dropdown_menu}>
             <li>
-              <Link href="/user">
+              <Link href="/me">
                 <a>user</a>
               </Link>
             </li>
