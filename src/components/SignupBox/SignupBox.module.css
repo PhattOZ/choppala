@@ -1,7 +1,7 @@
 .container {
   width: 70%;
   max-width: 480px;
-  height: 493px;
+  height: 340px;
   border-radius: 12px;
   background-color: #ffffff;
   display: flex;
@@ -69,6 +69,10 @@
 
 .googleButton {
   background-color: #d36236;
+}
+
+.githubButton {
+  background-color: #333;
 }
 
 .provider {

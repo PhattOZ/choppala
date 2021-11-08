@@ -4,7 +4,11 @@ import { signIn } from "next-auth/react"
 import styles from "./SignupBox.module.css"
 // Icon
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faFacebookF, faGoogle } from "@fortawesome/free-brands-svg-icons"
+import {
+  faFacebookF,
+  faGoogle,
+  faGithub,
+} from "@fortawesome/free-brands-svg-icons"
 
 export default function SignupBox() {
   return (
@@ -35,6 +39,17 @@ export default function SignupBox() {
             <FontAwesomeIcon icon={faGoogle} />
           </div>
           <span className={styles.provider}>Google</span>
+        </button>
+        <button
+          className={styles.githubButton}
+          onClick={() => {
+            signIn("github", { callbackUrl: "/user" })
+          }}
+        >
+          <div className={styles.socialIcon}>
+            <FontAwesomeIcon icon={faGithub} />
+          </div>
+          <span className={styles.provider}>Github</span>
         </button>
       </div>
     </div>

@@ -4,6 +4,7 @@ import dbConnect from "src/lib/dbConnect"
 // Providers
 import GoogleProvider from "next-auth/providers/google"
 import FacebookProvider from "next-auth/providers/facebook"
+import GithubProvider from "next-auth/providers/github"
 // Model
 import User from "src/models/User"
 
@@ -17,6 +18,10 @@ export default async function auth(req, res) {
       FacebookProvider({
         clientId: process.env.FACEBOOK_CLIENT_ID,
         clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+      }),
+      GithubProvider({
+        clientId: process.env.GITHUB_CLIENT_ID,
+        clientSecret: process.env.GITHUB_CLIENT_SECRET,
       }),
     ],
     pages: {
