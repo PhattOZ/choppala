@@ -22,7 +22,10 @@ export default function UserMenu() {
     setIsHamburgerActive(!isHamburgerActive)
   }
   let sum = 0
-  ctx.value.cart.map((item) => (sum += item.quantity))
+  if (ctx.value.cart.length > 0) {
+    ctx.value.cart.map((item) => (sum += item.quantity))
+  }
+
   // if (status === "loading") {
   //   return <></>
   // }

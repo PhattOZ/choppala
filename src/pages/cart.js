@@ -38,8 +38,16 @@ const transfromCart = (data) => {
 export default function Cart() {
   const ctx = useContext(CartContext)
   const cartLength = ctx.value.cart.length
+  let cartData
+  if (cartLength > 0) {
+    const cartItem = transfromCart(ctx.value.cart)
+    cartData = cartItem.map((data) => (
+      <ListItems key={data.name} name={data.name} items={data.items} />
+    ))
+  } else {
+    cartData = <></>
+  }
 
-  const cartItem = transfromCart(ctx.value.cart)
   // const eachItem = cartItem[2].items
 
   return (
@@ -60,11 +68,7 @@ export default function Cart() {
             <span>Quantity</span>
             <span>Sub total</span>
           </div>
-          <div className={styles.main_list_items}>
-            {cartItem.map((data) => (
-              <ListItems key={data.name} name={data.name} items={data.items} />
-            ))}
-          </div>
+          <div className={styles.main_list_items}>{cartData}</div>
         </div>
         <div className={styles.order_summary}>
           <div>Order Summary</div>

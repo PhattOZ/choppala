@@ -9,11 +9,15 @@ const initialState = {
 
 const calculatePrice = (data) => {
   let sum = 0
-  data.map((item) => {
-    if (item.isConfirm === true) {
-      sum += item.price * item.quantity
-    }
-  })
+  if (data.length > 0) {
+    data.map((item) => {
+      if (item.isConfirm === true) {
+        sum += item.price * item.quantity
+      }
+    })
+  } else {
+    return 0
+  }
   return sum
 }
 
@@ -33,9 +37,18 @@ const cartReducer = (state, action) => {
       const sum = calculatePrice(action.val)
       return { cart: action.val, totalPrice: sum }
     case "ADD_CART":
-      const addedTragetIndex = state.cart.findIndex(
-        (item) => item._id === action.val._id
-      )
+      let addedTragetIndex
+      if (state.cart.length > 0) {
+        addedTragetIndex = state.cart.findIndex(
+          (item) => item._id === action.val._id
+        )
+      } else {
+        return {
+          cart: [action.val],
+          totalPrice: action.val.quantity * action.val.price,
+        }
+      }
+
       let newCart
       let newTotal
       if (addedTragetIndex === -1) {
