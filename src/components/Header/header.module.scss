@@ -129,8 +129,25 @@ $headerHeight: 7.3rem;
     }
     .userMenu {
       display: flex;
-
       margin-bottom: 0.35em;
+
+      .countCart {
+        position: relative;
+        .totalQty {
+          bottom: 0.8rem;
+          position: absolute;
+          height: 20px;
+          width: 20px;
+          display: inline-flex;
+          background-color: #5c7aea;
+          justify-content: center;
+          align-items: center;
+          color: white;
+          font-size: 14px;
+          border-radius: 400px;
+        }
+      }
+
       a {
         width: 100%;
         height: auto;
