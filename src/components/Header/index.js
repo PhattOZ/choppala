@@ -10,16 +10,15 @@ export default function Header() {
 
   const [showHeader, setShowHeader] = useState(true)
 
-  const controlDirection = () => {
-    if (window.scrollY > oldScrollY) {
-      setShowHeader(false)
-    } else {
-      setShowHeader(true)
-    }
-    oldScrollY = window.scrollY
-  }
-
   useEffect(() => {
+    const controlDirection = () => {
+      if (window.scrollY > oldScrollY) {
+        setShowHeader(false)
+      } else {
+        setShowHeader(true)
+      }
+      oldScrollY = window.scrollY
+    }
     window.addEventListener("scroll", controlDirection)
     return () => {
       window.removeEventListener("scroll", controlDirection)
