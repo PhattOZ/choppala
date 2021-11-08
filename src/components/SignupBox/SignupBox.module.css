@@ -1,5 +1,5 @@
 .container {
-  width: 80%;
+  width: 70%;
   max-width: 480px;
   height: 493px;
   border-radius: 12px;
@@ -22,6 +22,7 @@
 
 .orContinueBox {
   width: 84%;
+  margin: 7px 0;
 }
 
 .orContinueText {
@@ -59,6 +60,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 2px 0;
 }
 
 .facebookButton {
@@ -67,10 +69,6 @@
 
 .googleButton {
   background-color: #d36236;
-}
-
-.lineButton {
-  background-color: #70d732;
 }
 
 .provider {
