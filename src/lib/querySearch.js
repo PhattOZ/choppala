@@ -1,21 +1,23 @@
 import Item from "src/models/Item"
 import dbConnect from "./dbConnect"
 
-export default async function querySearch(keyword, category) {
+export default async function querySearch(
+  keyword,
+  category,
+  minPrice,
+  maxPrice
+) {
   await dbConnect()
-  if (keyword && category) {
-    const data = await Item.find({
-      name: { $regex: keyword, $options: "i" },
-      category,
-    })
-    return JSON.parse(JSON.stringify(data))
-  } else if (keyword) {
-    const data = await Item.find({ name: { $regex: keyword, $options: "i" } })
-    return JSON.parse(JSON.stringify(data))
-  } else if (category) {
-    const data = await Item.find({ category })
-    return JSON.parse(JSON.stringify(data))
-  } else {
-    return null
+  const query = {
+    ...(keyword && { name: { $regex: keyword, $options: "i" } }),
+    ...(category && { category }),
+    ...(minPrice && { price: { $gte: minPrice } }),
+    ...(maxPrice && { price: { $lte: maxPrice } }),
+    ...(!!minPrice &&
+      !!maxPrice && {
+        $and: [{ price: { $gte: minPrice } }, { price: { $lte: maxPrice } }],
+      }),
   }
+  const itemList = await Item.find(query)
+  return JSON.parse(JSON.stringify(itemList))
 }
