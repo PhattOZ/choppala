@@ -39,7 +39,7 @@ export default async function auth(req, res) {
         const checkUser = await User.findOne({
           name: user.name,
           email: user.email,
-          image: user.image,
+          provider: account.provider,
         })
         if (checkUser) {
           return true // user คนนี้มีใน db แล้ว (เคย signin แล้ว)
