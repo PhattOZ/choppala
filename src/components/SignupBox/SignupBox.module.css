@@ -50,8 +50,8 @@
 
 .oauthButtons button {
   width: 100%;
-  height: 42px;
-  font-size: 1rem;
+  height: 48px;
+  font-size: 1.1rem;
   font-weight: 600;
   color: white;
   border-radius: 6px;
@@ -61,18 +61,20 @@
   align-items: center;
   justify-content: center;
   margin: 2px 0;
+  font-family: Poppins,sans-serif;
+  letter-spacing: 1px;
 }
 
 .facebookButton {
-  background-color: #3b5998;
+  background-color: #1068DB;
 }
 
 .googleButton {
-  background-color: #d36236;
+  background-color: #EA4335;
 }
 
 .githubButton {
-  background-color: #333;
+  background-color: #323131;
 }
 
 .provider {

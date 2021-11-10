@@ -4,6 +4,7 @@ import { useRouter } from "next/router"
 import { useSession } from "next-auth/react"
 import Layout from "src/components/UserProfileLayout"
 import DeletePopup from "src/components/DeletePopup"
+import OrderPopup from "src/components/OrderPopup"
 
 export default function Setting() {
   const [showModal, setShowModal] = useState(false)
@@ -19,10 +20,13 @@ export default function Setting() {
   if (status === "loading") {
     return <h1>Loading...</h1>
   }
+
+  //Open-Close Modal
   const handleClose = () => setShowModal(false)
   const handleShow = () => setShowModal(true)
 
-  const handleClick =() => console.log("click")
+  //For remove from database
+  const handleClick = () => console.log("click")
 
   return (
     <div className={styles.container}>
@@ -49,16 +53,30 @@ export default function Setting() {
           </section>
         </div>
       </Layout>
-      <DeletePopup
-        show={showModal}
-        onClose={handleClose}
-        onClick={handleClick}
-        title="Delete Account"
-        subtitle="Your account will be deleted!"
-      >
-        Do you really want to delete account? <br /> All information will
-        permanently lost.
-      </DeletePopup>
+      {/* -----------Popup------------ */}
+      {/* {showModal && (
+        <DeletePopup
+          show={showModal}
+          onClose={handleClose}
+          onClick={handleClick}
+          title="Delete Account"
+          subtitle="Your account will be deleted!"
+        >
+          Do you really want to delete account? <br /> All information will
+          permanently lost.
+        </DeletePopup>
+      )} */}
+      {showModal && (
+        <OrderPopup
+          show={showModal}
+          onClose={handleClose}
+          onClick={handleClick}
+          subtitle="Your account will be deleted!"
+        >
+          Do you really want to delete account? <br /> All information will
+          permanently lost.
+        </OrderPopup>
+      )}
     </div>
   )
 }

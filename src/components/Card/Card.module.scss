@@ -1,22 +1,39 @@
 .card {
-  border-radius: 1rem;
+  border-radius: 0.6rem;
   overflow: hidden;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-  width: 9rem;
+  width: 10rem;
+  margin-bottom: 1rem;
 }
 
 .card_image {
   position: relative;
-  height: 7rem;
+  height: 9rem;
 }
 
 .card_content {
   background: white;
-  height: 5.5rem;
   padding: 0.5rem;
   display: flex;
   flex-direction: column;
   row-gap: 0.2rem;
+}
+
+.card_title {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #444655;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.card_price {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #4585ff;
 }
 
 .stars_fav {

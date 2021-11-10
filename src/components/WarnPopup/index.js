@@ -1,6 +1,7 @@
 import ReactDom from "react-dom"
 import styles from "./WarnPopup.module.scss"
 import Link from "next/link"
+import { useLayoutEffect } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
   faExclamationTriangle,
@@ -8,6 +9,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons"
 
 export default function WarnPopup({ show, onClose, subtitle, children }) {
+  // Call hook to lock body scroll
+  useLockBodyScroll()
+
   return ReactDom.createPortal(
     <>
       {show ? (
@@ -44,4 +48,13 @@ export default function WarnPopup({ show, onClose, subtitle, children }) {
     </>,
     document.getElementById("modal-root")
   )
+}
+
+function useLockBodyScroll() {
+  useLayoutEffect(() => {
+    //Prevent scrolling on mount
+    document.body.style.overflow = "hidden"
+    //Re-enable scrolling when component unmount
+    return () => (document.body.style.overflow = "visible")
+  }, []) // Empty array ensures effect is only run on mount and unmount
 }
