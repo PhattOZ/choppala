@@ -1,5 +1,5 @@
 import Layout from "src/components/UserProfileLayout"
-import styles from "src/styles/pages/user/Addproduct.module.scss"
+import styles from "src/styles/pages/user/AddProduct.module.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faChevronCircleLeft, faImage } from "@fortawesome/free-solid-svg-icons"
 import Link from "next/link"

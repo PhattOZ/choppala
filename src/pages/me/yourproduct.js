@@ -1,5 +1,5 @@
 import Layout from "src/components/UserProfileLayout"
-import styles from "src/styles/pages/user/Addproduct.module.scss"
+import styles from "src/styles/pages/user/AddProduct.module.scss"
 import YourProductBox from "src/components/YourProductBox"
 import dbConnect from "src/lib/dbConnect"
 import User from "src/models/User"
