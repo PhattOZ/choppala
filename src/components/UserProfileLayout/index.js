@@ -70,7 +70,7 @@ export default function Layout({ children, user }) {
             </SidebarItem>
           </ul>
           <ul className={styles.sidebar_list}>
-            <SidebarItem content="Settings">
+            <SidebarItem content="Setting" path="/me/setting">
               <FontAwesomeIcon icon={faCog} size={"lg"} />
             </SidebarItem>
 

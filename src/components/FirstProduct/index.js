@@ -11,10 +11,10 @@ export default function FirstProduct() {
       <div className={styles.main}>
         <section>
           <div className={styles.peopleIcon}>
-            <Image src="/addproduct.svg" layout="fill" objectFit="cover" />
+            <Image src="/addproduct.svg" alt="addproduct" layout="fill" objectFit="cover" />
           </div>
           <div className={styles.text}>Start selling on Choppala</div>
-          <Link href="/me/addproduct">
+          <Link href="/me/addproduct" passHref>
           <div className={styles.button}>
             <FontAwesomeIcon icon={faPlusCircle} size={"lg"} />
             Add product
