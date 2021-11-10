@@ -6,11 +6,10 @@ import UserMenu from "./userMenu"
 import { useState, useEffect } from "react"
 
 export default function Header() {
-  let oldScrollY = 0
-
   const [showHeader, setShowHeader] = useState(true)
 
   useEffect(() => {
+    let oldScrollY = 0
     const controlDirection = () => {
       if (window.scrollY > oldScrollY) {
         setShowHeader(false)
