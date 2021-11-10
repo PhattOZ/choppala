@@ -2,11 +2,10 @@ import Layout from "src/components/UserProfileLayout"
 import styles from "src/styles/pages/user/SellingOrders.module.scss"
 import FirstProduct from "src/components/FirstProduct"
 import ActivateSeller from "src/components/ActivateSeller"
-import YourProduct from "src/components/YourProduct"
+import YourProduct from "src/components/YourProductBox"
 import { getSession } from "next-auth/react"
 import dbConnect from "src/lib/dbConnect"
 import User from "src/models/User"
-import AddProductBox from "src/components/AddProductBox"
 
 export default function SellingOrders({ user }) {
   return (
@@ -17,8 +16,6 @@ export default function SellingOrders({ user }) {
         ) : (
           <ActivateSeller name={user.name} email={user.email} />
         )}
-        {/* <AddProductBox/> 
-        <YourProduct/> */}
       </Layout>
     </div>
   )
@@ -40,7 +37,7 @@ export async function getServerSideProps(context) {
 
     return {
       props: {
-        user: leanResponse,
+        user: JSON.parse(JSON.stringify(leanResponse)) ,
       },
     }
   } else {

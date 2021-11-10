@@ -1,5 +1,8 @@
 .main {
   flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
 }
 
 .main section {
@@ -10,6 +13,7 @@
 
 .header {
   font-weight: 600;
+  font-size: 1.25rem;
   padding-bottom: 1rem;
 }
 
@@ -29,7 +33,7 @@
 }
 
 .edit_section label {
-  font-size: 0.75rem;
+  font-size: 0.9rem;
   color: #969696;
 }
 
@@ -42,8 +46,16 @@
   margin-bottom: 1rem;
 }
 
+.edit_section input[type="text"] {
+  padding: 0.3rem 0.6rem;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.95rem;
+}
+
 .edit_section input[type="date"] {
-  padding: 0.1rem;
+  padding: 0.3rem 0.6rem;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.95rem;
 }
 
 .edit_section input:focus {
@@ -64,9 +76,51 @@
 }
 
 .saveButton {
-  display: inline-block;
-  padding: 0.25rem 2rem;
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem 2rem;
   background-color: #4585ff;
   color: white;
   border-radius: 0.25rem;
+  width: 12rem;
+  cursor: pointer;
+  &:hover {
+    background-color: #8B8EA1;
+  }
+}
+
+//-----------Deliver Address Section--------------//
+.del {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit_t {
+  display: flex;
+}
+
+.edit_text {
+  display: flex;
+  flex-direction: column;
+  padding-left: 8rem;
+  margin-bottom: 1rem;
+}
+
+.edit_text label {
+  font-size: 0.9rem;
+  color: #969696;
+}
+
+.edit_text  textarea {
+  overflow: hidden;
+  width: 28rem;
+  display: block;
+  border-radius: 0.25rem;
+  border: 1px solid #969696;
+  padding: 0.3rem 0.6rem;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.95rem;
+  &:focus {
+    outline-color: #4585ff;
+  }
 }

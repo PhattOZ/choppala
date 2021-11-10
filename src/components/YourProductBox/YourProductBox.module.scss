@@ -8,6 +8,70 @@ $grey45: #a8aabc;
 $red: #ff1f00;
 $red20: #ffd2cc;
 
+.main {
+  flex-grow: 1;
+}
+
+.main section {
+  background-color: #ffffff;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+.header {
+  display: flex;
+  padding-left: 1rem;
+  justify-content: space-between;
+}
+
+.subheader {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  column-gap:4rem;
+}
+
+.subtitle {
+  font-size: 0.9rem;
+  color: $grey;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.button_wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.addBtn {
+  display: flex;
+  justify-content: center;
+  column-gap: 0.6rem;
+  width: 12rem;
+  padding: 0.6rem 1rem;
+  background-color: $blue;
+  color: white;
+  border-radius: 0.4rem;
+  cursor: pointer;
+}
+
+.addBtn:hover {
+  background-color: $grey70;
+}
+
+// ------------SellingBox------------ //
+
 .orderBox {
   display: flex;
   padding: 1rem;
@@ -85,3 +149,4 @@ $red20: #ffd2cc;
   color: white;
   cursor: pointer;
 }
+

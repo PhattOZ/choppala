@@ -1,0 +1,111 @@
+$grey45: #a8aabc;
+$grey70: #8b8ea1;
+$grey100: #444655;
+$red: #ff1f00;
+$red20: #ffd2cc;
+$blue: #4585ff;
+$lightblue: #dbe6fd;
+
+.container {
+  background-color: rgb(0, 0, 0, 0.6);
+  background-attachment: fixed;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  margin-bottom: auto;
+  margin-top: auto;
+ 
+}
+
+.header {
+  display: flex;
+  justify-content: flex-end;
+  align-content: flex-end;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  align-content: center;
+  align-items: center;
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: $red;
+}
+
+.subtitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: $grey100;
+}
+
+.icon {
+  cursor: pointer;
+}
+
+.textinfo {
+  font-size: 0.9rem;
+  color: $grey70;
+  text-align: center;
+}
+
+.button_wrapper {
+  display: flex;
+  justify-content: center;
+  column-gap: 1rem;
+}
+
+.deleteBtn {
+  display: flex;
+  justify-content: center;
+  column-gap: 0.4rem;
+  width: 12rem;
+  padding: 0.5rem 2rem;
+  background-color: $red;
+  color: white;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+}
+
+.deleteBtn:hover {
+  background-color: $red20;
+  color: $red;
+  cursor: pointer;
+}
+
+.cancelBtn {
+  display: flex;
+  justify-content: center;
+  column-gap: 0.4rem;
+  width: 12rem;
+  padding: 0.5rem 2rem;
+  background-color: $lightblue;
+  color: $blue;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+}
+
+.cancelBtn:hover {
+  background-color: $grey45;
+  color: white;
+  cursor: pointer;
+}
