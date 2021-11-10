@@ -36,7 +36,7 @@ export async function getServerSideProps(context) {
 
     return {
       props: {
-        user: leanResponse,
+        user: JSON.parse(JSON.stringify(leanResponse)),
       },
     }
   } else {

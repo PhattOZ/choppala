@@ -28,6 +28,7 @@ export default function Store() {
                   src={session.user.image}
                   layout="fill"
                   objectFit="cover"
+                  alt="user"
                 />
               </div>
             </div>
@@ -47,7 +48,7 @@ export default function Store() {
 
         <div className={styles.dashboard}>
           <div className={styles.peopleIcon}>
-            <Image src="/dashboard.svg" layout="fill" objectFit="cover" />
+            <Image src="/dashboard.svg" alt="dashboard" layout="fill" objectFit="cover" />
           </div>
           <div className={styles.text}>Dashboard is coming soon</div>
         </div>

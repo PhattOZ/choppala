@@ -1,0 +1,56 @@
+$grey45: #a8aabc;
+$grey70: #8b8ea1;
+$grey100: #444655;
+$red: #ff1f00;
+$red20: #ffd2cc;
+$blue: #4585ff;
+$lightblue: #dbe6fd;
+
+.main {
+  flex-grow: 1;
+}
+
+.main section {
+  background-color: #ffffff;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+.textbox {
+  display: flex;
+  max-width: 58rem;
+  padding-left: 1rem;
+}
+
+.textinfo {
+  font-size: 0.9;
+  color: $grey70;
+}
+
+.button_wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.deleteBtn {
+  display: flex;
+  justify-content: center;
+  column-gap: 0.4rem;
+  width: 12rem;
+  padding: 0.5rem 2rem;
+  background-color: $red20;
+  color: $red;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+}
+
+.deleteBtn:hover {
+  background-color: $red;
+  color: white;
+  cursor: pointer;
+}
