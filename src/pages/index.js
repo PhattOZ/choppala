@@ -1,5 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
+import Head from "next/head"
 import Card from "src/components/Card"
 import categories from "src/lib/categoryList"
 import styles from "src/styles/pages/index.module.scss"
@@ -28,38 +29,47 @@ function CategoryLink({ category }) {
 
 export default function Index({ productList }) {
   return (
-    <div className={styles.container}>
-      <div>
-        <div className={styles.section}>banner</div>
-        <section className={styles.section}>
-          <div className={styles.section_title}>Categories</div>
-          <div
-            className={styles.categoriesContainer}
-            style={{ "--category-length": categories.length }}
-          >
-            {categories.map((category) => (
-              <CategoryLink key={category} category={category} />
-            ))}
-          </div>
-        </section>
-        <section className={styles.section}>
-          <div className={styles.section_title}>Just for you</div>
-          <div className={styles.cardContainer}>
-            {productList.map((product) => (
-              <Link key={product._id} href={`/product/${product._id}`}>
-                <a>
-                  <Card
-                    title={product.name}
-                    price={product.price}
-                    image={product.image}
-                  />
-                </a>
-              </Link>
-            ))}
-          </div>
-        </section>
+    <>
+      <Head>
+        <title>Choppala | Shop Chim & Chill</title>
+        <meta
+          name="description"
+          content="Wonderously designed ecommerse application. Choppala is crafted carefully and delicately utilizing topics learned during Covid lockdown."
+        />
+      </Head>
+      <div className={styles.container}>
+        <div>
+          <div className={styles.section}>banner</div>
+          <section className={styles.section}>
+            <div className={styles.section_title}>Categories</div>
+            <div
+              className={styles.categoriesContainer}
+              style={{ "--category-length": categories.length }}
+            >
+              {categories.map((category) => (
+                <CategoryLink key={category} category={category} />
+              ))}
+            </div>
+          </section>
+          <section className={styles.section}>
+            <div className={styles.section_title}>Just for you</div>
+            <div className={styles.cardContainer}>
+              {productList.map((product) => (
+                <Link key={product._id} href={`/product/${product._id}`}>
+                  <a>
+                    <Card
+                      title={product.name}
+                      price={product.price}
+                      image={product.image}
+                    />
+                  </a>
+                </Link>
+              ))}
+            </div>
+          </section>
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 
