@@ -10,7 +10,7 @@ import {
 import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import styles from "./ProductBox.module.css"
+import styles from "./ProductBox.module.scss"
 
 export default function ProductBox({
   onCartChange,
@@ -84,9 +84,13 @@ export default function ProductBox({
         </div>
         <div className={styles.infocontainer}>
           <div className={styles.top}>
-            <div className={styles.title}>{productname}</div>
-            <div className={styles.break}></div>
-            <div className={styles.wishlist}>
+            <div>
+              <div className={styles.title}>{productname}</div>
+            </div>
+
+            {/* <div className={styles.break}></div> */}
+            <div className={styles.heartbox}>
+              <div className={styles.wishlist}>
               {heart ? (
                 <FontAwesomeIcon
                   icon={farfaHeart}
@@ -102,8 +106,9 @@ export default function ProductBox({
                   color="#8B8EA1"
                 />
               )}
-
               <div className={styles.txtwish}>wishlist</div>
+            </div>
+            
             </div>
           </div>
           <div className={styles.infosec}>
@@ -147,13 +152,13 @@ export default function ProductBox({
           <div className={styles.btncontainer}>
             <div className={styles.btncart} onClick={passCartToUppercompo}>
               <div className={styles.icon}>
-                <FontAwesomeIcon icon={faCartPlus} size={"lg"} color="#ffff" />
+                <FontAwesomeIcon icon={faCartPlus} size={"lg"}/>
               </div>
               <div>Add to cart</div>
             </div>
             <div className={styles.btnbuy}>
               <div className={styles.icon}>
-                <FontAwesomeIcon icon={faTags} size={"lg"} color="#ffff" />
+                <FontAwesomeIcon icon={faTags} size={"lg"}/>
               </div>
               <div>Buy now</div>
             </div>

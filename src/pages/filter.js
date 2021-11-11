@@ -89,22 +89,26 @@ export default function Filter({
       </div>
       <div className={styles.main}>
         <CategoryBox />
-        <div className={styles.card_container}>
-          {currentItems &&
-            currentItems.map((item) => (
-              <Link key={item._id} href={`/product/${item._id}`}>
-                <a>
-                  <Card
-                    title={item.name}
-                    price={item.price}
-                    image={item.image}
-                  />
-                </a>
-              </Link>
-            ))}
+        <div className={styles.main_body}>
+          <div className={styles.card_container}>
+            {currentItems &&
+              currentItems.map((item) => (
+                <Link key={item._id} href={`/product/${item._id}`}>
+                  <a>
+                    <Card
+                      title={item.name}
+                      price={item.price}
+                      image={item.image}
+                    />
+                  </a>
+                </Link>
+              ))}
+          </div>
+          <div className={styles.page_container}>
+            <Pagination itemsPerPage={itemsPerPage} totalItems={totalItems} />
+          </div>
         </div>
       </div>
-      <Pagination itemsPerPage={itemsPerPage} totalItems={totalItems} />
     </div>
   )
 }

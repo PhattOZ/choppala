@@ -1,5 +1,5 @@
 .sidebar {
-  width: 17%;
+  width: 16%;
   color: #7c7c7c;
   font-size: 0.9rem;
 }
@@ -33,7 +33,7 @@
 
 .fontBlueColor {
   color: #4585ff;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .priceTitle {
@@ -47,10 +47,16 @@
   display: flex;
   input {
     border-radius: 5px;
-    height: 1.9rem;
-    border-color: #969696;
-    padding-left: 0.3rem;
+    height: 2rem;
+    border: 1px solid #969696;
+    padding-left: 0.6rem;
     width: 45%;
+  }
+  input:focus {
+    outline-color: #4585ff;
+  }
+  input[type="number"] {
+    font-family: "Poppins", sans-serif;
   }
   input::-webkit-outer-spin-button,
   input::-webkit-inner-spin-button {
@@ -63,14 +69,18 @@
 }
 
 .priceButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
-  height: 1.9rem;
+  height: 2.2rem;
   margin: 0.8rem 0;
   background-color: #dbe6fd;
-  padding: 0;
   border: none;
   border-radius: 5px;
+  font-family: Poppins, sans-serif;
+  font-size: 0.9rem;
   color: #4585ff;
-  font-weight: 600;
+  font-weight: 500;
   cursor: pointer;
 }

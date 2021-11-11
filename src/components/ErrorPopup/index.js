@@ -2,8 +2,12 @@ import ReactDom from "react-dom"
 import styles from "./ErrorPopup.module.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTimes, faTimesCircle } from "@fortawesome/free-solid-svg-icons"
+import { useLayoutEffect } from "react"
 
-const ErrorPopup = ({ show, onClose, subtitle, children }) => {
+export default function ErrorPopup({ show, onClose, subtitle, children }){
+  // Call hook to lock body scroll
+  useLockBodyScroll()
+
   return ReactDom.createPortal(
     <>
       {show ? (
@@ -24,9 +28,7 @@ const ErrorPopup = ({ show, onClose, subtitle, children }) => {
                 />
               </div>
               <div className={styles.subtitle}>{subtitle}</div>
-              <div className={styles.textinfo}>
-                {children}
-              </div>
+              <div className={styles.textinfo}>{children}</div>
             </div>
           </div>
         </div>
@@ -35,4 +37,12 @@ const ErrorPopup = ({ show, onClose, subtitle, children }) => {
     document.getElementById("modal-root")
   )
 }
-export default ErrorPopup
+
+function useLockBodyScroll() {
+  useLayoutEffect(() => {
+    //Prevent scrolling on mount
+    document.body.style.overflow = "hidden"
+    //Re-enable scrolling when component unmount
+    return () => (document.body.style.overflow = "visible")
+  }, []) // Empty array ensures effect is only run on mount and unmount
+}

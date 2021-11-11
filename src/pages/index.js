@@ -17,7 +17,7 @@ function CategoryLink({ category }) {
           alt="category"
         />
       </div>
-      <div>{category}</div>
+      <div className={styles.category_title}>{category}</div>
     </div>
   )
 }
@@ -28,7 +28,7 @@ export default function Index({ productList }) {
       <div>
         <div className={styles.section}>banner</div>
         <div className={styles.section}>
-          <div className={styles.section_title}>categories</div>
+          <div className={styles.section_title}>Categories</div>
           <div
             className={styles.categoriesContainer}
             style={{ "--category-length": categories.length }}
@@ -46,7 +46,7 @@ export default function Index({ productList }) {
           </div>
         </div>
         <div className={styles.section}>
-          <div className={styles.section_title}>justforyou</div>
+          <div className={styles.section_title}>Just for you</div>
           <div className={styles.cardContainer}>
             {productList.map((product) => (
               <Link key={product._id} href={`/product/${product._id}`}>
