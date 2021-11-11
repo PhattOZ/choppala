@@ -25,10 +25,8 @@ export default async function auth(req, res) {
       }),
     ],
     jwt: {
-      signingKey: { kty: "oct", kid: "--", alg: "HS256", k: "--" },
-      verificationOptions: {
-        algorithms: ["HS256"],
-      },
+      secret: process.env.NODE_JWT_SECRET,
+      encryption: false,
     },
     pages: {
       signIn: "/signup", // ถ้า url เป็น /api/auth/signin ให้ไปที่ localhost:3000/signin
