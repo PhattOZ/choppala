@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { signIn } from "next-auth/react"
 // Styles
-import styles from "./SignupBox.module.css"
+import styles from "./SignupBox.module.scss"
 // Icon
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {

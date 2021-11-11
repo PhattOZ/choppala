@@ -56,7 +56,7 @@ export default function CategoryBox() {
           )
         })}
       </ul>
-      <div className={styles.priceTitle}>Price range</div>
+      <div className={styles.priceTitle}>PRICE RANGE</div>
       <div className={styles.inputPriceContainer}>
         <input
           type="number"
@@ -73,7 +73,7 @@ export default function CategoryBox() {
         />
       </div>
       <button className={styles.priceButton} onClick={handlePriceSubmit}>
-        SET PRICE
+        Set Price
       </button>
     </div>
   )

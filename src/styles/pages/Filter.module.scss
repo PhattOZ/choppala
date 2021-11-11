@@ -1,5 +1,5 @@
 .container {
-  padding: 2rem 6rem 0 6rem;
+  padding: 2rem 11rem 0 11rem;
 }
 
 .header {
@@ -11,7 +11,9 @@
 
 .header_sort {
   display: flex;
+  margin-right: 0;
   align-items: center;
+  font-size: 0.85rem;
   .sortBy {
     margin-right: 0.75rem;
   }
@@ -20,15 +22,21 @@
 .main {
   display: flex;
   column-gap: 3rem;
-  padding-bottom: 2rem;
+}
+
+.main_body {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  padding-bottom: 1rem;
 }
 
 .card_container {
   flex-grow: 1;
   display: grid;
-  column-gap: 1rem;
+  column-gap: 2rem;
   row-gap: 0.5rem;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .keyword {
@@ -37,23 +45,29 @@
 
 @media (min-width: 1024px) {
   .card_container {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
+}
+
+.page_container {
+  display: flex;
+  justify-content: center;
 }
 
 // ******************* Dropdown component section *******************
 .dropdownBox {
   cursor: pointer;
-  border: 1px solid black;
+  border: 1px solid #7c7c7c;
   border-radius: 5px;
   color: #7c7c7c;
   background-color: white;
-  width: 12rem;
+  width: 9.6rem;
   height: 2.2rem;
   display: flex;
   justify-content: space-between;
   padding: 0 11px;
   align-items: center;
+  column-gap: 0.4rem;
 }
 
 .listsContainer {
@@ -66,7 +80,7 @@
 }
 
 .dropdownItem {
-  width: 12rem;
+  width: 9.6rem;
   height: 2.2rem;
   display: flex;
   align-items: center;

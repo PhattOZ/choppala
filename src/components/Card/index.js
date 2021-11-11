@@ -6,9 +6,12 @@ import Image from "next/image"
 export default function Card({ title, price, image }) {
   return (
     <div className={styles.card}>
-      <div className={styles.card_image}>
+      <div className={styles.img_container}>
+        <div className={styles.card_image}>
         <Image src={image} layout="fill" objectFit="cover" alt="item" />
       </div>
+      </div>
+      
       <div className={styles.card_content}>
         <div className={styles.card_title}>{title}</div>
         <div className={styles.card_price}>{`B${price}`}</div>

@@ -54,7 +54,7 @@ export default function Setting() {
         </div>
       </Layout>
       {/* -----------Popup------------ */}
-      {/* {showModal && (
+      {showModal && (
         <DeletePopup
           show={showModal}
           onClose={handleClose}
@@ -65,17 +65,6 @@ export default function Setting() {
           Do you really want to delete account? <br /> All information will
           permanently lost.
         </DeletePopup>
-      )} */}
-      {showModal && (
-        <OrderPopup
-          show={showModal}
-          onClose={handleClose}
-          onClick={handleClick}
-          subtitle="Your account will be deleted!"
-        >
-          Do you really want to delete account? <br /> All information will
-          permanently lost.
-        </OrderPopup>
       )}
     </div>
   )

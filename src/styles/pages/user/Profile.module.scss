@@ -13,7 +13,7 @@
 
 .header {
   font-weight: 600;
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   padding-bottom: 1rem;
 }
 
@@ -34,7 +34,7 @@
 
 .edit_section label {
   font-size: 0.9rem;
-  color: #969696;
+  color: #444655;
 }
 
 .edit_section input {
@@ -63,8 +63,8 @@
 }
 
 .user_img {
-  width: 3rem;
-  height: 3rem;
+  width: 4.5rem;
+  height: 4.5rem;
   border-radius: 9999px;
   overflow: hidden;
   position: relative;
@@ -95,6 +95,14 @@
   flex-direction: column;
 }
 
+.home_icon {
+  width: 4.5rem;
+  padding-top: 1rem;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
 .edit_t {
   display: flex;
 }
@@ -102,13 +110,13 @@
 .edit_text {
   display: flex;
   flex-direction: column;
-  padding-left: 8rem;
+  padding-left: 9.5rem;
   margin-bottom: 1rem;
 }
 
 .edit_text label {
   font-size: 0.9rem;
-  color: #969696;
+  color: #444655;
 }
 
 .edit_text  textarea {
