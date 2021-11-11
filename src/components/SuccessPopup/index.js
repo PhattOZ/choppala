@@ -2,8 +2,12 @@ import ReactDom from "react-dom"
 import styles from "./SuccessPopup.module.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCheckCircle, faTimes } from "@fortawesome/free-solid-svg-icons"
+import { useLayoutEffect } from "react"
 
-const SuccessPopup = ({ show, onClose, subtitle, children }) => {
+export default function SuccessPopup({ show, onClose, subtitle, children }){
+  // Call hook to lock body scroll
+  useLockBodyScroll()
+
   return ReactDom.createPortal(
     <>
       {show ? (
@@ -33,4 +37,12 @@ const SuccessPopup = ({ show, onClose, subtitle, children }) => {
     document.getElementById("modal-root")
   )
 }
-export default SuccessPopup
+
+function useLockBodyScroll() {
+  useLayoutEffect(() => {
+    //Prevent scrolling on mount
+    document.body.style.overflow = "hidden"
+    //Re-enable scrolling when component unmount
+    return () => (document.body.style.overflow = "visible")
+  }, []) // Empty array ensures effect is only run on mount and unmount
+}

@@ -25,6 +25,7 @@ export default function Pagination({ itemsPerPage, totalItems, paginate }) {
               pathname: "/filter",
               query: { ...router.query, page: i },
             }}
+            passHref
           >
             <div className={`${styles.child} ${blueStyle}`}>{i}</div>
           </Link>

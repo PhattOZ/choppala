@@ -19,6 +19,7 @@
 
 .bold {
   font-weight: 600;
+  font-size: 1.1rem;
 }
 
 .email {
@@ -29,6 +30,8 @@
   width: 3rem;
   height: 3rem;
   position: relative;
+  overflow: hidden;
+  border-radius: 999rem;
 }
 
 .sidebar_list {
@@ -45,6 +48,7 @@
 
 .blue {
   color: #4585ff;
+  font-weight: 500;
 }
 
 .sidebar_list_item:hover {

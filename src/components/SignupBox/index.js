@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { signIn } from "next-auth/react"
 // Styles
-import styles from "./SignupBox.module.css"
+import styles from "./SignupBox.module.scss"
 // Icon
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
@@ -25,7 +25,7 @@ export default function SignupBox() {
           onClick={() => signIn("facebook", { callbackUrl: "/user" })}
         >
           <div className={styles.socialIcon}>
-            <FontAwesomeIcon icon={faFacebookF} />
+            <FontAwesomeIcon icon={faFacebookF}/>
           </div>
           <span className={styles.provider}>Facebook</span>
         </button>
@@ -36,7 +36,7 @@ export default function SignupBox() {
           }}
         >
           <div className={styles.socialIcon}>
-            <FontAwesomeIcon icon={faGoogle} />
+            <FontAwesomeIcon icon={faGoogle}/>
           </div>
           <span className={styles.provider}>Google</span>
         </button>
@@ -47,7 +47,7 @@ export default function SignupBox() {
           }}
         >
           <div className={styles.socialIcon}>
-            <FontAwesomeIcon icon={faGithub} />
+            <FontAwesomeIcon icon={faGithub} size="lg"/>
           </div>
           <span className={styles.provider}>Github</span>
         </button>

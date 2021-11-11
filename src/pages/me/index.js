@@ -1,9 +1,12 @@
 import styles from "src/styles/pages/user/Profile.module.scss"
-import { useSession } from "next-auth/react"
-import Image from "next/image"
+//Component
 import Layout from "src/components/UserProfileLayout"
 import Loader from "src/components/Loader"
+//Lib
+import Image from "next/image"
+import { useSession } from "next-auth/react"
 import { useRouter } from "next/router"
+//Icon
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faHome } from "@fortawesome/free-solid-svg-icons"
 
@@ -63,7 +66,7 @@ export default function Profile() {
             <div className={styles.del}>
               <div className={styles.edit}>
                 <div className={styles.edit_section}>
-                  <div className={styles.user_img}>
+                  <div className={styles.home_icon}>
                     <FontAwesomeIcon icon={faHome} size="2x" color="#4585ff" />
                   </div>
                 </div>
