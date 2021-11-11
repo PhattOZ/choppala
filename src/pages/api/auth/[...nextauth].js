@@ -24,11 +24,12 @@ export default async function auth(req, res) {
         clientSecret: process.env.GITHUB_CLIENT_SECRET,
       }),
     ],
-    pages: {
-      signIn: "/signin", // ถ้า url เป็น /api/auth/signin ให้ไปที่ localhost:3000/signin
+    jwt: {
+      secret: process.env.NODE_JWT_SECRET,
+      encryption: false,
     },
-    session: {
-      jwt: true, // ใช้ jwt แทน database session (ใน db จะไม่มี collection session)
+    pages: {
+      signIn: "/signup", // ถ้า url เป็น /api/auth/signin ให้ไปที่ localhost:3000/signin
     },
     callbacks: {
       async signIn({ user, account, profile, email, credentials }) {
@@ -36,7 +37,7 @@ export default async function auth(req, res) {
         const checkUser = await User.findOne({
           name: user.name,
           email: user.email,
-          image: user.image,
+          provider: account.provider,
         })
         if (checkUser) {
           return true // user คนนี้มีใน db แล้ว (เคย signin แล้ว)
