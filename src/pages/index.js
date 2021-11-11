@@ -8,17 +8,21 @@ import Item from "src/models/Item"
 
 function CategoryLink({ category }) {
   return (
-    <div className={styles.category}>
-      <div className={styles.category_image}>
-        <Image
-          src="/molang.jpg"
-          layout="fill"
-          objectFit="cover"
-          alt="category"
-        />
-      </div>
-      <div>{category}</div>
-    </div>
+    <Link href={{ pathname: "/filter", query: { category } }}>
+      <a>
+        <div className={styles.category}>
+          <div className={styles.category_image}>
+            <Image
+              src="/molang.jpg"
+              layout="fill"
+              objectFit="cover"
+              alt="category"
+            />
+          </div>
+          <div>{category}</div>
+        </div>
+      </a>
+    </Link>
   )
 }
 
@@ -27,25 +31,18 @@ export default function Index({ productList }) {
     <div className={styles.container}>
       <div>
         <div className={styles.section}>banner</div>
-        <div className={styles.section}>
+        <section className={styles.section}>
           <div className={styles.section_title}>categories</div>
           <div
             className={styles.categoriesContainer}
             style={{ "--category-length": categories.length }}
           >
             {categories.map((category) => (
-              <Link
-                key={category}
-                href={{ pathname: "/filter", query: { category } }}
-              >
-                <a>
-                  <CategoryLink category={category} />
-                </a>
-              </Link>
+              <CategoryLink key={category} category={category} />
             ))}
           </div>
-        </div>
-        <div className={styles.section}>
+        </section>
+        <section className={styles.section}>
           <div className={styles.section_title}>justforyou</div>
           <div className={styles.cardContainer}>
             {productList.map((product) => (
@@ -60,18 +57,23 @@ export default function Index({ productList }) {
               </Link>
             ))}
           </div>
-        </div>
+        </section>
       </div>
     </div>
   )
 }
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps() {
   await dbConnect()
-  const productList = await Item.find().sort({ _id: -1 }).limit(18)
+  const items = await Item.find({}).sort({ _id: -1 }).limit(18).lean()
+
+  items.map((item) => {
+    item._id = item._id.toString()
+  })
+
   return {
     props: {
-      productList: JSON.parse(JSON.stringify(productList)),
+      productList: items,
     },
   }
 }
