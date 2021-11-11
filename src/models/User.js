@@ -59,7 +59,6 @@ const UserSchema = new mongoose.Schema({
       ],
     },
   ],
-  sellerItem: [{ itemName: String }], // รายการสินค้าที่ลงขายแล้ว (กรณี activeSeller: true)
 })
 
 module.exports = mongoose.models.User || mongoose.model("User", UserSchema)
