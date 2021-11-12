@@ -98,7 +98,7 @@ export default function Layout({ children, user }) {
   return (
     <>
       <Head>
-        <title>{user.name}'s Profile | Choppala</title>
+        <title>{`${user.name}'s`} Profile | Choppala</title>
       </Head>
       <div className={styles.container}>
         <Sidebar user={user} />
