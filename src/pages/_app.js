@@ -14,11 +14,16 @@ export default function App({
   const router = useRouter()
 
   useEffect(() => {
+    let id
+
     const handleStart = () => {
-      setLoading(true)
+      id = setInterval(() => {
+        setLoading(true)
+      }, 500)
     }
 
     const handleStop = () => {
+      clearInterval(id)
       setLoading(false)
     }
 
