@@ -5,6 +5,7 @@ import { useContext, useState } from "react"
 import { getSession } from "next-auth/react"
 import dbConnect from "src/lib/dbConnect"
 import User from "src/models/User"
+import Image from "next/image"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
@@ -15,9 +16,15 @@ import {
   faPencilAlt,
 } from "@fortawesome/free-solid-svg-icons"
 
-export default function checkout({ data }) {
+export default function Checkout({ data }) {
   const ctx = useContext(CartContext)
-  console.log(data)
+
+  let addressFilter = data.address
+    .split(/(\s+)/)
+    .filter((e) => e.trim().length > 0)
+
+  let ItemFromCtx = ctx.value.cart.filter((item) => item.isConfirm == true)
+
   return (
     <div className={styles.container}>
       <div className={styles.main}>
@@ -30,13 +37,17 @@ export default function checkout({ data }) {
             <div>
               General informaition
               <div className={styles.info__name}>
-                <div>Joe bieden</div>
-                <div>jeoads@gmail.com</div>
-                <div>+66 123 6845</div>
+                <div>{data.name}</div>
+                <div>{data.email}</div>
+                <div>{data.phoneNumber}</div>
               </div>
             </div>
             <div>
-              <FontAwesomeIcon icon={faPencilAlt} size={"lg"} />
+              <FontAwesomeIcon
+                icon={faPencilAlt}
+                size={"lg"}
+                className={styles.icon_clickable}
+              />
             </div>
           </div>
         </div>
@@ -50,12 +61,19 @@ export default function checkout({ data }) {
             <div>
               Delivery Address
               <div className={styles.address_name}>
-                <div>Joe bieden</div>
-                <div>jeoads@gmail.com</div>
+                <div>
+                  {addressFilter.slice(0, addressFilter.length - 3).join(" ")}
+                </div>
+
+                <div>{addressFilter.slice(-3).join(" ")}</div>
               </div>
             </div>
             <div>
-              <FontAwesomeIcon icon={faPencilAlt} size={"lg"} />
+              <FontAwesomeIcon
+                icon={faPencilAlt}
+                size={"lg"}
+                className={styles.icon_clickable}
+              />
             </div>
           </div>
         </div>
@@ -84,31 +102,41 @@ export default function checkout({ data }) {
       </div>
       <div className={styles.order_summary}>
         Order Summary
-        <div className={styles.order__details}>
-          <div>picture</div>
-          <div className={styles.order__details_flexbox}>
-            <div>Sony playstation 5</div>
-            <div>$1000</div>
-          </div>
-          <div>1 each</div>
-        </div>
+        {ItemFromCtx.map((item) => (
+          <OrderList key={item._id} data={item} />
+        ))}
         <div className={styles.order__total}>
           <div>
             <span>Product total</span>
-            <span>$100</span>
+            <span>${ctx.value.totalPrice}</span>
           </div>
           <div>
             <span>Delivery</span>
             <span>$20</span>
           </div>
         </div>
-        <div className={styles.order__summary}>
+        <div className={styles.order__bottomPart}>
           <div>
-            <span>ALL payment</span> <span>$1000</span>
+            <span>ALL payment</span> <span>${ctx.value.totalPrice + 20}</span>
           </div>
           <div>Order now</div>
         </div>
       </div>
+    </div>
+  )
+}
+
+const OrderList = ({ data }) => {
+  return (
+    <div className={styles.order__details}>
+      <div>
+        <Image src={data.image} layout="fill" objectFit="cover" />
+      </div>
+      <div className={styles.order__details_flexbox}>
+        <div>{data.name}</div>
+        <div>${data.price}</div>
+      </div>
+      <div>{data.quantity} each</div>
     </div>
   )
 }

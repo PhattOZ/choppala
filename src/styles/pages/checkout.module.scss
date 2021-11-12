@@ -6,16 +6,19 @@
   height: inherit;
   min-height: 100%;
   column-gap: 2rem;
+  background-color: #f3f2f2;
 
   .main {
-    flex: 75%;
+    flex: 70%;
     display: flex;
     flex-direction: column;
     row-gap: 1.5rem;
     .fontAwesome {
       font-size: 180%;
     }
-
+    .icon_clickable {
+      cursor: pointer;
+    }
     > div {
       background-color: white;
       padding: 1rem 1.5rem;
@@ -31,9 +34,9 @@
         .info__name {
           padding-top: 0.5rem;
           display: flex;
-          column-gap: 10%;
+          flex-wrap: wrap;
+          column-gap: 4rem;
         }
-
         > div:last-child {
           position: absolute;
           float: right;
@@ -53,7 +56,6 @@
           column-gap: 10%;
           row-gap: 0.25rem;
         }
-
         > div:last-child {
           position: absolute;
           float: right;
@@ -100,8 +102,8 @@
   }
 
   .order_summary {
-    flex: 25%;
-    background-color: #e6ddc4;
+    flex: 30%;
+    background-color: white;
     align-self: flex-start;
     display: flex;
     flex-direction: column;
@@ -111,11 +113,18 @@
       position: relative;
       display: flex;
       align-items: center;
+      column-gap: 0.5rem;
       padding-bottom: 1rem;
       border-bottom: 1px dotted black;
+      > div:first-child {
+        position: relative;
+        width: 3rem;
+        height: 3rem;
+      }
       .order__details_flexbox {
         display: flex;
         flex-direction: column;
+        max-width: 67%;
       }
       > div:last-child {
         position: absolute;
@@ -124,12 +133,14 @@
       }
     }
     .order__total {
+      border-bottom: 1px dotted black;
+      padding-bottom: 1rem;
       span:last-child {
         float: right;
       }
     }
 
-    .order__summary {
+    .order__bottomPart {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -137,6 +148,19 @@
         width: 100%;
         display: flex;
         justify-content: space-around;
+        background-color: #f9f9f9;
+        padding: 0.5rem;
+        margin-bottom: 1rem;
+        border-radius: 5px;
+      }
+
+      > :nth-child(2) {
+        text-align: center;
+        width: 100%;
+        background-color: #4383fd;
+        color: white;
+        padding: 0.5rem;
+        cursor: pointer;
       }
     }
   }
