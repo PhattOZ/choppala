@@ -5,7 +5,6 @@ import { useContext, useState } from "react"
 import Image from "next/image"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons"
-import { useCallback } from "react"
 
 const transfromCart = (data) => {
   let cartItem = []
@@ -76,7 +75,11 @@ export default function Cart() {
             <span>total</span>
             <span>{ctx.value.totalPrice}</span>
           </div>
-          <div className={styles.process_btn}>process to order</div>
+          <Link href="/checkout">
+            <a>
+              <div className={styles.process_btn}>process to order</div>
+            </a>
+          </Link>
         </div>
       </div>
     </div>
