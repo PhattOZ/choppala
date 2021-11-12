@@ -6,7 +6,6 @@
 }
 
 .main {
-  position: static;
   min-height: -moz-calc(
     100% - header.$headerHeight - footer.$footerHeight
   ); /* Firefox */
