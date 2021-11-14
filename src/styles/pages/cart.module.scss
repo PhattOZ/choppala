@@ -158,10 +158,16 @@
       .process_btn {
         width: 90%;
         margin: 1rem auto;
-        background-color: blue;
-        text-align: center;
+        padding: 0.5rem;
+        background-color: #4383fd;
         color: white;
         cursor: pointer;
+        text-align: center;
+        border-radius: 5px;
+        &:hover {
+          background-color: #dbe6fd;
+          color: #4585ff;
+        }
       }
     }
     .order_summary div {

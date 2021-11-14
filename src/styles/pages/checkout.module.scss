@@ -161,6 +161,11 @@
         color: white;
         padding: 0.5rem;
         cursor: pointer;
+        border-radius: 5px;
+        &:hover {
+          background-color: #dbe6fd;
+          color: #4585ff;
+        }
       }
     }
   }

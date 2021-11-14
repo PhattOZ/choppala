@@ -17,7 +17,6 @@ export default function UserMenu() {
   const { data: session, status } = useSession()
   const [isHamburgerActive, setIsHamburgerActive] = useState(false)
   const ctx = useContext(CartContext)
-
   const toggleHamburger = () => {
     setIsHamburgerActive(!isHamburgerActive)
   }

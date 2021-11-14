@@ -59,9 +59,9 @@ const UserSchema = new mongoose.Schema({
       ],
     },
   ],
-  shoppingHistory: [
+  purchaseHistory: [
     {
-      ItemID: String,
+      itemID: String,
       name: String,
       image: String,
       price: Number,

@@ -32,8 +32,8 @@ const updatedCartDB = (cart) => {
 }
 
 const addedUserHistoryDB = (items) => {
-  const newItems = items.map(({ _id: ItemID, ...rest }) => ({
-    ItemID,
+  const newItems = items.map(({ _id: itemID, ...rest }) => ({
+    itemID,
     ...rest,
   }))
   fetch("/api/userHistory", {
