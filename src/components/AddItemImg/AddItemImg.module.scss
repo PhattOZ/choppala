@@ -90,3 +90,17 @@ $lightblue: #dbe6fd;
   color: white;
   cursor: pointer;
 }
+
+.canvasLg {
+  width: 14rem;
+  height: 14rem;
+  border: 2px dashed $grey45;
+  border-radius: 0.25rem;
+}
+
+.canvasSm {
+  width: 9rem;
+  height: 9rem;
+  border: 2px dashed $grey45;
+  border-radius: 0.25rem;
+}

@@ -8,6 +8,7 @@ import User from "src/models/User"
 import { getSession } from "next-auth/react"
 import { upload } from "src/lib/firebase"
 import AddItemImg from "src/components/AddItemImg"
+import { useState } from "react"
 
 function handleUpload(e) {
   const [file] = e.target.files
@@ -24,6 +25,10 @@ function handleUpload(e) {
 }
 
 export default function AddProduct({ user }) {
+  const [imgBlobs, setImgBlobs] = useState([])
+
+  console.log(imgBlobs)
+
   return (
     <div className={styles.container}>
       <Layout user={user}>
@@ -98,15 +103,35 @@ export default function AddProduct({ user }) {
                       <label>Product image</label>
                       {/* Big image input */}
                       <div className={styles.block}>
-                        <AddItemImg />
-                        <AddItemImg />
+                        <AddItemImg
+                          imgBlobs={imgBlobs}
+                          setImgBlobs={setImgBlobs}
+                          size="lg"
+                        />
+                        <AddItemImg
+                          imgBlobs={imgBlobs}
+                          setImgBlobs={setImgBlobs}
+                          size="lg"
+                        />
                       </div>
                       {/* Small image input */}
                       <div className={styles.img}>
                         <div className={styles.block}>
-                          <AddItemImg />
-                          <AddItemImg />
-                          <AddItemImg />
+                          <AddItemImg
+                            imgBlobs={imgBlobs}
+                            setImgBlobs={setImgBlobs}
+                            size="sm"
+                          />
+                          <AddItemImg
+                            imgBlobs={imgBlobs}
+                            setImgBlobs={setImgBlobs}
+                            size="sm"
+                          />
+                          <AddItemImg
+                            imgBlobs={imgBlobs}
+                            setImgBlobs={setImgBlobs}
+                            size="sm"
+                          />
                         </div>
                       </div>
                     </div>
