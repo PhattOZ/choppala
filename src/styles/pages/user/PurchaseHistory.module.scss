@@ -14,6 +14,10 @@
     .eachOrder__head {
       display: flex;
       justify-content: space-between;
+      font-weight: bold;
+      > span:nth-child(2) {
+        color: #3b7af4;
+      }
       // margin: 1rem 1.5rem 0 1.5rem;
     }
     .eachOrder__item {
@@ -26,9 +30,11 @@
 
       .eachOrder__image {
         place-self: center;
+        // margin-left: 1rem;
         position: relative;
         width: 5rem;
         height: 5rem;
+        // padding-right: 1rem;
       }
 
       > div:nth-child(3),
@@ -41,6 +47,7 @@
       // margin-top: -0.5rem;
       span {
         margin-left: 4rem;
+        font-weight: 450;
       }
     }
     .eachOrder__botton {

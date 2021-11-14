@@ -31,11 +31,16 @@
       .info__details {
         position: relative;
         flex: 1;
+        font-weight: bold;
+
         .info__name {
           padding-top: 0.5rem;
           display: flex;
           flex-wrap: wrap;
           column-gap: 4rem;
+          > div {
+            font-weight: normal;
+          }
         }
         > div:last-child {
           position: absolute;
@@ -49,12 +54,16 @@
       .address_details {
         position: relative;
         flex: 1;
+        > div {
+          font-weight: bold;
+        }
         .address_name {
           padding-top: 0.5rem;
           display: flex;
           flex-direction: column;
           column-gap: 10%;
           row-gap: 0.25rem;
+          font-weight: normal;
         }
         > div:last-child {
           position: absolute;
@@ -68,12 +77,15 @@
       .payment_details {
         position: relative;
         flex: 1;
+        font-weight: bold;
+
         .payment_method {
           padding-top: 0.5rem;
           display: flex;
           flex-direction: column;
           column-gap: 10%;
           row-gap: 0.25rem;
+          font-weight: normal;
 
           div {
             display: flex;
@@ -109,6 +121,7 @@
     flex-direction: column;
     padding: 1rem;
     row-gap: 1rem;
+    font-weight: bold;
     .order__details {
       position: relative;
       display: flex;
@@ -116,6 +129,7 @@
       column-gap: 0.5rem;
       padding-bottom: 1rem;
       border-bottom: 1px dotted black;
+      font-weight: normal;
       > div:first-child {
         position: relative;
         width: 3rem;
@@ -135,6 +149,7 @@
     .order__total {
       border-bottom: 1px dotted black;
       padding-bottom: 1rem;
+      font-weight: 450;
       span:last-child {
         float: right;
       }

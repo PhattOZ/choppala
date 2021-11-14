@@ -7,9 +7,11 @@ import dbConnect from "src/lib/dbConnect"
 import Link from "next/link"
 import CartContext from "src/lib/cart-context"
 import { useContext } from "react"
+import { useRouter } from "next/router"
 
 export default function ProductDetail({ product }) {
   const ctx = useContext(CartContext)
+  const router = useRouter()
   const cartHandler = (val) => {
     let { reviews, ...newProduct } = product
     newProduct = {
@@ -18,6 +20,11 @@ export default function ProductDetail({ product }) {
       quantity: val,
     }
     ctx.addToCart(newProduct)
+  }
+
+  const buynowHandler = (val) => {
+    cartHandler(val)
+    router.push("/cart")
   }
 
   return (
@@ -29,6 +36,7 @@ export default function ProductDetail({ product }) {
         /Search/{product.name}
       </div>
       <ProductBox
+        onClickBuynow={buynowHandler}
         onCartChange={cartHandler}
         productname={product.name}
         price={product.price}

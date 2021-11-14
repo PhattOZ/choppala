@@ -29,11 +29,18 @@ export default function Checkout({ data }) {
 
   const orderHandler = () => {
     ctx.orderItem(ItemFromCtx)
+    console.log("in orderHandler")
     setOrderModal(true)
   }
 
   return (
     <div className={styles.container}>
+      <OrderPopup
+        show={orderModal}
+        onClose={() => {
+          setOrderModal(false)
+        }}
+      />
       <div className={styles.main}>
         <div className={styles.info_container}>
           <FontAwesomeIcon
@@ -115,26 +122,18 @@ export default function Checkout({ data }) {
         <div className={styles.order__total}>
           <div>
             <span>Product total</span>
-            <span>${ctx.value.totalPrice}</span>
+            <span>฿{ctx.value.totalPrice}</span>
           </div>
           <div>
             <span>Delivery</span>
-            <span>$20</span>
+            <span>฿20</span>
           </div>
         </div>
         <div className={styles.order__bottomPart}>
           <div>
-            <span>ALL payment</span> <span>${ctx.value.totalPrice + 20}</span>
+            <span>ALL payment</span> <span>฿{ctx.value.totalPrice + 20}</span>
           </div>
-          <div onClick={orderHandler}>
-            Order now
-            <OrderPopup
-              show={orderModal}
-              onClose={() => {
-                setOrderModal(false)
-              }}
-            />
-          </div>
+          <div onClick={orderHandler}>Order now</div>
         </div>
       </div>
     </div>
@@ -149,7 +148,7 @@ const OrderList = ({ data }) => {
       </div>
       <div className={styles.order__details_flexbox}>
         <div>{data.name}</div>
-        <div>${data.price}</div>
+        <div>฿{data.price}</div>
       </div>
       <div>{data.quantity} each</div>
     </div>
