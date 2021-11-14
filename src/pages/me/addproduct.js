@@ -10,24 +10,24 @@ import { upload } from "src/lib/firebase"
 import AddItemImg from "src/components/AddItemImg"
 import { useState } from "react"
 
-function handleUpload(e) {
-  const [file] = e.target.files
-
-  if (file) {
-    const url = URL.createObjectURL(file)
-    setImgURL(url)
-  }
-
-  if (file) {
-    const filename = encodeURIComponent(file.name)
-    upload(filename, file)
-  }
-}
-
 export default function AddProduct({ user }) {
   const [imgBlobs, setImgBlobs] = useState([])
+  const initInputs = {
+    productName: "",
+    category: "",
+    price: "",
+    amount: "",
+    description: "",
+    images: [],
+  }
+  const [inputs, setInputs] = useState(initInputs)
 
-  console.log(imgBlobs)
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setInputs({ ...inputs, [name]: value })
+  }
+
+  const handleSubmit = (e) => {}
 
   return (
     <div className={styles.container}>
@@ -53,32 +53,60 @@ export default function AddProduct({ user }) {
                   <div className={styles.edit}>
                     <div className={styles.edit_section}>
                       <label>Product name</label>
-                      <input type="text" size="50" />
+                      <input
+                        type="text"
+                        size="50"
+                        name="productName"
+                        onChange={handleChange}
+                      />
                     </div>
                   </div>
                   {/* Row2 */}
                   <div className={styles.edit}>
                     <div className={styles.edit_section}>
                       <label htmlFor="">Category</label>
-                      <select id="cars" name="cars" size="1">
-                        <option>--Select--</option>
-                        <option>Accessories</option>
-                        <option>Food & Beverages</option>
-                        <option>Hobbies & Books</option>
-                        <option>Home Appliances</option>
-                        <option>Men Clothes</option>
-                        <option>Mobiles & Gadgets</option>
-                        <option>Sport & Outdoors</option>
-                        <option>Women Clothes</option>
+                      <select
+                        name="category"
+                        value={inputs.category}
+                        onChange={handleChange}
+                      >
+                        <option value="" disabled>
+                          --Select--
+                        </option>
+                        <option value="Accessories">Accessories</option>
+                        <option value="Food & Beverages">
+                          Food & Beverages
+                        </option>
+                        <option value="Hobbies & Books">Hobbies & Books</option>
+                        <option value="Home Appliances">Home Appliances</option>
+                        <option value="Men Clothes">Men Clothes</option>
+                        <option value="Mobiles & Gadget">
+                          Mobiles & Gadgets
+                        </option>
+                        <option value="Sport & Outdoors">
+                          Sport & Outdoors
+                        </option>
+                        <option value="Women Clothes">Women Clothes</option>
                       </select>
                     </div>
                     <div className={styles.edit_section}>
                       <label htmlFor="">Price</label>
-                      <input type="text" placeholder="Bath" size="7" />
+                      <input
+                        type="text"
+                        placeholder="Bath"
+                        size="7"
+                        name="price"
+                        onChange={handleChange}
+                      />
                     </div>
                     <div className={styles.edit_section}>
                       <label htmlFor="">Amount</label>
-                      <input type="number" placeholder="1" />
+                      <input
+                        type="number"
+                        placeholder="1"
+                        name="amount"
+                        onChange={handleChange}
+                      />
                     </div>
                   </div>
                   {/* Row3 */}
@@ -89,6 +117,8 @@ export default function AddProduct({ user }) {
                         id="txtboxMultiline"
                         cols="53"
                         rows="10"
+                        name="description"
+                        onChange={handleChange}
                         required
                       ></textarea>
                     </div>
