@@ -6,6 +6,22 @@ import Link from "next/link"
 import dbConnect from "src/lib/dbConnect"
 import User from "src/models/User"
 import { getSession } from "next-auth/react"
+import { upload } from "src/lib/firebase"
+import AddItemImg from "src/components/AddItemImg"
+
+function handleUpload(e) {
+  const [file] = e.target.files
+
+  if (file) {
+    const url = URL.createObjectURL(file)
+    setImgURL(url)
+  }
+
+  if (file) {
+    const filename = encodeURIComponent(file.name)
+    upload(filename, file)
+  }
+}
 
 export default function AddProduct({ user }) {
   return (
@@ -30,57 +46,47 @@ export default function AddProduct({ user }) {
                 <div className={styles.body_table}>
                   {/* Row1 */}
                   <div className={styles.edit}>
-                    <form>
-                      <div className={styles.edit_section}>
-                        <label>Product name</label>
-                        <input type="text" size="50" />
-                      </div>
-                    </form>
+                    <div className={styles.edit_section}>
+                      <label>Product name</label>
+                      <input type="text" size="50" />
+                    </div>
                   </div>
                   {/* Row2 */}
                   <div className={styles.edit}>
-                    <form>
-                      <div className={styles.edit_section}>
-                        <label htmlFor="">Category</label>
-                        <select id="cars" name="cars" size="1">
-                          <option>--Select--</option>
-                          <option>Accessories</option>
-                          <option>Food & Beverages</option>
-                          <option>Hobbies & Books</option>
-                          <option>Home Appliances</option>
-                          <option>Men Clothes</option>
-                          <option>Mobiles & Gadgets</option>
-                          <option>Sport & Outdoors</option>
-                          <option>Women Clothes</option>
-                        </select>
-                      </div>
-                    </form>
-                    <form>
-                      <div className={styles.edit_section}>
-                        <label htmlFor="">Price</label>
-                        <input type="text" placeholder="Bath" size="7" />
-                      </div>
-                    </form>
-                    <form>
-                      <div className={styles.edit_section}>
-                        <label htmlFor="">Amount</label>
-                        <input type="number" placeholder="1" />
-                      </div>
-                    </form>
+                    <div className={styles.edit_section}>
+                      <label htmlFor="">Category</label>
+                      <select id="cars" name="cars" size="1">
+                        <option>--Select--</option>
+                        <option>Accessories</option>
+                        <option>Food & Beverages</option>
+                        <option>Hobbies & Books</option>
+                        <option>Home Appliances</option>
+                        <option>Men Clothes</option>
+                        <option>Mobiles & Gadgets</option>
+                        <option>Sport & Outdoors</option>
+                        <option>Women Clothes</option>
+                      </select>
+                    </div>
+                    <div className={styles.edit_section}>
+                      <label htmlFor="">Price</label>
+                      <input type="text" placeholder="Bath" size="7" />
+                    </div>
+                    <div className={styles.edit_section}>
+                      <label htmlFor="">Amount</label>
+                      <input type="number" placeholder="1" />
+                    </div>
                   </div>
                   {/* Row3 */}
                   <div className={styles.edit}>
-                    <form>
-                      <div className={styles.edit_section}>
-                        <label htmlFor="">Description</label>
-                        <textarea
-                          id="txtboxMultiline"
-                          cols="53"
-                          rows="10"
-                          required
-                        ></textarea>
-                      </div>
-                    </form>
+                    <div className={styles.edit_section}>
+                      <label htmlFor="">Description</label>
+                      <textarea
+                        id="txtboxMultiline"
+                        cols="53"
+                        rows="10"
+                        required
+                      ></textarea>
+                    </div>
                   </div>
                 </div>
 
@@ -89,92 +95,18 @@ export default function AddProduct({ user }) {
                   {/* Row1 */}
                   <div className={styles.edit}>
                     <div className={styles.edit_section_image}>
-                      <label htmlFor="">Product image</label>
-                      {/* Big Image */}
+                      <label>Product image</label>
+                      {/* Big image input */}
                       <div className={styles.block}>
-                        <form>
-                          <input
-                            type="file"
-                            id="file-input"
-                            name="myImage"
-                            accept="image/x-png,image/gif,image/jpeg"
-                          />
-                          <label htmlFor="file-input">
-                            <FontAwesomeIcon
-                              icon={faImage}
-                              size="2x"
-                              color="#8B8EA1"
-                            />
-                            Add image
-                          </label>
-                        </form>
-                        <form>
-                          <input
-                            type="file"
-                            id="file-input"
-                            name="myImage"
-                            accept="image/x-png,image/gif,image/jpeg"
-                          />
-                          <label htmlFor="file-input">
-                            <FontAwesomeIcon
-                              icon={faImage}
-                              size="2x"
-                              color="#8B8EA1"
-                            />
-                            Add image
-                          </label>
-                        </form>
+                        <AddItemImg />
+                        <AddItemImg />
                       </div>
+                      {/* Small image input */}
                       <div className={styles.img}>
                         <div className={styles.block}>
-                          <form>
-                            <input
-                              type="file"
-                              id="file-input"
-                              name="myImage"
-                              accept="image/x-png,image/gif,image/jpeg"
-                            />
-                            <label htmlFor="file-input">
-                              <FontAwesomeIcon
-                                icon={faImage}
-                                size="2x"
-                                color="#8B8EA1"
-                              />
-                              Add image
-                            </label>
-                          </form>
-                          <form>
-                            <input
-                              type="file"
-                              id="file-input"
-                              name="myImage"
-                              accept="image/x-png,image/gif,image/jpeg"
-                            />
-                            <label htmlFor="file-input">
-                              <FontAwesomeIcon
-                                icon={faImage}
-                                size="2x"
-                                color="#8B8EA1"
-                              />
-                              Add image
-                            </label>
-                          </form>
-                          <form>
-                            <input
-                              type="file"
-                              id="file-input"
-                              name="myImage"
-                              accept="image/x-png,image/gif,image/jpeg"
-                            />
-                            <label htmlFor="file-input">
-                              <FontAwesomeIcon
-                                icon={faImage}
-                                size="2x"
-                                color="#8B8EA1"
-                              />
-                              Add image
-                            </label>
-                          </form>
+                          <AddItemImg />
+                          <AddItemImg />
+                          <AddItemImg />
                         </div>
                       </div>
                     </div>
