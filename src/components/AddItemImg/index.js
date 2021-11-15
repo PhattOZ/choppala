@@ -92,7 +92,7 @@ function CropImgPopup({
 
 // ----------------------------------------------------------------------
 
-export default function AddItemImg({ handleImgUpload, size }) {
+export default function AddItemImg({ handleImgUpload, size, no }) {
   const upImgStyle = size === "lg" ? styles.canvasLg : styles.canvasSm
   const [isPopup, setIsPopup] = useState(false)
   const [upImg, setUpImg] = useState()
@@ -136,7 +136,7 @@ export default function AddItemImg({ handleImgUpload, size }) {
 
     canvas.toBlob(
       (blob) => {
-        handleImgUpload(blob)
+        handleImgUpload(blob, no)
       },
       "image/jpeg",
       1
@@ -165,10 +165,10 @@ export default function AddItemImg({ handleImgUpload, size }) {
               type="file"
               onChange={onSelectFile}
               accept="image/png, image/jpeg"
-              id="file-input"
+              id={no}
               name="myImage"
             />
-            <label htmlFor="file-input">
+            <label htmlFor={no}>
               <FontAwesomeIcon icon={faImage} size="2x" color="#8B8EA1" />
               Add image
             </label>

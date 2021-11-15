@@ -20,7 +20,6 @@ export default function AddProduct({ user }) {
     price: "",
     amount: "",
     description: "",
-    images: [],
   }
   const [inputs, setInputs] = useState(initInputs)
 
@@ -29,8 +28,12 @@ export default function AddProduct({ user }) {
     setInputs({ ...inputs, [name]: value })
   }
 
-  const handleImgUpload = (blob) => {
-    setImgBlobs([...imgBlobs, blob])
+  const handleImgUpload = (blob, index) => {
+    setImgBlobs((prev) => {
+      const newArrayBlobs = [...prev]
+      newArrayBlobs[index] = blob
+      return newArrayBlobs
+    })
   }
 
   const handleSubmit = async (e) => {
@@ -154,10 +157,12 @@ export default function AddProduct({ user }) {
                         <AddItemImg
                           handleImgUpload={handleImgUpload}
                           size="lg"
+                          no="0"
                         />
                         <AddItemImg
                           handleImgUpload={handleImgUpload}
                           size="lg"
+                          no="1"
                         />
                       </div>
                       {/* Small image input */}
@@ -166,14 +171,17 @@ export default function AddProduct({ user }) {
                           <AddItemImg
                             handleImgUpload={handleImgUpload}
                             size="sm"
+                            no="2"
                           />
                           <AddItemImg
                             handleImgUpload={handleImgUpload}
                             size="sm"
+                            no="3"
                           />
                           <AddItemImg
                             handleImgUpload={handleImgUpload}
                             size="sm"
+                            no="4"
                           />
                         </div>
                       </div>
