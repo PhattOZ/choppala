@@ -92,7 +92,7 @@ function CropImgPopup({
 
 // ----------------------------------------------------------------------
 
-export default function AddItemImg({ imgBlobs, setImgBlobs, size }) {
+export default function AddItemImg({ handleImgUpload, size }) {
   const upImgStyle = size === "lg" ? styles.canvasLg : styles.canvasSm
   const [isPopup, setIsPopup] = useState(false)
   const [upImg, setUpImg] = useState()
@@ -136,7 +136,7 @@ export default function AddItemImg({ imgBlobs, setImgBlobs, size }) {
 
     canvas.toBlob(
       (blob) => {
-        setImgBlobs([...imgBlobs, blob])
+        handleImgUpload(blob)
       },
       "image/jpeg",
       1

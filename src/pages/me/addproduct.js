@@ -27,6 +27,10 @@ export default function AddProduct({ user }) {
     setInputs({ ...inputs, [name]: value })
   }
 
+  const handleImgUpload = (blob) => {
+    setImgBlobs([...imgBlobs, blob])
+  }
+
   const handleSubmit = (e) => {}
 
   return (
@@ -134,13 +138,11 @@ export default function AddProduct({ user }) {
                       {/* Big image input */}
                       <div className={styles.block}>
                         <AddItemImg
-                          imgBlobs={imgBlobs}
-                          setImgBlobs={setImgBlobs}
+                          handleImgUpload={handleImgUpload}
                           size="lg"
                         />
                         <AddItemImg
-                          imgBlobs={imgBlobs}
-                          setImgBlobs={setImgBlobs}
+                          handleImgUpload={handleImgUpload}
                           size="lg"
                         />
                       </div>
@@ -148,18 +150,15 @@ export default function AddProduct({ user }) {
                       <div className={styles.img}>
                         <div className={styles.block}>
                           <AddItemImg
-                            imgBlobs={imgBlobs}
-                            setImgBlobs={setImgBlobs}
+                            handleImgUpload={handleImgUpload}
                             size="sm"
                           />
                           <AddItemImg
-                            imgBlobs={imgBlobs}
-                            setImgBlobs={setImgBlobs}
+                            handleImgUpload={handleImgUpload}
                             size="sm"
                           />
                           <AddItemImg
-                            imgBlobs={imgBlobs}
-                            setImgBlobs={setImgBlobs}
+                            handleImgUpload={handleImgUpload}
                             size="sm"
                           />
                         </div>
