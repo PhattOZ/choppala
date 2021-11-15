@@ -9,8 +9,10 @@ import { getSession } from "next-auth/react"
 import { upload } from "src/lib/firebase"
 import AddItemImg from "src/components/AddItemImg"
 import { useState } from "react"
+import { useRouter } from "next/router"
 
 export default function AddProduct({ user }) {
+  const router = useRouter()
   const [imgBlobs, setImgBlobs] = useState([])
   const initInputs = {
     productName: "",
@@ -31,7 +33,19 @@ export default function AddProduct({ user }) {
     setImgBlobs([...imgBlobs, blob])
   }
 
-  const handleSubmit = (e) => {}
+  const handleSubmit = async (e) => {
+    const res = await fetch("/api/item", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(inputs),
+    })
+
+    if (res.ok) {
+      router.push("/me/yourproduct")
+    }
+  }
 
   return (
     <div className={styles.container}>
@@ -170,9 +184,9 @@ export default function AddProduct({ user }) {
               {/* Button */}
               <div className={styles.button_wrapper}>
                 <div className={styles.cancelBtn}>Cancel</div>
-                <Link href="/me/youritem" passHref>
-                  <div className={styles.addBtn}>Add product</div>
-                </Link>
+                <div className={styles.addBtn} onClick={handleSubmit}>
+                  Add product
+                </div>
                 {/* <div className={styles.deleteBtn}>Delete</div> */}
               </div>
             </section>
