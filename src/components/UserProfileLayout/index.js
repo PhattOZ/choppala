@@ -38,13 +38,7 @@ function Sidebar({ user }) {
     <div className={styles.sidebar}>
       <div className={styles.sidebar_header}>
         <div className={styles.sidebar_user_img}>
-          <Image
-            src={user.image}
-            layout="fill"
-            objectFit="cover"
-            alt=""
-            userimage
-          />
+          <Image src={user.image} layout="fill" objectFit="cover" alt="" />
         </div>
         <div>
           <div className={styles.bold}>{user.name}</div>
