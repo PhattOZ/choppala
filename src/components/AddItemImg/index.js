@@ -20,14 +20,14 @@ function useLockBodyScroll() {
 
 function CropImgPopup({
   upImg,
-  setUpImg,
   crop,
   setCrop,
   completedCrop,
   setCompletedCrop,
   setFinalCrop,
   imgRef,
-  setIsPopup,
+  onCancelCrop,
+  onSave,
 }) {
   // Call hook to lock body scroll
   useLockBodyScroll()
@@ -69,18 +69,12 @@ function CropImgPopup({
           <button
             className="save"
             onClick={() => {
-              setFinalCrop(completedCrop)
-              setIsPopup(false)
+              onSave(completedCrop)
             }}
           >
             Save
           </button>
-          <button
-            className="cancel"
-            onClick={() => {
-              setIsPopup(false)
-            }}
-          >
+          <button className="cancel" onClick={onCancelCrop}>
             Cancel
           </button>
         </div>
@@ -92,13 +86,14 @@ function CropImgPopup({
 
 // ----------------------------------------------------------------------
 
-export default function AddItemImg({ handleImgUpload, size, no }) {
+export default function AddItemImg({ handleFileSync, size, index }) {
   const upImgStyle = size === "lg" ? styles.canvasLg : styles.canvasSm
   const [isPopup, setIsPopup] = useState(false)
   const [upImg, setUpImg] = useState()
   const [crop, setCrop] = useState()
   const [completedCrop, setCompletedCrop] = useState(null)
   const [finalCrop, setFinalCrop] = useState()
+  const [filename, setFilename] = useState("")
   const imgRef = useRef(null)
   const canvasRef = useRef(null)
 
@@ -136,7 +131,8 @@ export default function AddItemImg({ handleImgUpload, size, no }) {
 
     canvas.toBlob(
       (blob) => {
-        handleImgUpload(blob, no)
+        blob.name = filename
+        handleFileSync(blob, index)
       },
       "image/jpeg",
       1
@@ -145,11 +141,23 @@ export default function AddItemImg({ handleImgUpload, size, no }) {
 
   const onSelectFile = (e) => {
     if (e.target.files && e.target.files.length > 0) {
+      const file = e.target.files[0]
       const reader = new FileReader()
-      reader.readAsDataURL(e.target.files[0])
+      reader.readAsDataURL(file)
       reader.addEventListener("load", () => setUpImg(reader.result))
+      setFilename(file.name)
       setIsPopup(true)
     }
+  }
+
+  const handleCancelCrop = () => {
+    setIsPopup(false)
+    setFilename("")
+  }
+
+  const handleConfirmCrop = (crop) => {
+    setIsPopup(false)
+    setFinalCrop(crop)
   }
 
   return (
@@ -165,10 +173,10 @@ export default function AddItemImg({ handleImgUpload, size, no }) {
               type="file"
               onChange={onSelectFile}
               accept="image/png, image/jpeg"
-              id={no}
+              id={index}
               name="myImage"
             />
-            <label htmlFor={no}>
+            <label htmlFor={index}>
               <FontAwesomeIcon icon={faImage} size="2x" color="#8B8EA1" />
               Add image
             </label>
@@ -176,14 +184,14 @@ export default function AddItemImg({ handleImgUpload, size, no }) {
           {isPopup ? (
             <CropImgPopup
               upImg={upImg}
-              setUpImg={setUpImg}
               crop={crop}
               setCrop={setCrop}
               completedCrop={completedCrop}
               setCompletedCrop={setCompletedCrop}
               setFinalCrop={setFinalCrop}
               imgRef={imgRef}
-              setIsPopup={setIsPopup}
+              onCancelCrop={handleCancelCrop}
+              onSave={handleConfirmCrop}
             />
           ) : null}
         </>

@@ -6,7 +6,8 @@ import Link from "next/link"
 import dbConnect from "src/lib/dbConnect"
 import User from "src/models/User"
 import { getSession } from "next-auth/react"
-import { upload } from "src/lib/firebase"
+import { storageRef } from "src/lib/firebase"
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
 import AddItemImg from "src/components/AddItemImg"
 import { useState } from "react"
 import { useRouter } from "next/router"
@@ -14,21 +15,20 @@ import { useRouter } from "next/router"
 export default function AddProduct({ user }) {
   const router = useRouter()
   const [imgBlobs, setImgBlobs] = useState([])
-  const initInputs = {
+  const [inputs, setInputs] = useState({
     productName: "",
     category: "",
     price: "",
     amount: "",
     description: "",
-  }
-  const [inputs, setInputs] = useState(initInputs)
+  })
 
   const handleChange = (e) => {
     const { name, value } = e.target
     setInputs({ ...inputs, [name]: value })
   }
 
-  const handleImgUpload = (blob, index) => {
+  const handleFileSync = (blob, index) => {
     setImgBlobs((prev) => {
       const newArrayBlobs = [...prev]
       newArrayBlobs[index] = blob
@@ -36,17 +36,38 @@ export default function AddProduct({ user }) {
     })
   }
 
-  const handleSubmit = async (e) => {
-    const res = await fetch("/api/item", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(inputs),
-    })
+  const handleSubmit = async () => {
+    // Needs validation !!!!!!!!!!!!!!
 
-    if (res.ok) {
-      router.push("/me/yourproduct")
+    const imgUrls = []
+
+    if (imgBlobs.length) {
+      await Promise.all(
+        imgBlobs.map(async (blob) => {
+          if (blob) {
+            const filename = blob.name
+            const fullname = new Date().getTime().toString() + "-" + filename
+            const fileRef = ref(storageRef, `/${fullname}`)
+
+            const snapshot = await uploadBytes(fileRef, blob)
+            const url = await getDownloadURL(snapshot.ref)
+
+            imgUrls.push(url)
+          }
+        })
+      )
+
+      const res = await fetch("/api/item", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ ...inputs, imgUrls: imgUrls }),
+      })
+
+      if (res.ok) {
+        router.push("/me/yourproduct")
+      }
     }
   }
 
@@ -155,33 +176,33 @@ export default function AddProduct({ user }) {
                       {/* Big image input */}
                       <div className={styles.block}>
                         <AddItemImg
-                          handleImgUpload={handleImgUpload}
+                          handleFileSync={handleFileSync}
                           size="lg"
-                          no="0"
+                          index={0}
                         />
                         <AddItemImg
-                          handleImgUpload={handleImgUpload}
+                          handleFileSync={handleFileSync}
                           size="lg"
-                          no="1"
+                          index={1}
                         />
                       </div>
                       {/* Small image input */}
                       <div className={styles.img}>
                         <div className={styles.block}>
                           <AddItemImg
-                            handleImgUpload={handleImgUpload}
+                            handleFileSync={handleFileSync}
                             size="sm"
-                            no="2"
+                            index={2}
                           />
                           <AddItemImg
-                            handleImgUpload={handleImgUpload}
+                            handleFileSync={handleFileSync}
                             size="sm"
-                            no="3"
+                            index={3}
                           />
                           <AddItemImg
-                            handleImgUpload={handleImgUpload}
+                            handleFileSync={handleFileSync}
                             size="sm"
-                            no="4"
+                            index={4}
                           />
                         </div>
                       </div>

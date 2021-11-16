@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app"
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage"
+import { getStorage } from "firebase/storage"
 
 // Firebase configuration
 const firebaseConfig = {
@@ -15,14 +15,4 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig)
 
 // Connect to root storage
-const storage = getStorage(firebaseApp)
-
-export const upload = (filename, file) => {
-  const fullname = new Date().getTime().toString() + "-" + filename
-  const storageRef = ref(storage, `/${fullname}`)
-  uploadBytes(storageRef, file).then(({ ref }) => {
-    getDownloadURL(ref).then((url) => {
-      console.log("url: " + url)
-    })
-  })
-}
+export const storageRef = getStorage(firebaseApp)
