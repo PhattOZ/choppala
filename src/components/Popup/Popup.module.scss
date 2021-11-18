@@ -8,6 +8,7 @@ $lightblue: #dbe6fd;
 
 .container {
   background-color: rgb(0, 0, 0, 0.6);
+  background-attachment: fixed;
   position: fixed;
   top: 0;
   bottom: 0;
@@ -21,14 +22,13 @@ $lightblue: #dbe6fd;
 
 .modal {
   display: flex;
-  width: 24rem;
   flex-direction: column;
   background-color: #fff;
   border-radius: 0.75rem;
   padding: 1rem;
-  padding-bottom: 2rem;
   margin-bottom: auto;
-  margin-top: auto;
+  margin-top: auto;  
+  width: 27rem;
 }
 
 .header {
@@ -46,13 +46,12 @@ $lightblue: #dbe6fd;
 }
 
 .title {
-  font-size: 1.25rem;
+  font-size: 1.325rem;
   font-weight: 600;
-  color: $blue;
 }
 
 .subtitle {
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: 600;
   color: $grey100;
 }
@@ -65,6 +64,7 @@ $lightblue: #dbe6fd;
   font-size: 0.9rem;
   color: $grey70;
   text-align: center;
+  overflow: hidden;
 }
 
 .button_wrapper {
@@ -73,6 +73,7 @@ $lightblue: #dbe6fd;
   column-gap: 1rem;
 }
 
+//===================== Delete Button =====================
 .deleteBtn {
   display: flex;
   justify-content: center;
@@ -104,6 +105,62 @@ $lightblue: #dbe6fd;
 }
 
 .cancelBtn:hover {
+  background-color: $grey45;
+  color: white;
+  cursor: pointer;
+}
+
+//===================== Warn Button =====================
+.stayBtn {
+  display: flex;
+  justify-content: center;
+  column-gap: 0.4rem;
+  width: 12rem;
+  padding: 0.5rem 2rem;
+  background-color: $blue;
+  color: white;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+}
+
+.stayBtn:hover {
+  background-color: $grey45;
+  color: white;
+  cursor: pointer;
+}
+
+.leaveBtn {
+  display: flex;
+  justify-content: center;
+  column-gap: 0.4rem;
+  width: 12rem;
+  padding: 0.5rem 2rem;
+  background-color: $lightblue;
+  color: $blue;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+}
+
+.leaveBtn:hover {
+  background-color: $red20;
+  color: $red;
+  cursor: pointer;
+}
+
+//===================== Warn Button =====================
+.actionBtn {
+  display: flex;
+  justify-content: center;
+  column-gap: 0.4rem;
+  width: 25rem;
+  padding: 0.6rem 2rem;
+  background-color: $blue;
+  color: white;
+  border-radius: 0.25rem;
+  font-size: 1.1rem;
+}
+
+.actionBtn:hover {
   background-color: $grey45;
   color: white;
   cursor: pointer;
