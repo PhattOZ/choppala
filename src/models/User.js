@@ -59,6 +59,18 @@ const UserSchema = new mongoose.Schema({
       ],
     },
   ],
+  purchaseHistory: [
+    {
+      itemID: String,
+      name: String,
+      image: String,
+      price: Number,
+      sellerName: String,
+      quantity: Number,
+      isRating: { type: Boolean, default: false },
+      orderAt: { type: Date, default: Date.now },
+    },
+  ],
 })
 
 module.exports = mongoose.models.User || mongoose.model("User", UserSchema)

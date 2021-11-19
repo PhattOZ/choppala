@@ -17,13 +17,16 @@ export default function UserMenu() {
   const { data: session, status } = useSession()
   const [isHamburgerActive, setIsHamburgerActive] = useState(false)
   const ctx = useContext(CartContext)
-
   const toggleHamburger = () => {
     setIsHamburgerActive(!isHamburgerActive)
   }
   let sum = 0
   if (ctx.value.cart.length > 0) {
-    ctx.value.cart.map((item) => (sum += item.quantity))
+    ctx.value.cart.map((item) => {
+      if (item.isConfirm == true) {
+        sum += item.quantity
+      }
+    })
   }
 
   // if (status === "loading") {

@@ -5,7 +5,6 @@ import { useContext, useState } from "react"
 import Image from "next/image"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons"
-import { useCallback } from "react"
 
 const transfromCart = (data) => {
   let cartItem = []
@@ -74,9 +73,13 @@ export default function Cart() {
           <div>Order Summary</div>
           <div className={styles.total_price}>
             <span>total</span>
-            <span>{ctx.value.totalPrice}</span>
+            <span>฿{ctx.value.totalPrice}</span>
           </div>
-          <div className={styles.process_btn}>process to order</div>
+          <Link href="/checkout">
+            <a>
+              <div className={styles.process_btn}>process to order</div>
+            </a>
+          </Link>
         </div>
       </div>
     </div>
@@ -146,7 +149,7 @@ const Item = ({ item }) => {
           </div>
           <span className={styles.each_item__name}>{item.name}</span>
         </div>
-        <div className={styles.each_item__price}>${item.price}</div>
+        <div className={styles.each_item__price}>฿{item.price}</div>
         <div className={styles.each_item__quantity}>
           <button
             className={styles.btncountdec}
@@ -165,7 +168,7 @@ const Item = ({ item }) => {
           </button>
         </div>
         <div className={styles.each_item__subTotal}>
-          <div>{item.price * item.quantity}</div>
+          <div>฿{item.price * item.quantity}</div>
           <FontAwesomeIcon
             icon={faTrashAlt}
             size={"lg"}
