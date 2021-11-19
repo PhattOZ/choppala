@@ -1,0 +1,106 @@
+$grey45: #a8aabc;
+$grey70: #8b8ea1;
+$grey100: #444655;
+$red: #ff1f00;
+$red20: #ffd2cc;
+$blue: #4585ff;
+$lightblue: #dbe6fd;
+
+.container {
+  background-color: rgb(0, 0, 0, 0.6);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  z-index: 9999;
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: 0.75rem;
+  width: 24rem;
+  padding: 1rem;
+  padding-bottom: 2rem;
+  margin-bottom: auto;
+  margin-top: auto;
+}
+
+.header {
+  display: flex;
+  justify-content: flex-end;
+  align-content: flex-end;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  align-content: center;
+  align-items: center;
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: $red;
+}
+
+.subtitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: $grey100;
+}
+
+.icon {
+  cursor: pointer;
+}
+
+.textinfo {
+  font-size: 0.9rem;
+  color: $grey70;
+  text-align: center;
+}
+
+.button_wrapper {
+  display: flex;
+  justify-content: center;
+  column-gap: 1rem;
+}
+
+.cancelBtn {
+  display: flex;
+  justify-content: center;
+  column-gap: 0.4rem;
+  width: 12rem;
+  padding: 0.5rem 2rem;
+  background-color: $lightblue;
+  color: $blue;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+}
+
+.cancelBtn:hover {
+  background-color: $grey45;
+  color: white;
+  cursor: pointer;
+}
+
+.canvasLg {
+  width: 14rem;
+  height: 14rem;
+  border: 2px dashed $grey45;
+  border-radius: 0.25rem;
+}
+
+.canvasSm {
+  width: 9rem;
+  height: 9rem;
+  border: 2px dashed $grey45;
+  border-radius: 0.25rem;
+}

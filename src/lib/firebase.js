@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app"
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage"
+import { getStorage } from "firebase/storage"
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
 
 // Firebase configuration
 const firebaseConfig = {
@@ -11,18 +12,21 @@ const firebaseConfig = {
   appId: "1:207614988549:web:72805892f528d012dd276c",
 }
 
-// Initialize Firebase
-const firebaseApp = initializeApp(firebaseConfig)
-
-// Connect to root storage
-const storage = getStorage(firebaseApp)
-
-export const upload = (filename, file) => {
-  const fullname = new Date().getTime().toString() + "-" + filename
-  const storageRef = ref(storage, `/${fullname}`)
-  uploadBytes(storageRef, file).then(({ ref }) => {
-    getDownloadURL(ref).then((url) => {
-      console.log("url: " + url)
+export default async function createImgUrls(imgBlobs) {
+  const firebaseApp = initializeApp(firebaseConfig) // Initialize Firebase
+  const storageRef = getStorage(firebaseApp) // Connect to root storage
+  const imgUrls = []
+  await Promise.all(
+    imgBlobs.map(async (blob) => {
+      if (blob) {
+        const filename = blob.name
+        const fullname = new Date().getTime().toString() + "-" + filename
+        const fileRef = ref(storageRef, `/${fullname}`)
+        const snapshot = await uploadBytes(fileRef, blob)
+        const url = await getDownloadURL(snapshot.ref)
+        imgUrls.push(url)
+      }
     })
-  })
+  )
+  return imgUrls
 }

@@ -1,13 +1,64 @@
+// Styles
 import Layout from "src/components/UserProfileLayout"
 import styles from "src/styles/pages/user/AddProduct.module.scss"
+// FontAwesome lib
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faChevronCircleLeft, faImage } from "@fortawesome/free-solid-svg-icons"
-import Link from "next/link"
-import dbConnect from "src/lib/dbConnect"
-import User from "src/models/User"
+// React, Next lib
+import { useState } from "react"
+import { useRouter } from "next/router"
 import { getSession } from "next-auth/react"
+import Link from "next/link"
+// Custom lib
+import dbConnect from "src/lib/dbConnect"
+import createImgUrls from "src/lib/firebase"
+// Model
+import User from "src/models/User"
+// Component
+import AddItemImg from "src/components/AddItemImg"
 
 export default function AddProduct({ user }) {
+  const router = useRouter()
+  const [imgBlobs, setImgBlobs] = useState([])
+  const [inputs, setInputs] = useState({
+    name: "",
+    category: "",
+    price: "",
+    amount: "",
+    detail: "",
+  })
+
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setInputs({ ...inputs, [name]: value })
+  }
+
+  const handleFileSync = (blob, index) => {
+    setImgBlobs((prev) => {
+      const newArrayBlobs = [...prev]
+      newArrayBlobs[index] = blob
+      return newArrayBlobs
+    })
+  }
+
+  const handleSubmit = async () => {
+    // Needs validation !!!!!!!!!!!!!!
+    if (imgBlobs.length) {
+      const imgUrls = await createImgUrls(imgBlobs)
+      const res = await fetch("/api/item", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ ...inputs, images: imgUrls }),
+      })
+
+      if (res.ok) {
+        router.push("/me/yourproduct")
+      }
+    }
+  }
+
   return (
     <div className={styles.container}>
       <Layout user={user}>
@@ -30,57 +81,77 @@ export default function AddProduct({ user }) {
                 <div className={styles.body_table}>
                   {/* Row1 */}
                   <div className={styles.edit}>
-                    <form>
-                      <div className={styles.edit_section}>
-                        <label>Product name</label>
-                        <input type="text" size="50" />
-                      </div>
-                    </form>
+                    <div className={styles.edit_section}>
+                      <label>Product name</label>
+                      <input
+                        type="text"
+                        size="50"
+                        name="name"
+                        onChange={handleChange}
+                      />
+                    </div>
                   </div>
                   {/* Row2 */}
                   <div className={styles.edit}>
-                    <form>
-                      <div className={styles.edit_section}>
-                        <label htmlFor="">Category</label>
-                        <select id="cars" name="cars" size="1">
-                          <option>--Select--</option>
-                          <option>Accessories</option>
-                          <option>Food & Beverages</option>
-                          <option>Hobbies & Books</option>
-                          <option>Home Appliances</option>
-                          <option>Men Clothes</option>
-                          <option>Mobiles & Gadgets</option>
-                          <option>Sport & Outdoors</option>
-                          <option>Women Clothes</option>
-                        </select>
-                      </div>
-                    </form>
-                    <form>
-                      <div className={styles.edit_section}>
-                        <label htmlFor="">Price</label>
-                        <input type="text" placeholder="Bath" size="7" />
-                      </div>
-                    </form>
-                    <form>
-                      <div className={styles.edit_section}>
-                        <label htmlFor="">Amount</label>
-                        <input type="number" placeholder="1" />
-                      </div>
-                    </form>
+                    <div className={styles.edit_section}>
+                      <label htmlFor="">Category</label>
+                      <select
+                        name="category"
+                        value={inputs.category}
+                        onChange={handleChange}
+                      >
+                        <option value="" disabled>
+                          --Select--
+                        </option>
+                        <option value="Accessories">Accessories</option>
+                        <option value="Food & Beverages">
+                          Food & Beverages
+                        </option>
+                        <option value="Hobbies & Books">Hobbies & Books</option>
+                        <option value="Home Appliances">Home Appliances</option>
+                        <option value="Men Clothes">Men Clothes</option>
+                        <option value="Mobiles & Gadget">
+                          Mobiles & Gadgets
+                        </option>
+                        <option value="Sport & Outdoors">
+                          Sport & Outdoors
+                        </option>
+                        <option value="Women Clothes">Women Clothes</option>
+                      </select>
+                    </div>
+                    <div className={styles.edit_section}>
+                      <label htmlFor="">Price</label>
+                      <input
+                        type="number"
+                        placeholder="Bath"
+                        size="7"
+                        name="price"
+                        onChange={handleChange}
+                      />
+                    </div>
+                    <div className={styles.edit_section}>
+                      <label htmlFor="">Amount</label>
+                      <input
+                        type="number"
+                        placeholder="1"
+                        name="amount"
+                        onChange={handleChange}
+                      />
+                    </div>
                   </div>
                   {/* Row3 */}
                   <div className={styles.edit}>
-                    <form>
-                      <div className={styles.edit_section}>
-                        <label htmlFor="">Description</label>
-                        <textarea
-                          id="txtboxMultiline"
-                          cols="53"
-                          rows="10"
-                          required
-                        ></textarea>
-                      </div>
-                    </form>
+                    <div className={styles.edit_section}>
+                      <label htmlFor="">Description</label>
+                      <textarea
+                        id="txtboxMultiline"
+                        cols="53"
+                        rows="10"
+                        name="detail"
+                        onChange={handleChange}
+                        required
+                      ></textarea>
+                    </div>
                   </div>
                 </div>
 
@@ -89,92 +160,38 @@ export default function AddProduct({ user }) {
                   {/* Row1 */}
                   <div className={styles.edit}>
                     <div className={styles.edit_section_image}>
-                      <label htmlFor="">Product image</label>
-                      {/* Big Image */}
+                      <label>Product image</label>
+                      {/* Big image input */}
                       <div className={styles.block}>
-                        <form>
-                          <input
-                            type="file"
-                            id="file-input"
-                            name="myImage"
-                            accept="image/x-png,image/gif,image/jpeg"
-                          />
-                          <label htmlFor="file-input">
-                            <FontAwesomeIcon
-                              icon={faImage}
-                              size="2x"
-                              color="#8B8EA1"
-                            />
-                            Add image
-                          </label>
-                        </form>
-                        <form>
-                          <input
-                            type="file"
-                            id="file-input"
-                            name="myImage"
-                            accept="image/x-png,image/gif,image/jpeg"
-                          />
-                          <label htmlFor="file-input">
-                            <FontAwesomeIcon
-                              icon={faImage}
-                              size="2x"
-                              color="#8B8EA1"
-                            />
-                            Add image
-                          </label>
-                        </form>
+                        <AddItemImg
+                          handleFileSync={handleFileSync}
+                          size="lg"
+                          index={0}
+                        />
+                        <AddItemImg
+                          handleFileSync={handleFileSync}
+                          size="lg"
+                          index={1}
+                        />
                       </div>
+                      {/* Small image input */}
                       <div className={styles.img}>
                         <div className={styles.block}>
-                          <form>
-                            <input
-                              type="file"
-                              id="file-input"
-                              name="myImage"
-                              accept="image/x-png,image/gif,image/jpeg"
-                            />
-                            <label htmlFor="file-input">
-                              <FontAwesomeIcon
-                                icon={faImage}
-                                size="2x"
-                                color="#8B8EA1"
-                              />
-                              Add image
-                            </label>
-                          </form>
-                          <form>
-                            <input
-                              type="file"
-                              id="file-input"
-                              name="myImage"
-                              accept="image/x-png,image/gif,image/jpeg"
-                            />
-                            <label htmlFor="file-input">
-                              <FontAwesomeIcon
-                                icon={faImage}
-                                size="2x"
-                                color="#8B8EA1"
-                              />
-                              Add image
-                            </label>
-                          </form>
-                          <form>
-                            <input
-                              type="file"
-                              id="file-input"
-                              name="myImage"
-                              accept="image/x-png,image/gif,image/jpeg"
-                            />
-                            <label htmlFor="file-input">
-                              <FontAwesomeIcon
-                                icon={faImage}
-                                size="2x"
-                                color="#8B8EA1"
-                              />
-                              Add image
-                            </label>
-                          </form>
+                          <AddItemImg
+                            handleFileSync={handleFileSync}
+                            size="sm"
+                            index={2}
+                          />
+                          <AddItemImg
+                            handleFileSync={handleFileSync}
+                            size="sm"
+                            index={3}
+                          />
+                          <AddItemImg
+                            handleFileSync={handleFileSync}
+                            size="sm"
+                            index={4}
+                          />
                         </div>
                       </div>
                     </div>
@@ -184,9 +201,9 @@ export default function AddProduct({ user }) {
               {/* Button */}
               <div className={styles.button_wrapper}>
                 <div className={styles.cancelBtn}>Cancel</div>
-                <Link href="/me/youritem" passHref>
-                  <div className={styles.addBtn}>Add product</div>
-                </Link>
+                <div className={styles.addBtn} onClick={handleSubmit}>
+                  Add product
+                </div>
                 {/* <div className={styles.deleteBtn}>Delete</div> */}
               </div>
             </section>

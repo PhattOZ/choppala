@@ -2,7 +2,7 @@ import { useRef, useState } from "react"
 import { upload } from "src/lib/firebase"
 import Image from "next/dist/client/image"
 
-export default function Wishlist() {
+export default function Upload() {
   const refe = useRef(null)
   const [imgUrl, setImgURL] = useState()
 

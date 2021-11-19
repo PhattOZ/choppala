@@ -14,7 +14,11 @@ export default function SellingOrders({ user }) {
         {user.isSeller ? (
           <FirstProduct />
         ) : (
-          <ActivateSeller name={user.name} email={user.email} />
+          <ActivateSeller
+            userId={user._id}
+            username={user.name}
+            userEmail={user.email}
+          />
         )}
       </Layout>
     </div>
@@ -27,17 +31,16 @@ export async function getServerSideProps(context) {
 
   if (session) {
     await dbConnect()
-    const leanResponse = await User.findOne(
-      {
-        name: session.user.name,
-        email: session.user.email,
-      },
-      { _id: 0, cart: 0 }
-    ).lean()
+    const leanResponse = await User.findOne({
+      name: session.user.name,
+      email: session.user.email,
+    }).lean()
+
+    leanResponse._id = leanResponse._id.toString()
 
     return {
       props: {
-        user: JSON.parse(JSON.stringify(leanResponse)) ,
+        user: leanResponse,
       },
     }
   } else {

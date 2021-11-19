@@ -9,6 +9,7 @@ module.exports = withPWA({
       "scontent.fzty3-2.fna.fbcdn.net", // Facebook profile picture (2)
       "lh3.googleusercontent.com", // Google profile picture
       "avatars.githubusercontent.com", // Github profile picture
+      "firebasestorage.googleapis.com", // Firebase image cloud storage
     ],
   },
   pwa: {

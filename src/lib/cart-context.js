@@ -57,6 +57,7 @@ const cartReducer = (state, action) => {
           (item) => item._id === action.val._id
         )
       } else {
+        updatedCartDB(action.val)
         return {
           cart: [action.val],
           totalPrice: action.val.quantity * action.val.price,
@@ -83,6 +84,7 @@ const cartReducer = (state, action) => {
         ]
         newTotal = calculatePrice(newCart)
       }
+
       updatedCartDB(newCart)
       return {
         cart: newCart,

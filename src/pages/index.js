@@ -60,7 +60,7 @@ export default function Index({ productList }) {
                     <Card
                       title={product.name}
                       price={product.price}
-                      image={product.image}
+                      image={product.images[0]}
                     />
                   </a>
                 </Link>
