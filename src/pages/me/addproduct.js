@@ -14,10 +14,11 @@ import dbConnect from "src/lib/dbConnect"
 import createImgUrls from "src/lib/firebase"
 // Model
 import User from "src/models/User"
+import Seller from "src/models/Seller"
 // Component
 import AddItemImg from "src/components/AddItemImg"
 
-export default function AddProduct({ user }) {
+export default function AddProduct({ user, seller }) {
   const router = useRouter()
   const [imgBlobs, setImgBlobs] = useState([])
   const [inputs, setInputs] = useState({
@@ -50,7 +51,12 @@ export default function AddProduct({ user }) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ ...inputs, images: imgUrls }),
+        body: JSON.stringify({
+          ...inputs,
+          images: imgUrls,
+          sellerName: seller.storeName,
+          sellerId: seller.id,
+        }),
       })
 
       if (res.ok) {
@@ -220,17 +226,20 @@ export async function getServerSideProps(context) {
 
   if (session) {
     await dbConnect()
-    const leanResponse = await User.findOne(
-      {
-        name: session.user.name,
-        email: session.user.email,
-      },
+    const leanResponse = await User.findOne({
+      name: session.user.name,
+      email: session.user.email,
+    }).lean()
+
+    const sellerLeanResponse = await Seller.findOne(
+      { userId: leanResponse._id },
       { _id: 0 }
     ).lean()
 
     return {
       props: {
         user: JSON.parse(JSON.stringify(leanResponse)),
+        seller: sellerLeanResponse,
       },
     }
   } else {

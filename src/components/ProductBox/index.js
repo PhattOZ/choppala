@@ -19,6 +19,7 @@ export default function ProductBox({
   price,
   sellerName,
   reviewCount,
+  images,
 }) {
   const [count, setCount] = useState(1)
 
@@ -55,37 +56,26 @@ export default function ProductBox({
         <div className={styles.imgcontainer}>
           <div>
             <Image
-              src="/molang2.jpg"
+              src={images[0]}
               alt="Product image"
               width={288}
               height={288}
             />
           </div>
           <div className={styles.imggal}>
-            <Image
-              src="/molang2.jpg"
-              alt="Product image"
-              width={64}
-              height={64}
-            />
-            <Image
-              src="/molang2.jpg"
-              alt="Product image"
-              width={64}
-              height={64}
-            />
-            <Image
-              src="/molang2.jpg"
-              alt="Product image"
-              width={64}
-              height={64}
-            />
-            <Image
-              src="/molang2.jpg"
-              alt="Product image"
-              width={64}
-              height={64}
-            />
+            {images.map((image, index) => {
+              if (index !== 0) {
+                return (
+                  <Image
+                    src={image}
+                    alt="Product image"
+                    width={64}
+                    height={64}
+                    key={index}
+                  />
+                )
+              }
+            })}
           </div>
         </div>
         <div className={styles.infocontainer}>

@@ -29,7 +29,10 @@ export default async function handler(req, res) {
 
         // Create seller in Seller collection
         const newSeller = { userId, storeName: username, storeEmail: userEmail }
-        await Seller.create(newSeller)
+        const dbResponse = await Seller.create(newSeller)
+        await Seller.findByIdAndUpdate(dbResponse._id, {
+          id: dbResponse._id.toString(),
+        })
         res.status(201).json({ success: true })
       } catch (error) {
         res.status(400).json({ success: false })
