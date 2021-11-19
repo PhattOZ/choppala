@@ -59,6 +59,18 @@ const UserSchema = new mongoose.Schema({
       ],
     },
   ],
+  purchaseHistory: [
+    {
+      itemID: String,
+      name: String,
+      image: String,
+      price: Number,
+      sellerName: String,
+      quantity: Number,
+      isRating: { type: Boolean, default: false },
+      orderAt: { type: Date, default: Date.now },
+    },
+  ],
   sellerItem: [{ itemName: String }], // รายการสินค้าที่ลงขายแล้ว (กรณี activeSeller: true)
 })
 

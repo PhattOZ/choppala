@@ -1,0 +1,187 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  padding: 1.5rem 10%;
+  width: 100%;
+  height: inherit;
+  min-height: 100%;
+  column-gap: 2rem;
+  background-color: #f3f2f2;
+
+  .main {
+    flex: 70%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1.5rem;
+    .fontAwesome {
+      font-size: 180%;
+    }
+    .icon_clickable {
+      cursor: pointer;
+    }
+    > div {
+      background-color: white;
+      padding: 1rem 1.5rem;
+      display: flex;
+      column-gap: 1.5rem;
+      align-items: center;
+    }
+
+    .info_container {
+      .info__details {
+        position: relative;
+        flex: 1;
+        font-weight: bold;
+
+        .info__name {
+          padding-top: 0.5rem;
+          display: flex;
+          flex-wrap: wrap;
+          column-gap: 4rem;
+          > div {
+            font-weight: normal;
+          }
+        }
+        > div:last-child {
+          position: absolute;
+          float: right;
+          top: 0;
+          right: 0;
+        }
+      }
+    }
+    .address_container {
+      .address_details {
+        position: relative;
+        flex: 1;
+        > div {
+          font-weight: bold;
+        }
+        .address_name {
+          padding-top: 0.5rem;
+          display: flex;
+          flex-direction: column;
+          column-gap: 10%;
+          row-gap: 0.25rem;
+          font-weight: normal;
+        }
+        > div:last-child {
+          position: absolute;
+          float: right;
+          top: 0;
+          right: 0;
+        }
+      }
+    }
+    .payment_container {
+      .payment_details {
+        position: relative;
+        flex: 1;
+        font-weight: bold;
+
+        .payment_method {
+          padding-top: 0.5rem;
+          display: flex;
+          flex-direction: column;
+          column-gap: 10%;
+          row-gap: 0.25rem;
+          font-weight: normal;
+
+          div {
+            display: flex;
+            align-items: center;
+            column-gap: 0.5rem;
+
+            input {
+              appearance: none;
+              -webkit-appearance: none;
+              margin-right: 1rem;
+              width: 20px;
+              height: 20px;
+              border-radius: 50%;
+              transition: box-shadow 0.3s;
+              background: lightgrey;
+              cursor: pointer;
+              border: 0;
+            }
+            input:checked {
+              box-shadow: inset 0 0 0 20px blue;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .order_summary {
+    flex: 30%;
+    background-color: white;
+    align-self: flex-start;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    row-gap: 1rem;
+    font-weight: bold;
+    .order__details {
+      position: relative;
+      display: flex;
+      align-items: center;
+      column-gap: 0.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px dotted black;
+      font-weight: normal;
+      > div:first-child {
+        position: relative;
+        width: 3rem;
+        height: 3rem;
+      }
+      .order__details_flexbox {
+        display: flex;
+        flex-direction: column;
+        max-width: 67%;
+      }
+      > div:last-child {
+        position: absolute;
+        bottom: 1rem;
+        right: 0;
+      }
+    }
+    .order__total {
+      border-bottom: 1px dotted black;
+      padding-bottom: 1rem;
+      font-weight: 450;
+      span:last-child {
+        float: right;
+      }
+    }
+
+    .order__bottomPart {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      > :first-child {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        background-color: #f9f9f9;
+        padding: 0.5rem;
+        margin-bottom: 1rem;
+        border-radius: 5px;
+      }
+
+      > :nth-child(2) {
+        text-align: center;
+        width: 100%;
+        background-color: #4383fd;
+        color: white;
+        padding: 0.5rem;
+        cursor: pointer;
+        border-radius: 5px;
+        &:hover {
+          background-color: #dbe6fd;
+          color: #4585ff;
+        }
+      }
+    }
+  }
+}

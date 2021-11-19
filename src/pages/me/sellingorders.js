@@ -32,7 +32,7 @@ export async function getServerSideProps(context) {
         name: session.user.name,
         email: session.user.email,
       },
-      { _id: 0 }
+      { _id: 0, cart: 0 }
     ).lean()
 
     return {
