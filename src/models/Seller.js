@@ -4,7 +4,6 @@ const SellerSchema = new mongoose.Schema({
   userId: { type: String, required: true },
   storeName: { type: String, required: true },
   storeEmail: { type: String, required: true },
-  sellerItems: [String],
 })
 
 module.exports =

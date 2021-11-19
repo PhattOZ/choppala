@@ -1,26 +1,31 @@
+// Styles
 import Layout from "src/components/UserProfileLayout"
 import styles from "src/styles/pages/user/AddProduct.module.scss"
+// FontAwesome lib
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faChevronCircleLeft, faImage } from "@fortawesome/free-solid-svg-icons"
-import Link from "next/link"
-import dbConnect from "src/lib/dbConnect"
-import User from "src/models/User"
-import { getSession } from "next-auth/react"
-import { storageRef } from "src/lib/firebase"
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
-import AddItemImg from "src/components/AddItemImg"
+// React, Next lib
 import { useState } from "react"
 import { useRouter } from "next/router"
+import { getSession } from "next-auth/react"
+import Link from "next/link"
+// Custom lib
+import dbConnect from "src/lib/dbConnect"
+import createImgUrls from "src/lib/firebase"
+// Model
+import User from "src/models/User"
+// Component
+import AddItemImg from "src/components/AddItemImg"
 
 export default function AddProduct({ user }) {
   const router = useRouter()
   const [imgBlobs, setImgBlobs] = useState([])
   const [inputs, setInputs] = useState({
-    productName: "",
+    name: "",
     category: "",
     price: "",
     amount: "",
-    description: "",
+    detail: "",
   })
 
   const handleChange = (e) => {
@@ -38,31 +43,14 @@ export default function AddProduct({ user }) {
 
   const handleSubmit = async () => {
     // Needs validation !!!!!!!!!!!!!!
-
-    const imgUrls = []
-
     if (imgBlobs.length) {
-      await Promise.all(
-        imgBlobs.map(async (blob) => {
-          if (blob) {
-            const filename = blob.name
-            const fullname = new Date().getTime().toString() + "-" + filename
-            const fileRef = ref(storageRef, `/${fullname}`)
-
-            const snapshot = await uploadBytes(fileRef, blob)
-            const url = await getDownloadURL(snapshot.ref)
-
-            imgUrls.push(url)
-          }
-        })
-      )
-
+      const imgUrls = await createImgUrls(imgBlobs)
       const res = await fetch("/api/item", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ ...inputs, imgUrls: imgUrls }),
+        body: JSON.stringify({ ...inputs, images: imgUrls }),
       })
 
       if (res.ok) {
@@ -98,7 +86,7 @@ export default function AddProduct({ user }) {
                       <input
                         type="text"
                         size="50"
-                        name="productName"
+                        name="name"
                         onChange={handleChange}
                       />
                     </div>
@@ -134,7 +122,7 @@ export default function AddProduct({ user }) {
                     <div className={styles.edit_section}>
                       <label htmlFor="">Price</label>
                       <input
-                        type="text"
+                        type="number"
                         placeholder="Bath"
                         size="7"
                         name="price"
@@ -159,7 +147,7 @@ export default function AddProduct({ user }) {
                         id="txtboxMultiline"
                         cols="53"
                         rows="10"
-                        name="description"
+                        name="detail"
                         onChange={handleChange}
                         required
                       ></textarea>
