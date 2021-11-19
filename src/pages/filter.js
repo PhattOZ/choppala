@@ -98,7 +98,7 @@ export default function Filter({
                     <Card
                       title={item.name}
                       price={item.price}
-                      image={item.image}
+                      image={item.images[0]}
                     />
                   </a>
                 </Link>

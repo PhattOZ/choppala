@@ -55,7 +55,7 @@ export default function Index({ productList }) {
             <div className={styles.section_title}>Just for you</div>
             <div className={styles.cardContainer}>
               {productList.map((product) => (
-                <Link key={product.id} href={`/product/${product.id}`}>
+                <Link key={product._id} href={`/product/${product._id}`}>
                   <a>
                     <Card
                       title={product.name}
@@ -75,10 +75,11 @@ export default function Index({ productList }) {
 
 export async function getServerSideProps() {
   await dbConnect()
-  const items = await Item.find({}, { _id: 0 })
-    .sort({ _id: -1 })
-    .limit(18)
-    .lean()
+  const items = await Item.find({}).sort({ _id: -1 }).limit(18).lean()
+
+  items.map((item) => {
+    item._id = item._id.toString()
+  })
 
   return {
     props: {
