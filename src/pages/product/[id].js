@@ -13,11 +13,12 @@ export default function ProductDetail({ product }) {
   const ctx = useContext(CartContext)
   const router = useRouter()
   const cartHandler = (val) => {
-    let { reviews, ...newProduct } = product
+    let { reviews, images, ...newProduct } = product
     newProduct = {
       ...newProduct,
       isConfirm: true,
       quantity: val,
+      image: images[0],
     }
     ctx.addToCart(newProduct)
   }
