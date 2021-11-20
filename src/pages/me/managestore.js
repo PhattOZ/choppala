@@ -1,17 +1,64 @@
 import Layout from "src/components/UserProfileLayout"
 import styles from "src/styles/pages/user/ManageStore.module.scss"
 import ActivateSeller from "src/components/ActivateSeller"
-import Store from "src/components/Store"
 import dbConnect from "src/lib/dbConnect"
 import User from "src/models/User"
 import { getSession } from "next-auth/react"
+import Image from "next/image"
+
+function Store({ user }) {
+  return (
+    <>
+      <div className={styles.main}>
+        <section>
+          <div className={styles.header}>Store Information</div>
+          <div className={styles.edit}>
+            <div className={styles.edit_section}>
+              <div className={styles.user_img}>
+                <Image
+                  src={user.image}
+                  layout="fill"
+                  objectFit="cover"
+                  alt="user"
+                />
+              </div>
+            </div>
+            <div className={styles.edit_section}>
+              <label htmlFor="">Store Name</label>
+              <input type="text" size="35" />
+            </div>
+            <div className={styles.edit_section}>
+              <label htmlFor="">Store Email</label>
+              <input type="text" size="50" />
+            </div>
+          </div>
+          <div className={styles.button_wrapper}>
+            <div className={styles.saveButton}>Save</div>
+          </div>
+        </section>
+
+        <div className={styles.dashboard}>
+          <div className={styles.peopleIcon}>
+            <Image
+              src="/dashboard.svg"
+              alt="dashboard"
+              layout="fill"
+              objectFit="cover"
+            />
+          </div>
+          <div className={styles.text}>Dashboard is coming soon</div>
+        </div>
+      </div>
+    </>
+  )
+}
 
 export default function ManageStore({ user }) {
   return (
     <div className={styles.container}>
       <Layout user={user}>
         {user.isSeller ? (
-          <Store />
+          <Store user={user} />
         ) : (
           <ActivateSeller
             userId={user._id}

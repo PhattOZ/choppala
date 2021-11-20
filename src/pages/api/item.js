@@ -10,7 +10,6 @@ export default async function handler(req, res) {
     case "GET":
       try {
         const sellerId = req.query.sellerId
-        console.log(sellerId)
         const itemsLeanResponse = await Item.find(
           { sellerId },
           { _id: 0 }

@@ -6,7 +6,6 @@ import { useState, useEffect } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons"
 import { faCoins, faTrash } from "@fortawesome/free-solid-svg-icons"
-import FirstProduct from "../FirstProduct"
 
 function SellingBox({ name, image, price, amount, sold }) {
   return (
@@ -45,6 +44,32 @@ function SellingBox({ name, image, price, amount, sold }) {
         </div>
       </div>
     </div>
+  )
+}
+
+function FirstProduct() {
+  return (
+    <>
+      <div className={styles.main}>
+        <section>
+          <div className={styles.peopleIcon}>
+            <Image
+              src="/addproduct.svg"
+              alt="addproduct"
+              layout="fill"
+              objectFit="cover"
+            />
+          </div>
+          <div className={styles.text}>Start selling on Choppala</div>
+          <Link href="/me/addproduct" passHref>
+            <div className={styles.button}>
+              <FontAwesomeIcon icon={faPlusCircle} size={"lg"} />
+              Add product
+            </div>
+          </Link>
+        </section>
+      </div>
+    </>
   )
 }
 
@@ -95,9 +120,7 @@ export default function YourProductBox({ sellerId }) {
           </section>
         </div>
       ) : (
-        <>
-          <FirstProduct />
-        </>
+        <FirstProduct />
       )}
     </>
   )

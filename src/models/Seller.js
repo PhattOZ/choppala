@@ -5,6 +5,7 @@ const SellerSchema = new mongoose.Schema({
   id: String, // Seller ID
   storeName: { type: String, required: true },
   storeEmail: { type: String, required: true },
+  storeImage: { type: String, required: true },
 })
 
 module.exports =
