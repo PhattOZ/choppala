@@ -1,6 +1,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import styles from "./YourProductBox.module.scss"
+import { useState, useEffect } from "react"
 // Icon
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons"
@@ -47,7 +48,13 @@ function SellingBox({ name, image, price, amount, sold }) {
   )
 }
 
-export default function YourProductBox({ sellerItems }) {
+export default function YourProductBox({ sellerId }) {
+  const [sellerItems, setSellerItems] = useState([])
+  useEffect(async () => {
+    const res = await fetch(`/api/item?sellerId=${sellerId}`)
+    const resData = await res.json()
+    setSellerItems(resData.item)
+  }, [])
   return (
     <>
       {sellerItems.length ? (
@@ -73,6 +80,7 @@ export default function YourProductBox({ sellerItems }) {
                   price={item.price}
                   amount={item.amount}
                   sold={item.soldCount}
+                  key={item.id}
                 />
               ))}
             </div>

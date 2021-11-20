@@ -30,10 +30,13 @@ export async function getServerSideProps(context) {
 
   if (session) {
     await dbConnect()
-    const leanResponse = await User.findOne({
-      name: session.user.name,
-      email: session.user.email,
-    }).lean()
+    const leanResponse = await User.findOne(
+      {
+        name: session.user.name,
+        email: session.user.email,
+      },
+      { name: 1, email: 1, image: 1, isSeller: 1 }
+    ).lean()
 
     leanResponse._id = leanResponse._id.toString()
 
