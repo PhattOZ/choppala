@@ -54,29 +54,31 @@ function CropImgPopup({
 
   return ReactDom.createPortal(
     <>
-      <div className={styles.container}>
-        <ReactCrop
-          className="cropSection"
-          src={upImg}
-          crop={crop}
-          onChange={(c) => setCrop(c)}
-          onImageLoaded={initCropSize}
-          onComplete={(c) => {
-            setCompletedCrop(c)
-          }}
-        />
-        <div className="menuSection">
-          <button
-            className="save"
-            onClick={() => {
-              onSave(completedCrop)
+      <div className={styles.bg}>
+        <div className={styles.cropBoxContainer}>
+          <ReactCrop
+            className={styles.cropSection}
+            src={upImg}
+            crop={crop}
+            onChange={(c) => setCrop(c)}
+            onImageLoaded={initCropSize}
+            onComplete={(c) => {
+              setCompletedCrop(c)
             }}
-          >
-            Save
-          </button>
-          <button className="cancel" onClick={onCancelCrop}>
-            Cancel
-          </button>
+          />
+          <div className={styles.buttonSection}>
+            <button
+              className={styles.save}
+              onClick={() => {
+                onSave(completedCrop)
+              }}
+            >
+              Save
+            </button>
+            <button className={styles.cancel} onClick={onCancelCrop}>
+              Cancel
+            </button>
+          </div>
         </div>
       </div>
     </>,
@@ -151,8 +153,8 @@ export default function AddItemImg({ handleFileSync, size, index }) {
   }
 
   const handleCancelCrop = () => {
-    setIsPopup(false)
     setFilename("")
+    setIsPopup(false)
   }
 
   const handleConfirmCrop = (crop) => {

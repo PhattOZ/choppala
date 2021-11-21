@@ -60,7 +60,7 @@ export default function AddProduct({ user, seller }) {
       })
 
       if (res.ok) {
-        router.push("/me/yourproduct")
+        router.push("/me/sellingorders")
       }
     }
   }
@@ -226,10 +226,15 @@ export async function getServerSideProps(context) {
 
   if (session) {
     await dbConnect()
-    const leanResponse = await User.findOne({
-      name: session.user.name,
-      email: session.user.email,
-    }).lean()
+    const leanResponse = await User.findOne(
+      {
+        name: session.user.name,
+        email: session.user.email,
+      },
+      { name: 1, email: 1, image: 1, _id: 1 }
+    ).lean()
+
+    leanResponse._id = leanResponse._id.toString()
 
     const sellerLeanResponse = await Seller.findOne(
       { userId: leanResponse._id },
@@ -238,7 +243,7 @@ export async function getServerSideProps(context) {
 
     return {
       props: {
-        user: JSON.parse(JSON.stringify(leanResponse)),
+        user: leanResponse,
         seller: sellerLeanResponse,
       },
     }

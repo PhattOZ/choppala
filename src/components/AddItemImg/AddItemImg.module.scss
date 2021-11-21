@@ -1,12 +1,6 @@
 $grey45: #a8aabc;
-$grey70: #8b8ea1;
-$grey100: #444655;
-$red: #ff1f00;
-$red20: #ffd2cc;
-$blue: #4585ff;
-$lightblue: #dbe6fd;
 
-.container {
+.bg {
   background-color: rgb(0, 0, 0, 0.6);
   position: fixed;
   top: 0;
@@ -15,80 +9,25 @@ $lightblue: #dbe6fd;
   left: 0;
   display: flex;
   justify-content: center;
-  align-content: center;
+  align-items: center;
   z-index: 9999;
 }
 
-.modal {
+.cropBoxContainer {
+  width: 70%;
+  height: 80%;
+  border-radius: 1rem;
   display: flex;
   flex-direction: column;
-  background-color: #fff;
-  border-radius: 0.75rem;
-  width: 24rem;
-  padding: 1rem;
-  padding-bottom: 2rem;
-  margin-bottom: auto;
-  margin-top: auto;
-}
-
-.header {
-  display: flex;
-  justify-content: flex-end;
-  align-content: flex-end;
-}
-
-.body {
-  display: flex;
-  flex-direction: column;
-  row-gap: 1rem;
-  align-content: center;
+  justify-content: center;
   align-items: center;
+  background-color: white;
 }
 
-.title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: $red;
-}
-
-.subtitle {
-  font-size: 1rem;
-  font-weight: 600;
-  color: $grey100;
-}
-
-.icon {
-  cursor: pointer;
-}
-
-.textinfo {
-  font-size: 0.9rem;
-  color: $grey70;
-  text-align: center;
-}
-
-.button_wrapper {
-  display: flex;
-  justify-content: center;
-  column-gap: 1rem;
-}
-
-.cancelBtn {
-  display: flex;
-  justify-content: center;
-  column-gap: 0.4rem;
-  width: 12rem;
-  padding: 0.5rem 2rem;
-  background-color: $lightblue;
-  color: $blue;
-  border-radius: 0.25rem;
-  font-size: 1rem;
-}
-
-.cancelBtn:hover {
-  background-color: $grey45;
-  color: white;
-  cursor: pointer;
+.cropSection {
+  max-width: 500px;
+  max-height: 1000px;
+  overflow: auto;
 }
 
 .canvasLg {
