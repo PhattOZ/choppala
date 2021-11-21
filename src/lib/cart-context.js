@@ -31,6 +31,20 @@ const updatedCartDB = (cart) => {
   })
 }
 
+const addedUserHistoryDB = (items) => {
+  const newItems = items.map(({ _id: itemID, ...rest }) => ({
+    itemID,
+    ...rest,
+  }))
+  fetch("/api/userHistory", {
+    method: "POST",
+    body: JSON.stringify(newItems),
+    headers: {
+      "content-type": "application/json",
+    },
+  })
+}
+
 const cartReducer = (state, action) => {
   switch (action.type) {
     case "GET_CART":
@@ -43,6 +57,7 @@ const cartReducer = (state, action) => {
           (item) => item._id === action.val._id
         )
       } else {
+        updatedCartDB(action.val)
         return {
           cart: [action.val],
           totalPrice: action.val.quantity * action.val.price,
@@ -69,6 +84,7 @@ const cartReducer = (state, action) => {
         ]
         newTotal = calculatePrice(newCart)
       }
+
       updatedCartDB(newCart)
       return {
         cart: newCart,
@@ -136,6 +152,16 @@ const cartReducer = (state, action) => {
         cart: newCart,
         totalPrice: newTotal,
       }
+    case "ORDER_ITEM":
+      newCart = [...state.cart.filter((item) => !action.val.includes(item))]
+
+      newTotal = calculatePrice(newCart)
+      updatedCartDB(newCart)
+      addedUserHistoryDB(action.val)
+      return {
+        cart: newCart,
+        totalPrice: newTotal,
+      }
     default:
       return {
         cart: [...state.cart],
@@ -161,6 +187,13 @@ export const CartContextProvider = (props) => {
     dispatchCart({ type: "DELETE_ITEM", val: id })
   }
 
+  const orderItem = (items) => {
+    console.log("order now!!")
+    console.log(items)
+
+    dispatchCart({ type: "ORDER_ITEM", val: items })
+  }
+
   useEffect(() => {
     fetch("/api/cart")
       .then((response) => response.json())
@@ -173,6 +206,7 @@ export const CartContextProvider = (props) => {
     addToCart: addToCart,
     deleteItem: deleteItem,
     updateCart: updateCart,
+    orderItem: orderItem,
   }
   return (
     <CartContext.Provider value={value}>{props.children}</CartContext.Provider>

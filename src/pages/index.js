@@ -36,6 +36,10 @@ export default function Index({ productList }) {
           name="description"
           content="Wonderously designed ecommerse application. Choppala is crafted carefully and delicately utilizing topics learned during Covid lockdown."
         />
+        <meta
+          name="google-site-verification"
+          content="k4fkUPyXYXuPrtxq7AzZW0-FenIrO2xiktU4S6oXicY"
+        />
       </Head>
       <div className={styles.container}>
         <div>
@@ -60,7 +64,7 @@ export default function Index({ productList }) {
                     <Card
                       title={product.name}
                       price={product.price}
-                      image={product.image}
+                      image={product.images[0]}
                     />
                   </a>
                 </Link>
