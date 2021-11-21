@@ -18,19 +18,10 @@ function useLockBodyScroll() {
   }, [])
 }
 
-function CropImgPopup({
-  upImg,
-  crop,
-  setCrop,
-  completedCrop,
-  setCompletedCrop,
-  setFinalCrop,
-  imgRef,
-  onCancelCrop,
-  onSave,
-}) {
-  // Call hook to lock body scroll
-  useLockBodyScroll()
+function CropImgPopup({ upImg, setFinalCrop, imgRef, onCancelCrop, onSave }) {
+  const [crop, setCrop] = useState()
+  const [completedCrop, setCompletedCrop] = useState(null)
+  useLockBodyScroll() // Call hook to lock body scroll
 
   const initCropSize = (img) => {
     imgRef.current = img
@@ -92,8 +83,6 @@ export default function AddItemImg({ handleFileSync, size, index }) {
   const upImgStyle = size === "lg" ? styles.canvasLg : styles.canvasSm
   const [isPopup, setIsPopup] = useState(false)
   const [upImg, setUpImg] = useState()
-  const [crop, setCrop] = useState()
-  const [completedCrop, setCompletedCrop] = useState(null)
   const [finalCrop, setFinalCrop] = useState()
   const [filename, setFilename] = useState("")
   const imgRef = useRef(null)
@@ -186,10 +175,6 @@ export default function AddItemImg({ handleFileSync, size, index }) {
           {isPopup ? (
             <CropImgPopup
               upImg={upImg}
-              crop={crop}
-              setCrop={setCrop}
-              completedCrop={completedCrop}
-              setCompletedCrop={setCompletedCrop}
               setFinalCrop={setFinalCrop}
               imgRef={imgRef}
               onCancelCrop={handleCancelCrop}

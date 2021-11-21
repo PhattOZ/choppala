@@ -64,6 +64,7 @@ export default function ManageStore({ user }) {
             userId={user._id}
             username={user.name}
             userEmail={user.email}
+            userImage={user.image}
           />
         )}
       </Layout>

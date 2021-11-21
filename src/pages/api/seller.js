@@ -20,9 +20,14 @@ export default async function handler(req, res) {
       }
     case "POST":
       try {
-        const { userId, username, userEmail } = req.body
+        const { userId, username, userEmail, userImage } = req.body
         // Create seller in Seller collection
-        const newSeller = { userId, storeName: username, storeEmail: userEmail }
+        const newSeller = {
+          userId,
+          storeName: username,
+          storeEmail: userEmail,
+          storeImage: userImage,
+        }
         const dbResponse = await Seller.create(newSeller)
         // Generate id field for seller
         await Seller.findByIdAndUpdate(dbResponse._id, {

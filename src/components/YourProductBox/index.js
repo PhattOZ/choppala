@@ -6,6 +6,8 @@ import { useState, useEffect } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons"
 import { faCoins, faTrash } from "@fortawesome/free-solid-svg-icons"
+// Component
+import Loader from "../Loader"
 
 function SellingBox({ name, image, price, amount, sold }) {
   return (
@@ -75,11 +77,19 @@ function FirstProduct() {
 
 export default function YourProductBox({ sellerId }) {
   const [sellerItems, setSellerItems] = useState([])
+  const [loading, setLoading] = useState(true)
   useEffect(async () => {
     const res = await fetch(`/api/item?sellerId=${sellerId}`)
     const resData = await res.json()
     setSellerItems(resData.item)
+    setLoading(false)
   }, [])
+
+  // Wait until fetch() in useEffect complete
+  if (loading === true) {
+    return <Loader />
+  }
+
   return (
     <>
       {sellerItems.length ? (

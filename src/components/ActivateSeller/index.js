@@ -4,9 +4,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faUserCheck } from "@fortawesome/free-solid-svg-icons"
 import { useRouter } from "next/router"
 
-export default function ActivateSeller({ userId, username, userEmail }) {
+export default function ActivateSeller({
+  userId,
+  username,
+  userEmail,
+  userImage,
+}) {
   const router = useRouter()
-  const data = { userId, username, userEmail }
+  const data = { userId, username, userEmail, userImage }
   async function setSeller() {
     const res = await fetch("/api/seller", {
       method: "POST",

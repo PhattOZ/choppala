@@ -18,6 +18,7 @@ export default function SellingOrders({ user }) {
             userId={user._id}
             username={user.name}
             userEmail={user.email}
+            userImage={user.image}
           />
         )}
       </Layout>
