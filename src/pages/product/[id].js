@@ -42,6 +42,7 @@ export default function ProductDetail({ product }) {
         productname={product.name}
         price={product.price}
         sellerName={product.sellerName}
+        sellerId={product.sellerId}
         reviewCount={product.reviews.length}
         images={product.images}
       />

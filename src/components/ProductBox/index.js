@@ -18,6 +18,7 @@ export default function ProductBox({
   productname,
   price,
   sellerName,
+  sellerId,
   reviewCount,
   images,
 }) {
@@ -110,7 +111,7 @@ export default function ProductBox({
             <div className={styles.fsold}>
               <div className={styles.p1}>
                 Sold by{" "}
-                <Link href="/">
+                <Link href={`/seller/${sellerId}`}>
                   <a className={styles.soldname}>{sellerName}</a>
                 </Link>
               </div>

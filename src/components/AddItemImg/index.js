@@ -18,7 +18,7 @@ function useLockBodyScroll() {
   }, [])
 }
 
-function CropImgPopup({ upImg, setFinalCrop, imgRef, onCancelCrop, onSave }) {
+function CropImgPopup({ upImg, imgRef, onCancelCrop, onSave }) {
   const [crop, setCrop] = useState()
   const [completedCrop, setCompletedCrop] = useState(null)
   useLockBodyScroll() // Call hook to lock body scroll
@@ -48,7 +48,12 @@ function CropImgPopup({ upImg, setFinalCrop, imgRef, onCancelCrop, onSave }) {
       <div className={styles.bg}>
         <div className={styles.cropBoxContainer}>
           <ReactCrop
-            className={styles.cropSection}
+            style={{
+              border: "5px solid red",
+            }}
+            imageStyle={{
+              border: "2px solid blue",
+            }}
             src={upImg}
             crop={crop}
             onChange={(c) => setCrop(c)}
@@ -175,7 +180,6 @@ export default function AddItemImg({ handleFileSync, size, index }) {
           {isPopup ? (
             <CropImgPopup
               upImg={upImg}
-              setFinalCrop={setFinalCrop}
               imgRef={imgRef}
               onCancelCrop={handleCancelCrop}
               onSave={handleConfirmCrop}
