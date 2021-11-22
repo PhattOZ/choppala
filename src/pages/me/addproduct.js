@@ -27,6 +27,15 @@ export default function AddProduct({ user }) {
     amount: "",
     detail: "",
   })
+  const [inputsValidation, setInputValidation] = useState({
+    error: false,
+    name: false,
+    category: false,
+    price: false,
+    amount: false,
+    detail: false,
+    images: false,
+  })
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -42,8 +51,29 @@ export default function AddProduct({ user }) {
   }
 
   const handleSubmit = async () => {
-    // Needs validation !!!!!!!!!!!!!!
-    if (imgBlobs.length) {
+    // Input validation (If all input not null, checkNull is true, otherwise checkNull is false)
+    const checkNull =
+      !!inputs.name &&
+      !!inputs.category &&
+      !!inputs.price &&
+      !!inputs.amount &&
+      !!inputs.detail &&
+      !!imgBlobs.length
+
+    if (!checkNull) {
+      // Some input(s) is invalid
+      const validation = {
+        error: true,
+        name: inputs.name ? false : true,
+        category: inputs.category ? false : true,
+        price: inputs.price ? false : true,
+        amount: inputs.amount ? false : true,
+        detail: inputs.detail ? false : true,
+        images: imgBlobs.length ? false : true,
+      }
+      setInputValidation(validation)
+    } else {
+      // All inputs is valid
       const imgUrls = await createImgUrls(imgBlobs)
       const res = await fetch("/api/item", {
         method: "POST",
@@ -58,6 +88,8 @@ export default function AddProduct({ user }) {
       }
     }
   }
+
+  console.log(inputsValidation)
 
   return (
     <div className={styles.container}>
@@ -207,7 +239,6 @@ export default function AddProduct({ user }) {
                 <div className={styles.addBtn} onClick={handleSubmit}>
                   Add product
                 </div>
-                {/* <div className={styles.deleteBtn}>Delete</div> */}
               </div>
             </section>
           </div>
