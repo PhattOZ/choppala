@@ -3,8 +3,8 @@ import { useState } from "react"
 import { useRouter } from "next/router"
 import { useSession } from "next-auth/react"
 import Layout from "src/components/UserProfileLayout"
-import DeletePopup from "src/components/DeletePopup"
-import OrderPopup from "src/components/OrderPopup"
+import Popup from "src/components/Popup"
+import { deleteAccount } from "src/lib/modalContent"
 
 export default function Setting() {
   const [showModal, setShowModal] = useState(false)
@@ -55,16 +55,18 @@ export default function Setting() {
       </Layout>
       {/* -----------Popup------------ */}
       {showModal && (
-        <DeletePopup
+        <Popup
           show={showModal}
           onClose={handleClose}
           onClick={handleClick}
-          title="Delete Account"
-          subtitle="Your account will be deleted!"
-        >
-          Do you really want to delete account? <br /> All information will
-          permanently lost.
-        </DeletePopup>
+          title={deleteAccount.title}
+          titlecolor={deleteAccount.titlecolor}
+          subtitle={deleteAccount.subtitle}
+          icon={deleteAccount.icon}
+          content1={deleteAccount.content1}
+          content2={deleteAccount.content2}
+          buttonShow={deleteAccount.buttonShow}
+        />
       )}
     </div>
   )

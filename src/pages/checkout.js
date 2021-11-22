@@ -6,7 +6,6 @@ import { getSession } from "next-auth/react"
 import dbConnect from "src/lib/dbConnect"
 import User from "src/models/User"
 import Image from "next/image"
-import OrderPopup from "src/components/OrderPopup"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
@@ -19,7 +18,6 @@ import {
 
 export default function Checkout({ data }) {
   const ctx = useContext(CartContext)
-  const [orderModal, setOrderModal] = useState(false)
 
   let addressFilter = data.address
     .split(/(\s+)/)
@@ -28,19 +26,11 @@ export default function Checkout({ data }) {
   let ItemFromCtx = ctx.value.cart.filter((item) => item.isConfirm == true)
 
   const orderHandler = () => {
-    ctx.orderItem(ItemFromCtx)
     console.log("in orderHandler")
-    setOrderModal(true)
   }
 
   return (
     <div className={styles.container}>
-      <OrderPopup
-        show={orderModal}
-        onClose={() => {
-          setOrderModal(false)
-        }}
-      />
       <div className={styles.main}>
         <div className={styles.info_container}>
           <FontAwesomeIcon
