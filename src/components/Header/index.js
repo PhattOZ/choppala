@@ -52,7 +52,7 @@ export default function Header() {
           </a>
         </Link>
       </div>
-      <SearchBar className={styles.searchBar} />
+      <SearchBar />
       <UserMenu />
     </div>
   )

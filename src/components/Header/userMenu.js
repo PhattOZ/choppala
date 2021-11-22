@@ -29,10 +29,6 @@ export default function UserMenu() {
     })
   }
 
-  // if (status === "loading") {
-  //   return <></>
-  // }
-
   return (
     <div className={styles.containerSide}>
       <div className={styles.menu}>
