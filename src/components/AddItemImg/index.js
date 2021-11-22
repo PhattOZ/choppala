@@ -55,28 +55,39 @@ function CropImgPopup({
   return ReactDom.createPortal(
     <>
       <div className={styles.container}>
-        <ReactCrop
-          className="cropSection"
-          src={upImg}
-          crop={crop}
-          onChange={(c) => setCrop(c)}
-          onImageLoaded={initCropSize}
-          onComplete={(c) => {
-            setCompletedCrop(c)
-          }}
-        />
-        <div className="menuSection">
-          <button
-            className="save"
-            onClick={() => {
-              onSave(completedCrop)
-            }}
-          >
-            Save
-          </button>
-          <button className="cancel" onClick={onCancelCrop}>
-            Cancel
-          </button>
+        <div className={styles.modal}>
+          <div className={styles.header}>
+            <div className={styles.title}>Crop Product Image</div>
+          </div>
+          <div className={styles.body}>
+            <ReactCrop
+              // className={styles.cropsection}
+              imageStyle={{
+                width: "70%",
+                objectFit:"scale-down"
+              }}
+              src={upImg}
+              crop={crop}
+              onChange={(c) => setCrop(c)}
+              onImageLoaded={initCropSize}
+              onComplete={(c) => {
+                setCompletedCrop(c)
+              }}
+            />
+            <div className={styles.button_wrapper}>
+              <div className={styles.cancelBtn} onClick={onCancelCrop}>
+                Cancel
+              </div>
+              <div
+                className={styles.activeBtn}
+                onClick={() => {
+                  onSave(completedCrop)
+                }}
+              >
+                Save
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </>,

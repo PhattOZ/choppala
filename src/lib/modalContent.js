@@ -112,6 +112,25 @@ const orderReceived = {
   buttonShow: "order",
 }
 
+//======================= Rating Popup ================================
+const rating = {
+  title: "Review & Rating",
+  titlecolor: "#444655",
+  icon: (
+    <Image
+      src="/rating.svg"
+      objectFit="cover"
+      alt="rate"
+      width={156}
+      height={156}
+    />
+  ),
+  subtitle: "Thanks for your purchase!",
+  content1: "Your order has been approved.",
+  content2: "You can wait for shipping from seller.",
+  buttonShow: "order",
+}
+
 export {
   deleteAccount,
   success,
@@ -122,4 +141,5 @@ export {
   productError,
   productWarn,
   orderReceived,
+  rating,
 }

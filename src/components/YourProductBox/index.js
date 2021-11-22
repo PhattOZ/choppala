@@ -1,12 +1,20 @@
 import Link from "next/link"
 import Image from "next/image"
 import styles from "./YourProductBox.module.scss"
+import { useState } from "react"
 // Icon
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons"
 import { faCoins, faTrash } from "@fortawesome/free-solid-svg-icons"
+// Pop up
+import Popup from "src/components/Popup"
+import { deleteProduct } from "src/lib/modalContent"
 
 function SellingBox() {
+  const [showModal, setShowModal] = useState(false)
+  //Open-Close Modal
+  const handleClose = () => setShowModal(false)
+  const handleShow = () => setShowModal(true)
   return (
     <div className={styles.orderBox}>
       <div className={styles.flexInfo}>
@@ -27,23 +35,37 @@ function SellingBox() {
           <div className={styles.infoblock}>
             <div className={styles.priceblock}>
               <FontAwesomeIcon icon={faCoins} size="sm" color="#FFD44D" />
-              <div className={styles.textInfo}>1299</div>
+              <div className={styles.textInfo}>1298</div>
             </div>
           </div>
           <div className={styles.infoblock}>
-            <div className={styles.textInfo}>100</div>
+            <div className={styles.textInfo}>10</div>
           </div>
-          <div className={styles.infoblock}>
-            <div className={styles.textInfo}>9</div>
-          </div>
-          <div className={styles.btnblock}>
-            <div className={styles.deleteBtn}>
-              <FontAwesomeIcon icon={faTrash} size="lg" />
-              Delete
-            </div>
+          <div className={styles.soldblock}>
+            <div className={styles.textInfo}>0</div>
           </div>
         </div>
       </div>
+      <div className={styles.btnblock}>
+        <div className={styles.deleteBtn} onClick={handleShow}>
+          <FontAwesomeIcon icon={faTrash} size="lg" />
+          Delete
+        </div>
+      </div>
+      {/* -----------Popup------------ */}
+      {showModal && (
+        <Popup
+          show={showModal}
+          onClose={handleClose}
+          title={deleteProduct.title}
+          titlecolor={deleteProduct.titlecolor}
+          subtitle={deleteProduct.subtitle}
+          icon={deleteProduct.icon}
+          content1={deleteProduct.content1}
+          content2={deleteProduct.content2}
+          buttonShow={deleteProduct.buttonShow}
+        />
+      )}
     </div>
   )
 }
@@ -65,7 +87,6 @@ export default function YourProduct() {
               </div>
               <div className={styles.subheader}></div>
             </div>
-
             <SellingBox />
             <SellingBox />
           </div>

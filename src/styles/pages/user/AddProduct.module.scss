@@ -136,8 +136,8 @@ $red20: #ffd2cc;
 
   input[type="file"] + label {
     display: flex;
-    width: 14rem;
-    height: 14rem;
+    width: 11rem;
+    height: 11rem;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -169,8 +169,8 @@ $red20: #ffd2cc;
 
   input[type="file"] + label {
     display: flex;
-    width: 9rem;
-    height: 9rem;
+    width: 7rem;
+    height: 7rem;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -178,6 +178,11 @@ $red20: #ffd2cc;
     border-radius: 0.25rem;
     cursor: pointer;
   }
+}
+
+.textinfo {
+  font-size: 0.85rem;
+  color: $red;
 }
 
 .button_wrapper {

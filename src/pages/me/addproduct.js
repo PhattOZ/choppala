@@ -194,13 +194,16 @@ export default function AddProduct({ user }) {
                           />
                         </div>
                       </div>
+                      {/* <div className={styles.textinfo}>
+                        *Please check the image file before uploading! <br/>
+                        You can select image at one time only. 
+                      </div> */}
                     </div>
                   </div>
                 </div>
               </div>
               {/* Button */}
               <div className={styles.button_wrapper}>
-                <div className={styles.cancelBtn}>Cancel</div>
                 <div className={styles.addBtn} onClick={handleSubmit}>
                   Add product
                 </div>
