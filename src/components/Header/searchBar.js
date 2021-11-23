@@ -101,7 +101,7 @@ export default function SearchBar() {
   )
 }
 
-const ItemList = forwardRef((props, ref) => {
+const ItemList = forwardRef(function ItemList(props, ref) {
   return (
     <ul
       className={styles.search__dropdown}
@@ -111,7 +111,7 @@ const ItemList = forwardRef((props, ref) => {
       ref={ref}
     >
       {props.Items.length > 0 ? (
-        props.Items.map((item) => <Item props={item} />)
+        props.Items.map((item) => <Item props={item} key={item.id} />)
       ) : (
         <div className={styles.search_item__empty}>not found</div>
       )}
