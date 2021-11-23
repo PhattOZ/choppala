@@ -116,7 +116,12 @@ const ItemList = forwardRef((props, ref) => {
             <a>
               <li className={styles.search_item}>
                 <div className={styles.search_item__image}>
-                  <Image src={item.image} layout="fill" objectFit="cover" />
+                  <Image
+                    src={item.image}
+                    layout="fill"
+                    objectFit="cover"
+                    alt="item"
+                  />
                 </div>
                 <span>{item.name}</span>
               </li>
