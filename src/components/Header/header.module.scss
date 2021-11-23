@@ -98,13 +98,36 @@ $headerHeight: 7.3rem;
       width: 100%;
       background-color: white;
       top: 2.25rem;
-      border: 1px solid black;
-      li:first-child {
-        border: none;
+      border-bottom: 1px solid black;
+      border-right: 1px solid black;
+      border-left: 1px solid black;
+
+      ul > li {
+        background-color: #4585ff;
       }
-      li {
-        padding: 0.5rem 0rem;
+      .search_item {
+        display: flex;
+        column-gap: 0.5rem;
+        align-items: center;
+        padding: 0.5rem;
         border-top: 1px solid black;
+        .search_item__image {
+          position: relative;
+          width: 3rem;
+          height: 3rem;
+        }
+      }
+      .search_item:hover {
+        background-color: #4585ff;
+      }
+
+      .search_item__empty {
+        width: 100%;
+        height: 5rem;
+        background-color: white;
+        border-top: 1px solid black;
+        text-align: center;
+        padding: 1.5rem;
       }
     }
   }

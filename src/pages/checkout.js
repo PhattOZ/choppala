@@ -1,7 +1,7 @@
 import CartContext from "src/lib/cart-context"
 import styles from "src/styles/pages/checkout.module.scss"
 
-import { useContext, useState } from "react"
+import { useContext } from "react"
 import { getSession } from "next-auth/react"
 import dbConnect from "src/lib/dbConnect"
 import User from "src/models/User"
