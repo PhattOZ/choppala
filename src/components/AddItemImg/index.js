@@ -104,6 +104,7 @@ export default function AddItemImg({ handleFileSync, size, index }) {
     width: 0,
     height: 0,
   })
+  const inputRef = useRef(null)
   const imgRef = useRef(null)
   const canvasRef = useRef(null)
 
@@ -149,6 +150,7 @@ export default function AddItemImg({ handleFileSync, size, index }) {
     )
   }, [finalCrop])
 
+  // Fire this function after seller select image to crop
   const onSelectFile = (e) => {
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0]
@@ -160,20 +162,34 @@ export default function AddItemImg({ handleFileSync, size, index }) {
     }
   }
 
+  // Fire this function after seller click Cancel in Crop Popup
   const handleCancelCrop = () => {
+    inputRef.current.value = ""
     setFilename("")
     setIsPopup(false)
   }
 
+  // Fire this function after seller click Save in Crop Popup
   const handleConfirmCrop = (crop) => {
     setIsPopup(false)
     setFinalCrop(crop)
   }
 
+  // Seller cancel cropped image
+  const handleDeleteCropped = () => {
+    setFinalCrop(null)
+  }
+
   return (
     <>
       {finalCrop ? (
-        <div>
+        <div className={styles.croppedImgContainer}>
+          <div
+            className={styles.croppedCancelBtn}
+            onClick={handleDeleteCropped}
+          >
+            x
+          </div>
           <canvas ref={canvasRef} className={upImgStyle}></canvas>
         </div>
       ) : (
@@ -185,6 +201,7 @@ export default function AddItemImg({ handleFileSync, size, index }) {
               accept="image/png, image/jpeg"
               id={index}
               name="myImage"
+              ref={inputRef}
             />
             <label htmlFor={index}>
               <FontAwesomeIcon icon={faImage} size="2x" color="#8B8EA1" />
