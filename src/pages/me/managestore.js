@@ -25,11 +25,11 @@ function Store({ user }) {
             </div>
             <div className={styles.edit_section}>
               <label htmlFor="">Store Name</label>
-              <input type="text" size="35" />
+              <input type="text" size="30" />
             </div>
             <div className={styles.edit_section}>
               <label htmlFor="">Store Email</label>
-              <input type="text" size="50" />
+              <input type="text" size="30" />
             </div>
           </div>
           <div className={styles.button_wrapper}>
