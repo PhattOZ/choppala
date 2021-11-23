@@ -95,8 +95,6 @@ export default function AddProduct({ user, seller }) {
     }
   }
 
-  console.log(inputsValidation)
-
   return (
     <div className={styles.container}>
       <Layout user={user}>
