@@ -3,10 +3,12 @@ import Link from "next/link"
 import Image from "next/image"
 import SearchBar from "./searchBar"
 import UserMenu from "./userMenu"
-import { useState, useEffect } from "react"
+import { useEffect, useContext } from "react"
+import CartContext from "src/lib/cart-context"
 
 export default function Header() {
-  const [showHeader, setShowHeader] = useState(true)
+  const { header } = useContext(CartContext)
+  const [showHeader, setShowHeader] = header
 
   useEffect(() => {
     let oldScrollY = 0

@@ -10,7 +10,8 @@ import { useContext } from "react"
 import { useRouter } from "next/router"
 
 export default function ProductDetail({ product }) {
-  const ctx = useContext(CartContext)
+  const { header, addToCart } = useContext(CartContext)
+  const [, setShowHeader] = header
   const router = useRouter()
   const cartHandler = (val) => {
     let { reviews, images, ...newProduct } = product
@@ -20,7 +21,8 @@ export default function ProductDetail({ product }) {
       quantity: val,
       image: images[0],
     }
-    ctx.addToCart(newProduct)
+    addToCart(newProduct)
+    setShowHeader(true)
   }
 
   const buynowHandler = (val) => {

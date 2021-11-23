@@ -1,4 +1,4 @@
-import { createContext, useEffect, useReducer } from "react"
+import { createContext, useEffect, useReducer, useState } from "react"
 
 const CartContext = createContext({})
 
@@ -172,6 +172,7 @@ const cartReducer = (state, action) => {
 
 export const CartContextProvider = (props) => {
   const [cart, dispatchCart] = useReducer(cartReducer, initialState)
+  const [showHeader, setShowHeader] = useState(true)
 
   const addToCart = (item) => {
     dispatchCart({ type: "ADD_CART", val: item }) //update state first than update in db
@@ -203,6 +204,7 @@ export const CartContextProvider = (props) => {
 
   const value = {
     value: cart,
+    header: [showHeader, setShowHeader],
     addToCart: addToCart,
     deleteItem: deleteItem,
     updateCart: updateCart,
