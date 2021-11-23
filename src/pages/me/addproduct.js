@@ -95,8 +95,6 @@ export default function AddProduct({ user, seller }) {
     }
   }
 
-  console.log(inputsValidation)
-
   return (
     <div className={styles.container}>
       <Layout user={user}>
@@ -127,6 +125,11 @@ export default function AddProduct({ user, seller }) {
                         name="name"
                         onChange={handleChange}
                       />
+                      {inputsValidation.name ? (
+                        <span className={styles.invalidText}>
+                          This field is required
+                        </span>
+                      ) : null}
                     </div>
                   </div>
                   {/* Row2 */}
@@ -156,6 +159,11 @@ export default function AddProduct({ user, seller }) {
                         </option>
                         <option value="Women Clothes">Women Clothes</option>
                       </select>
+                      {inputsValidation.category ? (
+                        <span className={styles.invalidText}>
+                          This field is required
+                        </span>
+                      ) : null}
                     </div>
                     <div className={styles.edit_section}>
                       <label htmlFor="">Price</label>
@@ -166,6 +174,11 @@ export default function AddProduct({ user, seller }) {
                         name="price"
                         onChange={handleChange}
                       />
+                      {inputsValidation.price ? (
+                        <span className={styles.invalidText}>
+                          This field is required
+                        </span>
+                      ) : null}
                     </div>
                     <div className={styles.edit_section}>
                       <label htmlFor="">Amount</label>
@@ -175,6 +188,11 @@ export default function AddProduct({ user, seller }) {
                         name="amount"
                         onChange={handleChange}
                       />
+                      {inputsValidation.amount ? (
+                        <span className={styles.invalidText}>
+                          This field is required
+                        </span>
+                      ) : null}
                     </div>
                   </div>
                   {/* Row3 */}
@@ -189,6 +207,11 @@ export default function AddProduct({ user, seller }) {
                         onChange={handleChange}
                         required
                       ></textarea>
+                      {inputsValidation.detail ? (
+                        <span className={styles.invalidText}>
+                          This field is required
+                        </span>
+                      ) : null}
                     </div>
                   </div>
                 </div>
@@ -232,6 +255,11 @@ export default function AddProduct({ user, seller }) {
                           />
                         </div>
                       </div>
+                      {inputsValidation.images ? (
+                        <span className={styles.invalidText}>
+                          This field is required (At least 1 image)
+                        </span>
+                      ) : null}
                     </div>
                   </div>
                 </div>
