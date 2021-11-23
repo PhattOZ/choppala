@@ -6,6 +6,10 @@ import { useLayoutEffect } from "react"
 export default function Loader() {
   useLockBodyScroll()
 
+  if (!document) {
+    return <></>
+  }
+
   return ReactDOM.createPortal(
     <>
       <div className={styles.body}>
