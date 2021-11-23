@@ -18,6 +18,12 @@ $red20: #ffd2cc;
   border-radius: 0.5rem;
 }
 
+.top_part {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .title {
   font-weight: 600;
   font-size: 1.25rem;
@@ -58,16 +64,14 @@ $red20: #ffd2cc;
   display: flex;
   justify-content: center;
   column-gap: 0.6rem;
-  width: 12rem;
   padding: 0.6rem 1rem;
-  background-color: $blue;
-  color: white;
+  color: $blue;
   border-radius: 0.4rem;
   cursor: pointer;
 }
 
 .addBtn:hover {
-  background-color: $grey70;
+  background-color: $lightblue;
 }
 
 // ------------SellingBox------------ //
@@ -123,10 +127,12 @@ $red20: #ffd2cc;
   column-gap: 0.4rem;
 }
 
-.amountblock {
+.price_align {
   display: flex;
-  justify-content: flex-end;
-  width: 5rem;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 6rem;
+  padding-left: 2rem;
 }
 
 .soldblock {
@@ -167,3 +173,43 @@ $red20: #ffd2cc;
   color: white;
   cursor: pointer;
 }
+
+// -------------------------------------------------
+
+//------------------ FirstProduct ------------------//
+
+.peopleIcon {
+  position: relative;
+  width: 18rem;
+  height: 18rem;
+  margin: auto;
+}
+
+.text {
+  font-size: 14px;
+  color: #444655;
+  text-align: center;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  column-gap: 0.8rem;
+  background-color: #4585ff;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #ffff;
+  border-radius: 0.4rem;
+  width: 13rem;
+  padding: 0.6rem 1rem;
+  cursor: pointer;
+}
+
+.button:hover{
+  background-color: #8B8EA1;
+}
+
+//--------------------------------------------

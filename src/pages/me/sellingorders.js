@@ -1,7 +1,6 @@
 import Layout from "src/components/UserProfileLayout"
 import styles from "src/styles/pages/user/SellingOrders.module.scss"
 import ActivateSeller from "src/components/ActivateSeller"
-import YourProduct from "src/components/YourProductBox"
 import { getSession } from "next-auth/react"
 import dbConnect from "src/lib/dbConnect"
 import User from "src/models/User"

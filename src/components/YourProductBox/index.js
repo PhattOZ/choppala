@@ -8,7 +8,7 @@ import styles from "./YourProductBox.module.scss"
 // Icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons"
-import { faCoins, faTrash } from "@fortawesome/free-solid-svg-icons"
+import { faTrash } from "@fortawesome/free-solid-svg-icons"
 // Component
 import Loader from "../Loader"
 // Custom lib
@@ -32,9 +32,8 @@ function SellingBox({ name, image, price, amount, sold }) {
             <div className={styles.textInfo}>{name}</div>
           </div>
           <div className={styles.infoblock}>
-            <div className={styles.priceblock}>
-              <FontAwesomeIcon icon={faCoins} size="sm" color="#FFD44D" />
-              <div className={styles.textInfo}>{price}</div>
+            <div className={styles.price_align}>
+              <div className={styles.textInfo}>฿{price}</div>
             </div>
           </div>
           <div className={styles.infoblock}>
@@ -108,7 +107,18 @@ export default function YourProductBox({ sellerId }) {
       {sellerItems.length ? (
         <div className={styles.main}>
           <section>
+            <div className={styles.top_part}>
             <div className={styles.title}>Your Product</div>
+            <div className={styles.button_wrapper}>
+              <Link href="/me/addproduct" passHref>
+                <div className={styles.addBtn}>
+                  <FontAwesomeIcon icon={faPlusCircle} size="lg" />
+                  Add product
+                </div>
+              </Link>
+            </div>
+            </div>
+  
             <div className={styles.body}>
               <div className={styles.header}>
                 <div className={styles.subtitle}>Product Name</div>
@@ -136,14 +146,6 @@ export default function YourProductBox({ sellerId }) {
                 totalItems={allSellerItems.length}
                 url="/sellingorders"
               />
-            </div>
-            <div className={styles.button_wrapper}>
-              <Link href="/me/addproduct" passHref>
-                <div className={styles.addBtn}>
-                  <FontAwesomeIcon icon={faPlusCircle} size="lg" />
-                  Add product
-                </div>
-              </Link>
             </div>
           </section>
         </div>
