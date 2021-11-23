@@ -203,6 +203,10 @@ $red20: #ffd2cc;
   &:hover {
     background-color: $grey70;
   }
+
+  .redBorder {
+    border: 1px solid $red;
+  }
 }
 
 .cancelBtn {
@@ -225,6 +229,12 @@ $red20: #ffd2cc;
   opacity: 80%;
   color: $red;
   cursor: pointer;
+}
+
+.invalidText {
+  font-size: 0.6rem;
+  font-weight: 500;
+  color: $red;
 }
 
 // ---------------------------- Disable arrow input type="number" ----------------------------

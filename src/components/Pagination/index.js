@@ -4,7 +4,7 @@ import { useRouter } from "next/router"
 // Style
 import styles from "./Pagination.module.scss"
 
-export default function Pagination({ itemsPerPage, totalItems, paginate }) {
+export default function Pagination({ itemsPerPage, totalItems, url }) {
   const router = useRouter()
   const pageNumber = []
   const currentPage = router.query.page ? router.query.page : 1
@@ -22,7 +22,7 @@ export default function Pagination({ itemsPerPage, totalItems, paginate }) {
           <Link
             key={i}
             href={{
-              pathname: "/filter",
+              pathname: `${url}`,
               query: { ...router.query, page: i },
             }}
             passHref

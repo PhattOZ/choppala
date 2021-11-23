@@ -1,23 +1,24 @@
 import Layout from "src/components/UserProfileLayout"
 import styles from "src/styles/pages/user/SellingOrders.module.scss"
-import FirstProduct from "src/components/FirstProduct"
 import ActivateSeller from "src/components/ActivateSeller"
 import YourProduct from "src/components/YourProductBox"
 import { getSession } from "next-auth/react"
 import dbConnect from "src/lib/dbConnect"
 import User from "src/models/User"
+import YourProductBox from "src/components/YourProductBox"
 
 export default function SellingOrders({ user }) {
   return (
     <div className={styles.container}>
       <Layout user={user}>
         {user.isSeller ? (
-          <FirstProduct />
+          <YourProductBox sellerId={user.sellerId} />
         ) : (
           <ActivateSeller
             userId={user._id}
             username={user.name}
             userEmail={user.email}
+            userImage={user.image}
           />
         )}
       </Layout>
@@ -31,10 +32,13 @@ export async function getServerSideProps(context) {
 
   if (session) {
     await dbConnect()
-    const leanResponse = await User.findOne({
-      name: session.user.name,
-      email: session.user.email,
-    }).lean()
+    const leanResponse = await User.findOne(
+      {
+        name: session.user.name,
+        email: session.user.email,
+      },
+      { name: 1, email: 1, image: 1, isSeller: 1, sellerId: 1 }
+    ).lean()
 
     leanResponse._id = leanResponse._id.toString()
 

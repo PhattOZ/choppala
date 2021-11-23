@@ -98,8 +98,6 @@ export default function AddItemImg({ handleFileSync, size, index }) {
   const upImgStyle = size === "lg" ? styles.canvasLg : styles.canvasSm
   const [isPopup, setIsPopup] = useState(false)
   const [upImg, setUpImg] = useState()
-  const [crop, setCrop] = useState()
-  const [completedCrop, setCompletedCrop] = useState(null)
   const [finalCrop, setFinalCrop] = useState()
   const [filename, setFilename] = useState("")
   const [imgSize, setImgSize] = useState({
@@ -163,8 +161,8 @@ export default function AddItemImg({ handleFileSync, size, index }) {
   }
 
   const handleCancelCrop = () => {
-    setIsPopup(false)
     setFilename("")
+    setIsPopup(false)
   }
 
   const handleConfirmCrop = (crop) => {
@@ -196,11 +194,6 @@ export default function AddItemImg({ handleFileSync, size, index }) {
           {isPopup ? (
             <CropImgPopup
               upImg={upImg}
-              crop={crop}
-              setCrop={setCrop}
-              completedCrop={completedCrop}
-              setCompletedCrop={setCompletedCrop}
-              setFinalCrop={setFinalCrop}
               imgRef={imgRef}
               onCancelCrop={handleCancelCrop}
               onSave={handleConfirmCrop}

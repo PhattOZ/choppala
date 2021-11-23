@@ -14,10 +14,11 @@ import dbConnect from "src/lib/dbConnect"
 import createImgUrls from "src/lib/firebase"
 // Model
 import User from "src/models/User"
+import Seller from "src/models/Seller"
 // Component
 import AddItemImg from "src/components/AddItemImg"
 
-export default function AddProduct({ user }) {
+export default function AddProduct({ user, seller }) {
   const router = useRouter()
   const [imgBlobs, setImgBlobs] = useState([])
   const [inputs, setInputs] = useState({
@@ -80,11 +81,16 @@ export default function AddProduct({ user }) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ ...inputs, images: imgUrls }),
+        body: JSON.stringify({
+          ...inputs,
+          images: imgUrls,
+          sellerName: seller.storeName,
+          sellerId: seller.id,
+        }),
       })
 
       if (res.ok) {
-        router.push("/me/yourproduct")
+        router.push("/me/sellingorders")
       }
     }
   }
@@ -121,6 +127,11 @@ export default function AddProduct({ user }) {
                         name="name"
                         onChange={handleChange}
                       />
+                      {inputsValidation.name ? (
+                        <span className={styles.invalidText}>
+                          This field is required
+                        </span>
+                      ) : null}
                     </div>
                   </div>
                   {/* Row2 */}
@@ -150,6 +161,11 @@ export default function AddProduct({ user }) {
                         </option>
                         <option value="Women Clothes">Women Clothes</option>
                       </select>
+                      {inputsValidation.category ? (
+                        <span className={styles.invalidText}>
+                          This field is required
+                        </span>
+                      ) : null}
                     </div>
                     <div className={styles.edit_section}>
                       <label htmlFor="">Price</label>
@@ -160,6 +176,11 @@ export default function AddProduct({ user }) {
                         name="price"
                         onChange={handleChange}
                       />
+                      {inputsValidation.price ? (
+                        <span className={styles.invalidText}>
+                          This field is required
+                        </span>
+                      ) : null}
                     </div>
                     <div className={styles.edit_section}>
                       <label htmlFor="">Amount</label>
@@ -169,6 +190,11 @@ export default function AddProduct({ user }) {
                         name="amount"
                         onChange={handleChange}
                       />
+                      {inputsValidation.amount ? (
+                        <span className={styles.invalidText}>
+                          This field is required
+                        </span>
+                      ) : null}
                     </div>
                   </div>
                   {/* Row3 */}
@@ -183,6 +209,11 @@ export default function AddProduct({ user }) {
                         onChange={handleChange}
                         required
                       ></textarea>
+                      {inputsValidation.detail ? (
+                        <span className={styles.invalidText}>
+                          This field is required
+                        </span>
+                      ) : null}
                     </div>
                   </div>
                 </div>
@@ -226,10 +257,11 @@ export default function AddProduct({ user }) {
                           />
                         </div>
                       </div>
-                      {/* <div className={styles.textinfo}>
-                        *Please check the image file before uploading! <br/>
-                        You can select image at one time only. 
-                      </div> */}
+                      {inputsValidation.images ? (
+                        <span className={styles.invalidText}>
+                          This field is required (At least 1 image)
+                        </span>
+                      ) : null}
                     </div>
                   </div>
                 </div>
@@ -259,12 +291,20 @@ export async function getServerSideProps(context) {
         name: session.user.name,
         email: session.user.email,
       },
+      { name: 1, email: 1, image: 1, _id: 1 }
+    ).lean()
+
+    leanResponse._id = leanResponse._id.toString()
+
+    const sellerLeanResponse = await Seller.findOne(
+      { userId: leanResponse._id },
       { _id: 0 }
     ).lean()
 
     return {
       props: {
-        user: JSON.parse(JSON.stringify(leanResponse)),
+        user: leanResponse,
+        seller: sellerLeanResponse,
       },
     }
   } else {

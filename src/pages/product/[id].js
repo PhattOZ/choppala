@@ -42,7 +42,9 @@ export default function ProductDetail({ product }) {
         productname={product.name}
         price={product.price}
         sellerName={product.sellerName}
+        sellerId={product.sellerId}
         reviewCount={product.reviews.length}
+        images={product.images}
       />
       <ProductInfo detail={product.detail} />
       <ReviewCard reviews={product.reviews} />
@@ -53,7 +55,7 @@ export default function ProductDetail({ product }) {
 export async function getServerSideProps(context) {
   const { id } = context.query
   await dbConnect()
-  const data = await Item.findById(id)
+  const data = await Item.findById(id, { _id: 0 })
   return {
     props: {
       product: JSON.parse(JSON.stringify(data)),

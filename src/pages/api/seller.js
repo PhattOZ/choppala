@@ -20,16 +20,24 @@ export default async function handler(req, res) {
       }
     case "POST":
       try {
-        const { userId, username, userEmail } = req.body
+        const { userId, username, userEmail, userImage } = req.body
+        // Create seller in Seller collection
+        const newSeller = {
+          userId,
+          storeName: username,
+          storeEmail: userEmail,
+          storeImage: userImage,
+        }
+        const dbResponse = await Seller.create(newSeller)
+        // Generate id field for seller
+        await Seller.findByIdAndUpdate(dbResponse._id, {
+          id: dbResponse._id.toString(),
+        }).lean()
 
         // Update user isSeller: true
         const filter = { name: username, email: userEmail }
-        const update = { isSeller: true }
+        const update = { isSeller: true, sellerId: dbResponse._id.toString() }
         await User.findOneAndUpdate(filter, update)
-
-        // Create seller in Seller collection
-        const newSeller = { userId, storeName: username, storeEmail: userEmail }
-        await Seller.create(newSeller)
         res.status(201).json({ success: true })
       } catch (error) {
         res.status(400).json({ success: false })

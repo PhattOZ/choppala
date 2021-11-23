@@ -93,7 +93,7 @@ export default function Filter({
           <div className={styles.card_container}>
             {currentItems &&
               currentItems.map((item) => (
-                <Link key={item._id} href={`/product/${item._id}`}>
+                <Link key={item.id} href={`/product/${item.id}`}>
                   <a>
                     <Card
                       title={item.name}
@@ -105,7 +105,11 @@ export default function Filter({
               ))}
           </div>
           <div className={styles.page_container}>
-            <Pagination itemsPerPage={itemsPerPage} totalItems={totalItems} />
+            <Pagination
+              itemsPerPage={itemsPerPage}
+              totalItems={totalItems}
+              url="/filter"
+            />
           </div>
         </div>
       </div>

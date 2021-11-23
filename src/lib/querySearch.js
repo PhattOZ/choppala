@@ -33,6 +33,6 @@ export default async function querySearch(
     sort = { price: -1 }
   }
 
-  const itemList = await Item.find(query).sort(sort)
+  const itemList = await Item.find(query, { _id: 0 }).sort(sort)
   return JSON.parse(JSON.stringify(itemList))
 }

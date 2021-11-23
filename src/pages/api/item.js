@@ -7,6 +7,19 @@ export default async function handler(req, res) {
   await dbConnect()
 
   switch (method) {
+    case "GET":
+      // Get all items that sellerId sold
+      try {
+        const sellerId = req.query.sellerId
+        const itemsLeanResponse = await Item.find({ sellerId }, { _id: 0 })
+          .sort({ _id: -1 })
+          .lean()
+        res.status(200).json({ item: itemsLeanResponse })
+      } catch (err) {
+        console.log(err)
+        res.status(404).json({ success: false })
+      }
+      break
     case "POST":
       try {
         const data = req.body
@@ -19,5 +32,6 @@ export default async function handler(req, res) {
         console.log(err)
         res.status(400).json({ success: false })
       }
+      break
   }
 }
