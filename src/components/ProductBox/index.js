@@ -54,31 +54,7 @@ export default function ProductBox({
   return (
     <div className={styles.container}>
       <div className={styles.row}>
-        <div className={styles.imgcontainer}>
-          <div>
-            <Image
-              src={images[0]}
-              alt="Product image"
-              width={288}
-              height={288}
-            />
-          </div>
-          <div className={styles.imggal}>
-            {images.map((image, index) => {
-              if (index !== 0) {
-                return (
-                  <Image
-                    src={image}
-                    alt="Product image"
-                    width={64}
-                    height={64}
-                    key={index}
-                  />
-                )
-              }
-            })}
-          </div>
-        </div>
+        <ImageSlide images={images} />
         <div className={styles.infocontainer}>
           <div className={styles.top}>
             <div>
@@ -128,9 +104,7 @@ export default function ProductBox({
             </div>
           </div>
           <div className={styles.pricecontainer}>
-            <div className={styles.price}>
-              {`฿${price}`}
-            </div>
+            <div className={styles.price}>{`฿${price}`}</div>
           </div>
           <div className={styles.linehr}></div>
           <div className={styles.countcontainer}>
@@ -160,6 +134,64 @@ export default function ProductBox({
           </div>
         </div>
       </div>
+    </div>
+  )
+}
+
+const ImageSlide = ({ images }) => {
+  const [mainImageIndex, setMainImageIndex] = useState(0)
+
+  const changeMainImageHandler = (e) => {
+    setMainImageIndex(e.currentTarget.getAttribute("imageat"))
+  }
+
+  return (
+    <div className={styles.imgcontainer}>
+      <MainImage index={mainImageIndex} images={images} />
+      <div className={styles.imggal}>
+        {images.map((image, index) => {
+          return (
+            <div
+              className={`${styles.item_image} ${
+                index == mainImageIndex && styles.item_image_select
+              }`}
+              key={index}
+              onMouseOver={changeMainImageHandler}
+              imageat={index}
+            >
+              <Image src={image} alt="Product image" layout="fill" />
+            </div>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
+const MainImage = ({ images, index }) => {
+  const [imagePos, setImagePos] = useState({
+    backgroundPosition: "0% 0%",
+  })
+
+  const handleMouseMove = (e) => {
+    const { left, top, width, height } = e.currentTarget.getBoundingClientRect()
+    const x = ((e.pageX - left) / width) * 100
+    const y = ((e.pageY - top) / height) * 100
+    setImagePos({ backgroundPosition: `${x}% ${y}%` })
+  }
+
+  const mainImage_style = {
+    backgroundPosition: imagePos.backgroundPosition,
+    backgroundImage: `url(${images[index]})`,
+  }
+
+  return (
+    <div
+      className={styles.item_mainImage}
+      onMouseMove={handleMouseMove}
+      style={mainImage_style}
+    >
+      <Image src={images[index]} alt="Product image" layout="fill" />
     </div>
   )
 }

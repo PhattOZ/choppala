@@ -25,7 +25,7 @@ export default function Checkout({ data }) {
   let ItemFromCtx = ctx.value.cart.filter((item) => item.isConfirm == true)
 
   const orderHandler = () => {
-    console.log("in orderHandler")
+    ctx.orderItem(ItemFromCtx)
   }
 
   return (
