@@ -72,12 +72,12 @@ export default function Cart() {
         <div className={styles.order_summary}>
           <div>Order Summary</div>
           <div className={styles.total_price}>
-            <span>total</span>
+            <span>Total</span>
             <span>฿{ctx.value.totalPrice}</span>
           </div>
           <Link href="/checkout">
             <a>
-              <div className={styles.process_btn}>process to order</div>
+              <div className={styles.process_btn}>Proceed to order</div>
             </a>
           </Link>
         </div>
@@ -173,6 +173,7 @@ const Item = ({ item }) => {
             icon={faTrashAlt}
             size={"lg"}
             onClick={deleteItemHandler}
+            color="#8B8EA1"
           ></FontAwesomeIcon>
         </div>
       </div>

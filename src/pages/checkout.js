@@ -11,9 +11,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
   faAddressCard,
   faMapMarkerAlt,
-  faCashRegister,
-  faHandHoldingUsd,
-  faPencilAlt,
+  faPen,
+  faMoneyBill,
 } from "@fortawesome/free-solid-svg-icons"
 
 export default function Checkout({ data }) {
@@ -33,10 +32,13 @@ export default function Checkout({ data }) {
     <div className={styles.container}>
       <div className={styles.main}>
         <div className={styles.info_container}>
-          <FontAwesomeIcon
-            icon={faAddressCard}
-            className={styles.fontAwesome}
-          />
+          <div className={styles.icon_box}>
+            <FontAwesomeIcon
+              icon={faAddressCard}
+              className={styles.fontAwesome}
+            />
+          </div>
+
           <div className={styles.info__details}>
             <div>
               General informaition
@@ -48,8 +50,8 @@ export default function Checkout({ data }) {
             </div>
             <div>
               <FontAwesomeIcon
-                icon={faPencilAlt}
-                size={"lg"}
+                icon={faPen}
+                size={"1x"}
                 className={styles.icon_clickable}
               />
             </div>
@@ -57,10 +59,13 @@ export default function Checkout({ data }) {
         </div>
 
         <div className={styles.address_container}>
-          <FontAwesomeIcon
-            icon={faMapMarkerAlt}
-            className={styles.fontAwesome}
-          />
+          <div className={styles.icon_box}>
+            <FontAwesomeIcon
+              icon={faMapMarkerAlt}
+              className={styles.fontAwesome}
+            />
+          </div>
+
           <div className={styles.address_details}>
             <div>
               Delivery Address
@@ -74,8 +79,8 @@ export default function Checkout({ data }) {
             </div>
             <div>
               <FontAwesomeIcon
-                icon={faPencilAlt}
-                size={"lg"}
+                icon={faPen}
+                size={"1x"}
                 className={styles.icon_clickable}
               />
             </div>
@@ -83,21 +88,19 @@ export default function Checkout({ data }) {
         </div>
 
         <div className={styles.payment_container}>
-          <FontAwesomeIcon
-            icon={faCashRegister}
-            className={styles.fontAwesome}
-          />
+          <div className={styles.check_box}>
+            <div className={styles.circle}></div>
+          </div>
           <div className={styles.payment_details}>
             <div>
-              General informaition
+              Payment
               <div className={styles.payment_method}>
-                <div>
-                  <input type="checkbox" />
+                <div className={styles.default}>
                   <FontAwesomeIcon
-                    icon={faHandHoldingUsd}
+                    icon={faMoneyBill}
                     className={styles.fontAwesome}
                   />
-                  cash
+                  Cash on delivery
                 </div>
               </div>
             </div>
@@ -121,7 +124,10 @@ export default function Checkout({ data }) {
         </div>
         <div className={styles.order__bottomPart}>
           <div>
-            <span>ALL payment</span> <span>฿{ctx.value.totalPrice + 20}</span>
+            <span>All payment</span>{" "}
+            <div className={styles.total_price}>
+              <span>฿{ctx.value.totalPrice + 20}</span>
+            </div>
           </div>
           <div onClick={orderHandler}>Order now</div>
         </div>
@@ -133,12 +139,12 @@ export default function Checkout({ data }) {
 const OrderList = ({ data }) => {
   return (
     <div className={styles.order__details}>
-      <div>
+      <div className={styles.img}>
         <Image src={data.image} layout="fill" objectFit="cover" />
       </div>
       <div className={styles.order__details_flexbox}>
-        <div>{data.name}</div>
-        <div>฿{data.price}</div>
+        <div className={styles.name}>{data.name}</div>
+        <div className={styles.price}>฿{data.price}</div>
       </div>
       <div>{data.quantity} each</div>
     </div>

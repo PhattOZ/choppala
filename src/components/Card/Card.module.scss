@@ -1,24 +1,25 @@
 .card {
   border-radius: 0.6rem;
   overflow: hidden;
-  width: 10rem;
+  width: 11rem;
   margin-bottom: 1rem;
   transform: matrix(1,0,0,1,0,0);
   transition: all 0.2s ease;
+  border: solid 1px #d9dbe9;
   &:hover {
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 6px 24px -2px;
-    transform: translateY(-0.25rem);
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 6px 20px -2px;
+    transform: translateY(-0.3rem);
   }
 }
 
 .img_container {
-  height: 9rem;
+  height: 10rem;
   overflow: hidden;
 }
 
 .card_image {
   position: relative;
-  height: 9rem;
+  height: 10rem;
   transition: transform 0.5s ease;
   overflow: hidden;
   &:hover {
@@ -35,6 +36,7 @@
 }
 
 .card_title {
+  height: 2.6rem;
   font-weight: 500;
   font-size: 0.9rem;
   color: #444655;

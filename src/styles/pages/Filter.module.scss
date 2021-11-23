@@ -21,7 +21,7 @@
 
 .main {
   display: flex;
-  column-gap: 3rem;
+  column-gap: 2.5rem;
 }
 
 .main_body {
@@ -34,7 +34,7 @@
 .card_container {
   flex-grow: 1;
   display: grid;
-  column-gap: 2rem;
+  column-gap: 1rem;
   row-gap: 0.5rem;
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }

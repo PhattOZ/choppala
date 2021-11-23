@@ -18,19 +18,10 @@ function useLockBodyScroll() {
   }, [])
 }
 
-function CropImgPopup({
-  upImg,
-  crop,
-  setCrop,
-  completedCrop,
-  setCompletedCrop,
-  setFinalCrop,
-  imgRef,
-  onCancelCrop,
-  onSave,
-}) {
-  // Call hook to lock body scroll
-  useLockBodyScroll()
+function CropImgPopup({ upImg, imgRef, onCancelCrop, onSave, setImgSize }) {
+  const [crop, setCrop] = useState()
+  const [completedCrop, setCompletedCrop] = useState(null)
+  useLockBodyScroll() // Call hook to lock body scroll
 
   const initCropSize = (img) => {
     imgRef.current = img
@@ -49,34 +40,51 @@ function CropImgPopup({
       x: 0,
       y: 0,
     })
+    setImgSize({
+      width: img.width,
+      height: img.height,
+    })
     return false // Return false when setting crop state in here.
   }
 
   return ReactDom.createPortal(
     <>
       <div className={styles.container}>
-        <ReactCrop
-          className="cropSection"
-          src={upImg}
-          crop={crop}
-          onChange={(c) => setCrop(c)}
-          onImageLoaded={initCropSize}
-          onComplete={(c) => {
-            setCompletedCrop(c)
-          }}
-        />
-        <div className="menuSection">
-          <button
-            className="save"
-            onClick={() => {
-              onSave(completedCrop)
-            }}
-          >
-            Save
-          </button>
-          <button className="cancel" onClick={onCancelCrop}>
-            Cancel
-          </button>
+        <div className={styles.modal}>
+          <div className={styles.header}>
+            <div className={styles.title}>Crop Product Image</div>
+          </div>
+          <div className={styles.body}>
+            <ReactCrop
+              style={{
+                border: "2px solid #969696",
+              }}
+              imageStyle={{
+                height: "60vh",
+                objectFit: "contain",
+              }}
+              src={upImg}
+              crop={crop}
+              onChange={(c) => setCrop(c)}
+              onImageLoaded={initCropSize}
+              onComplete={(c) => {
+                setCompletedCrop(c)
+              }}
+            />
+            <div className={styles.button_wrapper}>
+              <div className={styles.cancelBtn} onClick={onCancelCrop}>
+                Cancel
+              </div>
+              <div
+                className={styles.activeBtn}
+                onClick={() => {
+                  onSave(completedCrop)
+                }}
+              >
+                Save
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </>,
@@ -94,6 +102,10 @@ export default function AddItemImg({ handleFileSync, size, index }) {
   const [completedCrop, setCompletedCrop] = useState(null)
   const [finalCrop, setFinalCrop] = useState()
   const [filename, setFilename] = useState("")
+  const [imgSize, setImgSize] = useState({
+    width: 0,
+    height: 0,
+  })
   const imgRef = useRef(null)
   const canvasRef = useRef(null)
 
@@ -106,8 +118,8 @@ export default function AddItemImg({ handleFileSync, size, index }) {
     const canvas = canvasRef.current
     const crop = finalCrop
 
-    const scaleX = image.naturalWidth / image.width
-    const scaleY = image.naturalHeight / image.height
+    const scaleX = image.naturalWidth / imgSize.width
+    const scaleY = image.naturalHeight / imgSize.height
     const ctx = canvas.getContext("2d")
     const pixelRatio = window.devicePixelRatio
 
@@ -192,6 +204,7 @@ export default function AddItemImg({ handleFileSync, size, index }) {
               imgRef={imgRef}
               onCancelCrop={handleCancelCrop}
               onSave={handleConfirmCrop}
+              setImgSize={setImgSize}
             />
           ) : null}
         </>

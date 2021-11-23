@@ -4,7 +4,7 @@ import styles from "./Popup.module.scss"
 import { useLayoutEffect } from "react"
 // ---------------- Icon ----------------
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faTimes } from "@fortawesome/free-solid-svg-icons"
+import { faTimes, faStar } from "@fortawesome/free-solid-svg-icons"
 
 export default function Popup({
   show,
@@ -21,15 +21,19 @@ export default function Popup({
   // Call hook to lock body scroll
   useLockBodyScroll()
 
+  const rateHandler = () => {
+    console.log("in rateHandler")
+  }
+
   return ReactDom.createPortal(
     <>
       {show ? (
-        <div className={styles.container} onClick={() => onClose()}>
+        <div className={styles.container}>
           <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
             <div className={styles.header}>
-              <div className={styles.icon} onClick={() => onClose()}>
-                <FontAwesomeIcon icon={faTimes} size="lg" />
-              </div>
+                <div className={styles.icon} onClick={() => onClose()}>
+                  <FontAwesomeIcon icon={faTimes} size="lg" />
+                </div>
             </div>
             <div className={styles.body}>
               <div className={styles.title} style={{ color: titlecolor }}>
@@ -65,6 +69,31 @@ export default function Popup({
                   <Link href="/" passHref>
                     <div className={styles.actionBtn}>Back to Homepage</div>
                   </Link>
+                </div>
+              ) : buttonShow === "rating" ? (
+                <div className={styles.bottom_part}>
+                  <div className={styles.stars_fav}>
+                    <div className={styles.star_icon} onClick={rateHandler}>
+                      <FontAwesomeIcon icon={faStar} size={"2x"} />
+                    </div>
+                    <div className={styles.star_icon}>
+                      <FontAwesomeIcon icon={faStar} size={"2x"} />
+                    </div>
+                    <div className={styles.star_icon}>
+                      <FontAwesomeIcon icon={faStar} size={"2x"} />
+                    </div>
+                    <div className={styles.star_icon}>
+                      <FontAwesomeIcon icon={faStar} size={"2x"} />
+                    </div>
+                    <div className={styles.star_icon}>
+                      <FontAwesomeIcon icon={faStar} size={"2x"} />
+                    </div>
+                  </div>
+                  <div className={styles.button_wrapper}>
+                    <Link href="/" passHref>
+                      <div className={styles.actionBtn}>Submit</div>
+                    </Link>
+                  </div>
                 </div>
               ) : (
                 <div></div>
