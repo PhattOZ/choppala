@@ -51,6 +51,15 @@ export default function AddProduct({ user, seller }) {
     })
   }
 
+  // Seller cancel cropped image
+  const handleDeleteCropped = (index) => {
+    setImgBlobs((prev) => {
+      const newArrayBlobs = [...prev]
+      newArrayBlobs[index] = null
+      return newArrayBlobs
+    })
+  }
+
   const handleSubmit = async () => {
     // Input validation (If all input not null, checkNull is true, otherwise checkNull is false)
     const checkNull =
@@ -228,11 +237,13 @@ export default function AddProduct({ user, seller }) {
                           handleFileSync={handleFileSync}
                           size="lg"
                           index={0}
+                          handleDeleteCropped={handleDeleteCropped}
                         />
                         <AddItemImg
                           handleFileSync={handleFileSync}
                           size="lg"
                           index={1}
+                          handleDeleteCropped={handleDeleteCropped}
                         />
                       </div>
                       {/* Small image input */}
@@ -242,16 +253,19 @@ export default function AddProduct({ user, seller }) {
                             handleFileSync={handleFileSync}
                             size="sm"
                             index={2}
+                            handleDeleteCropped={handleDeleteCropped}
                           />
                           <AddItemImg
                             handleFileSync={handleFileSync}
                             size="sm"
                             index={3}
+                            handleDeleteCropped={handleDeleteCropped}
                           />
                           <AddItemImg
                             handleFileSync={handleFileSync}
                             size="sm"
                             index={4}
+                            handleDeleteCropped={handleDeleteCropped}
                           />
                         </div>
                       </div>

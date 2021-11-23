@@ -94,7 +94,12 @@ function CropImgPopup({ upImg, imgRef, onCancelCrop, onSave, setImgSize }) {
 
 // ----------------------------------------------------------------------
 
-export default function AddItemImg({ handleFileSync, size, index }) {
+export default function AddItemImg({
+  handleFileSync,
+  size,
+  index,
+  handleDeleteCropped,
+}) {
   const upImgStyle = size === "lg" ? styles.canvasLg : styles.canvasSm
   const [isPopup, setIsPopup] = useState(false)
   const [upImg, setUpImg] = useState()
@@ -175,18 +180,17 @@ export default function AddItemImg({ handleFileSync, size, index }) {
     setFinalCrop(crop)
   }
 
-  // Seller cancel cropped image
-  const handleDeleteCropped = () => {
-    setFinalCrop(null)
-  }
-
   return (
     <>
       {finalCrop ? (
         <div className={styles.croppedImgContainer}>
           <div
             className={styles.croppedCancelBtn}
-            onClick={handleDeleteCropped}
+            onClick={() => {
+              handleDeleteCropped(index)
+              setFilename("")
+              setFinalCrop(null)
+            }}
           >
             x
           </div>
