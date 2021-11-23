@@ -105,7 +105,11 @@ export default function Filter({
               ))}
           </div>
           <div className={styles.page_container}>
-            <Pagination itemsPerPage={itemsPerPage} totalItems={totalItems} />
+            <Pagination
+              itemsPerPage={itemsPerPage}
+              totalItems={totalItems}
+              url="/filter"
+            />
           </div>
         </div>
       </div>

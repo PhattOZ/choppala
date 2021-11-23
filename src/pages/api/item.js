@@ -8,12 +8,12 @@ export default async function handler(req, res) {
 
   switch (method) {
     case "GET":
+      // Get all items that sellerId sold
       try {
         const sellerId = req.query.sellerId
-        const itemsLeanResponse = await Item.find(
-          { sellerId },
-          { _id: 0 }
-        ).lean()
+        const itemsLeanResponse = await Item.find({ sellerId }, { _id: 0 })
+          .sort({ _id: -1 })
+          .lean()
         res.status(200).json({ item: itemsLeanResponse })
       } catch (err) {
         console.log(err)

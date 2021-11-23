@@ -22,32 +22,32 @@ export default function SignupBox() {
       <div className={`${styles.childBox} ${styles.oauthButtons}`}>
         <button
           className={styles.facebookButton}
-          onClick={() => signIn("facebook", { callbackUrl: "/user" })}
+          onClick={() => signIn("facebook", { callbackUrl: "/" })}
         >
           <div className={styles.socialIcon}>
-            <FontAwesomeIcon icon={faFacebookF}/>
+            <FontAwesomeIcon icon={faFacebookF} />
           </div>
           <span className={styles.provider}>Facebook</span>
         </button>
         <button
           className={styles.googleButton}
           onClick={() => {
-            signIn("google", { callbackUrl: "/user" })
+            signIn("google", { callbackUrl: "/" })
           }}
         >
           <div className={styles.socialIcon}>
-            <FontAwesomeIcon icon={faGoogle}/>
+            <FontAwesomeIcon icon={faGoogle} />
           </div>
           <span className={styles.provider}>Google</span>
         </button>
         <button
           className={styles.githubButton}
           onClick={() => {
-            signIn("github", { callbackUrl: "/user" })
+            signIn("github", { callbackUrl: "/" })
           }}
         >
           <div className={styles.socialIcon}>
-            <FontAwesomeIcon icon={faGithub} size="lg"/>
+            <FontAwesomeIcon icon={faGithub} size="lg" />
           </div>
           <span className={styles.provider}>Github</span>
         </button>

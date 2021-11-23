@@ -1,13 +1,19 @@
+// React, Next.js lobraries
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
+import { useRouter } from "next/router"
+// Style
 import styles from "./YourProductBox.module.scss"
-import { useState, useEffect } from "react"
-// Icon
+// Icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons"
 import { faCoins, faTrash } from "@fortawesome/free-solid-svg-icons"
 // Component
 import Loader from "../Loader"
+// Custom lib
+import spliceData from "src/lib/spliceData"
+import Pagination from "../Pagination"
 
 function SellingBox({ name, image, price, amount, sold }) {
   return (
@@ -76,16 +82,23 @@ function FirstProduct() {
 }
 
 export default function YourProductBox({ sellerId }) {
+  const router = useRouter()
+  const page = router.query.page ? router.query.page : "1" // Get current page (Used in Pagination component and spliceData)
+  const [allSellerItems, setAllSellerItems] = useState([])
   const [sellerItems, setSellerItems] = useState([])
   const [loading, setLoading] = useState(true)
+
+  // Fetch all seller's items (Fetch one time only)
   useEffect(async () => {
     const res = await fetch(`/api/item?sellerId=${sellerId}`)
     const resData = await res.json()
-    setSellerItems(resData.item)
+    const currentItems = spliceData(resData.item, page, 6)
+    setAllSellerItems(resData.item)
+    setSellerItems(currentItems)
     setLoading(false)
   }, [])
 
-  // Wait until fetch() in useEffect complete
+  // Render Loader component until fetch() in useEffect(1) complete
   if (loading === true) {
     return <Loader />
   }
@@ -118,6 +131,11 @@ export default function YourProductBox({ sellerId }) {
                   key={item.id}
                 />
               ))}
+              <Pagination
+                itemsPerPage={6}
+                totalItems={allSellerItems.length}
+                url="/sellingorders"
+              />
             </div>
             <div className={styles.button_wrapper}>
               <Link href="/me/addproduct" passHref>
