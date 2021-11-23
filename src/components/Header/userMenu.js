@@ -23,15 +23,9 @@ export default function UserMenu() {
   let sum = 0
   if (ctx.value.cart.length > 0) {
     ctx.value.cart.map((item) => {
-      if (item.isConfirm == true) {
-        sum += item.quantity
-      }
+      sum += item.quantity
     })
   }
-
-  // if (status === "loading") {
-  //   return <></>
-  // }
 
   return (
     <div className={styles.containerSide}>

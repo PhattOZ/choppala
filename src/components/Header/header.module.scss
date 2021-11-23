@@ -5,20 +5,21 @@ $headerHeight: 7.3rem;
 .headerContainer {
   display: flex;
   background-color: white;
-  padding: 1rem;
   position: sticky;
   top: 0;
   align-items: center;
   justify-content: center;
   z-index: 9999;
   height: $headerHeight;
-  transition: all 0.8s ease;
-
+  transition: all 0.5s ease;
+  column-gap: 0.5rem;
+  padding-bottom: 0.4rem;
   .logo {
-    margin: 1em 3em 0.25em 0.5em;
     padding: auto;
     width: 15em;
     height: 4em;
+    margin-top: 1rem;
+    margin-right: 0.25rem;
 
     a {
       display: flex;
@@ -41,8 +42,8 @@ $headerHeight: 7.3rem;
   @include breakpoint(phone) {
     padding: 0.5em;
     .logo {
-      margin: 1em 1.5em 0.25em 0em;
-      width: 5em;
+      // margin: 1em 1.5em 0.25em 0em;
+      width: 4em;
     }
     .logo_text {
       display: none;
@@ -53,9 +54,8 @@ $headerHeight: 7.3rem;
     display: flex;
     width: 50%;
     height: 2.25em;
-    margin: 0 3em 0.5em -2em;
-    padding-top: 1em;
     position: relative;
+    margin-top: 1.7rem;
 
     input[type="text"] {
       position: absolute;
@@ -67,11 +67,11 @@ $headerHeight: 7.3rem;
       background-color: #e9efff;
       box-shadow: 5px 5px 10px #f0f0f0;
       outline: none;
-      font-family: Poppins,sans-serif;
+      font-family: Poppins, sans-serif;
       font-size: 0.9rem;
     }
 
-    :nth-child(2) {
+    form > div {
       width: 12%;
       cursor: pointer;
       position: absolute;
@@ -84,6 +84,7 @@ $headerHeight: 7.3rem;
       box-shadow: 5px 5px 10px #f0f0f0;
       align-content: center;
       div {
+        //search icon
         display: flex;
         color: white;
         padding: 6px 3px 0 0;
@@ -91,16 +92,54 @@ $headerHeight: 7.3rem;
         margin: auto;
       }
     }
+
+    .search__dropdown {
+      position: absolute;
+      width: 100%;
+      background-color: white;
+      top: 2.25rem;
+      border-bottom: 1px solid black;
+      border-right: 1px solid black;
+      border-left: 1px solid black;
+
+      ul > li {
+        background-color: #4585ff;
+      }
+      .search_item {
+        display: flex;
+        column-gap: 0.5rem;
+        align-items: center;
+        padding: 0.5rem;
+        border-top: 1px solid black;
+        .search_item__image {
+          position: relative;
+          width: 3rem;
+          height: 3rem;
+        }
+      }
+      .search_item:hover {
+        background-color: #4585ff;
+      }
+
+      .search_item__empty {
+        width: 100%;
+        height: 5rem;
+        background-color: white;
+        border-top: 1px solid black;
+        text-align: center;
+        padding: 1.5rem;
+      }
+    }
   }
 
   .containerSide {
     display: flex;
     flex-direction: column;
-    width: 180px;
+    width: 11.25rem;
     align-items: flex-end;
-    margin-left: -2em;
+
     row-gap: 0.5rem;
-    margin-bottom: 0.8rem;
+    margin-bottom: 0.6rem;
 
     .menu {
       display: flex;
@@ -132,11 +171,12 @@ $headerHeight: 7.3rem;
     .userMenu {
       display: flex;
       margin-bottom: 0.35em;
-
       .countCart {
         position: relative;
         .totalQty {
-          bottom: 0.8rem;
+          // z-index: -1;
+          bottom: 1rem;
+          left: 1rem;
           position: absolute;
           height: 20px;
           width: 20px;
@@ -169,6 +209,24 @@ $headerHeight: 7.3rem;
     }
     .concise_menu {
       display: none;
+      .countCart {
+        position: relative;
+        .totalQty {
+          // z-index: -1;
+          bottom: 1rem;
+          left: 1rem;
+          position: absolute;
+          height: 20px;
+          width: 20px;
+          display: inline-flex;
+          background-color: #5c7aea;
+          justify-content: center;
+          align-items: center;
+          color: white;
+          font-size: 14px;
+          border-radius: 400px;
+        }
+      }
       .hamburger {
         .line1,
         .line2,
@@ -194,13 +252,13 @@ $headerHeight: 7.3rem;
   @include breakpoint(tablet) {
     .containerSide {
       width: 5em;
-      padding: 0 0 0 1rem;
-      margin-bottom: 0.7rem;
-      row-gap: 0.2rem;
+
       .menu {
-        margin-right: -1.5rem;
-        margin-bottom: 0.5rem;
+        > :nth-child(3) {
+          margin-right: 0.35rem;
+        }
       }
+
       .userMenu {
         display: none;
       }
