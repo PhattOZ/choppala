@@ -111,26 +111,30 @@ const ItemList = forwardRef((props, ref) => {
       ref={ref}
     >
       {props.Items.length > 0 ? (
-        props.Items.map((item) => (
-          <Link href={`/product/${item.id}`} key={item.id}>
-            <a>
-              <li className={styles.search_item}>
-                <div className={styles.search_item__image}>
-                  <Image
-                    src={item.image}
-                    layout="fill"
-                    objectFit="cover"
-                    alt="item"
-                  />
-                </div>
-                <span>{item.name}</span>
-              </li>
-            </a>
-          </Link>
-        ))
+        props.Items.map((item) => <Item props={item} />)
       ) : (
         <div className={styles.search_item__empty}>not found</div>
       )}
     </ul>
   )
 })
+
+const Item = ({ props }) => {
+  return (
+    <Link href={`/product/${props.id}`} key={props.id}>
+      <a>
+        <li className={styles.search_item}>
+          <div className={styles.search_item__image}>
+            <Image
+              src={props.image}
+              layout="fill"
+              objectFit="cover"
+              alt="item"
+            />
+          </div>
+          <span>{props.name}</span>
+        </li>
+      </a>
+    </Link>
+  )
+}
