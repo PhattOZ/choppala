@@ -2,14 +2,15 @@
 // https://www.youtube.com/watch?v=41tNotMxu1A&t=0s
 
 .body {
-  min-height: 100vh;
+  height: 100vh;
   width: 100%;
   background: rgba($color: #eaeef0, $alpha: 0.75);
   display: flex;
   justify-content: center;
   align-items: center;
   position: absolute;
-  z-index: 10;
+  top: 0;
+  z-index: 1000;
 }
 
 .loader {

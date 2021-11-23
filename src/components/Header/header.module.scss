@@ -10,7 +10,7 @@ $headerHeight: 7.3rem;
   top: 0;
   align-items: center;
   justify-content: center;
-  z-index: 9999;
+  z-index: 100;
   height: $headerHeight;
   transition: all 0.8s ease;
 
@@ -67,7 +67,7 @@ $headerHeight: 7.3rem;
       background-color: #e9efff;
       box-shadow: 5px 5px 10px #f0f0f0;
       outline: none;
-      font-family: Poppins,sans-serif;
+      font-family: Poppins, sans-serif;
       font-size: 0.9rem;
     }
 
