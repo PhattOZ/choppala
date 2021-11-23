@@ -30,7 +30,6 @@ export default function Checkout({ data }) {
 
   return (
     <div className={styles.container}>
-      <div>Check out</div>
       <div className={styles.main}>
         <div className={styles.info_container}>
           <div className={styles.icon_box}>

@@ -115,20 +115,20 @@ const orderReceived = {
 //======================= Rating Popup ================================
 const rating = {
   title: "Review & Rating",
-  titlecolor: "#444655",
+  titlecolor: "#4585ff",
   icon: (
     <Image
       src="/rating.svg"
       objectFit="cover"
       alt="rate"
-      width={156}
+      width={216}
       height={156}
     />
   ),
-  subtitle: "Thanks for your purchase!",
-  content1: "Your order has been approved.",
-  content2: "You can wait for shipping from seller.",
-  buttonShow: "order",
+  subtitle: "Please rate your recent purchase",
+  content1: "Click a star to rate",
+  content2: null,
+  buttonShow: "rating",
 }
 
 export {

@@ -60,14 +60,14 @@ export default function CategoryBox() {
       <div className={styles.inputPriceContainer}>
         <input
           type="number"
-          placeholder="Min price"
+          placeholder="Min ฿"
           value={minPrice}
           onChange={handleMinChange}
         />
         <div>-</div>
         <input
           type="number"
-          placeholder="Max price"
+          placeholder="Max ฿"
           value={maxPrice}
           onChange={handleMaxChange}
         />

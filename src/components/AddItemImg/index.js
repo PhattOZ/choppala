@@ -56,10 +56,12 @@ function CropImgPopup({ upImg, imgRef, onCancelCrop, onSave, setImgSize }) {
           </div>
           <div className={styles.body}>
             <ReactCrop
-              // className={styles.cropsection}
+              style={{
+                border: "2px solid #969696",
+              }}
               imageStyle={{
-                width: "70%",
-                objectFit: "scale-down",
+                height: "60vh",
+                objectFit: "contain",
               }}
               src={upImg}
               crop={crop}
