@@ -147,7 +147,7 @@ $lightblue: #dbe6fd;
   cursor: pointer;
 }
 
-//===================== Warn Button =====================
+//===================== Order Button =====================
 .actionBtn {
   display: flex;
   justify-content: center;
@@ -164,4 +164,27 @@ $lightblue: #dbe6fd;
   background-color: $grey45;
   color: white;
   cursor: pointer;
+}
+
+//===================== Rating Button =====================
+.bottom_part {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+}
+
+.star_icon {
+  color: $grey45;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+  &:hover{
+    color: #ffd700;
+  }
+}
+
+.stars_fav {
+  display: flex;
+  column-gap: 0.7rem;
+  justify-content: center;
+  align-items: center;
 }

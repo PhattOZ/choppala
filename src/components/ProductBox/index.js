@@ -129,8 +129,7 @@ export default function ProductBox({
           </div>
           <div className={styles.pricecontainer}>
             <div className={styles.price}>
-              <FontAwesomeIcon icon={faCoins} size={"xs"} color="#FFD44D" />
-              {` ${price}`}
+              {`฿${price}`}
             </div>
           </div>
           <div className={styles.linehr}></div>

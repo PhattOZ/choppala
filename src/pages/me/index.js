@@ -46,8 +46,6 @@ export default function Profile() {
                 <input type="text" />
                 <label htmlFor="">Phone number</label>
                 <input type="text" />
-                <label htmlFor="">Date</label>
-                <input type="date" />
               </div>
               <div className={styles.edit_section}>
                 <label htmlFor="">Name</label>

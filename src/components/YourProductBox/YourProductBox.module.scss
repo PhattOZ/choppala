@@ -106,21 +106,33 @@ $red20: #ffd2cc;
 
 .nameblock {
   display: flex;
-  width: 20rem;
+  width: 16rem;
 }
 
 .infoblock {
   display: flex;
-  justify-content: center;
   align-items: flex-start;
+  justify-content: flex-end;
   width: 6rem;
 }
 
 .priceblock {
   display: flex;
-  padding-left: 2rem;
+  flex-direction: row;
   align-items: center;
   column-gap: 0.4rem;
+}
+
+.amountblock {
+  display: flex;
+  justify-content: flex-end;
+  width: 5rem;
+}
+
+.soldblock {
+  display: flex;
+  justify-content: flex-end;
+  width: 4.6rem;
 }
 
 .textInfo {
@@ -132,12 +144,18 @@ $red20: #ffd2cc;
   margin-left: 1rem;
 }
 
+.btnblock {
+  margin-left: auto;
+  padding-left: 1rem;
+}
+
 .deleteBtn {
   display: flex;
+  align-items: center;
   justify-content: center;
   column-gap: 0.4rem;
   width: 6rem;
-  padding: 0.5rem 2rem;
+  height: 2.3rem;
   background-color: $red20;
   color: $red;
   border-radius: 0.25rem;

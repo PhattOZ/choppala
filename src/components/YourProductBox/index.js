@@ -51,6 +51,26 @@ function SellingBox({ name, image, price, amount, sold }) {
           </div>
         </div>
       </div>
+      <div className={styles.btnblock}>
+        <div className={styles.deleteBtn} onClick={handleShow}>
+          <FontAwesomeIcon icon={faTrash} size="lg" />
+          Delete
+        </div>
+      </div>
+      {/* -----------Popup------------ */}
+      {showModal && (
+        <Popup
+          show={showModal}
+          onClose={handleClose}
+          title={deleteProduct.title}
+          titlecolor={deleteProduct.titlecolor}
+          subtitle={deleteProduct.subtitle}
+          icon={deleteProduct.icon}
+          content1={deleteProduct.content1}
+          content2={deleteProduct.content2}
+          buttonShow={deleteProduct.buttonShow}
+        />
+      )}
     </div>
   )
 }

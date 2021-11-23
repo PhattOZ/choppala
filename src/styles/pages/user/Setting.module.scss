@@ -23,13 +23,15 @@ $lightblue: #dbe6fd;
 
 .textbox {
   display: flex;
-  max-width: 58rem;
+  max-width: 52rem;
   padding-left: 1rem;
 }
 
 .textinfo {
-  font-size: 0.9;
   color: $grey70;
+  p {
+    font-size: 0.9rem;
+  }
 }
 
 .button_wrapper {

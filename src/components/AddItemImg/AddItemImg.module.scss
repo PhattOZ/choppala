@@ -13,27 +13,106 @@ $grey45: #a8aabc;
   z-index: 9999;
 }
 
-.cropBoxContainer {
-  width: 70%;
-  height: 80%;
-  border-radius: 1rem;
+.modal {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   background-color: white;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  margin-bottom: auto;
+  margin-top: auto;
+}
+
+.cropsection {
+  width: 500px;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.body {
+  display: flex;
+  height: 90%;
+  flex-direction: column;
+  row-gap: 1rem;
+  align-content: center;
+  align-items: center;
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: $grey100;
+}
+
+.subtitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: $grey100;
+}
+
+.textinfo {
+  font-size: 0.9rem;
+  color: $grey70;
+  text-align: center;
+}
+
+.button_wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  column-gap: 1rem;
+}
+
+.activeBtn {
+  display: flex;
+  justify-content: center;
+  column-gap: 0.4rem;
+  width: 12rem;
+  padding: 0.5rem 2rem;
+  background-color: $blue;
+  color: $lightblue;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.activeBtn:hover {
+  background-color: #2f6ee2;
+  color: white;
+}
+
+.cancelBtn {
+  display: flex;
+  justify-content: center;
+  column-gap: 0.4rem;
+  width: 12rem;
+  padding: 0.5rem 2rem;
+  background-color: $lightblue;
+  color: $blue;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.cancelBtn:hover {
+  background-color: $grey45;
+  color: white;
 }
 
 .canvasLg {
-  width: 14rem;
-  height: 14rem;
+  width: 11rem;
+  height: 11rem;
   border: 2px dashed $grey45;
   border-radius: 0.25rem;
 }
 
 .canvasSm {
-  width: 9rem;
-  height: 9rem;
+  width: 7rem;
+  height: 7rem;
   border: 2px dashed $grey45;
   border-radius: 0.25rem;
 }

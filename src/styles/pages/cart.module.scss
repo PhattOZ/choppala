@@ -24,7 +24,7 @@
   .main {
     display: flex;
     flex-direction: row;
-    border-radius: 0.3rem;
+    border-radius: 0.25rem;
     column-gap: 1rem;
     .list_items {
       display: flex;
@@ -45,12 +45,13 @@
         align-items: center;
         margin-bottom: 1rem;
         font-weight: 600;
+        border-radius: 0.275rem;
       }
 
       .main_list_items {
         .each_seller {
           background-color: white;
-          border-radius: 10px;
+          border-radius: 0.3rem;
           display: flex;
           flex-direction: column;
           margin-bottom: 1rem;
@@ -59,32 +60,38 @@
             grid-template-columns: 7% 93%;
             align-items: center;
             margin: 1rem 0;
+            font-size: 0.9rem;
+            font-weight: 500;
           }
 
           .each_item {
             display: grid;
             grid-template-columns: 7% 48% 13% 20% 12%;
-            align-items: center;
-            border: 0.1px black dotted;
-            padding: 0.5rem 0.5rem 0.5rem 0;
+            align-items: flex-start;
+            border: 0.1px #cfcfcf solid;
+            padding: 0.75rem 0.75rem 0.75rem 0;
             margin: 0 1.5rem 1rem 1.5rem;
+            border-radius: 0.3rem;
 
             .each_item__header {
               display: flex;
-              align-items: center;
+              align-items: flex-start;
               .each_item__image {
                 display: inline-block;
                 position: relative;
-                width: 5rem;
-                height: 5rem;
+                width: 4rem;
+                height: 4rem;
                 align-items: center;
+                border-radius: 0.25rem;
+                overflow: hidden;
               }
               .each_item__name {
                 margin-left: 1rem;
                 max-width: 15rem;
-                white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
                 -webkit-line-clamp: 2;
               }
             }
@@ -130,7 +137,7 @@
               display: flex;
               flex-direction: column;
               align-items: center;
-              row-gap: 0.25rem;
+              row-gap: 1rem;
 
               > :nth-child(2) {
                 cursor: pointer;
@@ -142,10 +149,17 @@
     }
 
     .order_summary {
+      display: flex;
+      flex-direction: column;
       align-self: flex-start;
       flex-grow: 2.5;
       background-color: white;
       border-radius: 5px;
+      padding-top: 0.5rem;
+      padding-bottom: 1rem;
+      font-weight: bold;
+      row-gap: 1rem;
+      
       .total_price {
         position: relative;
         background-color: #f5f5fa;
@@ -163,7 +177,8 @@
 
       .process_btn {
         width: 90%;
-        margin: 1rem auto;
+        font-weight: 500;
+        margin: 0 auto;
         padding: 0.5rem;
         background-color: #4383fd;
         color: white;

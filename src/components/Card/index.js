@@ -1,4 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faHeart as farfaHeart } from "@fortawesome/free-regular-svg-icons"
 import { faStar, faHeart } from "@fortawesome/free-solid-svg-icons"
 import styles from "./Card.module.scss"
 import Image from "next/image"
@@ -14,7 +15,7 @@ export default function Card({ title, price, image }) {
       
       <div className={styles.card_content}>
         <div className={styles.card_title}>{title}</div>
-        <div className={styles.card_price}>{`B${price}`}</div>
+        <div className={styles.card_price}>{`฿${price}`}</div>
         <div className={styles.stars_fav}>
           <div>
             <FontAwesomeIcon icon={faStar} size={"xs"} color="#ffd700" />
@@ -24,7 +25,7 @@ export default function Card({ title, price, image }) {
             <FontAwesomeIcon icon={faStar} size={"xs"} color="#CCCCCC" />
           </div>
           <div>
-            <FontAwesomeIcon icon={faHeart} size={"sm"} color="#4585FF" />
+            <FontAwesomeIcon icon={farfaHeart} size={"sm"} color="#4585FF" />
           </div>
         </div>
       </div>

@@ -95,6 +95,8 @@ export default function AddProduct({ user, seller }) {
     }
   }
 
+  console.log(inputsValidation)
+
   return (
     <div className={styles.container}>
       <Layout user={user}>
@@ -266,7 +268,6 @@ export default function AddProduct({ user, seller }) {
               </div>
               {/* Button */}
               <div className={styles.button_wrapper}>
-                <div className={styles.cancelBtn}>Cancel</div>
                 <div className={styles.addBtn} onClick={handleSubmit}>
                   Add product
                 </div>

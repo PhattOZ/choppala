@@ -49,38 +49,41 @@ function CropImgPopup({ upImg, imgRef, onCancelCrop, onSave, setImgSize }) {
 
   return ReactDom.createPortal(
     <>
-      <div className={styles.bg}>
-        <div className={styles.cropBoxContainer}>
-          <ReactCrop
-            style={{
-              overflow: "auto",
-              maxWidth: "50%",
-              maxHeight: "50%",
-            }}
-            imageStyle={{
-              width: "100%",
-              height: "100%",
-            }}
-            src={upImg}
-            crop={crop}
-            onChange={(c) => setCrop(c)}
-            onImageLoaded={initCropSize}
-            onComplete={(c) => {
-              setCompletedCrop(c)
-            }}
-          />
-          <div className={styles.buttonSection}>
-            <button
-              className={styles.save}
-              onClick={() => {
-                onSave(completedCrop)
+      <div className={styles.container}>
+        <div className={styles.modal}>
+          <div className={styles.header}>
+            <div className={styles.title}>Crop Product Image</div>
+          </div>
+          <div className={styles.body}>
+            <ReactCrop
+              style={{
+                border: "2px solid #969696",
               }}
-            >
-              Save
-            </button>
-            <button className={styles.cancel} onClick={onCancelCrop}>
-              Cancel
-            </button>
+              imageStyle={{
+                height: "60vh",
+                objectFit: "contain",
+              }}
+              src={upImg}
+              crop={crop}
+              onChange={(c) => setCrop(c)}
+              onImageLoaded={initCropSize}
+              onComplete={(c) => {
+                setCompletedCrop(c)
+              }}
+            />
+            <div className={styles.button_wrapper}>
+              <div className={styles.cancelBtn} onClick={onCancelCrop}>
+                Cancel
+              </div>
+              <div
+                className={styles.activeBtn}
+                onClick={() => {
+                  onSave(completedCrop)
+                }}
+              >
+                Save
+              </div>
+            </div>
           </div>
         </div>
       </div>
