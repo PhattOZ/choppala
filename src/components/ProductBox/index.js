@@ -156,7 +156,7 @@ const ImageSlide = ({ images }) => {
                 index == mainImageIndex && styles.item_image_select
               }`}
               key={index}
-              onMouseOver={changeMainImageHandler}
+              onClick={changeMainImageHandler}
               imageat={index}
             >
               <Image src={image} alt="Product image" layout="fill" />

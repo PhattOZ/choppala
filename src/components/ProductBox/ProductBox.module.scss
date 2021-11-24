@@ -26,6 +26,7 @@
     position: relative;
     width: 18rem;
     height: 18rem;
+    cursor: zoom-in;
   }
   .item_mainImage:hover {
     * {
@@ -42,6 +43,7 @@
       position: relative;
       width: 4rem;
       height: 4rem;
+      cursor: pointer;
     }
     .item_image_select {
       border: 1px solid black;
