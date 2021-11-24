@@ -1,37 +1,28 @@
-import { createPortal } from "react-dom"
 import Image from "next/image"
 import styles from "./Loader.module.scss"
-import { useLayoutEffect, useState } from "react"
+import { useLayoutEffect } from "react"
+import ClientOnlyPortal from "../Portal"
 
 export default function Loader() {
-  const [mounted, setMounted] = useState(false)
-
-  useLayoutEffect(() => {
-    setMounted(true)
-
-    return () => setMounted(false)
-  }, [])
-
   useLockBodyScroll()
 
-  return mounted
-    ? createPortal(
-        <div className={styles.body}>
-          <div className={styles.loader}>
-            <div className={styles.spinner}></div>
-            <div className={styles.logo}>
-              <Image
-                src="/molang.jpg"
-                layout="fill"
-                objectFit="contain"
-                priority
-              />
-            </div>
+  return (
+    <ClientOnlyPortal selector="#modal-root">
+      <div className={styles.body}>
+        <div className={styles.loader}>
+          <div className={styles.spinner}></div>
+          <div className={styles.logo}>
+            <Image
+              src="/molang.jpg"
+              layout="fill"
+              objectFit="contain"
+              priority
+            />
           </div>
-        </div>,
-        document.getElementById("modal-root")
-      )
-    : null
+        </div>
+      </div>
+    </ClientOnlyPortal>
+  )
 }
 
 function useLockBodyScroll() {
