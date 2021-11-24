@@ -6,7 +6,7 @@ import Link from "next/link"
 
 export default function CategoryBox() {
   const router = useRouter()
-  const { category } = router.query
+  const { category: currentCategory } = router.query
   const min = router.query.minprice ? router.query.minprice : ""
   const max = router.query.maxprice ? router.query.maxprice : ""
   const [minPrice, setMinPrice] = useState(min)
@@ -39,18 +39,19 @@ export default function CategoryBox() {
       </div>
       <div className={styles.categories}>CATEGORIES</div>
       <ul className={styles.category_list}>
-        {categories.map((i) => {
-          const blueStyle = category === i ? styles.fontBlueColor : null
+        {categories.map((category) => {
+          const blueStyle =
+            currentCategory === category.name ? styles.fontBlueColor : null
           return (
             <Link
-              key={i}
+              key={category.name}
               href={{
                 pathname: "/filter",
-                query: { ...router.query, category: i, page: 1 },
+                query: { ...router.query, category: category.name, page: 1 },
               }}
             >
               <a>
-                <li className={blueStyle}>{i}</li>
+                <li className={blueStyle}>{category.name}</li>
               </a>
             </Link>
           )
