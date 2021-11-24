@@ -11,7 +11,7 @@ export default function SellingOrders({ user }) {
     <div className={styles.container}>
       <Layout user={user}>
         {user.isSeller ? (
-          <YourProductBox sellerId={user.sellerId} />
+          <YourProductBox sellerId={user.sellerId} isSeller={user.isSeller} />
         ) : (
           <ActivateSeller
             userId={user._id}
