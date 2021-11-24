@@ -1,12 +1,12 @@
 import { createPortal } from "react-dom"
 import Image from "next/image"
 import styles from "./Loader.module.scss"
-import { useEffect, useLayoutEffect, useState } from "react"
+import { useLayoutEffect, useState } from "react"
 
 export default function Loader() {
   const [mounted, setMounted] = useState(false)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setMounted(true)
 
     return () => setMounted(false)
