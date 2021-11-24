@@ -19,7 +19,7 @@ export default function App({
     const handleStart = () => {
       id = setInterval(() => {
         setLoading(true)
-      }, 500)
+      }, 250)
     }
 
     const handleStop = () => {
