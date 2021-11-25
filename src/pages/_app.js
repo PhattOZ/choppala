@@ -42,7 +42,7 @@ export default function App({
     <SessionProvider session={session}>
       <CartContextProvider>
         <Layout>
-          {loading ? <Loader /> : ""}
+          {loading && <Loader />}
           <Component {...pageProps} />
         </Layout>
       </CartContextProvider>

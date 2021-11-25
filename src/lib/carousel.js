@@ -5,6 +5,7 @@ export const carouselSettings = {
   showStatus: false,
   dynamicHeight: false,
   autoPlay: true,
+  showArrows: false,
 }
 
 export const bannerImages = [
