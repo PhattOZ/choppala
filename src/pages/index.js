@@ -9,18 +9,19 @@ import Item from "src/models/Item"
 
 function CategoryLink({ category }) {
   return (
-    <Link href={{ pathname: "/filter", query: { category } }}>
+    <Link href={{ pathname: "/filter", query: { category: category.name } }}>
       <a>
         <div className={styles.category}>
           <div className={styles.category_image}>
             <Image
-              src="/molang.jpg"
+              src={category.img}
               layout="fill"
-              objectFit="cover"
+              objectFit="contain"
               alt="category"
+              priority
             />
           </div>
-          <div className={styles.category_title}>{category}</div>
+          <div className={styles.category_title}>{category.name}</div>
         </div>
       </a>
     </Link>
@@ -51,7 +52,7 @@ export default function Index({ productList }) {
               style={{ "--category-length": categories.length }}
             >
               {categories.map((category) => (
-                <CategoryLink key={category} category={category} />
+                <CategoryLink key={category.name} category={category} />
               ))}
             </div>
           </section>

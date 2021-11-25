@@ -7,7 +7,6 @@ export default function ClientOnlyPortal({ children, selector }) {
 
   useLayoutEffect(() => {
     ref.current = document.querySelector(selector)
-    console.log(ref)
     setMount(true)
     return () => {
       setMount(false)
