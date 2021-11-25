@@ -40,15 +40,10 @@ export default function AddProduct({ user, seller }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target
-    if (name === "price") {
+    if (name === "price" || name === "amount") {
       const re = /^0/ // RegEx, String start with 0
       if (!re.test(value)) {
         // This input not start with 0
-        setInputs({ ...inputs, [name]: value })
-      }
-    } else if (name === "amount") {
-      const re = /^0/
-      if (!re.test(value)) {
         setInputs({ ...inputs, [name]: value })
       }
     } else {
