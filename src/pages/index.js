@@ -6,9 +6,6 @@ import categories from "src/lib/categoryList"
 import styles from "src/styles/pages/index.module.scss"
 import dbConnect from "src/lib/dbConnect"
 import Item from "src/models/Item"
-import { carouselSettings, bannerImages } from "src/lib/carousel"
-import { Carousel } from "react-responsive-carousel"
-import "react-responsive-carousel/lib/styles/carousel.min.css"
 
 function CategoryLink({ category }) {
   return (
@@ -47,15 +44,7 @@ export default function Index({ productList }) {
       </Head>
       <div className={styles.container}>
         <div>
-          <div className={styles.section}>
-            <Carousel {...carouselSettings}>
-              {bannerImages.map((src) => (
-                <div key={src} className={styles.slideContainer}>
-                  <img src={src} alt="" className={styles.carouselImage} />
-                </div>
-              ))}
-            </Carousel>
-          </div>
+          <div className={styles.section}></div>
           <section className={styles.section}>
             <div className={styles.section_title}>Categories</div>
             <div

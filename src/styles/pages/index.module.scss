@@ -15,16 +15,6 @@
   text-transform: uppercase;
 }
 
-.slideContainer {
-  height: 8rem;
-}
-
-.carouselImage {
-  object-fit: contain;
-  width: 100%;
-  height: 100%;
-}
-
 .categoriesContainer {
   display: grid;
   grid-template-columns: repeat(var(--category-length), minmax(0, 1fr));
@@ -60,9 +50,6 @@
 }
 
 @media (min-width: 768px) {
-  .slideContainer {
-    height: 15rem;
-  }
   .cardContainer {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
