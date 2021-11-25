@@ -40,7 +40,20 @@ export default function AddProduct({ user, seller }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target
-    setInputs({ ...inputs, [name]: value })
+    if (name === "price") {
+      const re = /^0/ // RegEx, String start with 0
+      if (!re.test(value)) {
+        // This input not start with 0
+        setInputs({ ...inputs, [name]: value })
+      }
+    } else if (name === "amount") {
+      const re = /^0/
+      if (!re.test(value)) {
+        setInputs({ ...inputs, [name]: value })
+      }
+    } else {
+      setInputs({ ...inputs, [name]: value })
+    }
   }
 
   const handleFileSync = (blob, index) => {
@@ -181,6 +194,7 @@ export default function AddProduct({ user, seller }) {
                         placeholder="Bath"
                         size="7"
                         name="price"
+                        value={inputs.price}
                         onChange={handleChange}
                       />
                       {inputsValidation.price ? (
@@ -195,6 +209,8 @@ export default function AddProduct({ user, seller }) {
                         type="number"
                         placeholder="1"
                         name="amount"
+                        pattern="[0-9]*"
+                        value={inputs.amount}
                         onChange={handleChange}
                       />
                       {inputsValidation.amount ? (
