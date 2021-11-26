@@ -70,13 +70,14 @@ export default function AddProduct({ user, seller }) {
 
   const handleSubmit = async () => {
     // Input validation (If all input not null, checkNull is true, otherwise checkNull is false)
+    const imgsNull = imgBlobs.every((img) => img == null) // Check images input is null or not
     const checkNull =
       !!inputs.name &&
       !!inputs.category &&
       !!inputs.price &&
       !!inputs.amount &&
       !!inputs.detail &&
-      !!imgBlobs.length
+      imgsNull
 
     if (!checkNull) {
       // Some input(s) is invalid
@@ -87,7 +88,7 @@ export default function AddProduct({ user, seller }) {
         price: inputs.price ? false : true,
         amount: inputs.amount ? false : true,
         detail: inputs.detail ? false : true,
-        images: imgBlobs.length ? false : true,
+        images: imgsNull,
       }
       setInputValidation(validation)
     } else {
