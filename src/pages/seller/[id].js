@@ -10,12 +10,13 @@ import Item from "src/models/Item"
 import styles from "src/styles/pages/storeProfile.module.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons"
+//Component
 import Card from "src/components/Card"
 
-function Sidebar({ seller }) {
+function Topbar({ seller }) {
   return (
-    <div className={styles.sidebar}>
-      <div className={styles.sidebar_header}>
+    <div className={styles.topbar}>
+      <div className={styles.topbar_header}>
         <div className={styles.cover_container}>
           <div className={styles.cover}>
             <Image
@@ -74,19 +75,21 @@ export default function SellerProfile({ seller }) {
     <>
       <div className={styles.container}>
         {/* Store profile session*/}
-        <Sidebar seller={seller} />
+        <Topbar seller={seller} />
         <div className={styles.main}>
           <section>
-            <div className={styles.section_title}>All products</div>
+            <div className={styles.section_title}>
+              All products
+            </div>
             {/* Store itemlist session */}
             <div>
               {itemLoading ? (
-                <h1>Loading...</h1>
+                <div className={styles.subtitle}>Loading...</div>
               ) : (
                 <div>
                   <div className={styles.cardContainer}>
                     {sellerItems.map((item) => (
-                      <Link key={item.id} href={`/item/${item.id}`}>
+                      <Link key={item.id} href={`/product/${item.id}`}>
                         <a>
                           <Card
                             title={item.name}

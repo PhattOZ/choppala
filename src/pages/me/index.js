@@ -2,15 +2,18 @@ import styles from "src/styles/pages/user/Profile.module.scss"
 //Component
 import Layout from "src/components/UserProfileLayout"
 import Loader from "src/components/Loader"
+import SmallPopup from "src/components/SmallPopup"
 //Lib
 import Image from "next/image"
 import { useSession } from "next-auth/react"
 import { useRouter } from "next/router"
+import { useState } from "react"
 //Icon
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faHome } from "@fortawesome/free-solid-svg-icons"
 
 export default function Profile() {
+  const [showModal, setShowModal] = useState(false)
   const router = useRouter()
   const { data: session, status } = useSession({
     required: true,
@@ -22,6 +25,16 @@ export default function Profile() {
   // Loading session
   if (status === "loading") {
     return <Loader />
+  }
+
+  //Open-Close Modal
+  const handleClose = () => setShowModal(false)
+  const handleShow = () => {
+    setShowModal(true)
+    //Auto Close after 2s
+    setTimeout(() => {
+      setShowModal((showModal) => !showModal)
+    }, 2000)
   }
 
   return (
@@ -55,7 +68,9 @@ export default function Profile() {
               </div>
             </div>
             <div className={styles.button_wrapper}>
-              <div className={styles.saveButton}>Save</div>
+              <div className={styles.saveButton} onClick={handleShow}>
+                Save
+              </div>
             </div>
           </section>
 
@@ -90,6 +105,8 @@ export default function Profile() {
           </section>
         </div>
       </Layout>
+      {/* -----------Popup------------ */}
+      {showModal && <SmallPopup show={showModal} onClose={handleClose} />}
     </div>
   )
 }

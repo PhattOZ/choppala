@@ -8,8 +8,8 @@ $grey45: #a8aabc;
 $red: #ff1f00;
 $red20: #ffd2cc;
 
-//-----------------SideBar------------------//
-.sidebar {
+//-----------------TopBar------------------//
+.topbar {
   width: 100%;
   height: 25%;
   border-radius: 0.5rem;
@@ -17,14 +17,14 @@ $red20: #ffd2cc;
   background-color: white;
 }
 
-.sidebar_header {
+.topbar_header {
   display: flex;
   flex-direction: column;
   row-gap: 0.5rem;
 }
 
 .img_profile {
-  padding-top: 5.75rem;
+  padding-top: 5.5rem;
   padding-left: 2rem;
   position: absolute;
 }
