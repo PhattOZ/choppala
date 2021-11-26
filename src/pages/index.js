@@ -64,7 +64,7 @@ export default function Index({ productList }) {
             <div className={styles.embla} ref={emblaRef}>
               <div className={styles.embla__container}>
                 {bannerImages.map((src) => (
-                  <div className={styles.embla__slide}>
+                  <div key={src} className={styles.embla__slide}>
                     <Image src={src} layout="fill" objectFit="contain" />
                   </div>
                 ))}
