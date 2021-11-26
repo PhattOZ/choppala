@@ -20,7 +20,7 @@ import AddItemImg from "src/components/AddItemImg"
 
 export default function EditProduct({ user, item }) {
   const router = useRouter()
-  const [imgBlobs, setImgBlobs] = useState([])
+  const [imgBlobs, setImgBlobs] = useState(item.images)
   const [inputs, setInputs] = useState({
     name: item.name,
     category: item.category,
@@ -71,7 +71,6 @@ export default function EditProduct({ user, item }) {
 
   const handleSubmit = async () => {
     // Input validation (If all input not null, checkNull is true, otherwise checkNull is false)
-    console.log(imgBlobs)
     const imgsNull = imgBlobs.every((img) => img == null) // Check images input is null or not (Return true if all items in array is null)
     const checkNull =
       !!inputs.name &&
@@ -97,18 +96,19 @@ export default function EditProduct({ user, item }) {
     } else {
       // All inputs is valid
       const imgUrls = await createImgUrls(imgBlobs)
-      const res = await fetch("/api/item", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ...inputs,
-          images: imgUrls,
-          sellerName: seller.storeName,
-          sellerId: seller.id,
-        }),
-      })
+      console.log(imgUrls)
+      // const res = await fetch("/api/item", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({
+      //     ...inputs,
+      //     images: imgUrls,
+      //     sellerName: seller.storeName,
+      //     sellerId: seller.id,
+      //   }),
+      // }) // เปลี่ยน method POST เป็น PUT (?)
 
       if (res.ok) {
         router.push("/me/sellingorders")
@@ -255,12 +255,14 @@ export default function EditProduct({ user, item }) {
                           size="lg"
                           index={0}
                           handleDeleteCropped={handleDeleteCropped}
+                          value={inputs.images[0]}
                         />
                         <AddItemImg
                           handleFileSync={handleFileSync}
                           size="lg"
                           index={1}
                           handleDeleteCropped={handleDeleteCropped}
+                          value={inputs.images[1]}
                         />
                       </div>
                       {/* Small image input */}
@@ -271,18 +273,21 @@ export default function EditProduct({ user, item }) {
                             size="sm"
                             index={2}
                             handleDeleteCropped={handleDeleteCropped}
+                            value={inputs.images[2]}
                           />
                           <AddItemImg
                             handleFileSync={handleFileSync}
                             size="sm"
                             index={3}
                             handleDeleteCropped={handleDeleteCropped}
+                            value={inputs.images[3]}
                           />
                           <AddItemImg
                             handleFileSync={handleFileSync}
                             size="sm"
                             index={4}
                             handleDeleteCropped={handleDeleteCropped}
+                            value={inputs.images[4]}
                           />
                         </div>
                       </div>

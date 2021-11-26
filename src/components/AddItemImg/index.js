@@ -107,6 +107,7 @@ export default function AddItemImg({
   const [upImg, setUpImg] = useState()
   const [finalCrop, setFinalCrop] = useState()
   const [filename, setFilename] = useState("")
+  const [imgUrl, setImgUrl] = useState(value) // Used for edit section
   const [imgSize, setImgSize] = useState({
     width: 0,
     height: 0,
@@ -180,6 +181,23 @@ export default function AddItemImg({
   const handleConfirmCrop = (crop) => {
     setIsPopup(false)
     setFinalCrop(crop)
+  }
+
+  if (imgUrl) {
+    return (
+      <div className={`${styles.oldImgContainer} ${upImgStyle}`}>
+        <div
+          className={styles.croppedCancelBtn}
+          onClick={() => {
+            handleDeleteCropped(index)
+            setImgUrl(null)
+          }}
+        >
+          x
+        </div>
+        <Image src={imgUrl} layout="fill" />
+      </div>
+    )
   }
 
   return (

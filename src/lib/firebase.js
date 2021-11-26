@@ -17,12 +17,14 @@ export default async function createImgUrls(imgBlobs) {
   const storageRef = getStorage(firebaseApp) // Connect to root storage
   const results = await Promise.all(
     imgBlobs.map(async (blob) => {
-      if (blob) {
+      if (blob && !!blob.name) {
         const filename = blob.name
         const fullname = new Date().getTime().toString() + "-" + filename
         const fileRef = ref(storageRef, `/${fullname}`)
         const snapshot = await uploadBytes(fileRef, blob)
         return getDownloadURL(snapshot.ref)
+      } else {
+        return blob
       }
     })
   )

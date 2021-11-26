@@ -153,10 +153,15 @@ $lightblue: #dbe6fd;
   justify-content: center;
   font-size: 0.8rem;
   font-weight: 100;
+  z-index: 100;
 }
 
 .croppedCancelBtn:hover {
   animation-name: zoomIn-zoomOut;
   animation-duration: 0.5s;
   animation-fill-mode: forwards;
+}
+
+.oldImgContainer {
+  position: relative;
 }
