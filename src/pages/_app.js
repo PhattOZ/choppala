@@ -43,7 +43,7 @@ export default function App({
     <SessionProvider session={session}>
       <CartContextProvider>
         <Layout>
-          {loading && <Loader debounce={50} />}
+          {loading && <Loader debounce={200} />}
           <Component {...pageProps} />
         </Layout>
       </CartContextProvider>
