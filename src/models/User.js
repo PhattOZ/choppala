@@ -36,13 +36,7 @@ const UserSchema = new mongoose.Schema({
   },
   cart: [
     {
-      name: String,
-      image: String,
-      price: Number,
-      detail: String,
-      sellerName: String,
-      category: String,
-      soldCount: String,
+      itemID: { type: String, ref: "Item" },
       quantity: Number,
       isConfirm: Boolean,
     },

@@ -1,7 +1,6 @@
 import dbConnect from "src/lib/dbConnect"
 import Item from "src/models/Item"
 
-//API for search item in search bar
 export default async function handler(req, res) {
   const { method } = req
 

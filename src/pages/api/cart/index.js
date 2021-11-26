@@ -18,7 +18,6 @@ export default async function handler(req, res) {
             { name: user.name, email: user.email },
             "cart -_id"
           )
-
           res.status(200).json(data.cart)
         } catch (error) {
           res.status(400).send({ error: "error, GET method for cart api" })

@@ -8,10 +8,10 @@ import { faTrashAlt } from "@fortawesome/free-solid-svg-icons"
 
 const transfromCart = (data) => {
   let cartItem = []
-  let sellerName = []
+  let sellerId = []
   data.map((item) => {
     const newItemFormat = {
-      _id: item._id,
+      id: item.id,
       name: item.name,
       image: item.image,
       price: item.price,
@@ -19,14 +19,21 @@ const transfromCart = (data) => {
       subTotal: item.quantity * item.price,
       isConfirm: item.isConfirm,
     }
-    const indexSeller = sellerName.findIndex((name) => name === item.sellerName)
+    const indexSeller = sellerId.findIndex((id) => id === item.sellerId)
 
     if (indexSeller == -1) {
-      sellerName.push(item.sellerName)
-      cartItem.push({ name: item.sellerName, items: [newItemFormat] })
+      // not found
+      sellerId.push(item.sellerId)
+      cartItem.push({
+        name: item.sellerName,
+        sellerId: item.sellerId,
+        items: [newItemFormat],
+      })
     } else {
+      //found
       cartItem[indexSeller] = {
         name: item.sellerName,
+        sellerId: item.sellerId,
         items: [...cartItem[indexSeller].items, newItemFormat],
       }
     }
@@ -38,16 +45,16 @@ export default function Cart() {
   const ctx = useContext(CartContext)
   const cartLength = ctx.value.cart.length
   let cartData
+
   if (cartLength > 0) {
     const cartItem = transfromCart(ctx.value.cart)
+    //each seller
     cartData = cartItem.map((data) => (
-      <ListItems key={data.name} name={data.name} items={data.items} />
+      <ListItems key={data.sellerId} name={data.name} items={data.items} />
     ))
   } else {
     cartData = <></>
   }
-
-  // const eachItem = cartItem[2].items
 
   return (
     <div className={styles.container}>
@@ -87,16 +94,31 @@ export default function Cart() {
 }
 
 const ListItems = (props) => {
+  const ctx = useContext(CartContext)
+  const [confirm, setConfirm] = useState(
+    props.items.filter((e) => e.isConfirm).length == props.items.length
+  )
+
+  const checkSellerHandler = () => {
+    console.log("click!")
+    ctx.selectManyCart(props.items.map((e) => e.id))
+    setConfirm(!confirm)
+  }
+
   return (
     <>
       <div className={styles.each_seller}>
         <div className={styles.each_seller__header}>
-          <input type="checkbox" />
+          <input
+            type="checkbox"
+            defaultChecked={confirm}
+            onClick={checkSellerHandler}
+          />
           <span className={styles.each_seller__header_name}>{props.name}</span>
         </div>
         <div>
           {props.items.map((data) => (
-            <Item key={data._id} item={data} />
+            <Item key={data.id} item={data} sellerConfirm={confirm} />
           ))}
         </div>
       </div>
@@ -104,31 +126,37 @@ const ListItems = (props) => {
   )
 }
 
-const Item = ({ item }) => {
+const Item = ({ item, sellerConfirm }) => {
   const ctx = useContext(CartContext)
   const [confirm, setConfirm] = useState(item.isConfirm)
   const [quantity, setQuantity] = useState(item.quantity)
 
+  console.log(sellerConfirm, confirm)
+  if (sellerConfirm && !confirm) {
+    setConfirm(true)
+  } else if (!sellerConfirm && confirm) {
+    setConfirm(false)
+  }
   const deleteItemHandler = () => {
-    ctx.deleteItem(item._id)
+    ctx.deleteItem(item.id)
   }
 
   //for isConfirm and quantity
   const updateItemHandler = (event) => {
     switch (event.target.value) {
       case "increase":
-        ctx.updateCart(item._id, 1)
+        ctx.updateCart(item.id, 1)
         setQuantity(quantity + 1)
         break
       case "decrease":
         if (quantity !== 0) {
-          ctx.updateCart(item._id, -1)
+          ctx.updateCart(item.id, -1)
           setQuantity(quantity - 1)
           break
         }
         break
       case "none":
-        ctx.updateCart(item._id, 0)
+        ctx.updateCart(item.id, 0)
         setConfirm(!confirm)
         break
     }
@@ -139,9 +167,9 @@ const Item = ({ item }) => {
       <div className={styles.each_item}>
         <input
           type="checkbox"
-          defaultChecked={confirm}
-          onClick={updateItemHandler}
+          onChange={updateItemHandler}
           value={"none"}
+          checked={confirm}
         />
         <div className={styles.each_item__header}>
           <div className={styles.each_item__image}>

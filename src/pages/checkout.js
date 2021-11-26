@@ -110,7 +110,7 @@ export default function Checkout({ data }) {
       <div className={styles.order_summary}>
         Order Summary
         {ItemFromCtx.map((item) => (
-          <OrderList key={item._id} data={item} />
+          <OrderList key={item.id} data={item} />
         ))}
         <div className={styles.order__total}>
           <div>
