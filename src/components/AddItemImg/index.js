@@ -1,5 +1,6 @@
 // react hook
 import { useState, useEffect, useRef } from "react"
+import Image from "next/image"
 // react-image-crop libraries
 import ReactCrop from "react-image-crop"
 import "react-image-crop/dist/ReactCrop.css"
@@ -99,6 +100,7 @@ export default function AddItemImg({
   size,
   index,
   handleDeleteCropped,
+  value,
 }) {
   const upImgStyle = size === "lg" ? styles.canvasLg : styles.canvasSm
   const [isPopup, setIsPopup] = useState(false)
