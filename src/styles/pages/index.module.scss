@@ -15,6 +15,22 @@
   text-transform: uppercase;
 }
 
+// Carousel
+.embla {
+  overflow: hidden;
+}
+
+.embla__container {
+  display: flex;
+}
+
+.embla__slide {
+  position: relative;
+  height: 8rem;
+  flex: 0 0 100%;
+}
+
+// Category
 .categoriesContainer {
   display: grid;
   grid-template-columns: repeat(var(--category-length), minmax(0, 1fr));
@@ -41,6 +57,7 @@
   border-radius: 100%;
 }
 
+// Item cards
 .cardContainer {
   display: grid;
   column-gap: 1rem;
@@ -49,7 +66,11 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+// Responsive
 @media (min-width: 768px) {
+  .embla__slide {
+    height: 15rem;
+  }
   .cardContainer {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }

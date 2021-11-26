@@ -6,6 +6,7 @@ import categories from "src/lib/categoryList"
 import styles from "src/styles/pages/index.module.scss"
 import dbConnect from "src/lib/dbConnect"
 import Item from "src/models/Item"
+import useEmblaCarousel from "embla-carousel-react"
 
 function CategoryLink({ category }) {
   return (
@@ -29,6 +30,21 @@ function CategoryLink({ category }) {
 }
 
 export default function Index({ productList }) {
+  const bannerImages = [
+    "/banners/b-choppala.png",
+    "/banners/b-blackfriday.png",
+    "/banners/b-12.png",
+    "/banners/b-electronics.png",
+    "/banners/b-seller.png",
+    "/banners/b-tech.png",
+  ]
+
+  const bannerOptions = {
+    loop: true,
+  }
+
+  const [emblaRef] = useEmblaCarousel(bannerOptions)
+
   return (
     <>
       <Head>
@@ -44,7 +60,18 @@ export default function Index({ productList }) {
       </Head>
       <div className={styles.container}>
         <div>
-          <div className={styles.section}></div>
+          <section className={styles.section}>
+            <div className={styles.embla} ref={emblaRef}>
+              <div className={styles.embla__container}>
+                {bannerImages.map((src) => (
+                  <div className={styles.embla__slide}>
+                    <Image src={src} layout="fill" objectFit="contain" />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
           <section className={styles.section}>
             <div className={styles.section_title}>Categories</div>
             <div
@@ -56,16 +83,17 @@ export default function Index({ productList }) {
               ))}
             </div>
           </section>
+
           <section className={styles.section}>
             <div className={styles.section_title}>Just for you</div>
             <div className={styles.cardContainer}>
-              {productList.map((product) => (
+              {productList.map((item) => (
                 <Card
-                  key={product.id}
-                  productID={product.id}
-                  title={product.name}
-                  price={product.price}
-                  image={product.images[0]}
+                  key={item.id}
+                  itemID={item.id}
+                  title={item.name}
+                  price={item.price}
+                  image={item.images[0]}
                 />
               ))}
             </div>

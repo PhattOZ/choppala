@@ -17,13 +17,14 @@ export default function App({
     let id
 
     const handleStart = () => {
-      id = setInterval(() => {
-        setLoading(true)
-      }, 250)
+      // id = setInterval(() => {
+      //   setLoading(true)
+      // }, 250)
+      setLoading(true)
     }
 
     const handleStop = () => {
-      clearInterval(id)
+      // clearInterval(id)
       setLoading(false)
     }
 
@@ -42,7 +43,7 @@ export default function App({
     <SessionProvider session={session}>
       <CartContextProvider>
         <Layout>
-          {loading && <Loader />}
+          {loading && <Loader debounce={50} />}
           <Component {...pageProps} />
         </Layout>
       </CartContextProvider>

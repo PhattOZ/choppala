@@ -5,10 +5,10 @@ import styles from "./Card.module.scss"
 import Image from "next/image"
 import Link from "next/link"
 
-export default function Card({ title, price, image, productID }) {
+export default function Card({ title, price, image, itemID }) {
   return (
     <div className={styles.card}>
-      <Link href={`/product/${productID}`}>
+      <Link href={`/product/${itemID}`}>
         <a>
           <div className={styles.img_container}>
             <div className={styles.card_image}>
