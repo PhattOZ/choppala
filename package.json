@@ -14,6 +14,7 @@
     "@fortawesome/free-regular-svg-icons": "^5.15.4",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@fortawesome/react-fontawesome": "^0.1.15",
+    "embla-carousel-autoplay": "^6.0.2",
     "embla-carousel-react": "^6.0.2",
     "firebase": "^9.4.0",
     "mongoose": "^6.0.10",

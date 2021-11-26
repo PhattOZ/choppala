@@ -7,6 +7,7 @@ import styles from "src/styles/pages/index.module.scss"
 import dbConnect from "src/lib/dbConnect"
 import Item from "src/models/Item"
 import useEmblaCarousel from "embla-carousel-react"
+import Autoplay from "embla-carousel-autoplay"
 
 function CategoryLink({ category }) {
   return (
@@ -39,11 +40,13 @@ export default function Index({ productList }) {
     "/banners/b-tech.png",
   ]
 
-  const bannerOptions = {
-    loop: true,
-  }
+  const autoplay = Autoplay({
+    delay: 2000,
+    stopOnInteraction: false,
+    stopOnMouseEnter: true,
+  })
 
-  const [emblaRef] = useEmblaCarousel(bannerOptions)
+  const [emblaRef] = useEmblaCarousel({ loop: true }, [autoplay])
 
   return (
     <>
