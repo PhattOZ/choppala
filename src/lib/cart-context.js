@@ -216,21 +216,22 @@ export const CartContextProvider = (props) => {
     dispatchCart({ type: "ORDER_ITEM", val: items })
   }
 
-  useEffect(async () => {
+  useEffect(() => {
     const getIDsfromDB = () => {
-      return fetch("/api/cart")
+      fetch("/api/cart")
         .then((response) => response.json())
         .then((data) => {
           data.forEach((e) => {
             delete e._id
           })
-          return data
+          getItemsFromIDs(data)
         })
         .catch((err) => console.log(err))
     }
 
     const getItemsFromIDs = (Items) => {
-      ItemIDs = Items.map((e) => e.itemID)
+      console.log(Items)
+      const ItemIDs = Items.map((e) => e.itemID)
       return fetch("/api/cart/item", {
         method: "POST",
         body: JSON.stringify(ItemIDs),
@@ -250,14 +251,10 @@ export const CartContextProvider = (props) => {
           merged.forEach((e) => {
             delete e.itemID
           })
-          return merged
+          dispatchCart({ type: "GET_CART", val: merged })
         })
     }
-    const ItemIDs = await getIDsfromDB()
-
-    const newCart = await getItemsFromIDs(ItemIDs)
-
-    dispatchCart({ type: "GET_CART", val: newCart })
+    getIDsfromDB()
   }, [])
 
   const value = {
