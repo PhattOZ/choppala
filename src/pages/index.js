@@ -6,21 +6,24 @@ import categories from "src/lib/categoryList"
 import styles from "src/styles/pages/index.module.scss"
 import dbConnect from "src/lib/dbConnect"
 import Item from "src/models/Item"
+import useEmblaCarousel from "embla-carousel-react"
+import Autoplay from "embla-carousel-autoplay"
 
 function CategoryLink({ category }) {
   return (
-    <Link href={{ pathname: "/filter", query: { category } }}>
+    <Link href={{ pathname: "/filter", query: { category: category.name } }}>
       <a>
         <div className={styles.category}>
           <div className={styles.category_image}>
             <Image
-              src="/molang.jpg"
+              src={category.img}
               layout="fill"
-              objectFit="cover"
+              objectFit="contain"
               alt="category"
+              priority
             />
           </div>
-          <div className={styles.category_title}>{category}</div>
+          <div className={styles.category_title}>{category.name}</div>
         </div>
       </a>
     </Link>
@@ -28,6 +31,22 @@ function CategoryLink({ category }) {
 }
 
 export default function Index({ productList }) {
+  const bannerImages = [
+    "/banners/b-choppala.png",
+    "/banners/b-blackfriday.png",
+    "/banners/b-12.png",
+    "/banners/b-electronics.png",
+    "/banners/b-seller.png",
+    "/banners/b-tech.png",
+  ]
+
+  const autoplay = Autoplay({
+    stopOnInteraction: false,
+    stopOnMouseEnter: true,
+  })
+
+  const [emblaRef] = useEmblaCarousel({ loop: true }, [autoplay])
+
   return (
     <>
       <Head>
@@ -43,7 +62,18 @@ export default function Index({ productList }) {
       </Head>
       <div className={styles.container}>
         <div>
-          <div className={styles.section}>banner</div>
+          <section className={styles.section}>
+            <div className={styles.embla} ref={emblaRef}>
+              <div className={styles.embla__container}>
+                {bannerImages.map((src) => (
+                  <div key={src} className={styles.embla__slide}>
+                    <Image src={src} layout="fill" objectFit="contain" />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
           <section className={styles.section}>
             <div className={styles.section_title}>Categories</div>
             <div
@@ -51,23 +81,22 @@ export default function Index({ productList }) {
               style={{ "--category-length": categories.length }}
             >
               {categories.map((category) => (
-                <CategoryLink key={category} category={category} />
+                <CategoryLink key={category.name} category={category} />
               ))}
             </div>
           </section>
+
           <section className={styles.section}>
             <div className={styles.section_title}>Just for you</div>
             <div className={styles.cardContainer}>
-              {productList.map((product) => (
-                <Link key={product.id} href={`/product/${product.id}`}>
-                  <a>
-                    <Card
-                      title={product.name}
-                      price={product.price}
-                      image={product.images[0]}
-                    />
-                  </a>
-                </Link>
+              {productList.map((item) => (
+                <Card
+                  key={item.id}
+                  itemID={item.id}
+                  title={item.name}
+                  price={item.price}
+                  image={item.images[0]}
+                />
               ))}
             </div>
           </section>

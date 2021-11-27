@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
+import Router from "next/router"
 import { useRouter } from "next/router"
 // Style
 import styles from "./YourProductBox.module.scss"
@@ -15,7 +16,16 @@ import Loader from "../Loader"
 import spliceData from "src/lib/spliceData"
 import Pagination from "../Pagination"
 
-function SellingBox({ name, image, price, amount, sold }) {
+function SellingBox({ itemId, name, image, price, amount, sold }) {
+  const handleDelete = async () => {
+    const res = await fetch(`/api/item?itemId=${itemId}`, {
+      method: "DELETE",
+    })
+    if (res.ok) {
+      Router.reload() // Reload page for fetch GET item again
+    }
+  }
+
   return (
     <div className={styles.orderBox}>
       <div className={styles.flexInfo}>
@@ -45,7 +55,7 @@ function SellingBox({ name, image, price, amount, sold }) {
         </div>
       </div>
       <div className={styles.btnblock}>
-        <div className={styles.deleteBtn}>
+        <div className={styles.deleteBtn} onClick={handleDelete}>
           <FontAwesomeIcon icon={faTrash} size="lg" />
           Delete
         </div>
@@ -80,45 +90,44 @@ function FirstProduct() {
   )
 }
 
-export default function YourProductBox({ sellerId }) {
+export default function YourProductBox({ sellerId, isSeller }) {
   const router = useRouter()
   const page = router.query.page ? router.query.page : "1" // Get current page (Used in Pagination component and spliceData)
   const [allSellerItems, setAllSellerItems] = useState([])
   const [sellerItems, setSellerItems] = useState([])
-  const [loading, setLoading] = useState(true)
 
-  // Fetch all seller's items (Fetch one time only)
   useEffect(async () => {
-    const res = await fetch(`/api/item?sellerId=${sellerId}`)
-    const resData = await res.json()
-    const currentItems = spliceData(resData.item, page, 6)
-    setAllSellerItems(resData.item)
-    setSellerItems(currentItems)
-    setLoading(false)
-  }, [])
-
-  // Render Loader component until fetch() in useEffect(1) complete
-  if (loading === true) {
-    return <Loader />
-  }
+    if (!allSellerItems.length) {
+      // User come to this page for first time or reload page
+      const res = await fetch(`/api/item?sellerId=${sellerId}`)
+      const resData = await res.json()
+      const currentItems = spliceData(resData.item, page, 6)
+      setAllSellerItems(resData.item)
+      setSellerItems(currentItems)
+    } else {
+      // This page already fetched items list
+      const currentItems = spliceData(allSellerItems, page, 6)
+      setSellerItems(currentItems)
+    }
+  }, [router.query.page])
 
   return (
     <>
-      {sellerItems.length ? (
+      {sellerItems.length || isSeller ? (
         <div className={styles.main}>
           <section>
             <div className={styles.top_part}>
-            <div className={styles.title}>Your Product</div>
-            <div className={styles.button_wrapper}>
-              <Link href="/me/addproduct" passHref>
-                <div className={styles.addBtn}>
-                  <FontAwesomeIcon icon={faPlusCircle} size="lg" />
-                  Add product
-                </div>
-              </Link>
+              <div className={styles.title}>Your Product</div>
+              <div className={styles.button_wrapper}>
+                <Link href="/me/addproduct" passHref>
+                  <div className={styles.addBtn}>
+                    <FontAwesomeIcon icon={faPlusCircle} size="lg" />
+                    Add product
+                  </div>
+                </Link>
+              </div>
             </div>
-            </div>
-  
+
             <div className={styles.body}>
               <div className={styles.header}>
                 <div className={styles.subtitle}>Product Name</div>
@@ -132,19 +141,23 @@ export default function YourProductBox({ sellerId }) {
               </div>
 
               {sellerItems.map((item) => (
-                <SellingBox
-                  name={item.name}
-                  image={item.images[0]}
-                  price={item.price}
-                  amount={item.amount}
-                  sold={item.soldCount}
-                  key={item.id}
-                />
+                <Link href={`/me/editproduct/${item.id}`} key={item.id}>
+                  <a>
+                    <SellingBox
+                      itemId={item.id}
+                      name={item.name}
+                      image={item.images[0]}
+                      price={item.price}
+                      amount={item.amount}
+                      sold={item.soldCount}
+                    />
+                  </a>
+                </Link>
               ))}
               <Pagination
                 itemsPerPage={6}
                 totalItems={allSellerItems.length}
-                url="/sellingorders"
+                url="/me/sellingorders"
               />
             </div>
           </section>

@@ -1,6 +1,6 @@
 // Styles
 import Layout from "src/components/UserProfileLayout"
-import styles from "src/styles/pages/user/AddProduct.module.scss"
+import styles from "src/styles/pages/user/EditProduct.module.scss"
 // FontAwesome lib
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faChevronCircleLeft, faImage } from "@fortawesome/free-solid-svg-icons"
@@ -14,19 +14,21 @@ import dbConnect from "src/lib/dbConnect"
 import createImgUrls from "src/lib/firebase"
 // Model
 import User from "src/models/User"
-import Seller from "src/models/Seller"
+import Item from "src/models/Item"
 // Component
 import AddItemImg from "src/components/AddItemImg"
 
-export default function AddProduct({ user, seller }) {
+export default function EditProduct({ user, item }) {
   const router = useRouter()
-  const [imgBlobs, setImgBlobs] = useState([])
+  const [imgBlobs, setImgBlobs] = useState(item.images)
   const [inputs, setInputs] = useState({
-    name: "",
-    category: "",
-    price: "",
-    amount: "",
-    detail: "",
+    id: item.id,
+    name: item.name,
+    category: item.category,
+    price: item.price,
+    amount: item.amount,
+    detail: item.detail,
+    images: item.images,
   })
   const [inputsValidation, setInputValidation] = useState({
     error: false,
@@ -70,14 +72,15 @@ export default function AddProduct({ user, seller }) {
 
   const handleSubmit = async () => {
     // Input validation (If all input not null, checkNull is true, otherwise checkNull is false)
-    const imgsNull = imgBlobs.every((img) => img == null) // Check images input is null or not
+    const imgsNull = imgBlobs.every((img) => img == null) // Check images input is null or not (Return true if all items in array is null)
     const checkNull =
       !!inputs.name &&
       !!inputs.category &&
       !!inputs.price &&
       !!inputs.amount &&
       !!inputs.detail &&
-      imgsNull
+      !imgsNull &&
+      !!imgBlobs.length
 
     if (!checkNull) {
       // Some input(s) is invalid
@@ -95,15 +98,13 @@ export default function AddProduct({ user, seller }) {
       // All inputs is valid
       const imgUrls = await createImgUrls(imgBlobs)
       const res = await fetch("/api/item", {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
           ...inputs,
           images: imgUrls,
-          sellerName: seller.storeName,
-          sellerId: seller.id,
         }),
       })
 
@@ -127,7 +128,7 @@ export default function AddProduct({ user, seller }) {
                     </div>
                   </a>
                 </Link>
-                <div className={styles.title}>Add Product</div>
+                <div className={styles.title}>Edit Product</div>
               </div>
 
               <div className={styles.body}>
@@ -141,6 +142,7 @@ export default function AddProduct({ user, seller }) {
                         type="text"
                         size="50"
                         name="name"
+                        value={inputs.name}
                         onChange={handleChange}
                       />
                       {inputsValidation.name ? (
@@ -225,6 +227,7 @@ export default function AddProduct({ user, seller }) {
                         cols="53"
                         rows="10"
                         name="detail"
+                        value={inputs.detail}
                         onChange={handleChange}
                         required
                       ></textarea>
@@ -250,12 +253,14 @@ export default function AddProduct({ user, seller }) {
                           size="lg"
                           index={0}
                           handleDeleteCropped={handleDeleteCropped}
+                          value={inputs.images[0]}
                         />
                         <AddItemImg
                           handleFileSync={handleFileSync}
                           size="lg"
                           index={1}
                           handleDeleteCropped={handleDeleteCropped}
+                          value={inputs.images[1]}
                         />
                       </div>
                       {/* Small image input */}
@@ -266,18 +271,21 @@ export default function AddProduct({ user, seller }) {
                             size="sm"
                             index={2}
                             handleDeleteCropped={handleDeleteCropped}
+                            value={inputs.images[2]}
                           />
                           <AddItemImg
                             handleFileSync={handleFileSync}
                             size="sm"
                             index={3}
                             handleDeleteCropped={handleDeleteCropped}
+                            value={inputs.images[3]}
                           />
                           <AddItemImg
                             handleFileSync={handleFileSync}
                             size="sm"
                             index={4}
                             handleDeleteCropped={handleDeleteCropped}
+                            value={inputs.images[4]}
                           />
                         </div>
                       </div>
@@ -293,7 +301,7 @@ export default function AddProduct({ user, seller }) {
               {/* Button */}
               <div className={styles.button_wrapper}>
                 <div className={styles.addBtn} onClick={handleSubmit}>
-                  Add product
+                  Confirm change
                 </div>
               </div>
             </section>
@@ -306,8 +314,8 @@ export default function AddProduct({ user, seller }) {
 
 export async function getServerSideProps(context) {
   const { req } = context
+  const { itemId } = context.query
   const session = await getSession({ req })
-
   if (session) {
     await dbConnect()
     const leanResponse = await User.findOne(
@@ -317,18 +325,14 @@ export async function getServerSideProps(context) {
       },
       { name: 1, email: 1, image: 1, _id: 1 }
     ).lean()
-
     leanResponse._id = leanResponse._id.toString()
 
-    const sellerLeanResponse = await Seller.findOne(
-      { userId: leanResponse._id },
-      { _id: 0 }
-    ).lean()
+    const item = await Item.findOne({ id: itemId }, { _id: 0 }).lean()
 
     return {
       props: {
         user: leanResponse,
-        seller: sellerLeanResponse,
+        item,
       },
     }
   } else {
