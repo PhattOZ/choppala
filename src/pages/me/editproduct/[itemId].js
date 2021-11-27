@@ -22,6 +22,7 @@ export default function EditProduct({ user, item }) {
   const router = useRouter()
   const [imgBlobs, setImgBlobs] = useState(item.images)
   const [inputs, setInputs] = useState({
+    id: item.id,
     name: item.name,
     category: item.category,
     price: item.price,
@@ -96,19 +97,16 @@ export default function EditProduct({ user, item }) {
     } else {
       // All inputs is valid
       const imgUrls = await createImgUrls(imgBlobs)
-      console.log(imgUrls)
-      // const res = await fetch("/api/item", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify({
-      //     ...inputs,
-      //     images: imgUrls,
-      //     sellerName: seller.storeName,
-      //     sellerId: seller.id,
-      //   }),
-      // }) // เปลี่ยน method POST เป็น PUT (?)
+      const res = await fetch("/api/item", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...inputs,
+          images: imgUrls,
+        }),
+      })
 
       if (res.ok) {
         router.push("/me/sellingorders")

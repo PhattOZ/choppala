@@ -16,7 +16,6 @@ export default async function handler(req, res) {
           .lean()
         res.status(200).json({ item: itemsLeanResponse })
       } catch (err) {
-        console.log(err)
         res.status(404).json({ success: false })
       }
       break
@@ -29,9 +28,16 @@ export default async function handler(req, res) {
         })
         res.status(200).json({ success: true })
       } catch (err) {
-        console.log(err)
         res.status(400).json({ success: false })
       }
       break
+    case "PUT":
+      try {
+        const data = req.body
+        await Item.findOneAndUpdate({ id: data.id }, { ...data })
+        res.status(200).json({ success: true })
+      } catch (err) {
+        res.status(400).json({ success: false })
+      }
   }
 }
