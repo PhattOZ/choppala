@@ -49,13 +49,8 @@
 .edit_section input[type="text"] {
   padding: 0.3rem 0.6rem;
   font-family: "Poppins", sans-serif;
-  font-size: 0.95rem;
-}
-
-.edit_section input[type="date"] {
-  padding: 0.3rem 0.6rem;
-  font-family: "Poppins", sans-serif;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
+  width: 15rem;
 }
 
 .edit_section input:focus {
@@ -85,7 +80,7 @@
   width: 12rem;
   cursor: pointer;
   &:hover {
-    background-color: #8B8EA1;
+    background-color: #8b8ea1;
   }
 }
 
@@ -119,9 +114,9 @@
   color: #444655;
 }
 
-.edit_text  textarea {
+.edit_text textarea {
   overflow: hidden;
-  width: 28rem;
+  width: 32rem;
   display: block;
   border-radius: 0.25rem;
   border: 1px solid #969696;
