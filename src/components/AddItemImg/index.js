@@ -1,5 +1,6 @@
 // react hook
 import { useState, useEffect, useRef } from "react"
+import Image from "next/image"
 // react-image-crop libraries
 import ReactCrop from "react-image-crop"
 import "react-image-crop/dist/ReactCrop.css"
@@ -99,12 +100,14 @@ export default function AddItemImg({
   size,
   index,
   handleDeleteCropped,
+  value,
 }) {
   const upImgStyle = size === "lg" ? styles.canvasLg : styles.canvasSm
   const [isPopup, setIsPopup] = useState(false)
   const [upImg, setUpImg] = useState()
   const [finalCrop, setFinalCrop] = useState()
   const [filename, setFilename] = useState("")
+  const [imgUrl, setImgUrl] = useState(value) // Used for edit section
   const [imgSize, setImgSize] = useState({
     width: 0,
     height: 0,
@@ -178,6 +181,23 @@ export default function AddItemImg({
   const handleConfirmCrop = (crop) => {
     setIsPopup(false)
     setFinalCrop(crop)
+  }
+
+  if (imgUrl) {
+    return (
+      <div className={`${styles.oldImgContainer} ${upImgStyle}`}>
+        <div
+          className={styles.croppedCancelBtn}
+          onClick={() => {
+            handleDeleteCropped(index)
+            setImgUrl(null)
+          }}
+        >
+          x
+        </div>
+        <Image src={imgUrl} layout="fill" />
+      </div>
+    )
   }
 
   return (

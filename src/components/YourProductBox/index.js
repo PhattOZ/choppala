@@ -131,14 +131,17 @@ export default function YourProductBox({ sellerId, isSeller }) {
               </div>
 
               {sellerItems.map((item) => (
-                <SellingBox
-                  name={item.name}
-                  image={item.images[0]}
-                  price={item.price}
-                  amount={item.amount}
-                  sold={item.soldCount}
-                  key={item.id}
-                />
+                <Link href={`/me/editproduct/${item.id}`} key={item.id}>
+                  <a>
+                    <SellingBox
+                      name={item.name}
+                      image={item.images[0]}
+                      price={item.price}
+                      amount={item.amount}
+                      sold={item.soldCount}
+                    />
+                  </a>
+                </Link>
               ))}
               <Pagination
                 itemsPerPage={6}
