@@ -1,7 +1,7 @@
 import styles from "src/styles/pages/cart.module.scss"
 import Link from "next/link"
 import CartContext from "src/lib/cart-context"
-import { useContext, useState } from "react"
+import { useContext, useState, useCallback, useEffect } from "react"
 import Image from "next/image"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons"
@@ -43,17 +43,10 @@ const transfromCart = (data) => {
 
 export default function Cart() {
   const ctx = useContext(CartContext)
-  const cartLength = ctx.value.cart.length
-  let cartData
+  const cartItem = transfromCart(ctx.value.cart)
 
-  if (cartLength > 0) {
-    const cartItem = transfromCart(ctx.value.cart)
-    //each seller
-    cartData = cartItem.map((data) => (
-      <ListItems key={data.sellerId} name={data.name} items={data.items} />
-    ))
-  } else {
-    cartData = <></>
+  const selectAllHandler = () => {
+    ctx.selectManyItems([])
   }
 
   return (
@@ -64,17 +57,34 @@ export default function Cart() {
         </Link>
         / Shopping Cart
       </div>
-      <div>Shopping Cart ({cartLength} items)</div>
+      <div>Shopping Cart ({cartItem.length} items)</div>
       <div className={styles.main}>
         <div className={styles.list_items}>
           <div className={styles.header_list_items}>
-            <input type="checkbox" />
+            <input
+              type="checkbox"
+              checked={ctx.value.checked}
+              onChange={selectAllHandler}
+            />
             <span>Product</span>
             <span>Price/unit</span>
             <span>Quantity</span>
             <span>Sub total</span>
           </div>
-          <div className={styles.main_list_items}>{cartData}</div>
+          <div className={styles.main_list_items}>
+            {cartItem.length > 0 ? (
+              cartItem.map((data) => (
+                <ListItems
+                  key={data.sellerId}
+                  name={data.name}
+                  items={data.items}
+                  id={data.sellerId}
+                />
+              ))
+            ) : (
+              <></>
+            )}
+          </div>
         </div>
         <div className={styles.order_summary}>
           <div>Order Summary</div>
@@ -93,16 +103,19 @@ export default function Cart() {
   )
 }
 
-const ListItems = (props) => {
+const ListItems = ({ name, items, id }) => {
   const ctx = useContext(CartContext)
-  const [confirm, setConfirm] = useState(
-    props.items.filter((e) => e.isConfirm).length == props.items.length
+
+  const checkSeller = ctx.value.cart.filter(
+    (e) => e.sellerId === id && e.isConfirm == false
   )
+  const check = !checkSeller.length > 0
 
   const checkSellerHandler = () => {
-    console.log("click!")
-    ctx.selectManyCart(props.items.map((e) => e.id))
-    setConfirm(!confirm)
+    ctx.selectManyItems(
+      items.map((e) => e.id),
+      check
+    )
   }
 
   return (
@@ -111,14 +124,16 @@ const ListItems = (props) => {
         <div className={styles.each_seller__header}>
           <input
             type="checkbox"
-            defaultChecked={confirm}
-            onClick={checkSellerHandler}
+            onChange={checkSellerHandler}
+            checked={check}
           />
-          <span className={styles.each_seller__header_name}>{props.name}</span>
+          <Link href={`/seller/${id}`}>
+            <a className={styles.each_seller__header_name}>{name}</a>
+          </Link>
         </div>
         <div>
-          {props.items.map((data) => (
-            <Item key={data.id} item={data} sellerConfirm={confirm} />
+          {items.map((data) => (
+            <Item key={data.id} item={data} />
           ))}
         </div>
       </div>
@@ -126,19 +141,16 @@ const ListItems = (props) => {
   )
 }
 
-const Item = ({ item, sellerConfirm }) => {
+const Item = ({ item }) => {
   const ctx = useContext(CartContext)
-  const [confirm, setConfirm] = useState(item.isConfirm)
   const [quantity, setQuantity] = useState(item.quantity)
 
-  console.log(sellerConfirm, confirm)
-  if (sellerConfirm && !confirm) {
-    setConfirm(true)
-  } else if (!sellerConfirm && confirm) {
-    setConfirm(false)
-  }
   const deleteItemHandler = () => {
     ctx.deleteItem(item.id)
+  }
+
+  const comfirmHandler = () => {
+    ctx.updateCart(item.id, 0)
   }
 
   //for isConfirm and quantity
@@ -155,10 +167,6 @@ const Item = ({ item, sellerConfirm }) => {
           break
         }
         break
-      case "none":
-        ctx.updateCart(item.id, 0)
-        setConfirm(!confirm)
-        break
     }
   }
 
@@ -167,13 +175,18 @@ const Item = ({ item, sellerConfirm }) => {
       <div className={styles.each_item}>
         <input
           type="checkbox"
-          onChange={updateItemHandler}
+          onChange={comfirmHandler}
           value={"none"}
-          checked={confirm}
+          checked={ctx.value.cart.find((e) => e.id === item.id).isConfirm}
         />
         <div className={styles.each_item__header}>
           <div className={styles.each_item__image}>
-            <Image src={item.image} layout="fill" objectFit="cover" />
+            <Image
+              src={item.image}
+              layout="fill"
+              objectFit="cover"
+              alt="cartItem"
+            />
           </div>
           <span className={styles.each_item__name}>{item.name}</span>
         </div>

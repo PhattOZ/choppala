@@ -26,6 +26,7 @@ export default function Checkout({ data }) {
 
   const orderHandler = () => {
     console.log("in orderHandler")
+    ctx.orderItem()
   }
 
   return (
@@ -140,7 +141,12 @@ const OrderList = ({ data }) => {
   return (
     <div className={styles.order__details}>
       <div className={styles.img}>
-        <Image src={data.image} layout="fill" objectFit="cover" />
+        <Image
+          src={data.image}
+          layout="fill"
+          objectFit="cover"
+          alt="checkoutItem"
+        />
       </div>
       <div className={styles.order__details_flexbox}>
         <div className={styles.name}>{data.name}</div>

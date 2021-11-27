@@ -5,6 +5,7 @@ const CartContext = createContext({})
 const initialState = {
   cart: [],
   totalPrice: 0,
+  checked: 0,
 }
 
 const calculatePrice = (data) => {
@@ -37,6 +38,14 @@ const transformCart = (cart) => {
   return newCart
 }
 
+const checkAllItems = (cart) => {
+  let check = 1
+  cart.map((e) => {
+    e.isConfirm ? (check *= 1) : (check *= 0)
+  })
+  return check
+}
+
 const updatedCartDB = (cart) => {
   const newCart = transformCart(cart)
   fetch("/api/cart", {
@@ -49,10 +58,16 @@ const updatedCartDB = (cart) => {
 }
 
 const addedUserHistoryDB = (items) => {
-  const newItems = items.map(({ _id: itemID, ...rest }) => ({
-    itemID,
-    ...rest,
+  const newItems = items.map((e) => ({
+    itemID: e.id,
+    name: e.name,
+    image: e.image,
+    price: e.price,
+    sellerName: e.sellerName,
+    sellerID: e.sellerId,
+    quantity: e.quantity,
   }))
+
   fetch("/api/userHistory", {
     method: "POST",
     body: JSON.stringify(newItems),
@@ -65,8 +80,11 @@ const addedUserHistoryDB = (items) => {
 const cartReducer = (state, action) => {
   switch (action.type) {
     case "GET_CART":
-      const sum = calculatePrice(action.val)
-      return { cart: action.val, totalPrice: sum }
+      return {
+        cart: action.val,
+        totalPrice: calculatePrice(action.val),
+        checked: checkAllItems(action.val),
+      }
     case "ADD_CART":
       let addedTragetIndex
       if (state.cart.length > 0) {
@@ -78,6 +96,7 @@ const cartReducer = (state, action) => {
         return {
           cart: [action.val],
           totalPrice: action.val.quantity * action.val.price,
+          checked: checkAllItems([action.val]),
         }
       }
 
@@ -99,13 +118,13 @@ const cartReducer = (state, action) => {
           ...state.cart.filter((item) => item.id != action.val.id),
           updatedItem,
         ]
-        newTotal = calculatePrice(newCart)
       }
 
       updatedCartDB(newCart)
       return {
         cart: newCart,
-        totalPrice: newTotal,
+        totalPrice: calculatePrice(newCart),
+        checked: checkAllItems(newCart),
       }
     case "UPDATE_CART":
       const updatedTragetIndex = state.cart.findIndex(
@@ -121,11 +140,11 @@ const cartReducer = (state, action) => {
           if (quantity == 1) {
             // delete item if quantity already 1 and decrease to 0
             newCart = [...state.cart.filter((item) => item.id != action.val.id)]
-            newTotal = calculatePrice(newCart)
             updatedCartDB(newCart)
             return {
               cart: newCart,
-              totalPrice: newTotal,
+              totalPrice: calculatePrice(newCart),
+              checked: checkAllItems(newCart),
             }
           } else {
             updatedItem = {
@@ -153,34 +172,59 @@ const cartReducer = (state, action) => {
       newCart = [...state.cart]
       newCart[updatedTragetIndex] = updatedItem
 
-      newTotal = calculatePrice(newCart)
       updatedCartDB(newCart)
       return {
         cart: newCart,
-        totalPrice: newTotal,
+        totalPrice: calculatePrice(newCart),
+        checked: checkAllItems(newCart),
       }
     case "DELETE_ITEM":
       newCart = [...state.cart.filter((item) => item.id != action.val)]
-      newTotal = calculatePrice(newCart)
       updatedCartDB(newCart)
       return {
         cart: newCart,
-        totalPrice: newTotal,
+        totalPrice: calculatePrice(newCart),
+        checked: checkAllItems(newCart),
       }
     case "ORDER_ITEM":
-      newCart = [...state.cart.filter((item) => !action.val.includes(item))]
-
-      newTotal = calculatePrice(newCart)
+      newCart = [...state.cart.filter((item) => !item.isConfirm)]
       updatedCartDB(newCart)
-      addedUserHistoryDB(action.val)
+      addedUserHistoryDB([...state.cart.filter((item) => item.isConfirm)])
+
       return {
         cart: newCart,
-        totalPrice: newTotal,
+        totalPrice: calculatePrice(newCart),
+        checked: checkAllItems(newCart),
+      }
+    case "SELECT_ALL":
+      newCart = state.cart.map((e) => {
+        return { ...e, isConfirm: !state.checked }
+      })
+      updatedCartDB(newCart)
+      return {
+        cart: newCart,
+        totalPrice: calculatePrice(newCart),
+        checked: !state.checked,
+      }
+    case "SELECT_SELLER":
+      newCart = state.cart.map((e) => {
+        if (action.val.IDs.includes(e.id)) {
+          return { ...e, isConfirm: !action.val.check }
+        } else {
+          return e
+        }
+      })
+      updatedCartDB(newCart)
+      return {
+        cart: newCart,
+        totalPrice: calculatePrice(newCart),
+        checked: checkAllItems(newCart),
       }
     default:
       return {
         cart: [...state.cart],
         totalPrice: state.totalPrice,
+        checked: state.checked,
       }
   }
 }
@@ -189,7 +233,7 @@ export const CartContextProvider = (props) => {
   const [cart, dispatchCart] = useReducer(cartReducer, initialState)
   const [showHeader, setShowHeader] = useState(true)
 
-  const addToCart = async (item) => {
+  const addToCart = (item) => {
     dispatchCart({ type: "ADD_CART", val: item }) //update state first than update in db
   }
 
@@ -198,11 +242,15 @@ export const CartContextProvider = (props) => {
     dispatchCart({ type: "UPDATE_CART", val: data })
   }
 
-  const selectManyCart = (IDs) => {
-    if (IDs.length == 1) {
+  const selectManyItems = (IDs, curr) => {
+    if (IDs.length == 0) {
+      dispatchCart({ type: "SELECT_ALL" })
+    } else if (IDs.length == 1) {
       const data = { id: IDs[0], check: 0 }
       dispatchCart({ type: "UPDATE_CART", val: data })
     } else {
+      const data = { IDs: IDs, check: curr }
+      dispatchCart({ type: "SELECT_SELLER", val: data })
     }
   }
 
@@ -211,8 +259,6 @@ export const CartContextProvider = (props) => {
   }
 
   const orderItem = (items) => {
-    console.log("order now!!")
-
     dispatchCart({ type: "ORDER_ITEM", val: items })
   }
 
@@ -230,7 +276,6 @@ export const CartContextProvider = (props) => {
     }
 
     const getItemsFromIDs = (Items) => {
-      console.log(Items)
       const ItemIDs = Items.map((e) => e.itemID)
       return fetch("/api/cart/item", {
         method: "POST",
@@ -263,7 +308,7 @@ export const CartContextProvider = (props) => {
     addToCart: addToCart,
     deleteItem: deleteItem,
     updateCart: updateCart,
-    selectManyCart: selectManyCart,
+    selectManyItems: selectManyItems,
     orderItem: orderItem,
   }
   return (

@@ -29,7 +29,7 @@ export default async function handler(req, res) {
         try {
           const filter = { name: user.name, email: user.email }
           const update = { $push: { purchaseHistory: req.body } }
-          console.log(req.body)
+
           await User.findOneAndUpdate(filter, update)
 
           res.status(200).json({ success: true })

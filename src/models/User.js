@@ -61,6 +61,7 @@ const UserSchema = new mongoose.Schema({
       image: String,
       price: Number,
       sellerName: String,
+      sellerID: String,
       quantity: Number,
       isRating: { type: Boolean, default: false },
       orderAt: { type: Date, default: Date.now },
