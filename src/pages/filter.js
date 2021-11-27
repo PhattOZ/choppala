@@ -93,15 +93,13 @@ export default function Filter({
           <div className={styles.card_container}>
             {currentItems &&
               currentItems.map((item) => (
-                <Link key={item.id} href={`/product/${item.id}`}>
-                  <a>
-                    <Card
-                      title={item.name}
-                      price={item.price}
-                      image={item.images[0]}
-                    />
-                  </a>
-                </Link>
+                <Card
+                  key={item.id}
+                  itemID={item.id}
+                  title={item.name}
+                  price={item.price}
+                  image={item.images[0]}
+                />
               ))}
           </div>
           <div className={styles.page_container}>

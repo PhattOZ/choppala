@@ -1,35 +1,40 @@
 import Image from "next/image"
 import styles from "./Loader.module.scss"
-import { useLayoutEffect } from "react"
+import { useLayoutEffect, useState } from "react"
 import ClientOnlyPortal from "../Portal"
 
-export default function Loader() {
-  useLockBodyScroll()
+export default function Loader({ debounce }) {
+  const [visible, setVisible] = useState(false)
+
+  useLayoutEffect(() => {
+    const id = setInterval(() => {
+      setVisible(true)
+      document.body.style.overflow = "hidden"
+    }, debounce)
+
+    return () => {
+      document.body.style.overflow = "visible"
+      clearInterval(id)
+    }
+  }, [])
 
   return (
-    <ClientOnlyPortal selector="#modal-root">
-      <div className={styles.body}>
-        <div className={styles.loader}>
-          <div className={styles.spinner}></div>
-          <div className={styles.logo}>
-            <Image
-              src="/molang.jpg"
-              layout="fill"
-              objectFit="contain"
-              priority
-            />
+    visible && (
+      <ClientOnlyPortal selector="#modal-root">
+        <div className={styles.body}>
+          <div className={styles.loader}>
+            <div className={styles.spinner}></div>
+            <div className={styles.logo}>
+              <Image
+                src="/molang.jpg"
+                layout="fill"
+                objectFit="contain"
+                priority
+              />
+            </div>
           </div>
         </div>
-      </div>
-    </ClientOnlyPortal>
+      </ClientOnlyPortal>
+    )
   )
-}
-
-function useLockBodyScroll() {
-  useLayoutEffect(() => {
-    //Prevent scrolling on mount
-    document.body.style.overflow = "hidden"
-    //Re-enable scrolling when component unmount
-    return () => (document.body.style.overflow = "visible")
-  }, []) // Empty array ensures effect is only run on mount and unmount
 }
