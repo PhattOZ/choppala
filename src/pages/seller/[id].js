@@ -41,7 +41,7 @@ function Topbar({ seller }) {
         <div className={styles.profile}>
           <div className={styles.profile_info}>
             <div className={styles.title}>
-              {seller.storeName}'s store
+              {seller.storeName}&#39;s store
               <div className={styles.check_line}>
                 <FontAwesomeIcon icon={faCheckCircle} />
                 seller
