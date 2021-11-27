@@ -1,7 +1,7 @@
 .container {
   display: flex;
   justify-content: center;
-  padding: 2rem 1rem 0 1rem;
+  padding: 1.5rem 1rem 0 1rem;
 }
 
 .section {
@@ -15,6 +15,22 @@
   text-transform: uppercase;
 }
 
+// Carousel
+.embla {
+  overflow: hidden;
+}
+
+.embla__container {
+  display: flex;
+}
+
+.embla__slide {
+  position: relative;
+  height: 8rem;
+  flex: 0 0 100%;
+}
+
+// Category
 .categoriesContainer {
   display: grid;
   grid-template-columns: repeat(var(--category-length), minmax(0, 1fr));
@@ -22,7 +38,6 @@
 }
 
 .category {
-  width: 6rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -38,20 +53,35 @@
   width: 4rem;
   height: 4rem;
   margin-bottom: 0.5rem;
+  background: #dbe6fd;
+  border-radius: 100%;
 }
 
+// Item cards
 .cardContainer {
   display: grid;
   column-gap: 1rem;
   row-gap: 0.5rem;
+  justify-items: center;
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-@media (min-width: 1024px) {
+// Responsive
+@media (min-width: 768px) {
+  .embla__slide {
+    height: 15rem;
+  }
   .cardContainer {
-    display: grid;
-    column-gap: 1rem;
-    row-gap: 0.5rem;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding-left: 8rem;
+    padding-right: 8rem;
+  }
+  .cardContainer {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 }
