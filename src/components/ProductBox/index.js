@@ -7,10 +7,11 @@ import {
   faCoins,
   faHeart as fasfaHeart,
 } from "@fortawesome/free-solid-svg-icons"
-import { useState } from "react"
+import { useState, useCallback } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import styles from "./ProductBox.module.scss"
+import useEmblaCarousel from "embla-carousel-react"
 
 export default function ProductBox({
   onClickBuynow,
@@ -145,24 +146,53 @@ const ImageSlide = ({ images }) => {
     setMainImageIndex(e.currentTarget.getAttribute("imageat"))
   }
 
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    slidesToScroll: 1,
+    align: "start",
+    loop: true,
+  })
+
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev()
+  }, [emblaApi])
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext()
+  }, [emblaApi])
+
   return (
     <div className={styles.imgcontainer}>
       <MainImage index={mainImageIndex} images={images} />
-      <div className={styles.imggal}>
-        {images.map((image, index) => {
-          return (
-            <div
-              className={`${styles.item_image} ${
-                index == mainImageIndex && styles.item_image_select
-              }`}
-              key={index}
-              onClick={changeMainImageHandler}
-              imageat={index}
-            >
-              <Image src={image} alt="Product image" layout="fill" />
-            </div>
-          )
-        })}
+      <div className={styles.embla} ref={emblaRef}>
+        <div className={styles.embla__container}>
+          {images.map((image, index) => {
+            return (
+              <div
+                className={`${styles.embla__slide} ${
+                  index == mainImageIndex && styles.item_image_select
+                }`}
+                key={index}
+                onClick={changeMainImageHandler}
+                imageat={index}
+              >
+                <Image src={image} alt="Product image" layout="fill" />
+              </div>
+            )
+          })}
+        </div>
+        <button
+          className={styles.embla__bottonPrev}
+          type="button"
+          onClick={scrollPrev}
+        >
+          <span></span>
+        </button>
+        <button
+          className={styles.embla__bottonNext}
+          type="button"
+          onClick={scrollNext}
+        >
+          <span></span>
+        </button>
       </div>
     </div>
   )
