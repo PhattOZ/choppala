@@ -16,7 +16,7 @@ export default function Loader({ debounce }) {
       document.body.style.overflow = "visible"
       clearInterval(id)
     }
-  }, [])
+  }, [debounce])
 
   return (
     visible && (
@@ -29,6 +29,7 @@ export default function Loader({ debounce }) {
                 src="/molang.jpg"
                 layout="fill"
                 objectFit="contain"
+                alt=""
                 priority
               />
             </div>

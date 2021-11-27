@@ -53,7 +53,7 @@ const EachItem = ({ item }) => {
       </div>
       <div className={styles.eachOrder__item}>
         <div className={styles.eachOrder__image}>
-          <Image src={item.image} layout="fill" objectFit="cover" />
+          <Image src={item.image} layout="fill" objectFit="cover" alt="" />
         </div>
         <div>{item.name}</div>
         <div>x{item.quantity}</div>
