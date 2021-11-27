@@ -97,6 +97,7 @@ export default function Index({ productList }) {
                       layout="fill"
                       objectFit="contain"
                       alt="banner"
+                      priority
                     />
                   </div>
                 ))}
