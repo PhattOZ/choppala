@@ -2,12 +2,13 @@ import styles from "src/styles/pages/user/Profile.module.scss"
 //Component
 import Layout from "src/components/UserProfileLayout"
 import Loader from "src/components/Loader"
-import SmallPopup from "src/components/SmallPopup"
+import Popup from "src/components/Popup"
 //Lib
 import Image from "next/image"
 import { useSession } from "next-auth/react"
 import { useRouter } from "next/router"
 import { useState } from "react"
+import { success } from "src/lib/modalContent"
 //Icon
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faHome } from "@fortawesome/free-solid-svg-icons"
@@ -99,14 +100,24 @@ export default function Profile() {
                 </div>
               </div>
               <div className={styles.button_wrapper}>
-                <div className={styles.saveButton}>Save</div>
+                <div className={styles.saveButton} onClick={handleShow}>Save</div>
               </div>
             </div>
           </section>
         </div>
       </Layout>
       {/* -----------Popup------------ */}
-      {showModal && <SmallPopup show={showModal} onClose={handleClose} />}
+      {showModal && <Popup
+          show={showModal}
+          onClose={handleClose}
+          title={success.title}
+          titlecolor={success.titlecolor}
+          subtitle={success.subtitle}
+          icon={success.icon}
+          content1={success.content1}
+          content2={success.content2}
+          buttonShow={success.buttonShow}
+        />}
     </div>
   )
 }

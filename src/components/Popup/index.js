@@ -31,9 +31,10 @@ export default function Popup({
         <div className={styles.container}>
           <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
             <div className={styles.header}>
-              <div className={styles.icon} onClick={() => onClose()}>
+              {buttonShow === "delete" || buttonShow === "warn" || buttonShow === "rating" || buttonShow === "order"? 
+                (<div className={styles.icon} onClick={() => onClose()}>
                 <FontAwesomeIcon icon={faTimes} size="lg" />
-              </div>
+              </div>):(<div></div>)}
             </div>
             <div className={styles.body}>
               <div className={styles.title} style={{ color: titlecolor }}>
