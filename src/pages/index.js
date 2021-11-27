@@ -4,10 +4,10 @@ import Head from "next/head"
 import Card from "src/components/Card"
 import categories from "src/lib/categoryList"
 import styles from "src/styles/pages/index.module.scss"
-import dbConnect from "src/lib/dbConnect"
-import Item from "src/models/Item"
+
 import useEmblaCarousel from "embla-carousel-react"
 import Autoplay from "embla-carousel-autoplay"
+import useSWR from "swr"
 
 function CategoryLink({ category }) {
   return (
@@ -30,22 +30,47 @@ function CategoryLink({ category }) {
   )
 }
 
+const bannerImages = [
+  "/banners/b-choppala.png",
+  "/banners/b-blackfriday.png",
+  "/banners/b-12.png",
+  "/banners/b-electronics.png",
+  "/banners/b-seller.png",
+  "/banners/b-tech.png",
+]
+
+const autoplay = Autoplay({
+  stopOnInteraction: false,
+  stopOnMouseEnter: true,
+})
+
+const fetcher = (url) => fetch(url).then((r) => r.json())
+
 export default function Index({ productList }) {
-  const bannerImages = [
-    "/banners/b-choppala.png",
-    "/banners/b-blackfriday.png",
-    "/banners/b-12.png",
-    "/banners/b-electronics.png",
-    "/banners/b-seller.png",
-    "/banners/b-tech.png",
-  ]
-
-  const autoplay = Autoplay({
-    stopOnInteraction: false,
-    stopOnMouseEnter: true,
-  })
-
   const [emblaRef] = useEmblaCarousel({ loop: true }, [autoplay])
+  const { data, error } = useSWR("/api/index_item_list", fetcher)
+
+  const itemCardsUI = () => {
+    if (error) {
+      return <div>Failed to load</div>
+    }
+
+    if (!data) {
+      return <div>loading</div>
+    }
+
+    const items = data.items.map((item) => (
+      <Card
+        key={item.id}
+        itemID={item.id}
+        title={item.name}
+        price={item.price}
+        image={item.images[0]}
+      />
+    ))
+
+    return items
+  }
 
   return (
     <>
@@ -88,17 +113,7 @@ export default function Index({ productList }) {
 
           <section className={styles.section}>
             <div className={styles.section_title}>Just for you</div>
-            <div className={styles.cardContainer}>
-              {productList.map((item) => (
-                <Card
-                  key={item.id}
-                  itemID={item.id}
-                  title={item.name}
-                  price={item.price}
-                  image={item.images[0]}
-                />
-              ))}
-            </div>
+            <div className={styles.cardContainer}>{itemCardsUI()}</div>
           </section>
         </div>
       </div>
@@ -106,16 +121,16 @@ export default function Index({ productList }) {
   )
 }
 
-export async function getServerSideProps() {
-  await dbConnect()
-  const items = await Item.find({}, { _id: 0 })
-    .sort({ _id: -1 })
-    .limit(18)
-    .lean()
+// export async function getServerSideProps() {
+//   await dbConnect()
+//   const items = await Item.find({}, { _id: 0 })
+//     .sort({ _id: -1 })
+//     .limit(18)
+//     .lean()
 
-  return {
-    props: {
-      productList: items,
-    },
-  }
-}
+//   return {
+//     props: {
+//       productList: items,
+//     },
+//   }
+// }
