@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
+import Router from "next/router"
 import { useRouter } from "next/router"
 // Style
 import styles from "./YourProductBox.module.scss"
@@ -15,7 +16,16 @@ import Loader from "../Loader"
 import spliceData from "src/lib/spliceData"
 import Pagination from "../Pagination"
 
-function SellingBox({ name, image, price, amount, sold }) {
+function SellingBox({ itemId, name, image, price, amount, sold }) {
+  const handleDelete = async () => {
+    const res = await fetch(`/api/item?itemId=${itemId}`, {
+      method: "DELETE",
+    })
+    if (res.ok) {
+      Router.reload() // Reload page for fetch GET item again
+    }
+  }
+
   return (
     <div className={styles.orderBox}>
       <div className={styles.flexInfo}>
@@ -45,7 +55,7 @@ function SellingBox({ name, image, price, amount, sold }) {
         </div>
       </div>
       <div className={styles.btnblock}>
-        <div className={styles.deleteBtn}>
+        <div className={styles.deleteBtn} onClick={handleDelete}>
           <FontAwesomeIcon icon={faTrash} size="lg" />
           Delete
         </div>
@@ -88,7 +98,7 @@ export default function YourProductBox({ sellerId, isSeller }) {
 
   useEffect(async () => {
     if (!allSellerItems.length) {
-      // User come to this page for first time
+      // User come to this page for first time or reload page
       const res = await fetch(`/api/item?sellerId=${sellerId}`)
       const resData = await res.json()
       const currentItems = spliceData(resData.item, page, 6)
@@ -134,6 +144,7 @@ export default function YourProductBox({ sellerId, isSeller }) {
                 <Link href={`/me/editproduct/${item.id}`} key={item.id}>
                   <a>
                     <SellingBox
+                      itemId={item.id}
                       name={item.name}
                       image={item.images[0]}
                       price={item.price}
