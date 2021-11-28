@@ -5,6 +5,7 @@ import { CartContextProvider } from "src/lib/cart-context"
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import Loader from "src/components/Loader"
+import ClientOnlyPortal from "src/components/Portal"
 
 export default function App({
   Component,
@@ -43,7 +44,11 @@ export default function App({
     <SessionProvider session={session}>
       <CartContextProvider>
         <Layout>
-          {loading && <Loader debounce={200} />}
+          {loading && (
+            <ClientOnlyPortal selector="#modal-root">
+              <Loader debounce={200} />
+            </ClientOnlyPortal>
+          )}
           <Component {...pageProps} />
         </Layout>
       </CartContextProvider>

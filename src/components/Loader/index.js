@@ -1,7 +1,6 @@
 import Image from "next/image"
 import styles from "./Loader.module.scss"
 import { useLayoutEffect, useState } from "react"
-import ClientOnlyPortal from "../Portal"
 
 export default function Loader({ debounce }) {
   const [visible, setVisible] = useState(false)
@@ -16,25 +15,24 @@ export default function Loader({ debounce }) {
       document.body.style.overflow = "visible"
       clearInterval(id)
     }
-  }, [])
+  }, [debounce])
 
   return (
     visible && (
-      <ClientOnlyPortal selector="#modal-root">
-        <div className={styles.body}>
-          <div className={styles.loader}>
-            <div className={styles.spinner}></div>
-            <div className={styles.logo}>
-              <Image
-                src="/molang.jpg"
-                layout="fill"
-                objectFit="contain"
-                priority
-              />
-            </div>
+      <div className={styles.body}>
+        <div className={styles.loader}>
+          <div className={styles.spinner}></div>
+          <div className={styles.logo}>
+            <Image
+              src="/molang.jpg"
+              layout="fill"
+              objectFit="contain"
+              alt=""
+              priority
+            />
           </div>
         </div>
-      </ClientOnlyPortal>
+      </div>
     )
   )
 }
