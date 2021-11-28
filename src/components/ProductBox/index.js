@@ -159,9 +159,9 @@ const ImageSlide = ({ images }) => {
     if (emblaApi) emblaApi.scrollNext()
   }, [emblaApi])
 
-  return (
-    <div className={styles.imgcontainer}>
-      <MainImage index={mainImageIndex} images={images} />
+  let ImageCarosel
+  if (images.length > 4) {
+    ImageCarosel = (
       <div className={styles.embla} ref={emblaRef}>
         <div className={styles.embla__container}>
           {images.map((image, index) => {
@@ -194,6 +194,34 @@ const ImageSlide = ({ images }) => {
           <span></span>
         </button>
       </div>
+    )
+  } else if (images.length > 1) {
+    ImageCarosel = (
+      <div className={styles.imggal}>
+        {images.map((image, index) => {
+          return (
+            <div
+              className={`${styles.item_image} ${
+                index == mainImageIndex && styles.item_image_select
+              }`}
+              key={index}
+              onClick={changeMainImageHandler}
+              imageat={index}
+            >
+              <Image src={image} alt="Product image" layout="fill" />
+            </div>
+          )
+        })}
+      </div>
+    )
+  } else {
+    ImageCarosel = <></>
+  }
+
+  return (
+    <div className={styles.imgcontainer}>
+      <MainImage index={mainImageIndex} images={images} />
+      {ImageCarosel}
     </div>
   )
 }

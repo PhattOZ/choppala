@@ -36,66 +36,79 @@
       opacity: 0;
     }
   }
+  .imggal {
+    width: 18rem;
+    margin-top: 0.25rem;
+    display: grid;
+    grid-template-columns: repeat(4, 22%);
+    column-gap: 4%;
+    row-gap: 0.25rem;
+    .item_image {
+      position: relative;
+      width: 4rem;
+      height: 4rem;
+    }
+    .item_image_select {
+      border: 1px solid black;
+    }
+  }
   .embla {
     margin-top: 0.25rem;
     overflow: hidden;
     position: relative;
     width: 20rem;
-  }
-  .embla__container {
-    display: flex;
-    width: 20rem;
-  }
-  .embla__slide {
-    position: relative;
-    flex: 0 0 25%;
-    width: 4rem;
-    height: 4rem;
-    cursor: pointer;
-  }
-  .item_image_select {
-    border: 1px solid black;
-  }
-
-  .embla_botton {
-    background-color: rgba(0, 0, 0, 0.1);
-    border: 0;
-    position: absolute;
-    top: 0%;
-    height: 100%;
-    width: 1.5rem;
-    span {
-      display: inline-block;
-      width: 2vw;
-      height: 2vw;
+    .embla__container {
+      display: flex;
+      width: 20rem;
+    }
+    .embla__slide {
       position: relative;
-      box-sizing: border-box;
-      opacity: 0.65;
-      border-bottom: 5px solid #4585ff;
-      border-left: 5px solid #4585ff;
-      transition: opacity 300ms ease;
+      flex: 0 0 25%;
+      width: 4rem;
+      height: 4rem;
+      cursor: pointer;
     }
-    &:hover {
-      background-color: rgba(0, 0, 0, 0.3);
+    .item_image_select {
+      border: 1px solid black;
     }
-  }
-
-  .embla__bottonPrev {
-    @extend .embla_botton;
-    span {
-      transform: rotate(45deg);
+    .embla_botton {
+      background-color: rgba(0, 0, 0, 0.1);
+      border: 0;
+      position: absolute;
+      top: 0%;
+      height: 100%;
+      width: 1.5rem;
+      span {
+        display: inline-block;
+        width: 2vw;
+        height: 2vw;
+        position: relative;
+        box-sizing: border-box;
+        opacity: 0.65;
+        border-bottom: 5px solid #4585ff;
+        border-left: 5px solid #4585ff;
+        transition: opacity 300ms ease;
+      }
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.3);
+      }
     }
-  }
-
-  .embla__bottonNext {
-    @extend .embla_botton;
-    right: 0%;
-    span {
-      right: calc(1.5rem - 6px);
-      transform: rotate(-135deg);
+    .embla__bottonPrev {
+      @extend .embla_botton;
+      span {
+        transform: rotate(45deg);
+      }
     }
-    &:hover {
-      background-color: rgba(0, 0, 0, 0.3);
+    .embla__bottonNext {
+      @extend .embla_botton;
+      right: 0%;
+      span {
+        right: calc(1.5rem - 6px);
+        transform: rotate(-135deg);
+      }
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.3);
+      }
     }
   }
 }
