@@ -77,7 +77,7 @@ export default function AddProduct({ user, seller }) {
       !!inputs.price &&
       !!inputs.amount &&
       !!inputs.detail &&
-      imgsNull
+      !imgsNull
 
     if (!checkNull) {
       // Some input(s) is invalid
@@ -94,6 +94,7 @@ export default function AddProduct({ user, seller }) {
     } else {
       // All inputs is valid
       const imgUrls = await createImgUrls(imgBlobs)
+      console.log(imgBlobs)
       const res = await fetch("/api/item", {
         method: "POST",
         headers: {
