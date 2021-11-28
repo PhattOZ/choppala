@@ -5,6 +5,7 @@ import { CartContextProvider } from "src/lib/cart-context"
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import Loader from "src/components/Loader"
+import ClientOnlyPortal from "src/components/Portal"
 
 export default function App({
   Component,
@@ -17,13 +18,14 @@ export default function App({
     let id
 
     const handleStart = () => {
-      id = setInterval(() => {
-        setLoading(true)
-      }, 500)
+      // id = setInterval(() => {
+      //   setLoading(true)
+      // }, 250)
+      setLoading(true)
     }
 
     const handleStop = () => {
-      clearInterval(id)
+      // clearInterval(id)
       setLoading(false)
     }
 
@@ -42,7 +44,11 @@ export default function App({
     <SessionProvider session={session}>
       <CartContextProvider>
         <Layout>
-          {loading ? <Loader /> : ""}
+          {loading && (
+            <ClientOnlyPortal selector="#modal-root">
+              <Loader debounce={200} />
+            </ClientOnlyPortal>
+          )}
           <Component {...pageProps} />
         </Layout>
       </CartContextProvider>

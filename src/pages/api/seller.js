@@ -18,6 +18,7 @@ export default async function handler(req, res) {
       } catch (err) {
         res.status(400).json({ success: false })
       }
+      break
     case "POST":
       try {
         const { userId, username, userEmail, userImage } = req.body

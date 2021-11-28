@@ -1,5 +1,6 @@
 // react hook
 import { useState, useEffect, useRef } from "react"
+import Image from "next/image"
 // react-image-crop libraries
 import ReactCrop from "react-image-crop"
 import "react-image-crop/dist/ReactCrop.css"
@@ -94,16 +95,24 @@ function CropImgPopup({ upImg, imgRef, onCancelCrop, onSave, setImgSize }) {
 
 // ----------------------------------------------------------------------
 
-export default function AddItemImg({ handleFileSync, size, index }) {
+export default function AddItemImg({
+  handleFileSync,
+  size,
+  index,
+  handleDeleteCropped,
+  value,
+}) {
   const upImgStyle = size === "lg" ? styles.canvasLg : styles.canvasSm
   const [isPopup, setIsPopup] = useState(false)
   const [upImg, setUpImg] = useState()
   const [finalCrop, setFinalCrop] = useState()
   const [filename, setFilename] = useState("")
+  const [imgUrl, setImgUrl] = useState(value) // Used for edit section
   const [imgSize, setImgSize] = useState({
     width: 0,
     height: 0,
   })
+  const inputRef = useRef(null)
   const imgRef = useRef(null)
   const canvasRef = useRef(null)
 
@@ -149,6 +158,7 @@ export default function AddItemImg({ handleFileSync, size, index }) {
     )
   }, [finalCrop])
 
+  // Fire this function after seller select image to crop
   const onSelectFile = (e) => {
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0]
@@ -160,20 +170,50 @@ export default function AddItemImg({ handleFileSync, size, index }) {
     }
   }
 
+  // Fire this function after seller click Cancel in Crop Popup
   const handleCancelCrop = () => {
+    inputRef.current.value = ""
     setFilename("")
     setIsPopup(false)
   }
 
+  // Fire this function after seller click Save in Crop Popup
   const handleConfirmCrop = (crop) => {
     setIsPopup(false)
     setFinalCrop(crop)
   }
 
+  if (imgUrl) {
+    return (
+      <div className={`${styles.oldImgContainer} ${upImgStyle}`}>
+        <div
+          className={styles.croppedCancelBtn}
+          onClick={() => {
+            handleDeleteCropped(index)
+            setImgUrl(null)
+          }}
+        >
+          x
+        </div>
+        <Image src={imgUrl} layout="fill" />
+      </div>
+    )
+  }
+
   return (
     <>
       {finalCrop ? (
-        <div>
+        <div className={styles.croppedImgContainer}>
+          <div
+            className={styles.croppedCancelBtn}
+            onClick={() => {
+              handleDeleteCropped(index)
+              setFilename("")
+              setFinalCrop(null)
+            }}
+          >
+            x
+          </div>
           <canvas ref={canvasRef} className={upImgStyle}></canvas>
         </div>
       ) : (
@@ -185,6 +225,7 @@ export default function AddItemImg({ handleFileSync, size, index }) {
               accept="image/png, image/jpeg"
               id={index}
               name="myImage"
+              ref={inputRef}
             />
             <label htmlFor={index}>
               <FontAwesomeIcon icon={faImage} size="2x" color="#8B8EA1" />

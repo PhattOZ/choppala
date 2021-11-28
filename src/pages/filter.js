@@ -65,54 +65,49 @@ function MenuLists({ lists, handleOpen, sort }) {
   )
 }
 
-export default function Filter({
-  keyword,
-  category,
-  currentItems,
-  sortby,
-  totalItems,
-}) {
+export default function Filter({ keyword, currentItems, sortby, totalItems }) {
   return (
     <div className={styles.container}>
-      <div className={styles.header}>
-        {keyword ? (
-          <div className={styles.blue}>
-            Search result for <span className={styles.keyword}>{keyword}</span>
-          </div>
-        ) : (
-          <div></div>
-        )}
-        <div className={styles.header_sort}>
-          <div className={styles.sortBy}>Sort by :</div>
-          <Dropdown sort={sortby} />
-        </div>
-      </div>
-      <div className={styles.main}>
-        <CategoryBox />
-        <div className={styles.main_body}>
-          <div className={styles.card_container}>
-            {currentItems &&
-              currentItems.map((item) => (
-                <Link key={item.id} href={`/product/${item.id}`}>
-                  <a>
-                    <Card
-                      title={item.name}
-                      price={item.price}
-                      image={item.images[0]}
-                    />
-                  </a>
-                </Link>
-              ))}
-          </div>
-          <div className={styles.page_container}>
-            <Pagination
-              itemsPerPage={itemsPerPage}
-              totalItems={totalItems}
-              url="/filter"
-            />
+      <span className={styles.sub_container}>
+        <div className={styles.header}>
+          {keyword ? (
+            <div className={styles.blue}>
+              Search result for{" "}
+              <span className={styles.keyword}>{keyword}</span>
+            </div>
+          ) : (
+            <div></div>
+          )}
+          <div className={styles.header_sort}>
+            <div className={styles.sortBy}>Sort by :</div>
+            <Dropdown sort={sortby} />
           </div>
         </div>
-      </div>
+        <div className={styles.main}>
+          <CategoryBox />
+          <div className={styles.main_body}>
+            <div className={styles.card_container}>
+              {currentItems &&
+                currentItems.map((item) => (
+                  <Card
+                    key={item.id}
+                    itemID={item.id}
+                    title={item.name}
+                    price={item.price}
+                    image={item.images[0]}
+                  />
+                ))}
+            </div>
+            <div className={styles.page_container}>
+              <Pagination
+                itemsPerPage={itemsPerPage}
+                totalItems={totalItems}
+                url="/filter"
+              />
+            </div>
+          </div>
+        </div>
+      </span>
     </div>
   )
 }
