@@ -27,13 +27,6 @@ export default function Profile() {
     return <Loader />
   }
 
-  //Open-Close Modal
-  const handleClose = () => setShowModal(false)
-  const handleShow = () => {
-    setShowModal(true)
-    setTimeout((!showModal),2000)
-  }
-
   return (
     <div className={styles.container}>
       <Layout user={session.user}>
@@ -99,7 +92,6 @@ export default function Profile() {
             </div>
           </section>
         </div>
-        <SmallPopup show={showModal} onClose={handleClose} />
       </Layout>
     </div>
   )

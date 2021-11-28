@@ -89,15 +89,13 @@ export default function SellerProfile({ seller }) {
                 <div>
                   <div className={styles.cardContainer}>
                     {sellerItems.map((item) => (
-                      <Link key={item.id} href={`/product/${item.id}`}>
-                        <a>
                           <Card
+                            key={item.id}
+                            itemID={item.id}
                             title={item.name}
                             price={item.price}
                             image={item.images[0]}
                           />
-                        </a>
-                      </Link>
                     ))}
                   </div>
                 </div>
