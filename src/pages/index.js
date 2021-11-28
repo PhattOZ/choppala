@@ -3,11 +3,13 @@ import Link from "next/link"
 import Head from "next/head"
 import Card from "src/components/Card"
 import categories from "src/lib/categoryList"
+import Loader from "src/components/Loader"
+
 import styles from "src/styles/pages/index.module.scss"
-import dbConnect from "src/lib/dbConnect"
-import Item from "src/models/Item"
+
 import useEmblaCarousel from "embla-carousel-react"
 import Autoplay from "embla-carousel-autoplay"
+import useSWR from "swr"
 
 function CategoryLink({ category }) {
   return (
@@ -30,22 +32,53 @@ function CategoryLink({ category }) {
   )
 }
 
+const bannerImages = [
+  "/banners/b-choppala.png",
+  "/banners/b-blackfriday.png",
+  "/banners/b-12.png",
+  "/banners/b-electronics.png",
+  "/banners/b-seller.png",
+  "/banners/b-tech.png",
+]
+
+const autoplay = Autoplay({
+  stopOnInteraction: false,
+  stopOnMouseEnter: true,
+})
+
+const fetcher = (url) => fetch(url).then((r) => r.json())
+
 export default function Index({ productList }) {
-  const bannerImages = [
-    "/banners/b-choppala.png",
-    "/banners/b-blackfriday.png",
-    "/banners/b-12.png",
-    "/banners/b-electronics.png",
-    "/banners/b-seller.png",
-    "/banners/b-tech.png",
-  ]
-
-  const autoplay = Autoplay({
-    stopOnInteraction: false,
-    stopOnMouseEnter: true,
-  })
-
   const [emblaRef] = useEmblaCarousel({ loop: true }, [autoplay])
+  const { data, error } = useSWR("/api/index_item_list", fetcher)
+
+  const itemCardsUI = () => {
+    if (error) {
+      return <div>Failed to load</div>
+    }
+
+    if (!data) {
+      return (
+        <div className={styles.loader}>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      )
+    }
+
+    const items = data.items.map((item) => (
+      <Card
+        key={item.id}
+        itemID={item.id}
+        title={item.name}
+        price={item.price}
+        image={item.images[0]}
+      />
+    ))
+
+    return <div className={styles.cardContainer}>{items}</div>
+  }
 
   return (
     <>
@@ -67,7 +100,13 @@ export default function Index({ productList }) {
               <div className={styles.embla__container}>
                 {bannerImages.map((src) => (
                   <div key={src} className={styles.embla__slide}>
-                    <Image src={src} layout="fill" objectFit="contain" />
+                    <Image
+                      src={src}
+                      layout="fill"
+                      objectFit="contain"
+                      alt="banner"
+                      priority
+                    />
                   </div>
                 ))}
               </div>
@@ -88,17 +127,7 @@ export default function Index({ productList }) {
 
           <section className={styles.section}>
             <div className={styles.section_title}>Just for you</div>
-            <div className={styles.cardContainer}>
-              {productList.map((item) => (
-                <Card
-                  key={item.id}
-                  itemID={item.id}
-                  title={item.name}
-                  price={item.price}
-                  image={item.images[0]}
-                />
-              ))}
-            </div>
+            {itemCardsUI()}
           </section>
         </div>
       </div>
@@ -106,16 +135,16 @@ export default function Index({ productList }) {
   )
 }
 
-export async function getServerSideProps() {
-  await dbConnect()
-  const items = await Item.find({}, { _id: 0 })
-    .sort({ _id: -1 })
-    .limit(18)
-    .lean()
+// export async function getServerSideProps() {
+//   await dbConnect()
+//   const items = await Item.find({}, { _id: 0 })
+//     .sort({ _id: -1 })
+//     .limit(18)
+//     .lean()
 
-  return {
-    props: {
-      productList: items,
-    },
-  }
-}
+//   return {
+//     props: {
+//       productList: items,
+//     },
+//   }
+// }

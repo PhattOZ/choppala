@@ -67,6 +67,7 @@ export default function UserMenu() {
                   src={session.user.image}
                   layout="fill"
                   objectFit="contain"
+                  alt="user_image"
                 />
               </div>
             ) : (

@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faHeart as farfaHeart } from "@fortawesome/free-regular-svg-icons"
+// import { faHeart as farfaHeart } from "@fortawesome/free-regular-svg-icons"
 import { faStar } from "@fortawesome/free-solid-svg-icons"
 import styles from "./Card.module.scss"
 import Image from "next/image"
@@ -27,13 +27,13 @@ export default function Card({ title, price, image, itemID }) {
                 <FontAwesomeIcon icon={faStar} size={"xs"} color="#ffd700" />
                 <FontAwesomeIcon icon={faStar} size={"xs"} color="#CCCCCC" />
               </div>
-              <div>
+              {/* <div>
                 <FontAwesomeIcon
                   icon={farfaHeart}
                   size={"sm"}
                   color="#4585FF"
                 />
-              </div>
+              </div> */}
             </div>
           </div>
         </a>

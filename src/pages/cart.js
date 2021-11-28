@@ -1,17 +1,17 @@
 import styles from "src/styles/pages/cart.module.scss"
 import Link from "next/link"
 import CartContext from "src/lib/cart-context"
-import { useContext, useState } from "react"
+import { useContext, useState, useCallback, useEffect } from "react"
 import Image from "next/image"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons"
 
 const transfromCart = (data) => {
   let cartItem = []
-  let sellerName = []
+  let sellerId = []
   data.map((item) => {
     const newItemFormat = {
-      _id: item._id,
+      id: item.id,
       name: item.name,
       image: item.image,
       price: item.price,
@@ -19,14 +19,21 @@ const transfromCart = (data) => {
       subTotal: item.quantity * item.price,
       isConfirm: item.isConfirm,
     }
-    const indexSeller = sellerName.findIndex((name) => name === item.sellerName)
+    const indexSeller = sellerId.findIndex((id) => id === item.sellerId)
 
     if (indexSeller == -1) {
-      sellerName.push(item.sellerName)
-      cartItem.push({ name: item.sellerName, items: [newItemFormat] })
+      // not found
+      sellerId.push(item.sellerId)
+      cartItem.push({
+        name: item.sellerName,
+        sellerId: item.sellerId,
+        items: [newItemFormat],
+      })
     } else {
+      //found
       cartItem[indexSeller] = {
         name: item.sellerName,
+        sellerId: item.sellerId,
         items: [...cartItem[indexSeller].items, newItemFormat],
       }
     }
@@ -36,18 +43,11 @@ const transfromCart = (data) => {
 
 export default function Cart() {
   const ctx = useContext(CartContext)
-  const cartLength = ctx.value.cart.length
-  let cartData
-  if (cartLength > 0) {
-    const cartItem = transfromCart(ctx.value.cart)
-    cartData = cartItem.map((data) => (
-      <ListItems key={data.name} name={data.name} items={data.items} />
-    ))
-  } else {
-    cartData = <></>
-  }
+  const cartItem = transfromCart(ctx.value.cart)
 
-  // const eachItem = cartItem[2].items
+  const selectAllHandler = () => {
+    ctx.selectManyItems([])
+  }
 
   return (
     <div className={styles.container}>
@@ -57,17 +57,34 @@ export default function Cart() {
         </Link>
         / Shopping Cart
       </div>
-      <div>Shopping Cart ({cartLength} items)</div>
+      <div>Shopping Cart ({cartItem.length} items)</div>
       <div className={styles.main}>
         <div className={styles.list_items}>
           <div className={styles.header_list_items}>
-            <input type="checkbox" />
+            <input
+              type="checkbox"
+              checked={ctx.value.checked}
+              onChange={selectAllHandler}
+            />
             <span>Product</span>
             <span>Price/unit</span>
             <span>Quantity</span>
             <span>Sub total</span>
           </div>
-          <div className={styles.main_list_items}>{cartData}</div>
+          <div className={styles.main_list_items}>
+            {cartItem.length > 0 ? (
+              cartItem.map((data) => (
+                <ListItems
+                  key={data.sellerId}
+                  name={data.name}
+                  items={data.items}
+                  id={data.sellerId}
+                />
+              ))
+            ) : (
+              <></>
+            )}
+          </div>
         </div>
         <div className={styles.order_summary}>
           <div>Order Summary</div>
@@ -86,17 +103,37 @@ export default function Cart() {
   )
 }
 
-const ListItems = (props) => {
+const ListItems = ({ name, items, id }) => {
+  const ctx = useContext(CartContext)
+
+  const checkSeller = ctx.value.cart.filter(
+    (e) => e.sellerId === id && e.isConfirm == false
+  )
+  const check = !checkSeller.length > 0
+
+  const checkSellerHandler = () => {
+    ctx.selectManyItems(
+      items.map((e) => e.id),
+      check
+    )
+  }
+
   return (
     <>
       <div className={styles.each_seller}>
         <div className={styles.each_seller__header}>
-          <input type="checkbox" />
-          <span className={styles.each_seller__header_name}>{props.name}</span>
+          <input
+            type="checkbox"
+            onChange={checkSellerHandler}
+            checked={check}
+          />
+          <Link href={`/seller/${id}`}>
+            <a className={styles.each_seller__header_name}>{name}</a>
+          </Link>
         </div>
         <div>
-          {props.items.map((data) => (
-            <Item key={data._id} item={data} />
+          {items.map((data) => (
+            <Item key={data.id} item={data} />
           ))}
         </div>
       </div>
@@ -106,30 +143,29 @@ const ListItems = (props) => {
 
 const Item = ({ item }) => {
   const ctx = useContext(CartContext)
-  const [confirm, setConfirm] = useState(item.isConfirm)
   const [quantity, setQuantity] = useState(item.quantity)
 
   const deleteItemHandler = () => {
-    ctx.deleteItem(item._id)
+    ctx.deleteItem(item.id)
+  }
+
+  const comfirmHandler = () => {
+    ctx.updateCart(item.id, 0)
   }
 
   //for isConfirm and quantity
   const updateItemHandler = (event) => {
     switch (event.target.value) {
       case "increase":
-        ctx.updateCart(item._id, 1)
+        ctx.updateCart(item.id, 1)
         setQuantity(quantity + 1)
         break
       case "decrease":
         if (quantity !== 0) {
-          ctx.updateCart(item._id, -1)
+          ctx.updateCart(item.id, -1)
           setQuantity(quantity - 1)
           break
         }
-        break
-      case "none":
-        ctx.updateCart(item._id, 0)
-        setConfirm(!confirm)
         break
     }
   }
@@ -139,13 +175,18 @@ const Item = ({ item }) => {
       <div className={styles.each_item}>
         <input
           type="checkbox"
-          defaultChecked={confirm}
-          onClick={updateItemHandler}
+          onChange={comfirmHandler}
           value={"none"}
+          checked={ctx.value.cart.find((e) => e.id === item.id).isConfirm}
         />
         <div className={styles.each_item__header}>
           <div className={styles.each_item__image}>
-            <Image src={item.image} layout="fill" objectFit="cover" />
+            <Image
+              src={item.image}
+              layout="fill"
+              objectFit="cover"
+              alt="cartItem"
+            />
           </div>
           <span className={styles.each_item__name}>{item.name}</span>
         </div>

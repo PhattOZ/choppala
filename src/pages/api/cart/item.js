@@ -1,31 +1,37 @@
 import dbConnect from "src/lib/dbConnect"
 import Item from "src/models/Item"
 
-//API for search item in search bar
+//API for get items with ID from cart
 export default async function handler(req, res) {
   const { method } = req
-
   await dbConnect()
 
   switch (method) {
     case "POST":
       try {
-        // const re = "/" + req.body + "/"
         const data = await Item.find(
-          { name: { $regex: req.body, $options: "i" } },
-          "name images"
-        )
+          {
+            id: {
+              $in: req.body,
+            },
+          },
+          "name images price sellerName sellerId id -_id"
+        ).lean()
+
         const items = data.map((item) => {
+          let image = item.images[0]
+          delete item.images
           return {
-            name: item.name,
-            image: item.images[0],
-            id: item._id.toString(),
+            ...item,
+            image: image,
           }
         })
 
         res.status(200).json(items)
       } catch (error) {
-        res.status(400).send({ error: "error, POST method for searchItem api" })
+        res
+          .status(400)
+          .send({ error: "error, GET method for getItemForCart api" })
       }
       break
     default:

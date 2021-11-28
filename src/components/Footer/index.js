@@ -163,11 +163,21 @@ export default function Footer() {
           </Link>
 
           <div className={styles.appcontainer}>
-            <Image src="/app-qr-code.svg" width={64} height={64} />
+            <Image
+              src="/app-qr-code.svg"
+              width={64}
+              height={64}
+              alt="qr-code"
+            />
 
             <div>
               <div className={styles.appflex}>
-                <Image src="/playstore.svg" width={20} height={20} />
+                <Image
+                  src="/playstore.svg"
+                  width={20}
+                  height={20}
+                  alt="playstore"
+                />
                 <a
                   className={styles.app}
                   href="https://play.google.com/store"
@@ -178,7 +188,12 @@ export default function Footer() {
                 </a>
               </div>
               <div className={styles.appflex}>
-                <Image src="/applestore.svg" width={20} height={20} />
+                <Image
+                  src="/applestore.svg"
+                  width={20}
+                  height={20}
+                  alt="appstore"
+                />
                 <a
                   className={styles.app}
                   href="https://www.apple.com/th/app-store/"
