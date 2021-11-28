@@ -24,7 +24,7 @@ export default function Header() {
     return () => {
       window.removeEventListener("scroll", controlDirection)
     }
-  }, [])
+  }, [setShowHeader])
 
   return (
     <div
@@ -40,7 +40,8 @@ export default function Header() {
                 src="/logo.png"
                 layout="fill"
                 objectFit="contain"
-                rel="preload"
+                alt="logo"
+                priority
               />
             </div>
             <div className={styles.logo_text}>
@@ -48,7 +49,8 @@ export default function Header() {
                 src="/logoText.png"
                 layout="fill"
                 objectFit="contain"
-                rel="preload"
+                alt="logo"
+                priority
               />
             </div>
           </a>
