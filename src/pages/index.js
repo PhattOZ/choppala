@@ -3,6 +3,8 @@ import Link from "next/link"
 import Head from "next/head"
 import Card from "src/components/Card"
 import categories from "src/lib/categoryList"
+import Loader from "src/components/Loader"
+
 import styles from "src/styles/pages/index.module.scss"
 
 import useEmblaCarousel from "embla-carousel-react"
@@ -56,7 +58,13 @@ export default function Index({ productList }) {
     }
 
     if (!data) {
-      return <div>loading</div>
+      return (
+        <div className={styles.loader}>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      )
     }
 
     const items = data.items.map((item) => (
@@ -69,7 +77,7 @@ export default function Index({ productList }) {
       />
     ))
 
-    return items
+    return <div className={styles.cardContainer}>{items}</div>
   }
 
   return (
@@ -119,7 +127,7 @@ export default function Index({ productList }) {
 
           <section className={styles.section}>
             <div className={styles.section_title}>Just for you</div>
-            <div className={styles.cardContainer}>{itemCardsUI()}</div>
+            {itemCardsUI()}
           </section>
         </div>
       </div>

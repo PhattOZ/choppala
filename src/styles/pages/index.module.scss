@@ -66,6 +66,37 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.loader {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 1rem;
+
+  span {
+    width: 1rem;
+    height: 1rem;
+    background-color: #4585ff;
+    border-radius: 100%;
+    animation: bounce 0.3s infinite alternate;
+  }
+}
+
+.loader > span:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.loader > span:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+@keyframes bounce {
+  to {
+    transform: translateY(-1rem);
+  }
+}
+
 // Responsive
 @media (min-width: 768px) {
   .embla__slide {
