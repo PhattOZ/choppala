@@ -22,8 +22,11 @@ export default function Purchasehistory() {
   useEffect(() => {
     fetch("/api/userHistory")
       .then((response) => response.json())
-      .then((data) => setItems(data))
-      .catch(setLoading(false))
+      .then((data) => {
+        setItems(data)
+        setLoading(false)
+      })
+      .catch((err) => console.log(err))
   }, [])
 
   // Loading session
@@ -45,15 +48,24 @@ export default function Purchasehistory() {
 }
 
 const EachItem = ({ item }) => {
+  console.log(item)
   return (
     <div className={styles.eachOrder}>
       <div className={styles.eachOrder__head}>
-        <span>{item.sellerName}</span>
+        <Link href={`/seller/${item.sellerID}`}>
+          <a>{item.sellerName}</a>
+        </Link>
+
         <span>seller will be</span>
       </div>
       <div className={styles.eachOrder__item}>
         <div className={styles.eachOrder__image}>
-          <Image src={item.image} layout="fill" objectFit="cover" alt="" />
+          <Image
+            src={item.image}
+            layout="fill"
+            objectFit="cover"
+            alt="historyItem"
+          />
         </div>
         <div>{item.name}</div>
         <div>x{item.quantity}</div>
