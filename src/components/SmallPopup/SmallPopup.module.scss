@@ -1,0 +1,61 @@
+$grey45: #a8aabc;
+$grey70: #8b8ea1;
+$grey100: #444655;
+$red: #ff1f00;
+$red20: #ffd2cc;
+$blue: #4585ff;
+$lightblue: #dbe6fd;
+
+.container {
+  background-attachment: fixed;
+  position: fixed;
+  top: 84%;
+  left: 5%;
+  display: flex;
+//   animation: 0.2s float ;
+  animation-name: floatup;
+  animation-duration: 0.2s;
+  animation-delay: 0s;
+}
+
+@keyframes floatup {
+    from {top: 92%}
+    to {top: 84%}
+}
+
+@keyframes disappear {
+    from {}
+    to {opacity: 0;}
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  background-color: $blue;
+  border-radius: 0.4rem;
+  padding: 0.8rem;
+  width: 15rem;
+  height: 3.6rem;
+  box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2);
+  justify-content: center;
+  align-content: center;
+}
+
+.body {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+}
+
+.title {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: white;
+}
+
+.icon {
+  cursor: pointer;
+}
+
+
