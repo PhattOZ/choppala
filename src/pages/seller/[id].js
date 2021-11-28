@@ -114,7 +114,7 @@ export async function getServerSideProps(context) {
   const { id } = context.query
   await dbConnect()
   const data = await Seller.findById(id, { _id: 0 }).lean()
-  const items = await Item.find({}, { _id: 0 })
+  const items = await Item.find({}, { _id: 0 }).lean()
 
   return {
     props: {
