@@ -87,7 +87,7 @@ export default function Profile() {
                 </div>
               </div>
               <div className={styles.button_wrapper}>
-                <div className={styles.saveButton} onClick={handleShow}>Save</div>
+                <div className={styles.saveButton}>Save</div>
               </div>
             </div>
           </section>

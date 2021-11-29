@@ -144,6 +144,7 @@ export default function EditProduct({ user, item }) {
                         name="name"
                         value={inputs.name}
                         onChange={handleChange}
+                        className={inputsValidation.name ? styles.outline_red : null}
                       />
                       {inputsValidation.name ? (
                         <span className={styles.invalidText}>
@@ -160,6 +161,7 @@ export default function EditProduct({ user, item }) {
                         name="category"
                         value={inputs.category}
                         onChange={handleChange}
+                        className={inputsValidation.category ? styles.outline_red : null}
                       >
                         <option value="" disabled>
                           --Select--
@@ -194,6 +196,7 @@ export default function EditProduct({ user, item }) {
                         name="price"
                         value={inputs.price}
                         onChange={handleChange}
+                        className={inputsValidation.price ? styles.outline_red : null}
                       />
                       {inputsValidation.price ? (
                         <span className={styles.invalidText}>
@@ -210,6 +213,7 @@ export default function EditProduct({ user, item }) {
                         pattern="[0-9]*"
                         value={inputs.amount}
                         onChange={handleChange}
+                        className={inputsValidation.amount ? styles.outline_red : null}
                       />
                       {inputsValidation.amount ? (
                         <span className={styles.invalidText}>
@@ -229,7 +233,7 @@ export default function EditProduct({ user, item }) {
                         name="detail"
                         value={inputs.detail}
                         onChange={handleChange}
-                        required
+                        className={inputsValidation.detail ? styles.outline_red : null}
                       ></textarea>
                       {inputsValidation.detail ? (
                         <span className={styles.invalidText}>

@@ -24,6 +24,7 @@ export default function Setting() {
   //Open-Close Modal
   const handleClose = () => setShowModal(false)
   const handleShow = () => setShowModal(true)
+  
 
   //For remove from database
   const handleClick = () => console.log("click")
