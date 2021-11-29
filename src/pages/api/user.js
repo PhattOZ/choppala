@@ -11,7 +11,7 @@ export default async function handler(req, res) {
   switch (method) {
     case "PUT":
       try {
-        const userId = req.query.userId
+        const { userId } = req.query
         const data = req.body
         const id = mongoose.Types.ObjectId(userId)
         await dbConnect()

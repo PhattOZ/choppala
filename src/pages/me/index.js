@@ -59,6 +59,23 @@ export default function Profile({ user }) {
     }
   }
 
+  const handleAddressSubmit = async () => {
+    const res = await fetch(`/api/user?userId=${user._id}&address=true`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        customName: addressInput.addressName,
+        phoneNumber: addressInput.addressPhone,
+        address: addressInput.address,
+      }),
+    })
+    if (res.ok) {
+      setSuccessModal(true)
+    }
+  }
+
   return (
     <div className={styles.container}>
       <Layout user={user}>
@@ -157,7 +174,10 @@ export default function Profile({ user }) {
                 </div>
               </div>
               <div className={styles.button_wrapper}>
-                <div className={styles.saveButton} onClick={handleSubmit}>
+                <div
+                  className={styles.saveButton}
+                  onClick={handleAddressSubmit}
+                >
                   Save
                 </div>
               </div>
