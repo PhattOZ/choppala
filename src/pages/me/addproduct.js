@@ -94,7 +94,6 @@ export default function AddProduct({ user, seller }) {
     } else {
       // All inputs is valid
       const imgUrls = await createImgUrls(imgBlobs)
-      console.log(imgBlobs)
       const res = await fetch("/api/item", {
         method: "POST",
         headers: {
