@@ -6,6 +6,7 @@ import Image from "next/image"
 import { getSession } from "next-auth/react"
 import { useState } from "react"
 import { useRouter } from "next/router"
+import { useState } from "react"
 //Icon
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faHome } from "@fortawesome/free-solid-svg-icons"
