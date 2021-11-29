@@ -24,7 +24,9 @@
 }
 
 .email {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
+  max-width: 32ch;
+  overflow: hidden;
 }
 
 .sidebar_user_img {
@@ -33,6 +35,10 @@
   position: relative;
   overflow: hidden;
   border-radius: 999rem;
+}
+
+.sidebar_user_name {
+  width: 13rem;
 }
 
 .sidebar_list {

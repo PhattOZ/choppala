@@ -40,7 +40,7 @@ function Sidebar({ user }) {
         <div className={styles.sidebar_user_img}>
           <Image src={user.image} layout="fill" objectFit="cover" alt="" />
         </div>
-        <div>
+        <div className={styles.sidebar_user_name}>
           <div className={styles.bold}>{user.name}</div>
           <div className={styles.email}>{user.email}</div>
         </div>

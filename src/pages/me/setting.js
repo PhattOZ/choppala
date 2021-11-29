@@ -14,6 +14,7 @@ export default function Setting({ user }) {
   //Open-Close Modal
   const handleClose = () => setShowModal(false)
   const handleShow = () => setShowModal(true)
+  
 
   //For remove from database
   const handleClick = async () => {
