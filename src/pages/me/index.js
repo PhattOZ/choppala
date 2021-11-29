@@ -60,7 +60,7 @@ export default function Profile({ user }) {
   }
 
   const handleAddressSubmit = async () => {
-    const res = await fetch(`/api/user?userId=${user._id}&address=true`, {
+    const res = await fetch(`/api/user?userId=${user._id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
