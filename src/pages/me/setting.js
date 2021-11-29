@@ -6,10 +6,9 @@ import Popup from "src/components/Popup"
 import { deleteAccount } from "src/lib/modalContent"
 import dbConnect from "src/lib/dbConnect"
 import User from "src/models/User"
-import { useRouter } from "next/router"
+import { signOut } from "next-auth/react"
 
 export default function Setting({ user }) {
-  const router = useRouter()
   const [showModal, setShowModal] = useState(false)
 
   //Open-Close Modal
@@ -28,7 +27,7 @@ export default function Setting({ user }) {
       }),
     })
     if (res.ok) {
-      router.push("/")
+      signOut({ callbackUrl: "/" })
     }
   }
 
