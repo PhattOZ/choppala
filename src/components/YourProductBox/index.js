@@ -101,9 +101,12 @@ export default function YourProductBox({ sellerId, isSeller }) {
       // User come to this page for first time or reload page
       const res = await fetch(`/api/item?sellerId=${sellerId}`)
       const resData = await res.json()
-      const currentItems = spliceData(resData.item, page, 6)
-      setAllSellerItems(resData.item)
-      setSellerItems(currentItems)
+      if (resData) {
+        // This seller sold at least 1 item
+        const currentItems = spliceData(resData.item, page, 6)
+        setAllSellerItems(resData.item)
+        setSellerItems(currentItems)
+      }
     } else {
       // This page already fetched items list
       const currentItems = spliceData(allSellerItems, page, 6)
@@ -113,7 +116,7 @@ export default function YourProductBox({ sellerId, isSeller }) {
 
   return (
     <>
-      {sellerItems.length || isSeller ? (
+      {allSellerItems.length ? (
         <div className={styles.main}>
           <section>
             <div className={styles.top_part}>

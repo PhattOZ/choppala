@@ -77,7 +77,7 @@ export default function AddProduct({ user, seller }) {
       !!inputs.price &&
       !!inputs.amount &&
       !!inputs.detail &&
-      imgsNull
+      !imgsNull
 
     if (!checkNull) {
       // Some input(s) is invalid

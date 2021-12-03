@@ -1,25 +1,15 @@
 import styles from "src/styles/pages/user/Setting.module.scss"
 import { useState } from "react"
-import { useRouter } from "next/router"
-import { useSession } from "next-auth/react"
+import { getSession } from "next-auth/react"
 import Layout from "src/components/UserProfileLayout"
 import Popup from "src/components/Popup"
 import { deleteAccount } from "src/lib/modalContent"
+import dbConnect from "src/lib/dbConnect"
+import User from "src/models/User"
+import { signOut } from "next-auth/react"
 
-export default function Setting() {
+export default function Setting({ user }) {
   const [showModal, setShowModal] = useState(false)
-  const router = useRouter()
-  const { data: session, status } = useSession({
-    required: true,
-    onUnauthenticated() {
-      router.push("/signup")
-    },
-  })
-
-  // Loading session
-  if (status === "loading") {
-    return <h1>Loading...</h1>
-  }
 
   //Open-Close Modal
   const handleClose = () => setShowModal(false)
@@ -27,11 +17,24 @@ export default function Setting() {
   
 
   //For remove from database
-  const handleClick = () => console.log("click")
+  const handleClick = async () => {
+    const res = await fetch(`/api/user?userId=${user._id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        sellerId: user.sellerId,
+      }),
+    })
+    if (res.ok) {
+      signOut({ callbackUrl: "/" })
+    }
+  }
 
   return (
     <div className={styles.container}>
-      <Layout user={session.user}>
+      <Layout user={user}>
         <div className={styles.main}>
           <section>
             <div className={styles.title}>Delete Account</div>
@@ -71,4 +74,35 @@ export default function Setting() {
       )}
     </div>
   )
+}
+
+export const getServerSideProps = async (context) => {
+  const { req } = context
+  const session = await getSession({ req })
+
+  if (session) {
+    await dbConnect()
+    const leanResponse = await User.findOne(
+      {
+        name: session.user.name,
+        email: session.user.email,
+      },
+      { name: 1, email: 1, image: 1, _id: 1, sellerId: 1 }
+    ).lean()
+
+    leanResponse._id = leanResponse._id.toString()
+
+    return {
+      props: {
+        user: leanResponse,
+      },
+    }
+  } else {
+    return {
+      redirect: {
+        destination: "/signup",
+        permanent: false,
+      },
+    }
+  }
 }
