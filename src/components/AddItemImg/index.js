@@ -156,7 +156,7 @@ export default function AddItemImg({
       "image/jpeg",
       1
     )
-  }, [finalCrop])
+  }, [finalCrop, filename, imgSize, index])
 
   // Fire this function after seller select image to crop
   const onSelectFile = (e) => {
