@@ -51,7 +51,7 @@ $red20: #ffd2cc;
 .edit {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
   column-gap: 0.5rem;
 }
 
@@ -74,6 +74,15 @@ $red20: #ffd2cc;
 
   input:focus {
     outline-color: $blue;
+  }
+
+  //For input validation
+  .outline_red {
+    border: 2px solid $red;
+    &:focus:invalid {
+      border: none;
+      outline: 2px solid $red;
+    }
   }
 
   input[type="text"] {
