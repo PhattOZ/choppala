@@ -11,19 +11,26 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons"
 import { faTrash } from "@fortawesome/free-solid-svg-icons"
 // Component
-import Loader from "../Loader"
+import Popup from "../Popup"
 // Custom lib
 import spliceData from "src/lib/spliceData"
 import Pagination from "../Pagination"
+import { deleteProduct } from "src/lib/modalContent"
 
 function SellingBox({ itemId, name, image, price, amount, sold }) {
+  const [showModal, setShowModal] = useState(false)
   const handleDelete = async () => {
-    const res = await fetch(`/api/item?itemId=${itemId}`, {
-      method: "DELETE",
-    })
-    if (res.ok) {
-      Router.reload() // Reload page for fetch GET item again
-    }
+    setShowModal(true)
+    // const res = await fetch(`/api/item?itemId=${itemId}`, {
+    //   method: "DELETE",
+    // })
+    // if (res.ok) {
+    //   Router.reload() // Reload page for fetch GET item again
+    // }
+  }
+
+  const confirmDelete = () => {
+    console.log(`yay`)
   }
 
   return (
@@ -60,6 +67,21 @@ function SellingBox({ itemId, name, image, price, amount, sold }) {
           Delete
         </div>
       </div>
+      {/* -----------Popup------------ */}
+      {showModal && (
+        <Popup
+          show={showModal}
+          onClose={() => setShowModal(false)}
+          onClick={confirmDelete}
+          title={deleteProduct.title}
+          titlecolor={deleteProduct.titlecolor}
+          subtitle={deleteProduct.subtitle}
+          icon={deleteProduct.icon}
+          content1={deleteProduct.content1}
+          content2={deleteProduct.content2}
+          buttonShow={deleteProduct.buttonShow}
+        />
+      )}
     </div>
   )
 }
