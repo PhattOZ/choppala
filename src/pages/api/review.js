@@ -7,10 +7,8 @@ export default async function handler(req, res) {
   switch (method) {
     case "POST":
       try {
-        console.log(req.body)
         const { id, ...review } = req.body
-        console.log(id)
-        console.log(review)
+
         const filter = { id: id }
         const update = { $push: { reviews: review } }
         await Item.findOneAndUpdate(filter, update)

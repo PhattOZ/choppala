@@ -41,7 +41,7 @@ export default function Purchasehistory() {
       <Layout user={session.user}>
         <div className={styles.main}>
           {Items.map((data) => (
-            <EachItem item={data} key={data._id} user={session.user} />
+            <EachItem item={data} key={data.itemID} user={session.user} />
           ))}
         </div>
       </Layout>
@@ -51,6 +51,7 @@ export default function Purchasehistory() {
 
 const EachItem = ({ item, user }) => {
   const [showPopup, setShowPopup] = useState(false)
+  const [isRating, setIsRating] = useState(item.isRating)
 
   const onClickRating = () => {
     setShowPopup(true)
@@ -63,7 +64,6 @@ const EachItem = ({ item, user }) => {
       rating: val,
       id: item.itemID,
     }
-    console.log(newReview)
 
     fetch("/api/review", {
       method: "POST",
@@ -72,6 +72,15 @@ const EachItem = ({ item, user }) => {
         "content-type": "application/json",
       },
     })
+
+    fetch("/api/userHistory", {
+      method: "PUT",
+      body: JSON.stringify(item.itemID),
+      headers: {
+        "content-type": "application/json",
+      },
+    })
+    setIsRating(true)
   }
 
   return (
@@ -108,7 +117,7 @@ const EachItem = ({ item, user }) => {
           </Link>
         </div>
         <div
-          className={item.isRating ? styles.unRating : ""}
+          className={isRating ? styles.unRating : ""}
           onClick={onClickRating}
         >
           Rating
