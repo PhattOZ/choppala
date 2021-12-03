@@ -73,7 +73,7 @@ export default function SellerProfile({ seller }) {
     }
 
     fetchData()
-  }, [])
+  }, [seller])
 
   return (
     <>
