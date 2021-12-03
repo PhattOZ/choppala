@@ -64,11 +64,15 @@ export default function SellerProfile({ seller }) {
   const [sellerItems, setSellerItems] = useState([])
   const [itemLoading, setItemLoading] = useState(true)
 
-  useEffect(async () => {
-    const res = await fetch(`/api/item?sellerId=${seller.id}`)
-    const resData = await res.json()
-    setSellerItems(resData.item)
-    setItemLoading(false)
+  useEffect(() => {
+    async function fetchData() {
+      const res = await fetch(`/api/item?sellerId=${seller.id}`)
+      const resData = await res.json()
+      setSellerItems(resData.item)
+      setItemLoading(false)
+    }
+
+    fetchData()
   }, [])
 
   return (
@@ -78,9 +82,7 @@ export default function SellerProfile({ seller }) {
         <Topbar seller={seller} />
         <div className={styles.main}>
           <section>
-            <div className={styles.section_title}>
-              All products
-            </div>
+            <div className={styles.section_title}>All products</div>
             {/* Store itemlist session */}
             <div>
               {itemLoading ? (
@@ -89,13 +91,13 @@ export default function SellerProfile({ seller }) {
                 <div>
                   <div className={styles.cardContainer}>
                     {sellerItems.map((item) => (
-                          <Card
-                            key={item.id}
-                            itemID={item.id}
-                            title={item.name}
-                            price={item.price}
-                            image={item.images[0]}
-                          />
+                      <Card
+                        key={item.id}
+                        itemID={item.id}
+                        title={item.name}
+                        price={item.price}
+                        image={item.images[0]}
+                      />
                     ))}
                   </div>
                 </div>

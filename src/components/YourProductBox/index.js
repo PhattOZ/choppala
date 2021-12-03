@@ -118,9 +118,8 @@ export default function YourProductBox({ sellerId, isSeller }) {
   const [allSellerItems, setAllSellerItems] = useState([])
   const [sellerItems, setSellerItems] = useState([])
 
-  useEffect(async () => {
-    if (!allSellerItems.length) {
-      // User come to this page for first time or reload page
+  useEffect(() => {
+    async function fetchData() {
       const res = await fetch(`/api/item?sellerId=${sellerId}`)
       const resData = await res.json()
       if (resData) {
@@ -129,6 +128,11 @@ export default function YourProductBox({ sellerId, isSeller }) {
         setAllSellerItems(resData.item)
         setSellerItems(currentItems)
       }
+    }
+
+    if (!allSellerItems.length) {
+      // User come to this page for first time or reload page
+      fetchData()
     } else {
       // This page already fetched items list
       const currentItems = spliceData(allSellerItems, page, 6)
