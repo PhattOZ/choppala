@@ -6,6 +6,8 @@ import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
+import Popup from "src/components/Popup"
+import { rating } from "src/lib/modalContent"
 
 export default function Purchasehistory() {
   const router = useRouter()
@@ -39,7 +41,7 @@ export default function Purchasehistory() {
       <Layout user={session.user}>
         <div className={styles.main}>
           {Items.map((data) => (
-            <EachItem item={data} key={data._id} />
+            <EachItem item={data} key={data._id} user={session.user} />
           ))}
         </div>
       </Layout>
@@ -47,8 +49,31 @@ export default function Purchasehistory() {
   )
 }
 
-const EachItem = ({ item }) => {
-  console.log(item)
+const EachItem = ({ item, user }) => {
+  const [showPopup, setShowPopup] = useState(false)
+
+  const onClickRating = () => {
+    setShowPopup(true)
+  }
+
+  const reviewHandler = (val) => {
+    const newReview = {
+      userName: user.name,
+      userImage: user.image,
+      rating: val,
+      id: item.itemID,
+    }
+    console.log(newReview)
+
+    fetch("/api/review", {
+      method: "POST",
+      body: JSON.stringify(newReview),
+      headers: {
+        "content-type": "application/json",
+      },
+    })
+  }
+
   return (
     <div className={styles.eachOrder}>
       <div className={styles.eachOrder__head}>
@@ -82,8 +107,29 @@ const EachItem = ({ item }) => {
             </a>
           </Link>
         </div>
-        <div className={item.isRating ? styles.unRating : ""}>Rating</div>
+        <div
+          className={item.isRating ? styles.unRating : ""}
+          onClick={onClickRating}
+        >
+          Rating
+        </div>
       </div>
+
+      {showPopup && (
+        <Popup
+          show={showPopup}
+          onClose={() => setShowPopup(false)}
+          onClick={() => setShowPopup(true)}
+          title={rating.title}
+          titlecolor={rating.titlecolor}
+          subtitle={rating.subtitle}
+          icon={rating.icon}
+          content1={rating.content1}
+          content2={rating.content2}
+          buttonShow={rating.buttonShow}
+          onSubmit={reviewHandler}
+        />
+      )}
     </div>
   )
 }

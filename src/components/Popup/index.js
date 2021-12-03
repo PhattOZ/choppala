@@ -1,7 +1,7 @@
 import ReactDom from "react-dom"
 import Link from "next/link"
 import styles from "./Popup.module.scss"
-import { useLayoutEffect } from "react"
+import { useLayoutEffect, useState } from "react"
 // ---------------- Icon ----------------
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTimes, faStar } from "@fortawesome/free-solid-svg-icons"
@@ -17,12 +17,22 @@ export default function Popup({
   content1,
   content2,
   buttonShow,
+  onSubmit,
 }) {
   // Call hook to lock body scroll
   useLockBodyScroll()
+  const [rating, setRating] = useState(-1)
 
-  const rateHandler = () => {
-    console.log("in rateHandler")
+  const rateHandler = (e) => {
+    setRating(e.currentTarget.getAttribute("index"))
+  }
+
+  const submitRatingHandler = () => {
+    if (rating > -1) {
+      //cast rating to int first than add
+      onSubmit(+rating + 1)
+      onClose()
+    }
   }
 
   return ReactDom.createPortal(
@@ -31,9 +41,9 @@ export default function Popup({
         <div className={styles.container}>
           <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
             <div className={styles.header}>
-                <div className={styles.icon} onClick={() => onClose()}>
-                  <FontAwesomeIcon icon={faTimes} size="lg" />
-                </div>
+              <div className={styles.icon} onClick={() => onClose()}>
+                <FontAwesomeIcon icon={faTimes} size="lg" />
+              </div>
             </div>
             <div className={styles.body}>
               <div className={styles.title} style={{ color: titlecolor }}>
@@ -73,26 +83,24 @@ export default function Popup({
               ) : buttonShow === "rating" ? (
                 <div className={styles.bottom_part}>
                   <div className={styles.stars_fav}>
-                    <div className={styles.star_icon} onClick={rateHandler}>
-                      <FontAwesomeIcon icon={faStar} size={"2x"} />
-                    </div>
-                    <div className={styles.star_icon}>
-                      <FontAwesomeIcon icon={faStar} size={"2x"} />
-                    </div>
-                    <div className={styles.star_icon}>
-                      <FontAwesomeIcon icon={faStar} size={"2x"} />
-                    </div>
-                    <div className={styles.star_icon}>
-                      <FontAwesomeIcon icon={faStar} size={"2x"} />
-                    </div>
-                    <div className={styles.star_icon}>
-                      <FontAwesomeIcon icon={faStar} size={"2x"} />
-                    </div>
+                    {[...Array(5)].map((x, i) => (
+                      <div
+                        className={`${styles.star_icon} ${
+                          i <= rating && styles.star_icon__clicked
+                        }`}
+                        onClick={rateHandler}
+                        key={i}
+                        index={i}
+                      >
+                        <FontAwesomeIcon icon={faStar} size={"2x"} />
+                      </div>
+                    ))}
                   </div>
-                  <div className={styles.button_wrapper}>
-                    <Link href="/" passHref>
-                      <div className={styles.actionBtn}>Submit</div>
-                    </Link>
+                  <div
+                    className={styles.button_wrapper}
+                    onClick={submitRatingHandler}
+                  >
+                    <div className={styles.actionBtn}>Submit</div>
                   </div>
                 </div>
               ) : (

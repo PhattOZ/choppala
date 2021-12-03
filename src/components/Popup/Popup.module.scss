@@ -27,7 +27,7 @@ $lightblue: #dbe6fd;
   border-radius: 0.75rem;
   padding: 1rem;
   margin-bottom: auto;
-  margin-top: auto;  
+  margin-top: auto;
   width: 27rem;
 }
 
@@ -177,9 +177,10 @@ $lightblue: #dbe6fd;
   color: $grey45;
   cursor: pointer;
   transition: all 0.3s ease-out;
-  &:hover{
-    color: #ffd700;
-  }
+}
+
+.star_icon__clicked {
+  color: #ffd700;
 }
 
 .stars_fav {
