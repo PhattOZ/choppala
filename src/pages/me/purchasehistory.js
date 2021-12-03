@@ -118,7 +118,7 @@ const EachItem = ({ item, user }) => {
         </div>
         <div
           className={isRating ? styles.unRating : ""}
-          onClick={onClickRating}
+          onClick={isRating ? undefined : onClickRating}
         >
           Rating
         </div>
