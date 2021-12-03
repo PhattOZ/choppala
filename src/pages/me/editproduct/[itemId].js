@@ -5,7 +5,7 @@ import styles from "src/styles/pages/user/EditProduct.module.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faChevronCircleLeft, faImage } from "@fortawesome/free-solid-svg-icons"
 // React, Next lib
-import { useState } from "react"
+import { useState, useCallback } from "react"
 import { useRouter } from "next/router"
 import { getSession } from "next-auth/react"
 import Link from "next/link"
@@ -53,13 +53,13 @@ export default function EditProduct({ user, item }) {
     }
   }
 
-  const handleFileSync = (blob, index) => {
+  const handleFileSync = useCallback((blob, index) => {
     setImgBlobs((prev) => {
       const newArrayBlobs = [...prev]
       newArrayBlobs[index] = blob
       return newArrayBlobs
     })
-  }
+  }, [])
 
   // Seller cancel cropped image
   const handleDeleteCropped = (index) => {
@@ -144,7 +144,9 @@ export default function EditProduct({ user, item }) {
                         name="name"
                         value={inputs.name}
                         onChange={handleChange}
-                        className={inputsValidation.name ? styles.outline_red : null}
+                        className={
+                          inputsValidation.name ? styles.outline_red : null
+                        }
                       />
                       {inputsValidation.name ? (
                         <span className={styles.invalidText}>
@@ -161,7 +163,9 @@ export default function EditProduct({ user, item }) {
                         name="category"
                         value={inputs.category}
                         onChange={handleChange}
-                        className={inputsValidation.category ? styles.outline_red : null}
+                        className={
+                          inputsValidation.category ? styles.outline_red : null
+                        }
                       >
                         <option value="" disabled>
                           --Select--
@@ -196,7 +200,9 @@ export default function EditProduct({ user, item }) {
                         name="price"
                         value={inputs.price}
                         onChange={handleChange}
-                        className={inputsValidation.price ? styles.outline_red : null}
+                        className={
+                          inputsValidation.price ? styles.outline_red : null
+                        }
                       />
                       {inputsValidation.price ? (
                         <span className={styles.invalidText}>
@@ -213,7 +219,9 @@ export default function EditProduct({ user, item }) {
                         pattern="[0-9]*"
                         value={inputs.amount}
                         onChange={handleChange}
-                        className={inputsValidation.amount ? styles.outline_red : null}
+                        className={
+                          inputsValidation.amount ? styles.outline_red : null
+                        }
                       />
                       {inputsValidation.amount ? (
                         <span className={styles.invalidText}>
@@ -233,7 +241,9 @@ export default function EditProduct({ user, item }) {
                         name="detail"
                         value={inputs.detail}
                         onChange={handleChange}
-                        className={inputsValidation.detail ? styles.outline_red : null}
+                        className={
+                          inputsValidation.detail ? styles.outline_red : null
+                        }
                       ></textarea>
                       {inputsValidation.detail ? (
                         <span className={styles.invalidText}>

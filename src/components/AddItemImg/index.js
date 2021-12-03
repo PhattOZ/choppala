@@ -184,6 +184,7 @@ export default function AddItemImg({
   }
 
   if (imgUrl) {
+    // User come to edit item detail
     return (
       <div className={`${styles.oldImgContainer} ${upImgStyle}`}>
         <div
@@ -195,7 +196,7 @@ export default function AddItemImg({
         >
           x
         </div>
-        <Image src={imgUrl} layout="fill" />
+        <Image src={imgUrl} layout="fill" alt="item-image" />
       </div>
     )
   }

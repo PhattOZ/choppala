@@ -5,7 +5,7 @@ import styles from "src/styles/pages/user/AddProduct.module.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faChevronCircleLeft, faImage } from "@fortawesome/free-solid-svg-icons"
 // React, Next lib
-import { useState } from "react"
+import { useState, useCallback } from "react"
 import { useRouter } from "next/router"
 import { getSession } from "next-auth/react"
 import Link from "next/link"
@@ -54,13 +54,13 @@ export default function AddProduct({ user, seller }) {
     }
   }
 
-  const handleFileSync = (blob, index) => {
+  const handleFileSync = useCallback((blob, index) => {
     setImgBlobs((prev) => {
       const newArrayBlobs = [...prev]
       newArrayBlobs[index] = blob
       return newArrayBlobs
     })
-  }
+  }, [])
 
   // Seller cancel cropped image
   const handleDeleteCropped = (index) => {
