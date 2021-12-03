@@ -19,18 +19,18 @@ import { deleteProduct } from "src/lib/modalContent"
 
 function SellingBox({ itemId, name, image, price, amount, sold }) {
   const [showModal, setShowModal] = useState(false)
-  const handleDelete = async () => {
+  const handleDelete = (e) => {
+    e.preventDefault()
     setShowModal(true)
-    // const res = await fetch(`/api/item?itemId=${itemId}`, {
-    //   method: "DELETE",
-    // })
-    // if (res.ok) {
-    //   Router.reload() // Reload page for fetch GET item again
-    // }
   }
 
-  const confirmDelete = () => {
-    console.log(`yay`)
+  const confirmDelete = async () => {
+    const res = await fetch(`/api/item?itemId=${itemId}`, {
+      method: "DELETE",
+    })
+    if (res.ok) {
+      Router.reload() // Reload page for fetch GET item again
+    }
   }
 
   return (
