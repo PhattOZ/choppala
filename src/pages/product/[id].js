@@ -36,7 +36,7 @@ export default function ProductDetail({ product }) {
 
   return (
     <div className={styles.container}>
-      <SmallPopup show={showPopup} onClose={() => setShowPopup(false)} />
+      <SmallPopup show={showPopup} onClose={setTimeout(() => setShowPopup(false),3000)} />
       <div className={styles.toplink}>
         <Link href="/">
           <a className={styles.ahome}>Home</a>

@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCheckCircle, faTimes } from "@fortawesome/free-solid-svg-icons"
 
 export default function SmallPopup({ show, onClose }) {
-  return ReactDom.createPortal(
+  return (
     <>
       {show ? (
         <div className={styles.container}>
@@ -22,7 +22,6 @@ export default function SmallPopup({ show, onClose }) {
           </div>
         </div>
       ) : null}
-    </>,
-    document.getElementById("modal-root")
+    </>
   )
 }

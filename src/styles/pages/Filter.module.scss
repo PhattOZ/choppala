@@ -11,6 +11,8 @@
 .header {
   display: flex;
   justify-content: space-between;
+  padding-right: 5rem;
+  padding-left: 5rem;
   padding-bottom: 2rem;
   align-items: center;
 }
@@ -27,7 +29,7 @@
 .main {
   display: flex;
   justify-content: center;
-  column-gap: 2.5rem;
+  column-gap: 2rem;
 }
 
 .main_body {
@@ -50,7 +52,7 @@
 
 @media (min-width: 1200px) {
   .card_container {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 }
 

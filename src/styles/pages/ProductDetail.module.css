@@ -7,10 +7,10 @@
   margin-right: auto;
 }
 .toplink {
-padding-left: 13%;
+  padding-left: 12%;
   display: flex;
   flex-direction: row;
-  font-size: 14px;
+  font-size: 1rem;
 }
 .ahome {
   font-weight: 600;
