@@ -1,11 +1,14 @@
 import CartContext from "src/lib/cart-context"
 import styles from "src/styles/pages/checkout.module.scss"
 
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { getSession } from "next-auth/react"
 import dbConnect from "src/lib/dbConnect"
 import User from "src/models/User"
 import Image from "next/image"
+import Link from "next/link"
+import Popup from "src/components/Popup"
+import { orderReceived } from "src/lib/modalContent"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
@@ -17,6 +20,7 @@ import {
 
 export default function Checkout({ data }) {
   const ctx = useContext(CartContext)
+  const [showPopup, setShowPopup] = useState(false)
 
   let addressFilter = data.address
     .split(/(\s+)/)
@@ -25,8 +29,8 @@ export default function Checkout({ data }) {
   let ItemFromCtx = ctx.value.cart.filter((item) => item.isConfirm == true)
 
   const orderHandler = () => {
-    console.log("in orderHandler")
     ctx.orderItem()
+    setShowPopup(true)
   }
 
   return (
@@ -50,11 +54,15 @@ export default function Checkout({ data }) {
               </div>
             </div>
             <div>
-              <FontAwesomeIcon
-                icon={faPen}
-                size={"1x"}
-                className={styles.icon_clickable}
-              />
+              <Link href="/me">
+                <a>
+                  <FontAwesomeIcon
+                    icon={faPen}
+                    size={"1x"}
+                    className={styles.icon_clickable}
+                  />
+                </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -79,11 +87,15 @@ export default function Checkout({ data }) {
               </div>
             </div>
             <div>
-              <FontAwesomeIcon
-                icon={faPen}
-                size={"1x"}
-                className={styles.icon_clickable}
-              />
+              <Link href="/me">
+                <a>
+                  <FontAwesomeIcon
+                    icon={faPen}
+                    size={"1x"}
+                    className={styles.icon_clickable}
+                  />
+                </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -130,9 +142,37 @@ export default function Checkout({ data }) {
               <span>฿{ctx.value.totalPrice + 20}</span>
             </div>
           </div>
-          <div onClick={orderHandler}>Order now</div>
+
+          <div
+            className={
+              addressFilter.length > 0 && ItemFromCtx.length > 0
+                ? styles.order__btn
+                : styles.order__btn_none
+            }
+            onClick={
+              addressFilter.length > 0 && ItemFromCtx.length > 0
+                ? orderHandler
+                : undefined
+            }
+          >
+            Order now
+          </div>
         </div>
       </div>
+      {showPopup && (
+        <Popup
+          show={showPopup}
+          onClose={() => setShowPopup(false)}
+          onClick={() => setShowPopup(true)}
+          title={orderReceived.title}
+          titlecolor={orderReceived.titlecolor}
+          subtitle={orderReceived.subtitle}
+          icon={orderReceived.icon}
+          content1={orderReceived.content1}
+          content2={orderReceived.content2}
+          buttonShow={orderReceived.buttonShow}
+        />
+      )}
     </div>
   )
 }

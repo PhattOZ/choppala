@@ -6,6 +6,8 @@ import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
+import Popup from "src/components/Popup"
+import { rating } from "src/lib/modalContent"
 
 export default function Purchasehistory() {
   const router = useRouter()
@@ -38,17 +40,57 @@ export default function Purchasehistory() {
     <div className={styles.container}>
       <Layout user={session.user}>
         <div className={styles.main}>
-          {Items.map((data) => (
-            <EachItem item={data} key={data._id} />
-          ))}
+          {Items.slice(0)
+            .reverse()
+            .map((data) => (
+              <EachItem
+                item={data}
+                key={data.itemID + data.orderAt}
+                user={session.user}
+              />
+            ))}
         </div>
       </Layout>
     </div>
   )
 }
 
-const EachItem = ({ item }) => {
-  console.log(item)
+const EachItem = ({ item, user }) => {
+  const [showPopup, setShowPopup] = useState(false)
+  const [isRating, setIsRating] = useState(item.isRating)
+
+  const onClickRating = () => {
+    setShowPopup(true)
+  }
+
+  const reviewHandler = (val) => {
+    const newReview = {
+      userName: user.name,
+      userImage: user.image,
+      rating: val,
+      id: item.itemID,
+    }
+
+    fetch("/api/review", {
+      method: "POST",
+      body: JSON.stringify(newReview),
+      headers: {
+        "content-type": "application/json",
+      },
+    })
+
+    fetch("/api/userHistory", {
+      method: "PUT",
+      body: JSON.stringify(item.itemID),
+      headers: {
+        "content-type": "application/json",
+      },
+    })
+    setIsRating(true)
+  }
+
+  const date = item.orderAt.match(/^\d{4}-\d{2}-\d{2}/g)[0]
+
   return (
     <div className={styles.eachOrder}>
       <div className={styles.eachOrder__head}>
@@ -56,7 +98,7 @@ const EachItem = ({ item }) => {
           <a>{item.sellerName}</a>
         </Link>
 
-        <span>seller will be</span>
+        <span>order at {date.split("-").reverse().join("-")}</span>
       </div>
       <div className={styles.eachOrder__item}>
         <div className={styles.eachOrder__image}>
@@ -67,7 +109,11 @@ const EachItem = ({ item }) => {
             alt="historyItem"
           />
         </div>
-        <div>{item.name}</div>
+        <div>
+          <Link href={`/product/${item.itemID}`}>
+            <a>{item.name}</a>
+          </Link>
+        </div>
         <div>x{item.quantity}</div>
         <div>฿{item.price}</div>
       </div>
@@ -82,8 +128,29 @@ const EachItem = ({ item }) => {
             </a>
           </Link>
         </div>
-        <div className={item.isRating ? styles.unRating : ""}>Rating</div>
+        <div
+          className={isRating ? styles.unRating : ""}
+          onClick={isRating ? undefined : onClickRating}
+        >
+          Rating
+        </div>
       </div>
+
+      {showPopup && (
+        <Popup
+          show={showPopup}
+          onClose={() => setShowPopup(false)}
+          onClick={() => setShowPopup(true)}
+          title={rating.title}
+          titlecolor={rating.titlecolor}
+          subtitle={rating.subtitle}
+          icon={rating.icon}
+          content1={rating.content1}
+          content2={rating.content2}
+          buttonShow={rating.buttonShow}
+          onSubmit={reviewHandler}
+        />
+      )}
     </div>
   )
 }

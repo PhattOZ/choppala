@@ -39,6 +39,28 @@ export default async function handler(req, res) {
             .send({ error: "error, POST method for purchaseHistory api" })
         }
         break
+      case "PUT":
+        try {
+          const filter = {
+            name: user.name,
+            email: user.email,
+            "purchaseHistory.itemID": req.body,
+          }
+          const update = {
+            $set: {
+              "purchaseHistory.$.isRating": true,
+            },
+          }
+
+          await User.findOneAndUpdate(filter, update)
+
+          res.status(200).json()
+        } catch (error) {
+          res
+            .status(400)
+            .send({ error: "error, POST method for purchaseHistory api" })
+        }
+        break
       default:
         res.status(400)
         break
