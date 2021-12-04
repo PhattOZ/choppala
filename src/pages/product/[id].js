@@ -15,6 +15,7 @@ export default function ProductDetail({ product }) {
   const [showPopup, setShowPopup] = useState(false)
   const [, setShowHeader] = header
   const router = useRouter()
+
   const cartHandler = (val, isBuyNow) => {
     let { reviews, images, ...newProduct } = product
     newProduct = {

@@ -109,7 +109,11 @@ const EachItem = ({ item, user }) => {
             alt="historyItem"
           />
         </div>
-        <div>{item.name}</div>
+        <div>
+          <Link href={`/product/${item.itemID}`}>
+            <a>{item.name}</a>
+          </Link>
+        </div>
         <div>x{item.quantity}</div>
         <div>฿{item.price}</div>
       </div>
