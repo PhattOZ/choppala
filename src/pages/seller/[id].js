@@ -63,12 +63,16 @@ export default function SellerProfile({ seller }) {
   const [sellerItems, setSellerItems] = useState([])
   const [itemLoading, setItemLoading] = useState(true)
 
-  useEffect(async () => {
-    const res = await fetch(`/api/item?sellerId=${seller.id}`)
-    const resData = await res.json()
-    setSellerItems(resData.item)
-    setItemLoading(false)
-  }, [])
+  useEffect(() => {
+    async function fetchData() {
+      const res = await fetch(`/api/item?sellerId=${seller.id}`)
+      const resData = await res.json()
+      setSellerItems(resData.item)
+      setItemLoading(false)
+    }
+
+    fetchData()
+  }, [seller])
 
   return (
     <>

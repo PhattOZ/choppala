@@ -31,7 +31,12 @@ export default function ActivateSeller({
       <div className={styles.main}>
         <section>
           <div className={styles.peopleIcon}>
-            <Image src="/activate-seller.svg" layout="fill" objectFit="cover" />
+            <Image
+              src="/activate-seller.svg"
+              layout="fill"
+              objectFit="cover"
+              alt="active-icon"
+            />
           </div>
           <div className={styles.text}>Start selling on Choppala</div>
           <div className={styles.button} onClick={setSeller}>

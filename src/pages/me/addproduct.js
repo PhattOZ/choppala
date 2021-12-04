@@ -5,18 +5,20 @@ import styles from "src/styles/pages/user/AddProduct.module.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faChevronCircleLeft, faImage } from "@fortawesome/free-solid-svg-icons"
 // React, Next lib
-import { useState } from "react"
+import { useState, useCallback } from "react"
 import { useRouter } from "next/router"
 import { getSession } from "next-auth/react"
 import Link from "next/link"
 // Custom lib
 import dbConnect from "src/lib/dbConnect"
 import createImgUrls from "src/lib/firebase"
+import { productSuccess } from "src/lib/modalContent"
 // Model
 import User from "src/models/User"
 import Seller from "src/models/Seller"
-// Component
+// Components
 import AddItemImg from "src/components/AddItemImg"
+import Popup from "src/components/Popup"
 
 export default function AddProduct({ user, seller }) {
   const router = useRouter()
@@ -37,6 +39,7 @@ export default function AddProduct({ user, seller }) {
     detail: false,
     images: false,
   })
+  const [successModal, setSuccessModal] = useState(false) // Success modal state
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -51,13 +54,13 @@ export default function AddProduct({ user, seller }) {
     }
   }
 
-  const handleFileSync = (blob, index) => {
+  const handleFileSync = useCallback((blob, index) => {
     setImgBlobs((prev) => {
       const newArrayBlobs = [...prev]
       newArrayBlobs[index] = blob
       return newArrayBlobs
     })
-  }
+  }, [])
 
   // Seller cancel cropped image
   const handleDeleteCropped = (index) => {
@@ -108,7 +111,7 @@ export default function AddProduct({ user, seller }) {
       })
 
       if (res.ok) {
-        router.push("/me/sellingorders")
+        setSuccessModal(true)
       }
     }
   }
@@ -137,18 +140,20 @@ export default function AddProduct({ user, seller }) {
                   <div className={styles.edit}>
                     <div className={styles.edit_section}>
                       <label>Product name</label>
-                        <input
-                          type="text"
-                          size="50"
-                          name="name"
-                          onChange={handleChange}
-                          className={inputsValidation.name ? styles.outline_red : null}
-                        />
-                        {inputsValidation.name ? (
-                          <span className={styles.invalidText}>
-                            This field is required
-                          </span>
-                        ) : null}
+                      <input
+                        type="text"
+                        size="50"
+                        name="name"
+                        onChange={handleChange}
+                        className={
+                          inputsValidation.name ? styles.outline_red : null
+                        }
+                      />
+                      {inputsValidation.name ? (
+                        <span className={styles.invalidText}>
+                          This field is required
+                        </span>
+                      ) : null}
                     </div>
                   </div>
                   {/* Row2 */}
@@ -159,7 +164,9 @@ export default function AddProduct({ user, seller }) {
                         name="category"
                         value={inputs.category}
                         onChange={handleChange}
-                        className={inputsValidation.category ? styles.outline_red : null}
+                        className={
+                          inputsValidation.category ? styles.outline_red : null
+                        }
                       >
                         <option value="" disabled>
                           --Select--
@@ -194,7 +201,9 @@ export default function AddProduct({ user, seller }) {
                         name="price"
                         value={inputs.price}
                         onChange={handleChange}
-                        className={inputsValidation.price ? styles.outline_red : null}
+                        className={
+                          inputsValidation.price ? styles.outline_red : null
+                        }
                       />
                       {inputsValidation.price ? (
                         <span className={styles.invalidText}>
@@ -211,7 +220,9 @@ export default function AddProduct({ user, seller }) {
                         pattern="[0-9]*"
                         value={inputs.amount}
                         onChange={handleChange}
-                        className={inputsValidation.amount ? styles.outline_red : null}
+                        className={
+                          inputsValidation.amount ? styles.outline_red : null
+                        }
                       />
                       {inputsValidation.amount ? (
                         <span className={styles.invalidText}>
@@ -230,7 +241,9 @@ export default function AddProduct({ user, seller }) {
                         rows="10"
                         name="detail"
                         onChange={handleChange}
-                        className={inputsValidation.detail ? styles.outline_red : null}
+                        className={
+                          inputsValidation.detail ? styles.outline_red : null
+                        }
                       ></textarea>
                       {inputsValidation.detail ? (
                         <span className={styles.invalidText}>
@@ -304,6 +317,23 @@ export default function AddProduct({ user, seller }) {
           </div>
         </div>
       </Layout>
+      {/* -----------Popup------------ */}
+      {successModal && (
+        <Popup
+          show={successModal}
+          onClose={() => {
+            router.push("/me/sellingorders")
+          }}
+          onClick={() => setSuccessModal((prev) => !prev)}
+          title={productSuccess.title}
+          titlecolor={productSuccess.titlecolor}
+          subtitle={productSuccess.subtitle}
+          icon={productSuccess.icon}
+          content1={productSuccess.content1}
+          content2={productSuccess.content2}
+          buttonShow={productSuccess.buttonShow}
+        />
+      )}
     </div>
   )
 }
