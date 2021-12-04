@@ -137,18 +137,20 @@ export default function AddProduct({ user, seller }) {
                   <div className={styles.edit}>
                     <div className={styles.edit_section}>
                       <label>Product name</label>
-                        <input
-                          type="text"
-                          size="50"
-                          name="name"
-                          onChange={handleChange}
-                          className={inputsValidation.name ? styles.outline_red : null}
-                        />
-                        {inputsValidation.name ? (
-                          <span className={styles.invalidText}>
-                            This field is required
-                          </span>
-                        ) : null}
+                      <input
+                        type="text"
+                        size="50"
+                        name="name"
+                        onChange={handleChange}
+                        className={
+                          inputsValidation.name ? styles.outline_red : null
+                        }
+                      />
+                      {inputsValidation.name ? (
+                        <span className={styles.invalidText}>
+                          This field is required
+                        </span>
+                      ) : null}
                     </div>
                   </div>
                   {/* Row2 */}
@@ -159,7 +161,9 @@ export default function AddProduct({ user, seller }) {
                         name="category"
                         value={inputs.category}
                         onChange={handleChange}
-                        className={inputsValidation.category ? styles.outline_red : null}
+                        className={
+                          inputsValidation.category ? styles.outline_red : null
+                        }
                       >
                         <option value="" disabled>
                           --Select--
@@ -171,11 +175,11 @@ export default function AddProduct({ user, seller }) {
                         <option value="Hobbies & Books">Hobbies & Books</option>
                         <option value="Home Appliances">Home Appliances</option>
                         <option value="Men Clothes">Men Clothes</option>
-                        <option value="Mobiles & Gadget">
+                        <option value="Mobiles & Gadgets">
                           Mobiles & Gadgets
                         </option>
-                        <option value="Sport & Outdoors">
-                          Sport & Outdoors
+                        <option value="Sports & Outdoors">
+                          Sports & Outdoors
                         </option>
                         <option value="Women Clothes">Women Clothes</option>
                       </select>
@@ -194,7 +198,9 @@ export default function AddProduct({ user, seller }) {
                         name="price"
                         value={inputs.price}
                         onChange={handleChange}
-                        className={inputsValidation.price ? styles.outline_red : null}
+                        className={
+                          inputsValidation.price ? styles.outline_red : null
+                        }
                       />
                       {inputsValidation.price ? (
                         <span className={styles.invalidText}>
@@ -211,7 +217,9 @@ export default function AddProduct({ user, seller }) {
                         pattern="[0-9]*"
                         value={inputs.amount}
                         onChange={handleChange}
-                        className={inputsValidation.amount ? styles.outline_red : null}
+                        className={
+                          inputsValidation.amount ? styles.outline_red : null
+                        }
                       />
                       {inputsValidation.amount ? (
                         <span className={styles.invalidText}>
@@ -230,7 +238,9 @@ export default function AddProduct({ user, seller }) {
                         rows="10"
                         name="detail"
                         onChange={handleChange}
-                        className={inputsValidation.detail ? styles.outline_red : null}
+                        className={
+                          inputsValidation.detail ? styles.outline_red : null
+                        }
                       ></textarea>
                       {inputsValidation.detail ? (
                         <span className={styles.invalidText}>
