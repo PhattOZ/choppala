@@ -2,8 +2,7 @@
   border-radius: 0.6rem;
   overflow: hidden;
   width: 11rem;
-  margin-bottom: 1rem;
-  transform: matrix(1,0,0,1,0,0);
+  transform: matrix(1, 0, 0, 1, 0, 0);
   transition: all 0.2s ease;
   border: solid 1px #d9dbe9;
   &:hover {
@@ -53,8 +52,31 @@
   color: #4585ff;
 }
 
-.stars_fav {
+.rating {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  position: relative;
+  column-gap: 0.25rem;
+  min-height: 1.625rem;
+}
+
+.rating span {
+  font-size: 1.1rem;
+}
+
+.rating span::before {
+  --percent: calc(var(--rating) / 5 * 100%);
+  content: "★★★★★";
+  background: linear-gradient(
+    to right,
+    #ffd700 var(--percent),
+    #cccccc var(--percent)
+  );
+  background-clip: text;
+  color: transparent;
+}
+
+.rating div {
+  font-size: 0.75rem;
+  color: #8b8ea1;
 }

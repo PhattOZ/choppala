@@ -1,11 +1,8 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-// import { faHeart as farfaHeart } from "@fortawesome/free-regular-svg-icons"
-import { faStar } from "@fortawesome/free-solid-svg-icons"
 import styles from "./Card.module.scss"
 import Image from "next/image"
 import Link from "next/link"
 
-export default function Card({ title, price, image, itemID }) {
+export default function Card({ title, price, image, itemID, avg_rating }) {
   return (
     <div className={styles.card}>
       <Link href={`/product/${itemID}`}>
@@ -19,21 +16,16 @@ export default function Card({ title, price, image, itemID }) {
           <div className={styles.card_content}>
             <div className={styles.card_title}>{title}</div>
             <div className={styles.card_price}>{`฿${price}`}</div>
-            <div className={styles.stars_fav}>
-              <div>
-                <FontAwesomeIcon icon={faStar} size={"xs"} color="#ffd700" />
-                <FontAwesomeIcon icon={faStar} size={"xs"} color="#ffd700" />
-                <FontAwesomeIcon icon={faStar} size={"xs"} color="#ffd700" />
-                <FontAwesomeIcon icon={faStar} size={"xs"} color="#ffd700" />
-                <FontAwesomeIcon icon={faStar} size={"xs"} color="#CCCCCC" />
-              </div>
-              {/* <div>
-                <FontAwesomeIcon
-                  icon={farfaHeart}
-                  size={"sm"}
-                  color="#4585FF"
-                />
-              </div> */}
+
+            <div className={styles.rating}>
+              {avg_rating ? (
+                <>
+                  <span style={{ "--rating": avg_rating }} />
+                  <div> {`(${avg_rating})`}</div>
+                </>
+              ) : (
+                <div>No review</div>
+              )}
             </div>
           </div>
         </a>

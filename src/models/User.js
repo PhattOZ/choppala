@@ -56,6 +56,7 @@ const UserSchema = new mongoose.Schema({
   ],
   purchaseHistory: [
     {
+      _id: false,
       itemID: String,
       name: String,
       image: String,

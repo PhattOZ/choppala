@@ -1,6 +1,5 @@
 import Item from "src/models/Item"
 import dbConnect from "./dbConnect"
-import { sortConditions } from "./sortTitles"
 
 export default async function querySearch(
   keyword,
@@ -33,6 +32,21 @@ export default async function querySearch(
     sort = { price: -1 }
   }
 
-  const itemList = await Item.find(query, { _id: 0 }).sort(sort)
-  return JSON.parse(JSON.stringify(itemList))
+  const itemList = await Item.aggregate([
+    { $match: query },
+    {
+      $project: {
+        _id: 0,
+        id: 1,
+        name: 1,
+        price: 1,
+        image: { $arrayElemAt: ["$images", 0] },
+        reviews: 1,
+        avg_rating: { $round: [{ $avg: "$reviews.rating" }, 1] },
+      },
+    },
+    sort && { $sort: sort },
+  ])
+
+  return itemList
 }

@@ -1,5 +1,4 @@
 import ReactDom from "react-dom"
-import Link from "next/link"
 import styles from "./SmallPopup.module.scss"
 // ---------------- Icon ----------------
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"

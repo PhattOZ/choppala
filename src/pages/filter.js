@@ -94,7 +94,8 @@ export default function Filter({ keyword, currentItems, sortby, totalItems }) {
                     itemID={item.id}
                     title={item.name}
                     price={item.price}
-                    image={item.images[0]}
+                    image={item.image}
+                    avg_rating={item.avg_rating}
                   />
                 ))}
             </div>

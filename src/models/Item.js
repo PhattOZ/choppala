@@ -12,11 +12,7 @@ const ItemSchema = new mongoose.Schema({
   soldCount: { type: Number, default: 0 },
   amount: Number,
   reviews: [
-    {
-      username: String,
-      userImage: String,
-      rating: Number,
-    },
+    { _id: false, userName: String, userImage: String, rating: Number },
   ],
 })
 
