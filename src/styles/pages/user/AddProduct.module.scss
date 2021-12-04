@@ -116,6 +116,7 @@ $red20: #ffd2cc;
 
   textarea {
     overflow: hidden;
+    overflow-y: scroll;
     display: block;
     border-radius: 0.25rem;
     border: 1px solid $grey;

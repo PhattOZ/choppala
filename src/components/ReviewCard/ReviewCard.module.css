@@ -1,8 +1,8 @@
 .container {
-  width: 75%;
+  width: 78%;
   max-width: 1136px;
   height: 50%;
-  border-radius: 12px;
+  border-radius: 0.6rem;
   background-color: #ffffff;
   display: flex;
   flex-direction: column;

@@ -62,7 +62,6 @@ export default function ProductBox({
               <div className={styles.title}>{productname}</div>
             </div>
 
-            {/* <div className={styles.break}></div> */}
             <div className={styles.heartbox}>
               <div className={styles.wishlist}>
                 {heart ? (

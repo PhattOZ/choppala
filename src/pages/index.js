@@ -32,12 +32,12 @@ function CategoryLink({ category }) {
 }
 
 const bannerImages = [
-  "/banners/b-choppala.png",
-  "/banners/b-blackfriday.png",
-  "/banners/b-12.png",
-  "/banners/b-electronics.png",
-  "/banners/b-seller.png",
-  "/banners/b-tech.png",
+  "/banners/b01-choppala.png",
+  "/banners/b02-seller.png",
+  "/banners/b03-mega.png",
+  "/banners/b04-electronics.png",
+  "/banners/b05-blackfriday.png",
+  "/banners/b06-tech.png",
 ]
 
 const autoplay = Autoplay({
@@ -126,7 +126,7 @@ export default function Index() {
           </section>
 
           <section className={styles.section}>
-            <div className={styles.section_title}>Just for you</div>
+            <div className={styles.section_title}>Just released</div>
             {itemCardsUI()}
           </section>
         </div>

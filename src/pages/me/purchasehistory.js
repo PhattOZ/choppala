@@ -111,7 +111,7 @@ const EachItem = ({ item, user }) => {
         </div>
         <div>
           <Link href={`/product/${item.itemID}`}>
-            <a>{item.name}</a>
+            <a className={styles.eachOrder__name}>{item.name}</a>
           </Link>
         </div>
         <div>x{item.quantity}</div>

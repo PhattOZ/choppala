@@ -2,7 +2,7 @@
   width: 75%;
   max-width: 1136px;
   height: 50%;
-  border-radius: 12px;
+  border-radius: 0.6rem;
   background-color: #ffffff;
   display: flex;
   flex-direction: row;
@@ -124,7 +124,7 @@
   font-weight: 600;
   font-size: 20px;
   color: #444655;
-  width: 36rem;
+  width: 38rem;
 }
 .top {
   display: flex;
@@ -139,7 +139,7 @@
 }
 
 .heartbox {
-  width: 10rem;
+  width: 10.5rem;
   display: flex;
   justify-content: flex-end;
 }
