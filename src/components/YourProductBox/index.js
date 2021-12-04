@@ -136,7 +136,7 @@ export default function YourProductBox({ sellerId, isSeller }) {
       const currentItems = spliceData(allSellerItems, page, 6)
       setSellerItems(currentItems)
     }
-  }, [sellerItems, page, sellerId])
+  }, [allSellerItems, page, sellerId])
 
   return (
     <>
