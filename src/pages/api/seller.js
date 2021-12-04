@@ -53,7 +53,7 @@ export default async function handler(req, res) {
         ).lean()
         const newItems = await Item.updateMany(
           { sellerId: newSeller.id },
-          { sellerName: newSeller.storeName }
+          { sellerName: storeName }
         )
         res.status(201).json()
       } catch (error) {
