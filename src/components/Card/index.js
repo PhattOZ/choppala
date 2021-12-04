@@ -16,9 +16,16 @@ export default function Card({ title, price, image, itemID, avg_rating }) {
           <div className={styles.card_content}>
             <div className={styles.card_title}>{title}</div>
             <div className={styles.card_price}>{`฿${price}`}</div>
+
             <div className={styles.rating}>
-              <span style={{ "--rating": avg_rating }}></span>
-              <div>{avg_rating && `(${avg_rating})`}</div>
+              {avg_rating ? (
+                <>
+                  <span style={{ "--rating": avg_rating }} />
+                  <div> {`(${avg_rating})`}</div>
+                </>
+              ) : (
+                <div>No review</div>
+              )}
             </div>
           </div>
         </a>
