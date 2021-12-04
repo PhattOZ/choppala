@@ -5,8 +5,57 @@ import dbConnect from "src/lib/dbConnect"
 import User from "src/models/User"
 import { getSession } from "next-auth/react"
 import Image from "next/image"
+import { useState, useEffect } from "react"
+import Popup from "src/components/Popup"
+import { success } from "src/lib/modalContent"
+import { useRouter } from "next/router"
 
 function Store({ user }) {
+  const router = useRouter()
+  const [loading, setLoading] = useState(true) // Show loading text if this page not fetch seller data yet
+  const [successModal, setSuccessModal] = useState(false) // Success modal state
+  const [sellerInput, setSellerInput] = useState({
+    storeName: "",
+    storeEmail: "",
+  })
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target
+    setSellerInput({ ...sellerInput, [name]: value })
+  }
+
+  const handleSubmit = async () => {
+    const res = await fetch(`/api/seller?userId=${user._id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        ...sellerInput,
+      }),
+    })
+    if (res.ok) {
+      setSuccessModal(true)
+    }
+  }
+
+  useEffect(() => {
+    async function fetchData() {
+      const res = await fetch(`/api/seller?userId=${user._id}`)
+      const resData = await res.json()
+      setSellerInput({
+        storeName: resData.storeName,
+        storeEmail: resData.storeEmail,
+      })
+      setLoading(false)
+    }
+    fetchData()
+  }, [])
+
+  if (loading) {
+    return <></>
+  }
+
   return (
     <>
       <div className={styles.main}>
@@ -25,15 +74,29 @@ function Store({ user }) {
             </div>
             <div className={styles.edit_section}>
               <label htmlFor="">Store Name</label>
-              <input type="text" size="30" />
+              <input
+                type="text"
+                size="30"
+                name="storeName"
+                value={sellerInput.storeName}
+                onChange={handleInputChange}
+              />
             </div>
             <div className={styles.edit_section}>
               <label htmlFor="">Store Email</label>
-              <input type="text" size="30" />
+              <input
+                type="text"
+                size="30"
+                name="storeEmail"
+                value={sellerInput.storeEmail}
+                onChange={handleInputChange}
+              />
             </div>
           </div>
           <div className={styles.button_wrapper}>
-            <div className={styles.saveButton}>Save</div>
+            <div className={styles.saveButton} onClick={handleSubmit}>
+              Save
+            </div>
           </div>
         </section>
 
@@ -49,6 +112,23 @@ function Store({ user }) {
           <div className={styles.text}>Dashboard is coming soon</div>
         </div>
       </div>
+      {/* -----------Popup------------ */}
+      {successModal && (
+        <Popup
+          show={successModal}
+          onClose={() => {
+            router.reload()
+          }}
+          onClick={() => setSuccessModal((prev) => !prev)}
+          title={success.title}
+          titlecolor={success.titlecolor}
+          subtitle={success.subtitle}
+          icon={success.icon}
+          content1={success.content1}
+          content2={success.content2}
+          buttonShow={success.buttonShow}
+        />
+      )}
     </>
   )
 }
