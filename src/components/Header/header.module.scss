@@ -56,6 +56,7 @@ $headerHeight: 7.3rem;
     height: 2.25em;
     position: relative;
     margin-top: 1.7rem;
+    animation: enlarge 0.25s forwards;
 
     input[type="text"] {
       position: absolute;
@@ -101,9 +102,11 @@ $headerHeight: 7.3rem;
       border-bottom: 1px solid black;
       border-right: 1px solid black;
       border-left: 1px solid black;
-
+      overflow: scroll;
+      max-height: 30rem;
       ul > li {
         background-color: #4585ff;
+        display: inline;
       }
       .search_item {
         display: flex;
