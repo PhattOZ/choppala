@@ -267,10 +267,14 @@ export const CartContextProvider = (props) => {
       fetch("/api/cart")
         .then((response) => response.json())
         .then((data) => {
-          data.forEach((e) => {
-            delete e._id
-          })
-          getItemsFromIDs(data)
+          if (data.length > 0) {
+            data.forEach((e) => {
+              delete e._id
+            })
+            getItemsFromIDs(data)
+          } else {
+            dispatchCart({ type: "GET_CART", val: [] })
+          }
         })
         .catch((err) => console.log(err))
     }
