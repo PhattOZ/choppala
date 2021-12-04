@@ -40,9 +40,15 @@ export default function Purchasehistory() {
     <div className={styles.container}>
       <Layout user={session.user}>
         <div className={styles.main}>
-          {Items.map((data) => (
-            <EachItem item={data} key={data.itemID} user={session.user} />
-          ))}
+          {Items.slice(0)
+            .reverse()
+            .map((data) => (
+              <EachItem
+                item={data}
+                key={data.itemID + data.orderAt}
+                user={session.user}
+              />
+            ))}
         </div>
       </Layout>
     </div>
