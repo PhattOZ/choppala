@@ -3,7 +3,6 @@ import Link from "next/link"
 import Head from "next/head"
 import Card from "src/components/Card"
 import categories from "src/lib/categoryList"
-import Loader from "src/components/Loader"
 
 import styles from "src/styles/pages/index.module.scss"
 
@@ -48,7 +47,7 @@ const autoplay = Autoplay({
 
 const fetcher = (url) => fetch(url).then((r) => r.json())
 
-export default function Index({ productList }) {
+export default function Index() {
   const [emblaRef] = useEmblaCarousel({ loop: true }, [autoplay])
   const { data, error } = useSWR("/api/index_item_list", fetcher)
 
@@ -73,7 +72,8 @@ export default function Index({ productList }) {
         itemID={item.id}
         title={item.name}
         price={item.price}
-        image={item.images[0]}
+        image={item.image}
+        avg_rating={item.avg_rating}
       />
     ))
 
