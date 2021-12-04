@@ -4,7 +4,6 @@ import {
   faStar,
   faTags,
   faCartPlus,
-  faCoins,
   faHeart as fasfaHeart,
 } from "@fortawesome/free-solid-svg-icons"
 import { useState, useCallback } from "react"
