@@ -50,7 +50,7 @@ function Store({ user }) {
       setLoading(false)
     }
     fetchData()
-  }, [])
+  }, [user._id])
 
   if (loading) {
     return <></>
