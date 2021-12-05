@@ -1,49 +1,45 @@
 import styles from "./ReviewCard.module.css"
 import Image from "next/dist/client/image"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faUser } from "@fortawesome/free-regular-svg-icons"
 import { faStar } from "@fortawesome/free-solid-svg-icons"
 
 export default function ReviewCard({ reviews }) {
+  let list = [0, 0, 0, 0, 0]
+
   return (
     <div className={styles.container}>
       <div className={styles.titlectn}>Review & Rating</div>
       <div className={styles.reviewlist}>
-        {reviews.map((review) => (
+        {reviews.map((review, index) => (
           <div key={review.userName}>
             <div className={styles.review}>
               <div className={styles.avatar}>
-                <FontAwesomeIcon icon={faUser} size={"lg"} color="#ffff" />
+                <Image
+                  src={review.userImage}
+                  layout="fill"
+                  objectFit="contain"
+                  alt="user_image"
+                />
               </div>
               <div className={styles.reviewmain}>
-                <div className={styles.h2}>{review.username}</div>
+                <div className={styles.h2}>{review.userName}</div>
                 <div className={styles.liststar}>
                   <div className={styles.stars}>
-                    <FontAwesomeIcon
-                      icon={faStar}
-                      size={"xs"}
-                      color="#ffd700"
-                    />
-                    <FontAwesomeIcon
-                      icon={faStar}
-                      size={"xs"}
-                      color="#ffd700"
-                    />
-                    <FontAwesomeIcon
-                      icon={faStar}
-                      size={"xs"}
-                      color="#ffd700"
-                    />
-                    <FontAwesomeIcon
-                      icon={faStar}
-                      size={"xs"}
-                      color="#ffd700"
-                    />
-                    <FontAwesomeIcon
-                      icon={faStar}
-                      size={"xs"}
-                      color="#A8AABC"
-                    />
+                    {list.map((e, index) =>
+                      review.rating > index ? (
+                        <FontAwesomeIcon
+                          icon={faStar}
+                          size={"xs"}
+                          color="#ffd700"
+                        />
+                      ) : (
+                        <FontAwesomeIcon
+                          icon={faStar}
+                          size={"xs"}
+                          color="#cccccc"
+                        />
+                      )
+                    )}
                   </div>
                 </div>
               </div>
