@@ -74,6 +74,7 @@ export default function Index() {
         price={item.price}
         image={item.image}
         avg_rating={item.avg_rating}
+        review_count={item.review_count}
       />
     ))
 

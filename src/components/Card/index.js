@@ -2,7 +2,14 @@ import styles from "./Card.module.scss"
 import Image from "next/image"
 import Link from "next/link"
 
-export default function Card({ title, price, image, itemID, avg_rating }) {
+export default function Card({
+  title,
+  price,
+  image,
+  itemID,
+  avg_rating,
+  review_count,
+}) {
   return (
     <div className={styles.card}>
       <Link href={`/product/${itemID}`}>
@@ -21,7 +28,7 @@ export default function Card({ title, price, image, itemID, avg_rating }) {
               {avg_rating ? (
                 <>
                   <span style={{ "--rating": avg_rating }} />
-                  <div> {`(${avg_rating})`}</div>
+                  <div> {`(${review_count})`}</div>
                 </>
               ) : (
                 <div>No review</div>

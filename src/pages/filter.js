@@ -96,6 +96,7 @@ export default function Filter({ keyword, currentItems, sortby, totalItems }) {
                     price={item.price}
                     image={item.image}
                     avg_rating={item.avg_rating}
+                    review_count={item.review_count}
                   />
                 ))}
             </div>

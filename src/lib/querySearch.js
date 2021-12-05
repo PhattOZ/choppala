@@ -41,7 +41,7 @@ export default async function querySearch(
         name: 1,
         price: 1,
         image: { $arrayElemAt: ["$images", 0] },
-        reviews: 1,
+        review_count: { $size: "$reviews" },
         avg_rating: { $round: [{ $avg: "$reviews.rating" }, 1] },
       },
     },
