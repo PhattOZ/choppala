@@ -34,6 +34,25 @@ export default function ProductDetail({ product }) {
     cartHandler(val, 1)
     router.push("/cart")
   }
+  const wishList = async (heart) => {
+    if (!heart) {
+      await fetch("/api/wishlist", {
+        method: "POST",
+        body: JSON.stringify({ itemID: product.id, isHeart: true }),
+        headers: {
+          "content-type": "application/json",
+        },
+      })
+    } else {
+      await fetch("/api/wishlist", {
+        method: "DELETE",
+        body: JSON.stringify({ itemID: product.id, isHeart: false }),
+        headers: {
+          "content-type": "application/json",
+        },
+      })
+    }
+  }
 
   return (
     <>
@@ -61,6 +80,8 @@ export default function ProductDetail({ product }) {
           review_count={product.review_count}
           avg_rating={product.avg_rating}
           images={product.images}
+          wishList={wishList}
+          itemID={product.id}
         />
         <ProductInfo detail={product.detail} />
         <ReviewCard reviews={product.reviews} />

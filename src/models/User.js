@@ -41,19 +41,7 @@ const UserSchema = new mongoose.Schema({
       isConfirm: Boolean,
     },
   ],
-  wishlist: [
-    {
-      itemName: String,
-      itemPrice: Number,
-      itemReviews: [
-        {
-          username: String,
-          userImage: String,
-          rating: Number,
-        },
-      ],
-    },
-  ],
+  wishlist: [],
   purchaseHistory: [
     {
       _id: false,

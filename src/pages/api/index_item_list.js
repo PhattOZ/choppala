@@ -23,7 +23,7 @@ export default async function handler(req, res) {
             },
           },
           { $sort: { _id: -1 } },
-          { $limit: 20 },
+          { $limit: 24 },
         ])
 
         res.status(200).json({ items: items })

@@ -50,7 +50,7 @@ function Store({ user }) {
       setLoading(false)
     }
     fetchData()
-  }, [])
+  }, [user._id])
 
   if (loading) {
     return <></>
@@ -86,7 +86,7 @@ function Store({ user }) {
               <label htmlFor="">Store Email</label>
               <input
                 type="text"
-                size="30"
+                size="40"
                 name="storeEmail"
                 value={sellerInput.storeEmail}
                 onChange={handleInputChange}
