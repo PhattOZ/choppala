@@ -84,7 +84,6 @@ export default function Checkout({ data }) {
                 <div>
                   {addressFilter.slice(0, addressFilter.length - 3).join(" ")}
                 </div>
-
                 <div>{addressFilter.slice(-3).join(" ")}</div>
               </div>
             </div>

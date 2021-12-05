@@ -64,6 +64,16 @@ export default function SearchBar() {
     }
   }, [dropdown])
 
+  useEffect(() => {
+    //check change path
+    router.events.on("routeChangeComplete", () => {
+      setKeyword("")
+    })
+    return () => {
+      router.events.off("routeChangeComplete", () => {})
+    }
+  }, [router.events])
+
   const searchDropdownHandler = (e) => {
     const value = e.target.value
     value.length > 0 ? setDropdown(true) : setDropdown(false)
