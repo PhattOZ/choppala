@@ -56,6 +56,7 @@ $headerHeight: 7.3rem;
     height: 2.25em;
     position: relative;
     margin-top: 1.7rem;
+    animation: enlarge 0.25s forwards;
 
     input[type="text"] {
       position: absolute;
@@ -101,9 +102,11 @@ $headerHeight: 7.3rem;
       border-bottom: 1px solid black;
       border-right: 1px solid black;
       border-left: 1px solid black;
-
+      overflow: scroll;
+      max-height: 30rem;
       ul > li {
         background-color: #4585ff;
+        display: inline;
       }
       .search_item {
         display: flex;
@@ -137,15 +140,13 @@ $headerHeight: 7.3rem;
     flex-direction: column;
     width: 11.25rem;
     align-items: flex-end;
-
     row-gap: 0.5rem;
-    margin-bottom: 0.6rem;
+    margin-bottom: 0.4rem;
 
     .menu {
       display: flex;
-      padding: 0.25em 0;
-      padding-top: -0.5em;
       margin-bottom: 0.3rem;
+      column-gap: 1rem;
       .fabell {
         width: max-content;
         color: #5c94ff;
@@ -164,13 +165,16 @@ $headerHeight: 7.3rem;
 
       a {
         height: auto;
-        margin-right: 1.5em;
         font-size: 0.8em;
       }
     }
     .userMenu {
       display: flex;
-      margin-bottom: 0.35em;
+      height: 30px;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      column-gap: 2rem;
       .countCart {
         position: relative;
         .totalQty {
@@ -191,9 +195,7 @@ $headerHeight: 7.3rem;
       }
 
       a {
-        width: 100%;
         height: auto;
-        margin-right: 2em;
       }
       .user_image {
         position: relative;

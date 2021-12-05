@@ -6,7 +6,7 @@ import {
   faCartPlus,
   faHeart as fasfaHeart,
 } from "@fortawesome/free-solid-svg-icons"
-import { useState, useCallback } from "react"
+import { useState, useCallback, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import styles from "./ProductBox.module.scss"
@@ -21,10 +21,12 @@ export default function ProductBox({
   sellerId,
   reviewCount,
   images,
+  wishList,
+  itemID,
 }) {
   const [count, setCount] = useState(1)
 
-  const [heart, setHeart] = useState(farfaHeart)
+  const [heart, setHeart] = useState(0)
 
   const handleChangeHeart = () => {
     setHeart((previousHeart) => {
@@ -51,6 +53,22 @@ export default function ProductBox({
     setCount(1)
   }
 
+  useEffect(() => {
+    fetch("/api/wishlist")
+      .then((data) => data.json())
+      .then((data) => {
+        const result = data.find((e) => {
+          return e == itemID
+        })
+
+        if (result) {
+          setHeart(1)
+        } else {
+          setHeart(0)
+        }
+      })
+  }, [itemID])
+
   return (
     <div className={styles.container}>
       <div className={styles.row}>
@@ -62,17 +80,22 @@ export default function ProductBox({
             </div>
 
             <div className={styles.heartbox}>
-              <div className={styles.wishlist}>
+              <div
+                className={styles.wishlist}
+                onClick={() => {
+                  wishList(heart)
+                }}
+              >
                 {heart ? (
                   <FontAwesomeIcon
-                    icon={farfaHeart}
+                    icon={fasfaHeart}
                     onClick={handleChangeHeart}
                     size={"lg"}
                     color="#8B8EA1"
                   />
                 ) : (
                   <FontAwesomeIcon
-                    icon={fasfaHeart}
+                    icon={farfaHeart}
                     onClick={handleChangeHeart}
                     size={"lg"}
                     color="#8B8EA1"

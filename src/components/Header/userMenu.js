@@ -105,7 +105,11 @@ export default function UserMenu() {
                 <a>user</a>
               </Link>
             </li>
-            <li>favorite</li>
+            <li>
+              <Link href="/me/wishlist">
+                <a>favorite</a>
+              </Link>
+            </li>
             <li onClick={() => signOut()}>logout</li>
           </ul>
         </div>

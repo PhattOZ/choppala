@@ -33,10 +33,32 @@ export default function ProductDetail({ product }) {
     cartHandler(val, 1)
     router.push("/cart")
   }
+  const wishList = async (heart) => {
+    if (!heart) {
+      await fetch("/api/wishlist", {
+        method: "POST",
+        body: JSON.stringify({ itemID: product.id, isHeart: true }),
+        headers: {
+          "content-type": "application/json",
+        },
+      })
+    } else {
+      await fetch("/api/wishlist", {
+        method: "DELETE",
+        body: JSON.stringify({ itemID: product.id, isHeart: false }),
+        headers: {
+          "content-type": "application/json",
+        },
+      })
+    }
+  }
 
   return (
     <div className={styles.container}>
-      <SmallPopup show={showPopup} onClose={setTimeout(() => setShowPopup(false),3000)} />
+      <SmallPopup
+        show={showPopup}
+        onClose={setTimeout(() => setShowPopup(false), 3000)}
+      />
       <div className={styles.toplink}>
         <Link href="/">
           <a className={styles.ahome}>Home</a>
@@ -52,6 +74,8 @@ export default function ProductDetail({ product }) {
         sellerId={product.sellerId}
         reviewCount={product.reviews.length}
         images={product.images}
+        wishList={wishList}
+        itemID={product.id}
       />
       <ProductInfo detail={product.detail} />
       <ReviewCard reviews={product.reviews} />

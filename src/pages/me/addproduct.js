@@ -178,11 +178,11 @@ export default function AddProduct({ user, seller }) {
                         <option value="Hobbies & Books">Hobbies & Books</option>
                         <option value="Home Appliances">Home Appliances</option>
                         <option value="Men Clothes">Men Clothes</option>
-                        <option value="Mobiles & Gadget">
+                        <option value="Mobiles & Gadgets">
                           Mobiles & Gadgets
                         </option>
-                        <option value="Sport & Outdoors">
-                          Sport & Outdoors
+                        <option value="Sports & Outdoors">
+                          Sports & Outdoors
                         </option>
                         <option value="Women Clothes">Women Clothes</option>
                       </select>
