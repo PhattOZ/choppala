@@ -107,16 +107,7 @@
   }
 }
 
-@media (min-width: 984px) {
-  .embla__slide {
-    height: 15rem;
-  }
-  .cardContainer {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-  }
-}
-
-@media (min-width: 1440px) {
+@media (min-width: 1200px) {
   .container {
     padding-left: 6rem;
     padding-right: 6rem;
