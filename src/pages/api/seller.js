@@ -1,6 +1,7 @@
 import dbConnect from "src/lib/dbConnect"
 import User from "src/models/User"
 import Seller from "src/models/Seller"
+import Item from "src/models/Item"
 
 export default async function handler(req, res) {
   const { method } = req
@@ -10,10 +11,8 @@ export default async function handler(req, res) {
   switch (method) {
     case "GET":
       try {
-        const { userId, sellerId } = req.query
-        const seller = userId
-          ? await Seller.findById(userId)
-          : await Seller.findById(sellerId)
+        const { userId } = req.query
+        const seller = await Seller.findOne({ userId })
         res.status(200).json(seller)
       } catch (err) {
         res.status(400).json({ success: false })
@@ -39,14 +38,30 @@ export default async function handler(req, res) {
         const filter = { name: username, email: userEmail }
         const update = { isSeller: true, sellerId: dbResponse._id.toString() }
         await User.findOneAndUpdate(filter, update)
-        res.status(201).json({ success: true })
+        res.status(201).json()
       } catch (error) {
-        res.status(400).json({ success: false })
+        res.status(400).json()
       }
       break
-
+    case "PUT":
+      try {
+        const { userId } = req.query
+        const { storeName, storeEmail } = req.body
+        const newSeller = await Seller.findOneAndUpdate(
+          { userId },
+          { storeName, storeEmail }
+        ).lean()
+        const newItems = await Item.updateMany(
+          { sellerId: newSeller.id },
+          { sellerName: storeName }
+        )
+        res.status(201).json()
+      } catch (error) {
+        res.status(400).json()
+      }
+      break
     default:
-      res.status(400).json({ success: false })
+      res.status(400).json()
       break
   }
 }

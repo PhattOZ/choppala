@@ -50,7 +50,7 @@
   padding: 0.3rem 0.6rem;
   font-family: "Poppins", sans-serif;
   font-size: 0.9rem;
-  width: 15rem;
+  display: flex;
 }
 
 .edit_section input:focus {
@@ -116,7 +116,7 @@
 
 .edit_text textarea {
   overflow: hidden;
-  width: 32rem;
+  width: 40rem;
   display: block;
   border-radius: 0.25rem;
   border: 1px solid #969696;

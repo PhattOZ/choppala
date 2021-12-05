@@ -98,6 +98,7 @@ export default function Profile({ user }) {
                 <input
                   type="text"
                   name="username"
+                  size="28"
                   value={userInput.username}
                   readOnly
                 />
@@ -121,6 +122,7 @@ export default function Profile({ user }) {
                 <input
                   type="text"
                   name="email"
+                  size="40"
                   value={userInput.email}
                   readOnly
                 />
@@ -147,6 +149,7 @@ export default function Profile({ user }) {
                   <input
                     type="text"
                     name="addressName"
+                    size="28"
                     value={addressInput.addressName}
                     onChange={handleAddressChange}
                   />
@@ -156,6 +159,7 @@ export default function Profile({ user }) {
                   <input
                     type="text"
                     name="addressPhone"
+                    size="40"
                     value={addressInput.addressPhone}
                     onChange={handleAddressChange}
                   />

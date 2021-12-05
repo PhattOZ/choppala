@@ -11,13 +11,20 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons"
 import { faTrash } from "@fortawesome/free-solid-svg-icons"
 // Component
-import Loader from "../Loader"
+import Popup from "../Popup"
 // Custom lib
 import spliceData from "src/lib/spliceData"
 import Pagination from "../Pagination"
+import { deleteProduct } from "src/lib/modalContent"
 
 function SellingBox({ itemId, name, image, price, amount, sold }) {
-  const handleDelete = async () => {
+  const [showModal, setShowModal] = useState(false)
+  const handleDelete = (e) => {
+    e.preventDefault()
+    setShowModal(true)
+  }
+
+  const confirmDelete = async () => {
     const res = await fetch(`/api/item?itemId=${itemId}`, {
       method: "DELETE",
     })
@@ -60,6 +67,21 @@ function SellingBox({ itemId, name, image, price, amount, sold }) {
           Delete
         </div>
       </div>
+      {/* -----------Popup------------ */}
+      {showModal && (
+        <Popup
+          show={showModal}
+          onClose={() => setShowModal(false)}
+          onClick={confirmDelete}
+          title={deleteProduct.title}
+          titlecolor={deleteProduct.titlecolor}
+          subtitle={deleteProduct.subtitle}
+          icon={deleteProduct.icon}
+          content1={deleteProduct.content1}
+          content2={deleteProduct.content2}
+          buttonShow={deleteProduct.buttonShow}
+        />
+      )}
     </div>
   )
 }
@@ -96,23 +118,25 @@ export default function YourProductBox({ sellerId, isSeller }) {
   const [allSellerItems, setAllSellerItems] = useState([])
   const [sellerItems, setSellerItems] = useState([])
 
-  useEffect(async () => {
-    if (!allSellerItems.length) {
-      // User come to this page for first time or reload page
+  useEffect(() => {
+    async function fetchData() {
       const res = await fetch(`/api/item?sellerId=${sellerId}`)
       const resData = await res.json()
-      if (resData) {
+      if (resData.item.length) {
         // This seller sold at least 1 item
         const currentItems = spliceData(resData.item, page, 6)
         setAllSellerItems(resData.item)
         setSellerItems(currentItems)
       }
+    }
+
+    if (!allSellerItems.length) {
+      fetchData()
     } else {
-      // This page already fetched items list
       const currentItems = spliceData(allSellerItems, page, 6)
       setSellerItems(currentItems)
     }
-  }, [router.query.page])
+  }, [allSellerItems, page, sellerId])
 
   return (
     <>

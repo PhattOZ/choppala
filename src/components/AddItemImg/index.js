@@ -156,7 +156,7 @@ export default function AddItemImg({
       "image/jpeg",
       1
     )
-  }, [finalCrop])
+  }, [finalCrop, filename, imgSize, index, handleFileSync])
 
   // Fire this function after seller select image to crop
   const onSelectFile = (e) => {
@@ -184,6 +184,7 @@ export default function AddItemImg({
   }
 
   if (imgUrl) {
+    // User come to edit item detail
     return (
       <div className={`${styles.oldImgContainer} ${upImgStyle}`}>
         <div
@@ -195,7 +196,7 @@ export default function AddItemImg({
         >
           x
         </div>
-        <Image src={imgUrl} layout="fill" />
+        <Image src={imgUrl} layout="fill" alt="item-image" />
       </div>
     )
   }

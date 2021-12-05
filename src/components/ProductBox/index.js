@@ -4,7 +4,6 @@ import {
   faStar,
   faTags,
   faCartPlus,
-  faCoins,
   faHeart as fasfaHeart,
 } from "@fortawesome/free-solid-svg-icons"
 import { useState, useCallback } from "react"
@@ -62,7 +61,6 @@ export default function ProductBox({
               <div className={styles.title}>{productname}</div>
             </div>
 
-            {/* <div className={styles.break}></div> */}
             <div className={styles.heartbox}>
               <div className={styles.wishlist}>
                 {heart ? (
