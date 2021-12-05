@@ -176,20 +176,34 @@
   text-decoration: underline;
 }
 
-.freview {
-  display: flex;
+.rating {
   padding: 0 1rem;
-  justify-content: center;
+  display: flex;
+  justify-items: center;
   align-items: center;
-  column-gap: 0.4rem;
+  position: relative;
+  column-gap: 0.5rem;
 }
 
-.stars {
-  display: flex;
-  justify-content: space-around;
-  align-content: flex-start;
-  column-gap: 0.1rem;
-  align-items: center;
+.rating span {
+  font-size: 1.1rem;
+}
+
+.rating span::before {
+  --percent: calc(var(--rating) / 5 * 100%);
+  content: "★★★★★";
+  background: linear-gradient(
+    to right,
+    #ffd700 var(--percent),
+    #cccccc var(--percent)
+  );
+  background-clip: text;
+  color: transparent;
+}
+
+.rating div {
+  font-size: 0.75rem;
+  color: #8b8ea1;
 }
 
 .p2 {

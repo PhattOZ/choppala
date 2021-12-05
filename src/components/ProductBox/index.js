@@ -19,7 +19,8 @@ export default function ProductBox({
   price,
   sellerName,
   sellerId,
-  reviewCount,
+  review_count,
+  avg_rating,
   images,
 }) {
   const [count, setCount] = useState(1)
@@ -91,15 +92,15 @@ export default function ProductBox({
                 </Link>
               </div>
             </div>
-            <div className={styles.freview}>
-              <div className={styles.stars}>
-                <FontAwesomeIcon icon={faStar} size={"xs"} color="#ffd700" />
-                <FontAwesomeIcon icon={faStar} size={"xs"} color="#ffd700" />
-                <FontAwesomeIcon icon={faStar} size={"xs"} color="#ffd700" />
-                <FontAwesomeIcon icon={faStar} size={"xs"} color="#ffd700" />
-                <FontAwesomeIcon icon={faStar} size={"xs"} color="#A8AABC" />
-              </div>
-              <div className={styles.p2}>{reviewCount} reviews</div>
+            <div className={styles.rating}>
+              {avg_rating ? (
+                <>
+                  <span style={{ "--rating": avg_rating }} />
+                  <div> {`${review_count} reviews`}</div>
+                </>
+              ) : (
+                <div>No review</div>
+              )}
             </div>
           </div>
           <div className={styles.pricecontainer}>

@@ -9,6 +9,7 @@ import CartContext from "src/lib/cart-context"
 import { useContext, useState } from "react"
 import { useRouter } from "next/router"
 import SmallPopup from "src/components/SmallPopup"
+import Head from "next/head"
 
 export default function ProductDetail({ product }) {
   const { header, addToCart } = useContext(CartContext)
@@ -35,37 +36,58 @@ export default function ProductDetail({ product }) {
   }
 
   return (
-    <div className={styles.container}>
-      <SmallPopup show={showPopup} onClose={setTimeout(() => setShowPopup(false),3000)} />
-      <div className={styles.toplink}>
-        <Link href="/">
-          <a className={styles.ahome}>Home</a>
-        </Link>
-        /Search/{product.name}
+    <>
+      <Head>
+        <title>{product.name}</title>
+      </Head>
+      <div className={styles.container}>
+        <SmallPopup
+          show={showPopup}
+          onClose={setTimeout(() => setShowPopup(false), 3000)}
+        />
+        <div className={styles.toplink}>
+          <Link href="/">
+            <a className={styles.ahome}>Home</a>
+          </Link>
+          /Search/{product.name}
+        </div>
+        <ProductBox
+          onClickBuynow={buynowHandler}
+          onCartChange={cartHandler}
+          productname={product.name}
+          price={product.price}
+          sellerName={product.sellerName}
+          sellerId={product.sellerId}
+          review_count={product.review_count}
+          avg_rating={product.avg_rating}
+          images={product.images}
+        />
+        <ProductInfo detail={product.detail} />
+        <ReviewCard reviews={product.reviews} />
       </div>
-      <ProductBox
-        onClickBuynow={buynowHandler}
-        onCartChange={cartHandler}
-        productname={product.name}
-        price={product.price}
-        sellerName={product.sellerName}
-        sellerId={product.sellerId}
-        reviewCount={product.reviews.length}
-        images={product.images}
-      />
-      <ProductInfo detail={product.detail} />
-      <ReviewCard reviews={product.reviews} />
-    </div>
+    </>
   )
 }
 
 export async function getServerSideProps(context) {
   const { id } = context.query
   await dbConnect()
-  const data = await Item.findById(id, { _id: 0 })
+  const data = await Item.aggregate([
+    { $match: { id: id } },
+    {
+      $addFields: {
+        review_count: { $size: "$reviews" },
+        avg_rating: { $round: [{ $avg: "$reviews.rating" }, 1] },
+      },
+    },
+    {
+      $project: { _id: 0 },
+    },
+  ])
+
   return {
     props: {
-      product: JSON.parse(JSON.stringify(data)),
+      product: data[0],
     },
   }
 }
