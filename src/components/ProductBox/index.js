@@ -95,6 +95,9 @@ export default function ProductBox({
             <div className={styles.rating}>
               {avg_rating ? (
                 <>
+                  <div className={styles.average_rating}>
+                    {avg_rating.toFixed(1)}
+                  </div>
                   <span style={{ "--rating": avg_rating }} />
                   <div> {`${review_count} reviews`}</div>
                 </>
