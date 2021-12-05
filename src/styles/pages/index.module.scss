@@ -118,6 +118,16 @@
 
 @media (min-width: 1440px) {
   .container {
+    padding-left: 6rem;
+    padding-right: 6rem;
+  }
+  .cardContainer {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1400px) {
+  .container {
     padding-left: 10rem;
     padding-right: 10rem;
   }
