@@ -78,14 +78,12 @@ export default function Checkout({ data }) {
           <div className={styles.address_details}>
             <div>
               Delivery Address
-              {addressFilter.length > 0 ? undefined : (
-                <span> *Please fill your delivery address!</span>
-              )}
+              {addressFilter.length > 0
+                ? undefined : <span> *Please fill your delivery address!</span> }
               <div className={styles.address_name}>
                 <div>
                   {addressFilter.slice(0, addressFilter.length - 3).join(" ")}
                 </div>
-
                 <div>{addressFilter.slice(-3).join(" ")}</div>
               </div>
             </div>
