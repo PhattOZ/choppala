@@ -67,7 +67,7 @@ export default function ProductBox({
           setHeart(0)
         }
       })
-  }, [])
+  }, [itemID])
 
   return (
     <div className={styles.container}>
