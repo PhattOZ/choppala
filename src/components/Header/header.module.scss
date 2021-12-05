@@ -141,13 +141,12 @@ $headerHeight: 7.3rem;
     width: 11.25rem;
     align-items: flex-end;
     row-gap: 0.5rem;
-    margin-bottom: 0.1rem;
+    margin-bottom: 0.4rem;
 
     .menu {
       display: flex;
-      padding: 0.25em 0;
-      padding-top: -0.5em;
       margin-bottom: 0.3rem;
+      column-gap: 1rem;
       .fabell {
         width: max-content;
         color: #5c94ff;
@@ -166,13 +165,16 @@ $headerHeight: 7.3rem;
 
       a {
         height: auto;
-        margin-right: 1.5em;
         font-size: 0.8em;
       }
     }
     .userMenu {
       display: flex;
-      margin-bottom: 0.35em;
+      height: 30px;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      column-gap: 2rem;
       .countCart {
         position: relative;
         .totalQty {
@@ -193,9 +195,7 @@ $headerHeight: 7.3rem;
       }
 
       a {
-        width: 100%;
         height: auto;
-        margin-right: 2em;
       }
       .user_image {
         position: relative;
