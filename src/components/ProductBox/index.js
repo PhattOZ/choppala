@@ -21,6 +21,7 @@ export default function ProductBox({
   sellerId,
   reviewCount,
   images,
+  wishList,
   itemID,
 }) {
   const [count, setCount] = useState(1)
@@ -79,7 +80,12 @@ export default function ProductBox({
             </div>
 
             <div className={styles.heartbox}>
-              <div className={styles.wishlist}>
+              <div
+                className={styles.wishlist}
+                onClick={() => {
+                  wishList(heart)
+                }}
+              >
                 {heart ? (
                   <FontAwesomeIcon
                     icon={fasfaHeart}

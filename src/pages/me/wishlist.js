@@ -10,15 +10,20 @@ export default function Wishlist({ data, user }) {
   return (
     <div className={styles.container}>
       <Layout user={user}>
-        {data.map((wishlist) => (
-          <Card
-            title={wishlist.name}
-            price={wishlist.price}
-            image={wishlist.images[0]}
-            key={wishlist.id}
-            itemID={wishlist.id}
-          />
-        ))}
+        <div className={styles.main}>
+          <div className={styles.card_container}>
+            {data.map((wishlist) => (
+              <Card
+                title={wishlist.name}
+                price={wishlist.price}
+                image={wishlist.image}
+                key={wishlist.id}
+                itemID={wishlist.id}
+                avg_rating={wishlist.avg_rating}
+              />
+            ))}
+          </div>
+        </div>
       </Layout>
     </div>
   )
@@ -35,18 +40,24 @@ export const getServerSideProps = async (context) => {
         name: session.user.name,
         email: session.user.email,
       },
-      " -_id"
+      " -_id name email image wishlist"
     )
 
-    let items = await Item.find({
-      _id: {
-        $in: Response.wishlist,
+    const items = await Item.aggregate([
+      { $match: { id: { $in: Response.wishlist } } },
+      {
+        $project: {
+          _id: 0,
+          id: 1,
+          name: 1,
+          price: 1,
+          image: { $arrayElemAt: ["$images", 0] },
+          reviews: 1,
+          avg_rating: { $round: [{ $avg: "$reviews.rating" }, 1] },
+        },
       },
-    }).lean()
-
-    items.map((item) => {
-      item._id = item._id.toString()
-    })
+      { $sort: { _id: -1 } },
+    ])
 
     return {
       props: {
