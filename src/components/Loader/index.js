@@ -24,7 +24,7 @@ export default function Loader({ debounce }) {
           <div className={styles.spinner}></div>
           <div className={styles.logo}>
             <Image
-              src="/molang.jpg"
+              src="/logo.png"
               layout="fill"
               objectFit="contain"
               alt=""
