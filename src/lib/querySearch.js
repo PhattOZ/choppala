@@ -36,7 +36,6 @@ export default async function querySearch(
     { $match: query },
     {
       $project: {
-        _id: 0,
         id: 1,
         name: 1,
         price: 1,
@@ -46,6 +45,11 @@ export default async function querySearch(
       },
     },
     sort && { $sort: sort },
+    {
+      $project: {
+        _id: 0,
+      },
+    },
   ])
 
   return itemList
