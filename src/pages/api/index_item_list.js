@@ -13,7 +13,6 @@ export default async function handler(req, res) {
         const items = await Item.aggregate([
           {
             $project: {
-              _id: 0,
               id: 1,
               name: 1,
               price: 1,
@@ -24,6 +23,11 @@ export default async function handler(req, res) {
           },
           { $sort: { _id: -1 } },
           { $limit: 24 },
+          {
+            $project: {
+              _id: 0,
+            },
+          },
         ])
 
         res.status(200).json({ items: items })

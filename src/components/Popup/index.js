@@ -2,6 +2,7 @@ import ReactDom from "react-dom"
 import Link from "next/link"
 import styles from "./Popup.module.scss"
 import { useLayoutEffect, useState } from "react"
+import { useRouter } from "next/router"
 // ---------------- Icon ----------------
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTimes, faStar } from "@fortawesome/free-solid-svg-icons"
@@ -22,7 +23,7 @@ export default function Popup({
   // Call hook to lock body scroll
   useLockBodyScroll()
   const [rating, setRating] = useState(-1)
-
+  const router = useRouter()
   const rateHandler = (e) => {
     setRating(e.currentTarget.getAttribute("index"))
   }
@@ -35,13 +36,21 @@ export default function Popup({
     }
   }
 
+  const onCloseHandler = () => {
+    if (buttonShow === "order") {
+      router.push('/me/purchasehistory')
+    } else {
+      onClose()
+    }
+  }
+
   return ReactDom.createPortal(
     <>
       {show ? (
         <div className={styles.container}>
           <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
             <div className={styles.header}>
-              <div className={styles.icon} onClick={() => onClose()}>
+              <div className={styles.icon} onClick={onCloseHandler}>
                 <FontAwesomeIcon icon={faTimes} size="lg" />
               </div>
             </div>
