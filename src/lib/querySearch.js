@@ -14,11 +14,14 @@ export default async function querySearch(
   const query = {
     ...(keyword && { name: { $regex: keyword, $options: "i" } }),
     ...(category && { category }),
-    ...(minprice && { price: { $gte: minprice } }),
-    ...(maxprice && { price: { $lte: maxprice } }),
+    ...(minprice && { price: { $gte: parseFloat(minprice) } }),
+    ...(maxprice && { price: { $lte: parseFloat(maxprice) } }),
     ...(!!minprice &&
       !!maxprice && {
-        $and: [{ price: { $gte: minprice } }, { price: { $lte: maxprice } }],
+        $and: [
+          { price: { $gte: parseFloat(minprice) } },
+          { price: { $lte: parseFloat(maxprice) } },
+        ],
       }),
   }
 
