@@ -9,11 +9,14 @@ import CartContext from "src/lib/cart-context"
 import { useContext, useState } from "react"
 import { useRouter } from "next/router"
 import SmallPopup from "src/components/SmallPopup"
+import { addCart } from "src/lib/smallContent"
+import { wishlist } from "src/lib/smallContent"
 import Head from "next/head"
 
 export default function ProductDetail({ product }) {
   const { header, addToCart } = useContext(CartContext)
   const [showPopup, setShowPopup] = useState(false)
+  const [showHeart, setShowHeart] = useState(false)
   const [, setShowHeader] = header
   const router = useRouter()
 
@@ -43,6 +46,7 @@ export default function ProductDetail({ product }) {
           "content-type": "application/json",
         },
       })
+      setShowHeart(true)
     } else {
       await fetch("/api/wishlist", {
         method: "DELETE",
@@ -62,7 +66,15 @@ export default function ProductDetail({ product }) {
       <div className={styles.container}>
         <SmallPopup
           show={showPopup}
+          title={addCart.title}
+          icon={addCart.icon}
           onClose={setTimeout(() => setShowPopup(false), 3000)}
+        />
+        <SmallPopup
+          show={showHeart}
+          title={wishlist.title}
+          icon={wishlist.icon}
+          onClose={setTimeout(() => setShowHeart(false), 3000)}
         />
         <div className={styles.toplink}>
           <Link href="/">
