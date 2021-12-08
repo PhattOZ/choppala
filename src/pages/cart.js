@@ -1,10 +1,11 @@
 import styles from "src/styles/pages/cart.module.scss"
 import Link from "next/link"
 import CartContext from "src/lib/cart-context"
-import { useContext, useState, useCallback, useEffect } from "react"
+import { useContext, useState } from "react"
 import Image from "next/image"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons"
+import { useRouter } from "next/router"
 
 const transfromCart = (data) => {
   let cartItem = []
@@ -44,6 +45,7 @@ const transfromCart = (data) => {
 export default function Cart() {
   const ctx = useContext(CartContext)
   const cartItem = transfromCart(ctx.value.cart)
+  const router = useRouter()
 
   const selectAllHandler = () => {
     ctx.selectManyItems([])
@@ -92,11 +94,20 @@ export default function Cart() {
             <span>Total</span>
             <span>฿{ctx.value.totalPrice}</span>
           </div>
-          <Link href="/checkout">
-            <a>
-              <div className={styles.process_btn}>Proceed to order</div>
-            </a>
-          </Link>
+          <div
+            className={
+              ctx.value.checked ? styles.process_btn : styles.process_btn__none
+            }
+            onClick={
+              ctx.value.checked
+                ? () => {
+                    router.push("/checkout")
+                  }
+                : undefined
+            }
+          >
+            Proceed to order
+          </div>
         </div>
       </div>
     </div>

@@ -159,7 +159,7 @@
       padding-bottom: 1rem;
       font-weight: bold;
       row-gap: 1rem;
-      
+
       .total_price {
         position: relative;
         background-color: #f5f5fa;
@@ -189,6 +189,18 @@
           background-color: #dbe6fd;
           color: #4585ff;
         }
+      }
+
+      .process_btn__none {
+        color: white;
+        background-color: #a8aabc;
+        width: 90%;
+        font-weight: 500;
+        margin: 0 auto;
+        padding: 0.5rem;
+        text-align: center;
+        border-radius: 5px;
+        cursor: none;
       }
     }
     .order_summary div {
