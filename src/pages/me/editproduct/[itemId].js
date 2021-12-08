@@ -167,8 +167,8 @@ export default function EditProduct({ user, item }) {
                           inputsValidation.category ? styles.outline_red : null
                         }
                       >
-                        <option value="" disabled>
-                          --Select--
+                        <option value={inputs.category} disabled>
+                          {inputs.category}
                         </option>
                         <option value="Accessories">Accessories</option>
                         <option value="Food & Beverages">
