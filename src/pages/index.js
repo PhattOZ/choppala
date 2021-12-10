@@ -85,6 +85,9 @@ export default function Index() {
     <>
       <Head>
         <title>Choppala | Shop Chim & Chill</title>
+        <meta name="image" 
+        property="og:image" 
+        content="/thumbnail.jpg" />
         <meta
           name="description"
           content="Wonderously designed ecommerse application. Choppala is crafted carefully and delicately utilizing topics learned during Covid lockdown."
