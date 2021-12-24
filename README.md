@@ -37,11 +37,16 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Authors
 - 🐉 [Phattarapol L.](https://github.com/PhattOZ)
--
--
--
--
+- Sorawong Leardmongkonrut
+- Thanathorn Mahathanapol
+- Phakathorn Punyatharo
+- Pholphat Kittivitayakul
 
-## Learn more
+## Techs & Tools
 This project wouldn't have been possible without these awesome open-source tools and softwares. <br />
 Go check out their documentation if you want to learn more!
+- [Next.js Documentation](https://nextjs.org/docs/getting-started)
+- MongoDB
+- NextAuth.js
+- Firebase Cloud Storage
+- Figma
