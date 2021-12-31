@@ -49,8 +49,8 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 This project wouldn't have been possible without these awesome open-source tools and softwares. <br />
 Go check out their documentation if you want to learn more!
 
-- [Next.js Documentation](https://nextjs.org/docs/getting-started)
-- MongoDB
-- NextAuth.js
-- Firebase Cloud Storage
-- Figma
+- [Next.js Documentation](https://nextjs.org/docs/getting-started) - learn about Next.js features and API.
+- [MongoDB Documentation](https://docs.mongodb.com/) - Find the guides, samples, and references you need to use MongoDB
+- [NextAuth.js Official Page](https://next-auth.js.org/) - Authentication for Next.js
+- [Firebase Cloud Storage](https://firebase.google.com/docs/storage) - Simple object storage service
+- [Figma](https://www.figma.com/) - Our UI designing tool
