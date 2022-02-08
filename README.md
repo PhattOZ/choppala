@@ -1,7 +1,5 @@
 # <img src="/public/logo.png" alt="logo" height="65px" /> &nbsp; <img src="/public/logoText.png" alt="logoText" height="40px" />
 
-A ..
-
 Don't forget to leave a ⭐ if you find this project helpful!
 
 ## Features
