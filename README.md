@@ -1,12 +1,16 @@
 # <img src="/public/logo.png" alt="logo" height="65px" /> &nbsp; <img src="/public/logoText.png" alt="logoText" height="40px" />
 
+**choppala** is an E-Commerce web application, inspired from shopee. This project is for education purpose.
+
+URL : https://choppala.vercel.app
+
 Don't forget to leave a ⭐ if you find this project helpful!
 
 ## Features
 
 - Browse & filter items by its title, category and price range.
 - Shopping Cart system
-- Login using Oauth provider
+- Login using OAuth provider (Google, Facebook, GitHub)
 - Post item for sale with item detail form + image cropping
 - Purchase history
 - Ratings
