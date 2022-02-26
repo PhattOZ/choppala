@@ -1,6 +1,6 @@
 # <img src="/public/logo.png" alt="logo" height="65px" /> &nbsp; <img src="/public/logoText.png" alt="logoText" height="40px" />
 
-Inspired from Shopee, we wanted to apply topics we self-learned during our summer break which is under the covid-19 lockdown including Next.js, Express client-server-side responsibilities to create our first fully functional web application.
+Inspired from Shopee, we wanted to apply topics we self-learned during our summer break which is under the covid-19 lockdown including Next.js, Express and client-server-side responsibilities to create our first fully functional web application.
 
 We learned a lot. The project widens our knowledge about the application development life cycle and we're fully aware that there's a lot of room for improvement which we will address in our next project.
 
