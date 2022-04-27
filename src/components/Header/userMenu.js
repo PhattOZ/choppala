@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
-  faUserCircle,
+  faBoxOpen,
   faGlobe,
   faShoppingCart,
   faHeart,
@@ -59,20 +59,9 @@ export default function UserMenu() {
             {sum === 0 ? <></> : <span className={styles.totalQty}>{sum}</span>}
           </a>
         </Link>
-        <Link href="/me">
+        <Link href="/ultimate_inventory">
           <a>
-            {status === "authenticated" ? (
-              <div className={styles.user_image}>
-                <Image
-                  src={session.user.image}
-                  layout="fill"
-                  objectFit="contain"
-                  alt="user_image"
-                />
-              </div>
-            ) : (
-              <FontAwesomeIcon icon={faUserCircle} size={"lg"} />
-            )}
+            <FontAwesomeIcon icon={faBoxOpen} size={"lg"} />
           </a>
         </Link>
       </div>
